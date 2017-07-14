@@ -1,0 +1,10 @@
+#FORMAT #TYPE	#EXT	#ACTION
+#######	#####	######	################################
+VERILOG	FILE	*.vg	{view "vi $$"}
+DEF	FILE	*.def	{view "vi $$"}
+SDC	FILE	*.sdc	{view "vi $$"}
+SPEC	FILE	*.spef	{view "vi $$"}
+DIR	DIR	*/	{view "ls -al $$"}
+TAR	TAR	*.tar	{view "tar tvf $$"}
+TGZ	TGZ	*.tgz	{view "unizp -c $$ | tar tvf -"}
+

@@ -1,0 +1,14 @@
+#NAME           #FORMAT #TITLE
+#############   ####### ##########################
+S00-NETLIST     DIR     "Initial Design Data"
+S10-CIRCUIT     DIR     "Circuit Level Design"
+S20-SYNTHESIS   DIR     "Synthesis Stage"
+S30-DFT         DIR     "Design For Test"
+S40-APR         DIR     "Auto Place & Route"
+S41-FLOORPLAN   DIR     "APR Floorplan"
+S42-PLACED      DIR     "APR Placed DB"
+S43-CTS         DIR     "APR CTS"
+S44-ROUTED      DIR     "APR Routed DB"
+S45-ECO         DIR     "APR ECO"
+S50-SIGNOFF     DIR     "Signoff Stage"
+S60-TAPEOUT     DIR     "Tapeout Database"

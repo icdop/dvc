@@ -1,0 +1,8 @@
+#NAME           #FORMAT	#TITLE
+#############	#######	##########################
+P1-trial	DIR	"Initial Trial Run Phase "
+P2-stable	DIR	"Stable Run Phase "
+P3-final	DIR	"Final Run Phase "
+P4-tapeout	DIR	"Tapeout Phase "
+P5-silicon	DIR	"Silicon ramp up Phase "
+P6-production	DIR	"Production Phase "

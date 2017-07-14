@@ -1,0 +1,184 @@
+PATH	:= $(PATH):$(DOP_HOME)/dvc/bin
+
+help:
+	@echo "PWD    = $(PWD)"
+	@echo "CURDIR = $(CURDIR)"
+	@echo "SVN_ROOT = $(SVN_ROOT)"
+	@echo "Usage:  make test "
+	@echo "        make init     | reset_repository"
+	@echo "        make create   | create_project"
+	@echo "        make checkout | checkout_container"
+	@echo "        make empty    | empty_container"
+	@echo "        make checin   | checkin_object"
+	@echo "        make commit   | commit_container"
+	@echo "        make remove   | remove_object"
+	@echo "        make udpate   | update_container"
+	@echo "        make list     | list_container"
+	@echo ""
+	@echo "Usage:  make clean    | clean_data"
+	@echo ""
+
+run:	test
+test:
+	make init
+	make create
+	make checkout
+	make checkin
+	make commit
+	make remove
+	make update
+	make commit
+	make checkin
+	make list
+
+
+init: reset_repository
+reset_repository:
+	@echo "#---------------------------------------------------"
+	@echo "# 0. Reset project repository"
+	@echo "#---------------------------------------------------"
+	@rm -fr .design .dvc
+	@rm -fr $(HOME)/.dvc
+	@rm -fr $(SVN_ROOT)
+	@mkdir -p $(SVN_ROOT)
+
+env:
+	@echo "#---------------------------------------------------"
+	@echo "# 1. Environment Variable"
+	@echo "#---------------------------------------------------"
+	dvc_get_env -v
+
+create: create_project
+create_project:
+	@echo "#---------------------------------------------------"
+	@echo "# 2. Create project directory in SVN server"
+	@echo "#---------------------------------------------------"
+	dvc_set_svn $(SVN_ROOT)
+	dvc_create_project	$(DESIGN_PROJT)
+	dvc_create_phase	$(DESIGN_PHASE)
+	dvc_create_block	$(DESIGN_BLOCK)
+	dvc_create_stage	$(SRC_STAGE)
+	dvc_create_version	$(SRC_VERSN)
+	dvc_create_stage	$(DST_STAGE)
+	dvc_create_version	$(DST_VERSN)
+
+
+checkout: checkout_container
+checkout_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 3. Checkout container"
+	@echo "#---------------------------------------------------"
+	dvc_container_checkout	$(SRC_VERSN) $(SRC_STAGE)
+	dvc_container_checkout	$(DST_VERSN) $(DST_STAGE)
+
+checkin: checkin_object
+checkin_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5. Checkin file into container"
+	@echo "#---------------------------------------------------"
+	make copy_object
+	make link_object
+
+empty: empty_container
+empty_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-0 Empty data in container"
+	@echo "#---------------------------------------------------"
+	dvc_container_empty 	$(DST_VERSN) $(DST_STAGE)
+
+add: add_object
+add_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-1 Add file to container"
+	@echo "#---------------------------------------------------"
+	set filename file_`date +%Y%m%d_%H%M%S`
+	echo "$(filename)" > $(filename)
+	dvc_container_add_obj	$(filename)
+
+copy: copy_object
+copy_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-2 Copy file to container"
+	@echo "#---------------------------------------------------"
+	@date +%Y%m%d_%H%M%S >> $(TEST_FILE)
+	dvc_container_cp_obj	$(TEST_FILE)
+	dvc_container_cp_obj	$(TEST_FILE)  newfile
+
+link: link_object
+link_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-3 Link directory to container"
+	@echo "#---------------------------------------------------"
+	@mkdir -p $(TEST_DIR_)
+	@date +%Y%m%d_%H%M%S >> $(TEST_DIR_)/$(TEST_FILE)
+	dvc_container_ln_obj	$(TEST_DIR_)
+	dvc_container_ln_obj	$(TEST_DIR_)  newdir
+
+rename: rename_object
+rename_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-4 Rename file in container"
+	@echo "#---------------------------------------------------"
+	@mkdir -p old_$(TEST_DIR_)
+	dvc_container_add_obj	old_$(TEST_DIR_)
+	dvc_container_mv_obj	old_$(TEST_DIR_)  new_$(TEST_DIR_)
+
+remove: remove_object
+remove_object:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-5 Remove files in container"
+	@echo "#---------------------------------------------------"
+	dvc_container_rm_obj	$(TEST_FILE)
+	dvc_container_rm_obj	$(TEST_DIR_)
+
+
+list: list_container
+list_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-6 List all data in container"
+	@echo "#---------------------------------------------------"
+	dvc_container_list 	$(SRC_VERSN) $(SRC_STAGE)
+	dvc_container_list 	$(DST_VERSN) $(DST_STAGE)
+
+
+update: update_container
+update_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-8 Update change into container"
+	@echo "#---------------------------------------------------"
+	dvc_container_update	$(DST_VERSN) $(DST_STAGE)
+
+
+commit: commit_container
+commit_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-9 Commit change to SVN server"
+	@echo "#---------------------------------------------------"
+	dvc_container_commit	$(DST_VERSN) $(DST_STAGE)
+
+
+clean: clean_data
+clean_data: remove_project
+	@rm -fr $(TEST_FILE) $(TEST_DIR_) file_*
+	@rm -fr $(SVN_ROOT) .dvc
+
+remove_project: remove_container
+	@echo "#---------------------------------------------------"
+	@echo "# 7. Clean up proejct data"
+	@echo "#---------------------------------------------------"
+	dvc_remove_version	$(SRC_VERSN) $(SRC_STAGE) 
+	dvc_remove_stage	$(SRC_STAGE)
+	dvc_remove_version	$(DST_VERSN) $(DST_STAGE)
+	dvc_remove_stage	$(DST_STAGE)
+	dvc_remove_block	$(DESIGN_BLOCK)
+	dvc_remove_phase	$(DESIGN_PHASE)
+	dvc_remove_project	$(DESIGN_PROJT)
+
+remove_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 6. Clean up container data"
+	@echo "#---------------------------------------------------"
+	dvc_remove_container	$(SRC_VERSN) $(SRC_STAGE)
+	dvc_remove_container	$(DST_VERSN) $(DST_STAGE)
+	@rm -fr .design
+

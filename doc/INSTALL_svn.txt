@@ -1,0 +1,27 @@
+1. setup apache server for SVN
+	1.1 find mod_dav_svn rpm and install it
+		% sudo apt-get install mod_dav_svn
+
+	1.2 modify httpd.conf , could be in /etc/httpd/conf/httpd.conf
+		Add the following line
+		-----
+		LoadModule mod_dav_svn modules/mod_dav_svn.so
+
+		<Location /database>
+		  DAV svn
+		  SVNParentPath /var/www/database
+		</Location>
+		<Location /projects>
+		  DAV svn
+		  SVNParentPath /var/www/projects
+		</Location>
+		----
+	1.3 restart apache server
+
+2 create repository
+	2.1 create repository for each project
+		% mkdir /var/www/database
+		% svnadmin create /var/www/database/P0001
+	2.2 
+		% svn mkdir -m "Initial project root" file:///var/www/database/P0001
+		% svn mkdir -m "Initial project root" http://localhost/database/P0001

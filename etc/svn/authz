@@ -1,0 +1,8 @@
+
+[/]
+PM = rw
+* = r
+
+[repository:/]
+@PM = rw
+* = r

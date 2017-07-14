@@ -1,0 +1,90 @@
+########################################################
+# DVC (Design Version Control) Specification
+########################################################
+# V1.0  2017/06/08 By Albert Li
+#       use 4+1 level directory
+# V1.1  2017/06/09 By Albert Li
+#       revere back to 4 level directory, remove parition level
+# V1.2  2017/06/13 By Albert Li
+#       use svn to implement a sampel code
+# V1.3  2017/06/14 By Albert Li
+#       add regressiion test
+# V1.4  2017/06/28 By Albert Li
+#       create dvc (design version control) sub-module 
+# 
+########################################################
+# DOP_ROOT       = /home/owner/CAD
+########################################################
+# ============================
+# Global environment variable
+# ============================
+# - Global variable are stored in the dvc config directory
+#   and the search path sequency is as below:
+#
+#    1) Local directory
+#	.dvc/env/#VARNAME#
+#
+#    2) Home directory
+#	~/.dvc/env/#VARNAME#
+#
+# ----------------------------
+# Global SVN variable
+# ----------------------------
+# SVN_ROOT = /home/owner/DATA_ROOT
+# SVN_URL = http://localhost/$SVN_ROOT
+# SVN_URL = svn://localhost/$SVN_ROOT
+# SVN_URL = file://$SVN_ROOT
+#
+# ----------------------------
+# Global DESIGN variable
+# ----------------------------
+# DESIGN_PROJT = M6
+# DESIGN_PHASE = TR3
+# DESIGN_BLOCK = chip
+# DESIGN_STAGE = S00-INIT_DATA
+# DESIGN_VERSN = 2017_0610-XXXX
+#
+# ========================================================
+# Project Design Directory Structure
+# ========================================================
+#
+# $SVN_ROOT/ (SVN Database Root Path)
+#	$DESIGN_PROJT/conf (Project Repository Root)
+#	 	$DESIGN_PHASE/
+#       		$DESIGN_BLOCK/.dvc
+#				$DESIGN_STAGE/
+#					$DESIGN_VERSN/.dqi
+#
+# ========================================================
+# Config Directory (.dvc/)
+# ========================================================
+# ------------------------------------
+# FILE_FORMAT.csv (etc/csv/format_obj.csv)
+# ------------------------------------
+# [FORMAT]	[TYPE]	[NAME_RULE]	[ACTION]
+#  DEF		text	.def		{view "vi $1"}
+#  VG		text	.vg		{view "vi $1"}
+#  LOG		text	.log		{view "vi $1"} 
+#  DIR		dir	/		{view "ls -al $1"}
+#
+# ------------------------------------
+# NAME_RULE.csv (etc/csv/dir_phase.csv)
+# ------------------------------------
+# #NAME        #FORMAT	#TITLE
+# ############	#######	##########################
+# P1-trial	DIR	"Initial Trial Run Phase "
+# P2-stable	DIR	"Stable Run Phase "
+# P3-final	DIR	"Final Run Phase "
+# P4-tapeout	DIR	"Tapeout Phase "
+# P5-silicon	DIR	"Silicon ramp up Phase "
+# P6-production	DIR	"Production Phase "
+#
+# ------------------------------------
+# VARIABLE.csv (etc/csv/dvc_variable.csv)
+# ------------------------------------
+#;NAME		FORMAT		DESCRIPTION
+# NETLIST_FILE	VG		"Verilog Netlist File"
+# DEF_FILE	DEF		"Physical Design Data"
+# SPEF_FILE	SPEF		"RC Extraction Data"
+# PT_STA_RPT	DIR		"STA Report Directory"
+#
