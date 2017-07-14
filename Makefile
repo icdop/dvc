@@ -1,3 +1,4 @@
+GIT_PATH := https://github.com/VirtaulChip/dvc.git
 BIN_PATH := bin
 CSH_PATH := ../csh
 
@@ -35,3 +36,11 @@ bin:
 	ln -f -s $(CSH_PATH)/x3_remove_stage.csh		$(BIN_PATH)/dvc_remove_stage
 	ln -f -s $(CSH_PATH)/x4_remove_version.csh		$(BIN_PATH)/dvc_remove_version
 	ln -f -s $(CSH_PATH)/x5_remove_container.csh		$(BIN_PATH)/dvc_remove_container
+
+pull:
+	git pull $(GIT_PATH)
+
+push:
+	git push $(GIT_PATH)
+
+
