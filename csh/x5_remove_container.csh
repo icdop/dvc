@@ -5,11 +5,10 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
 endif
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_BIN $0:h
-else
-   setenv DVC_BIN $DOP_HOME/dvc/bin
+   setenv DOP_HOME $0:h/../..
 endif
-source $DVC_BIN/dvc_get_version
+source $DOP_HOME/dvc/csh/11_get_svn.csh
+source $DOP_HOME/dvc/csh/12_get_version.csh
 
 if ($1 != "") then
     setenv DESIGN_VERSN $1

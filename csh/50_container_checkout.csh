@@ -5,19 +5,21 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
 endif
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_BIN $0:h
-else
-   setenv DVC_BIN $DOP_HOME/dvc/bin
+   setenv DOP_HOME $0:h/../..
 endif
-source $DVC_BIN/dvc_set_version
-source $DVC_BIN/dvc_get_version
-source $DVC_BIN/dvc_get_svn
+setenv DVC_CSH $DOP_HOME/dvc/csh
+source $DVC_CSH/02_set_version.csh
+source $DVC_CSH/12_get_version.csh
+source $DVC_CSH/11_get_svn.csh
 
 
 setenv BLOCK_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 setenv DVC_CONTAINER .design/$DESIGN_STAGE/$DESIGN_VERSN
 
-mkdir $DVC_CONTAINER -p
+mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK
+rm -f .design
+ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK .design
+mkdir -p $DVC_CONTAINER
 svn checkout --quiet $BLOCK_URL/$DESIGN_STAGE/$DESIGN_VERSN $DVC_CONTAINER
 svn update --quiet $DVC_CONTAINER
 

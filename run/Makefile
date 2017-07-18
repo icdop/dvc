@@ -1,6 +1,6 @@
 DOP_HOME     := $(HOME)/DOP_HOME
+SVN_ROOT     := $(DOP_HOME)/PROJ_SVN
 
-SVN_ROOT     := $(PWD)/DATA_ROOT
 DESIGN_PROJT := testcase
 DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip

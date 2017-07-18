@@ -7,13 +7,11 @@ endif
 echo "INFO: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_BIN $0:h
-   setenv DVC_ETC $DVC_BIN/../../dvc/etc
-else
-   setenv DVC_BIN $DOP_HOME/dvc/bin
-   setenv DVC_ETC $DOP_HOME/dvc/etc
+   setenv DOP_HOME $0:h/../..
 endif
-source $DVC_BIN/dvc_get_svn
+setenv DVC_CSH $DOP_HOME/dvc/csh
+setenv DVC_ETC $DOP_HOME/dvc/etc
+source $DVC_CSH/11_get_svn.csh
 
 if ($1 != "") then
    setenv DESIGN_PROJT $1

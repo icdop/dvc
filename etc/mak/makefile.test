@@ -9,7 +9,7 @@ help:
 	@echo "        make create   | create_project"
 	@echo "        make checkout | checkout_container"
 	@echo "        make empty    | empty_container"
-	@echo "        make checin   | checkin_object"
+	@echo "        make checkin  | checkin_object"
 	@echo "        make commit   | commit_container"
 	@echo "        make remove   | remove_object"
 	@echo "        make udpate   | update_container"
@@ -37,7 +37,7 @@ reset_repository:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Reset project repository"
 	@echo "#---------------------------------------------------"
-	@rm -fr .design .dvc
+	@rm -fr .project .design .dvc
 	@rm -fr $(HOME)/.dvc
 	@rm -fr $(SVN_ROOT)
 	@mkdir -p $(SVN_ROOT)
@@ -160,7 +160,8 @@ commit_container:
 clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_FILE) $(TEST_DIR_) file_*
-	@rm -fr $(SVN_ROOT) .dvc
+	@rm -fr $(SVN_ROOT) 
+	@rm -fr .project .design .dvc
 
 remove_project: remove_container
 	@echo "#---------------------------------------------------"
@@ -180,5 +181,4 @@ remove_container:
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(SRC_VERSN) $(SRC_STAGE)
 	dvc_remove_container	$(DST_VERSN) $(DST_STAGE)
-	@rm -fr .design
 

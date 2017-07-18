@@ -6,11 +6,11 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
 endif
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_BIN $0:h
+   setenv DVC_CSH $0:h/../csh
 else
-   setenv DVC_BIN $DOP_HOME/dvc/bin
+   setenv DVC_CSH $DOP_HOME/dvc/csh 
 endif
-source $DVC_BIN/dvc_get_version
+source $DVC_CSH/12_get_version.csh
 
 if ($1 != "") then
     setenv DESIGN_VERSN $1

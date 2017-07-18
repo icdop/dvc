@@ -7,13 +7,12 @@ else
 endif
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_BIN $0:h
-else
-   setenv DVC_BIN $DOP_HOME/dvc/bin
+   setenv DOP_HOME $0:h/../..
 endif
+setenv DVC_CSH $DOP_HOME/dvc/csh
 if ( $pvar == 1) then
-   echo "DVC_BIN      = $DVC_BIN"
+   echo "DVC_CSH      = $DVC_CSH"
 endif
 
-source $DVC_BIN/dvc_get_svn
-source $DVC_BIN/dvc_get_version
+source $DVC_CSH/11_get_svn.csh
+source $DVC_CSH/12_get_version.csh
