@@ -57,10 +57,10 @@ create_project:
 	dvc_create_project	$(DESIGN_PROJT)
 	dvc_create_phase	$(DESIGN_PHASE)
 	dvc_create_block	$(DESIGN_BLOCK)
-	dvc_create_stage	$(SRC_STAGE)
-	dvc_create_version	$(SRC_VERSN)
-	dvc_create_stage	$(DST_STAGE)
-	dvc_create_version	$(DST_VERSN)
+	dvc_create_stage	$(SOURCE_STAGE)
+	dvc_create_version	$(SOURCE_VERSN)
+	dvc_create_stage	$(DESIGN_STAGE)
+	dvc_create_version	$(DESIGN_VERSN)
 
 
 checkout: checkout_container
@@ -68,8 +68,8 @@ checkout_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 3. Checkout container"
 	@echo "#---------------------------------------------------"
-	dvc_container_checkout	$(SRC_VERSN) $(SRC_STAGE)
-	dvc_container_checkout	$(DST_VERSN) $(DST_STAGE)
+	dvc_container_checkout	$(SOURCE_VERSN) $(SOURCE_STAGE)
+	dvc_container_checkout	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
 checkin: checkin_object
 checkin_object:
@@ -84,7 +84,7 @@ empty_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-0 Empty data in container"
 	@echo "#---------------------------------------------------"
-	dvc_container_empty 	$(DST_VERSN) $(DST_STAGE)
+	dvc_container_empty 	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
 add: add_object
 add_object:
@@ -137,8 +137,8 @@ list_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-6 List all data in container"
 	@echo "#---------------------------------------------------"
-	dvc_container_list 	$(SRC_VERSN) $(SRC_STAGE)
-	dvc_container_list 	$(DST_VERSN) $(DST_STAGE)
+	dvc_container_list 	$(SOURCE_VERSN) $(SOURCE_STAGE)
+	dvc_container_list 	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
 
 update: update_container
@@ -146,7 +146,7 @@ update_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-8 Update change into container"
 	@echo "#---------------------------------------------------"
-	dvc_container_update	$(DST_VERSN) $(DST_STAGE)
+	dvc_container_update	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
 
 commit: commit_container
@@ -154,7 +154,7 @@ commit_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-9 Commit change to SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_container_commit	$(DST_VERSN) $(DST_STAGE)
+	dvc_container_commit	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
 
 clean: clean_data
@@ -167,10 +167,10 @@ remove_project: remove_container
 	@echo "#---------------------------------------------------"
 	@echo "# 7. Clean up proejct data"
 	@echo "#---------------------------------------------------"
-	dvc_remove_version	$(SRC_VERSN) $(SRC_STAGE) 
-	dvc_remove_stage	$(SRC_STAGE)
-	dvc_remove_version	$(DST_VERSN) $(DST_STAGE)
-	dvc_remove_stage	$(DST_STAGE)
+	dvc_remove_version	$(SOURCE_VERSN) $(SOURCE_STAGE) 
+	dvc_remove_stage	$(SOURCE_STAGE)
+	dvc_remove_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
+	dvc_remove_stage	$(DESIGN_STAGE)
 	dvc_remove_block	$(DESIGN_BLOCK)
 	dvc_remove_phase	$(DESIGN_PHASE)
 	dvc_remove_project	$(DESIGN_PROJT)
@@ -179,6 +179,6 @@ remove_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 6. Clean up container data"
 	@echo "#---------------------------------------------------"
-	dvc_remove_container	$(SRC_VERSN) $(SRC_STAGE)
-	dvc_remove_container	$(DST_VERSN) $(DST_STAGE)
+	dvc_remove_container	$(SOURCE_VERSN) $(SOURCE_STAGE)
+	dvc_remove_container	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
