@@ -27,8 +27,8 @@ test:
 	make commit
 	make remove
 	make update
-	make commit
 	make checkin
+	make commit
 	make list
 
 
@@ -113,6 +113,7 @@ link_object:
 	@date +%Y%m%d_%H%M%S >> $(TEST_DIR_)/$(TEST_FILE)
 	dvc_container_ln_obj	$(TEST_DIR_)
 	dvc_container_ln_obj	$(TEST_DIR_)  newdir
+	dvc_container_ln_obj	.design/$(SOURCE_STAGE)/$(SOURCE_VERSN)/ :
 
 rename: rename_object
 rename_object:
