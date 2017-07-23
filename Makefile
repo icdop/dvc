@@ -9,7 +9,7 @@ help:
 $(BIN_PATH): $(CSH_PATH)
 	mkdir -p $(BIN_PATH)
 	rm -f $(BIN_PATH)/dvc_*
-	ln -f -s ../$(CSH_PATH)/01_set_env.csh			$(BIN_PATH)/dvc_set_env
+	ln -f -s ../$(CSH_PATH)/00_set_env.csh			$(BIN_PATH)/dvc_set_env
 	ln -f -s ../$(CSH_PATH)/01_set_svn.csh			$(BIN_PATH)/dvc_set_svn
 	ln -f -s ../$(CSH_PATH)/02_set_version.csh		$(BIN_PATH)/dvc_set_version
 	ln -f -s ../$(CSH_PATH)/10_get_env.csh			$(BIN_PATH)/dvc_get_env
