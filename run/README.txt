@@ -25,29 +25,41 @@
 # 1. Create design directory in SVN server
 #---------------------------------------------------
 
-  % make create_project
+  % make create
 
 #---------------------------------------------------
-# 2. Checkout container
+# 2. Checkout version to local directory
 #---------------------------------------------------
 
   % make checkout
 
 #---------------------------------------------------
-# 3. Checkin file into container
+# 3. Checkout container
+#---------------------------------------------------
+
+  % make container
+
+#---------------------------------------------------
+# 4. Checkin file into container
 #---------------------------------------------------
 
   % make checkin
 
 #---------------------------------------------------
-# 4. Update and Commit change into container
+# 5. Update and Commit change into container
 #---------------------------------------------------
 
-  % make update_container
-  % make commit_container
+  % make update
+  % make commit
 
 #---------------------------------------------------
-# 5. Clean up project data
+# 6. List file in direcotry
+#---------------------------------------------------
+
+  % make list
+
+#---------------------------------------------------
+# 7. Clean up project data
 #---------------------------------------------------
 
   % make clean
