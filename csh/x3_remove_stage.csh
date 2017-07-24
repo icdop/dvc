@@ -23,13 +23,16 @@ if ($1 != "") then
     endif
 endif
 
-setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
+setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
-    echo "INFO: Remove Project Design Stage : /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
+    echo "INFO: Remove Project Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
     svn remove --quiet $STAGE_URL -m "Remove Design Stage : $DESIGN_STAGE"
 else
-    echo "WARN: Design Stage Not Exist : /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
+    echo "ERROR: Can not find Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
 endif
 
 

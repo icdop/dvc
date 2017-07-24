@@ -1,8 +1,10 @@
 #!/bin/csh -f
+set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
@@ -19,7 +21,9 @@ if ($1 != "") then
    echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
 endif
 
-setenv BLOCK_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
@@ -34,4 +38,22 @@ svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config"
 svn import --quiet $DVC_ETC/csv/dir_version.csv $STAGE_URL/.dvc/NAME_RULE.csv -m 'Version Naming Rule'
 svn import --quiet $DVC_ETC/csv/dvc_format.csv $STAGE_URL/.dvc/FILE_FORMAT.csv -m 'Directory Format'
 
+setenv README "/tmp/README.md"
+echo -n "" > $README
+echo "# Design Version Control Directory" >> $README
+echo "=======================================" >> $README
+echo "* Project : $DESIGN_PROJT" >> $README
+echo "* Phase   : $DESIGN_PHASE" >> $README
+echo "* Block   : $DESIGN_BLOCK" >> $README
+echo "* Stage   : $DESIGN_STAGE" >> $README
+echo "* Path    : .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $README
+echo "* Author  : $USER" >> $README
+echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
+echo "=======================================" >> $README
 
+svn import --quiet $README $STAGE_URL/.dvc/README.md -m 'Initial Design Version Directory'
+rm -fr $README
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo ""
+exit 0

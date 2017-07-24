@@ -17,13 +17,14 @@ if ($1 != "") then
     endif
 endif
 
-setenv PHASE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
-    echo "INFO: Remove Project Design Phase : /$DESIGN_PROJT/$DESIGN_PHASE"
+    echo "INFO: Remove Project Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
     svn remove --quiet $PHASE_URL -m "remove Phase : /$DESIGN_PROJT/$DESIGN_PHASE"
 else
-    echo "WARN: Design Phase Not Exist : /$DESIGN_PROJT/$DESIGN_PHASE"
+    echo "ERROR: Can not find Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
 endif
   
 

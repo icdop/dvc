@@ -19,8 +19,8 @@ endif
 
 setenv DVC_CONTAINER .design/$DESIGN_STAGE/$DESIGN_VERSN
 if {(test -d $DVC_CONTAINER)} then
-   echo "INFO: Remove Project Design Container : $DVC_CONTAINER ..."
+   echo "INFO: Remove Project Design Container - $DVC_CONTAINER ..."
    rm -fr $DVC_CONTAINER
 else
-   echo "ERROR: Container Not Found: $DVC_CONTAINER"
+   echo "ERROR: Can not find Desiign Container - $DVC_CONTAINER"
 endif

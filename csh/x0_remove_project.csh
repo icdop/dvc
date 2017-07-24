@@ -9,9 +9,14 @@ if ($?DOP_HOME == 0) then
 endif
 source $DOP_HOME/dvc/csh/11_get_svn.csh
 
-if ($1 != "") then
-    setenv DESIGN_PROJT $1
-    echo "INFO: Delete Project Design Respository : $DESIGN_PROJT"
-    rm -fr $SVN_ROOT/$DESIGN_PROJT
-endif
+setenv DESIGN_PROJT $1
 
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+echo "PARA: PROJ_URL = $PROJT_URL"
+svn info $PROJT_URL >& /dev/null
+if ($status == 0) then
+   echo "INFO: Delete Project Respository - $DESIGN_PROJT"
+   rm -fr $SVN_ROOT/$DESIGN_PROJT
+else
+   echo "ERROR: Can not find Project Respository - $DESIGN_PROJT"
+endif

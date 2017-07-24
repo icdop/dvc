@@ -20,11 +20,13 @@ if ($1 != "") then
     endif
 endif
 
-setenv BLOCK_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
-    echo "INFO: Remove Project Design Block : /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
+    echo "INFO: Remove Project Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
     svn remove --quiet $BLOCK_URL -m "Remove Design Block : $DESIGN_BLOCK"
 else
-    echo "WARN: Design Block Not Exist : /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
+    echo "ERROR: Can not find Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
 endif

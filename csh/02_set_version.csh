@@ -1,7 +1,7 @@
 #!/bin/csh -f
-
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE> <DESIGN_PROJT>"
+set prog = $0:t
+if (($1 == "-h") || ($1 == "--help")) then
+   echo "Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE> <DESIGN_PROJT>"
    exit -1
 endif
 
@@ -12,15 +12,15 @@ else
 endif
 source $DVC_CSH/12_get_version.csh
 
-if ($1 != "") then
+if (($1 != "") && ($1 != ".")) then
     setenv DESIGN_VERSN $1
-    if ($2 != "") then
+    if (($2 != "") && ($2 != ".")) then
         setenv DESIGN_STAGE $2
-        if ($3 != "") then
+        if (($3 != "") && ($3 != ".")) then
             setenv DESIGN_BLOCK $3
-            if ($4 != "") then
+            if (($4 != "") && ($4 != ".")) then
                 setenv DESIGN_PHASE $4
-                if ($5 != "") then
+                if (($5 != "") && ($5 != ".")) then
                     setenv DESIGN_PROJT $5
                 endif
             endif
