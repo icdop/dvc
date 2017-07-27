@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>"
    exit -1
 endif
 
@@ -14,23 +14,28 @@ source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
-   setenv DESIGN_STAGE $1
-   echo "PARA: DESIGN_STAGE = $DESIGN_STAGE"
+   setenv DESIGN_BLOCK $1
+   echo "PARA: DESIGN_BLOCK = $DESIGN_BLOCK"
 endif
+
+if (($2 != "") && ($2 != ".")) then
+    setenv DESIGN_PHASE $1
+    echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+endif
+
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
-setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
-svn info $STAGE_URL >& /dev/null
+svn info $BLOCK_URL >& /dev/null
 if ($status == 1) then
-   echo "ERROR: Cannot find Project Design Stage : $DESIGN_STAGE"
+   echo "ERROR: Cannot find Project Design Block : $DESIGN_BLOCK"
    exit 1
 endif
 
-#svn info $STAGE_URL
-echo "URL: $STAGE_URL"
+#svn info $BLOCK_URL
+echo "URL: $BLOCK_URL"
 echo "------------------------------------------------------------"
-svn list $STAGE_URL -v
+svn list $BLOCK_URL -v
 
 exit 0

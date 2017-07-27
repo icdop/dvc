@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PHASE>"
+   echo "Usage: $prog <DESIGN_PROJT>"
    exit -1
 endif
 
@@ -14,21 +14,21 @@ source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
-   setenv DESIGN_PHASE $1
-   echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+   setenv DESIGN_PROJT $1
+   echo "PARA: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
-svn info $PHASE_URL >& /dev/null
+svn info $PROJT_URL >& /dev/null
 if ($status == 1) then
-   echo "ERROR: Cannot find Project Design Phase : $DESIGN_PHASE"
+   echo "ERROR: Cannot find Project Design Respository : $DESIGN_PROJT"
    exit 1
 endif
 
-#svn info $PHASE_URL
-echo "URL: $PHASE_URL"
+#svn info $PROJT_URL
+echo "URL: $PROJT_URL"
 echo "------------------------------------------------------------"
-svn list $PHASE_URL -v
+svn list $PROJT_URL -v
 
 exit 0
+ 
