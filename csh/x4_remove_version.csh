@@ -10,8 +10,9 @@ endif
 source $DOP_HOME/dvc/csh/11_get_svn.csh
 source $DOP_HOME/dvc/csh/12_get_version.csh
 
-if ($1 != "") then
+if (($1 != "") && ($1 != ".")) then
     setenv DESIGN_VERSN $1
+    echo "PARA: DESIGN_VERSN = $DESIGN_VERSN"
     if ($2 != "") then
         setenv DESIGN_STAGE $2
         if ($3 != "") then

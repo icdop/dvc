@@ -28,19 +28,20 @@ $(BIN_PATH): $(CSH_PATH) Makefile
 	ln -f -s ../$(CSH_PATH)/33_checkout_stage.csh		$(BIN_PATH)/dvc_checkout_stage
 	ln -f -s ../$(CSH_PATH)/34_checkout_version.csh		$(BIN_PATH)/dvc_checkout_version
 	ln -f -s ../$(CSH_PATH)/35_checkout_container.csh	$(BIN_PATH)/dvc_checkout_container
-	ln -f -s ../$(CSH_PATH)/40_list_project.csh		$(BIN_PATH)/dvc_list_project
 	ln -f -s ../$(CSH_PATH)/41_list_phase.csh		$(BIN_PATH)/dvc_list_phase
 	ln -f -s ../$(CSH_PATH)/42_list_block.csh		$(BIN_PATH)/dvc_list_block
 	ln -f -s ../$(CSH_PATH)/43_list_stage.csh		$(BIN_PATH)/dvc_list_stage
 	ln -f -s ../$(CSH_PATH)/44_list_version.csh		$(BIN_PATH)/dvc_list_version
 	ln -f -s ../$(CSH_PATH)/45_list_container.csh		$(BIN_PATH)/dvc_list_container
+	ln -f -s ../$(CSH_PATH)/46_list_object.csh		$(BIN_PATH)/dvc_list_object
+	ln -f -s ../$(CSH_PATH)/50_empty_container.csh		$(BIN_PATH)/dvc_empty_container
 	ln -f -s ../$(CSH_PATH)/51_add_object.csh		$(BIN_PATH)/dvc_add_object
 	ln -f -s ../$(CSH_PATH)/52_copy_object.csh		$(BIN_PATH)/dvc_copy_object
 	ln -f -s ../$(CSH_PATH)/53_link_object.csh		$(BIN_PATH)/dvc_link_object
 	ln -f -s ../$(CSH_PATH)/54_move_object.csh		$(BIN_PATH)/dvc_move_object
 	ln -f -s ../$(CSH_PATH)/55_remove_object.csh		$(BIN_PATH)/dvc_remove_object
-	ln -f -s ../$(CSH_PATH)/58_update_object.csh		$(BIN_PATH)/dvc_update_object
-	ln -f -s ../$(CSH_PATH)/59_commit_object.csh		$(BIN_PATH)/dvc_commit_object
+	ln -f -s ../$(CSH_PATH)/58_update_container.csh		$(BIN_PATH)/dvc_update_container
+	ln -f -s ../$(CSH_PATH)/59_commit_container.csh		$(BIN_PATH)/dvc_commit_container
 	ln -f -s ../$(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s ../$(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase
 	ln -f -s ../$(CSH_PATH)/x2_remove_block.csh		$(BIN_PATH)/dvc_remove_block

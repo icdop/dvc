@@ -34,7 +34,7 @@
   % make checkout
 
 #---------------------------------------------------
-# 3. Checkout container
+# 3. Create container
 #---------------------------------------------------
 
   % make container
@@ -46,14 +46,13 @@
   % make checkin
 
 #---------------------------------------------------
-# 5. Update and Commit change into container
+# 5. Commit change into container
 #---------------------------------------------------
 
-  % make update
   % make commit
 
 #---------------------------------------------------
-# 6. List file in direcotry
+# 6. List files in direcotry
 #---------------------------------------------------
 
   % make list

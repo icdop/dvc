@@ -69,7 +69,7 @@ checkout_version:
 	@echo "#---------------------------------------------------"
 	dvc_checkout_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
 
-container: create_container checkout_container checkin_object commit_object
+container: create_container checkout_container checkin_object commit_container
 create_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 4. Create container"
@@ -142,27 +142,26 @@ remove_object:
 	dvc_remove_obj	$(TEST_FILE)
 	dvc_remove_obj	$(TEST_DIR_)
 
-update: update_object
-update_object:
+update: update_container
+update_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-8 Update change into container"
 	@echo "#---------------------------------------------------"
-	dvc_update_object	$(DESIGN_CNTNR)
+	dvc_update_container	$(DESIGN_CNTNR)
 
 
-commit: commit_object
-commit_object:
+commit: commit_container
+commit_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-9 Commit change to SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_commit_object	$(DESIGN_CNTNR)
+	dvc_commit_container	$(DESIGN_CNTNR)
 
 list: list_version list_container
 list_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
 	@echo "#---------------------------------------------------"
-	dvc_list_project 
 	dvc_list_phase
 	dvc_list_block
 	dvc_list_stage
@@ -172,7 +171,8 @@ list_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-2 List all data in container"
 	@echo "#---------------------------------------------------"
-	dvc_list_container 	$(DESIGN_CNTNR)
+	dvc_list_container
+	dvc_list_object	
 
 clean: clean_data
 clean_data: remove_project
@@ -184,8 +184,6 @@ remove_project: remove_container
 	@echo "#---------------------------------------------------"
 	@echo "# 7. Clean up proejct data"
 	@echo "#---------------------------------------------------"
-	dvc_remove_version	$(SOURCE_VERSN) $(SOURCE_STAGE) 
-	dvc_remove_stage	$(SOURCE_STAGE)
 	dvc_remove_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
 	dvc_remove_stage	$(DESIGN_STAGE)
 	dvc_remove_block	$(DESIGN_BLOCK)

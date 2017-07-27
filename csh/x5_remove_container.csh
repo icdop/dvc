@@ -11,13 +11,11 @@ source $DOP_HOME/dvc/csh/11_get_svn.csh
 source $DOP_HOME/dvc/csh/12_get_version.csh
 
 if ($1 != "") then
-    setenv DESIGN_VERSN $1
-    if ($2 != "") then
-        setenv DESIGN_STAGE $2
-    endif
+    setenv CONTAINER $1
+    echo "PARA: CONTAINER = $CONTAINER"
 endif
 
-setenv DVC_CONTAINER .design/$DESIGN_STAGE/$DESIGN_VERSN
+setenv DVC_CONTAINER .design/$DESIGN_STAGE/$DESIGN_VERSN/$CONTAINER
 if {(test -d $DVC_CONTAINER)} then
    echo "INFO: Remove Project Design Container - $DVC_CONTAINER ..."
    rm -fr $DVC_CONTAINER
