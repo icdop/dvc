@@ -1,12 +1,12 @@
 #dvc : Design Version Control
 ========================================
 Steps:
-1) create bin/ directory and link command script
+1) create bin/ directory and link c-shell command script
 
-% make bin
+  % make bin
 
-2) test installation
+2) regress test
 
-% cd run
+  % cd run
 
-% make test
+  % make test
