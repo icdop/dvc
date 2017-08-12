@@ -1,6 +1,6 @@
 GIT_PATH := https://github.com/VirtaulChip/dvc.git
 EMAIL    := hungchun.li@yahoo.com
-USER     := "Albert Li"
+USER     := VirtualChip
 BIN_PATH := bin
 CSH_PATH := csh
 
