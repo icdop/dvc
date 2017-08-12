@@ -1,6 +1,7 @@
 #!/bin/csh -f
-if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_OBJECT>"
+set prog = $0:t
+if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+   echo "Usage: $prog <CONTAINER>"
    exit -1
 endif
 
@@ -13,7 +14,7 @@ source $DVC_CSH/12_get_version.csh
 source $DVC_CSH/13_get_container.csh
 
 if {(test -d $DVC_CONTAINER)} then
-   svn commit --quiet $DVC_CONTAINER -m "Commit Design Container" 
+   svn commit $DVC_CONTAINER -m "Commit Design Container $SVN_CONTAINER"
 else
    echo "ERROR: Cannot find Container : $DVC_CONTAINER"
 endif

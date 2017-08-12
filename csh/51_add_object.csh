@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_OBJECT>"
+   echo "Usage: $prog <CONTAINER> <DESIGN_OBJECT>"
    exit -1
 endif
 
@@ -13,10 +13,14 @@ source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
 source $DVC_CSH/13_get_container.csh
 
-if ($1 != ".") then
-    set filename =  $1
-    rm -fr $DVC_CONTAINER/$filename
-    cp -r $filename $DVC_CONTAINER/$filename
-    svn add --quiet $DVC_CONTAINER/$filename --force
+if (($2 != "") && ($2 != ".")) then
+    set src_name = $2
+    if { (test -e $DVC_CONTAINER/$src_name) } then
+       (cd $DVC_CONTAINER; svn add $src_name --force)
+    else
+       echo "ERROR: $src_name does not exist in container."
+    endif
+else
+    (cd $DVC_CONTAINER; svn add `glob *` --force)
 endif
 

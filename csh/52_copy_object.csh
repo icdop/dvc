@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_OBJECT> <DEST_NAME>"
+   echo "Usage: $prog <CONTAINER> <DESIGN_OBJECT> <DEST_NAME>"
    exit -1
 endif
 
@@ -13,17 +13,24 @@ source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
 source $DVC_CSH/13_get_container.csh
 
-if ($1 != "") then
-    set src_name = $1
-    set dst_name = $1:t
-    if ($2 != "") then
-        set dst_name = $2
+if ($2 != "") then
+    set src_name = $2
+    set dst_name = $2:t
+    if ($3 != "") then
+        set dst_name = $3
     endif
     if {(test -d $DVC_CONTAINER/$dst_name)} then
-        svn rm --quiet $DVC_CONTAINER/$dst_name --force
-        rm -fr $DVC_CONTAINER/$dst_name
+       if {(test -d $src_name)} then
+          # if both src and dest are directory, remove dest directory first
+          rm -fr $DVC_CONTAINER/$dst_name
+          cp -r $src_name $DVC_CONTAINER/$dst_name
+       else if {(test -e $src_name)} then
+          cp -r $src_name $DVC_CONTAINER/$dst_name
+       endif
+    else
+       rm -fr $DVC_CONTAINER/$dst_name
+       cp -fr $src_name $DVC_CONTAINER/$dst_name
     endif 
-    cp -r $src_name $DVC_CONTAINER/$dst_name
-    svn add --quiet $DVC_CONTAINER/$dst_name --force
+    (cd $DVC_CONTAINER; svn add $dst_name --force)
 endif
 

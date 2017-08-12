@@ -1,4 +1,9 @@
 #!/bin/csh -f
+set prog = $0:t
+if (($1 == "-h") || ($1 == "--help")) then
+   echo "Usage: $prog <SVN_ROOT> <SVN_URL>"
+   exit -1
+endif
 mkdir -p .dvc/env
 
 if ($1 != "") then

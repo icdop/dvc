@@ -1,5 +1,5 @@
-#!/bin/csh
-setenv DOP_HOME `(cd $0:h/../..; pwd)`
+#!/bin/csh -f
+setenv DOP_HOME `(cd ../..; pwd)`
 echo "DOP_HOME = $DOP_HOME"
 set path = ($DOP_HOME/dvc/bin $path)
 

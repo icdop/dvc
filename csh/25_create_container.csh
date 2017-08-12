@@ -22,9 +22,9 @@ endif
 
 $DVC_CSH/34_checkout_version.csh .
 
-setenv DVC_CONTAINER $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$CONTAINER
-svn mkdir --quiet $SVN_URL/$DVC_CONTAINER -m "Create Design Container $CONTAINER" --parents
-svn checkout --quiet $SVN_URL/$DVC_CONTAINER .project/$DVC_CONTAINER
+setenv SVN_CONTAINER $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$CONTAINER
+svn mkdir --quiet $SVN_URL/$SVN_CONTAINER -m "Create Design Container $CONTAINER" --parents
+svn checkout --quiet $SVN_URL/$SVN_CONTAINER .project/$SVN_CONTAINER
 
 if {(test -h .container)} then
   echo "WARN: remove old .container link!"
@@ -34,9 +34,9 @@ else if {(test -d .container)} then
   echo "WARN: .contrainer folder exist, rename it to .container.$d !"
   mv .container .container.$d
 endif
-ln -s .project/$DVC_CONTAINER .container
-mkdir -p .dvc/env
-echo $DVC_CONTAINER > .dvc/env/DVC_CONTAINER
+ln -s .project/$SVN_CONTAINER .container
+mkdir -p .container/.dvc/env
+echo $SVN_CONTAINER > .container/.dvc/env/SVN_CONTAINER
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
