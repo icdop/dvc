@@ -1,17 +1,22 @@
 #!/bin/csh -f
+#set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog [-v]"
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
+   set verbose = 1
+   shift argv
+endif
+if ($1 == "--pvar") then
    set pvar = 1
+   shift argv
 else
    set pvar = 0
 endif
 if (($1 != "") && ($1 != "-")) then
    setenv CONTAINER $1
-#   echo "PARA: CONTAINER = $CONTAINER"
    if {(test -d $CONTAINER)} then
       # parameter is a directory
       setenv DVC_CONTAINER $CONTAINER
@@ -24,6 +29,10 @@ else if {(test -d .container)} then
   setenv DVC_CONTAINER .container
 else
   setenv DVC_CONTAINER .
+endif
+
+if ($pvar == 1) then
+   echo "PARA: DVC_CONTAINER = $DVC_CONTAINER"
 endif
 
 if {(test -d $DVC_CONTAINER/.svn)} then

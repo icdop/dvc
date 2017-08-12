@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <CONTAINER> <DESIGN_OBJECT> <DEST_NAME>"
+   echo "Usage: $prog <CONTAINER> <SRC_FILE> <DEST_NAME>"
    exit -1
 endif
 

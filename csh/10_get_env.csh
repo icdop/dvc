@@ -6,7 +6,12 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
+   set verbose = 1
+   shift argv
+endif
+if ($1 == "--pvar") then
    set pvar = 1
+   shift argv
 else
    set pvar = 0
 endif
@@ -19,5 +24,3 @@ if ( $pvar == 1) then
    echo "DVC_CSH      = $DVC_CSH"
 endif
 
-source $DVC_CSH/11_get_svn.csh
-source $DVC_CSH/12_get_version.csh

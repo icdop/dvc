@@ -8,16 +8,16 @@ switch ($1)
  case "-h":
  case "--help":
    exit -1
- case "":
+ case "--local":
   if {(test -d .dvc/env)} then
      ls .dvc/env  
   endif
-  exit -1
- case "-home":
+  exit 0
+ case "--global":
   if {(test -d $HOME/.dvc/env)} then
      ls $HOME/.dvc/env  
   endif
-  exit -1
+  exit 0
 
  default:   
    set varname = $1
