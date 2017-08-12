@@ -15,6 +15,7 @@ help:
 	@echo "        make update   "
 	@echo "        make commit   "
 	@echo "        make list     "
+	@echo "        make varible  "
 	@echo ""
 	@echo "Usage:  make clean    "
 	@echo ""
@@ -29,6 +30,7 @@ test:
 	make update
 	make commit
 	make list
+	make variable
 
 
 init: reset_repository
@@ -45,12 +47,12 @@ $(SVN_ROOT):
 	@mkdir -p $(SVN_ROOT)
 	dvc_set_svn $(SVN_ROOT)
 
-env:
+variable:
 	@echo "#---------------------------------------------------"
-	@echo "# 1. Environment Variable"
+	@echo "# 1. Default Variable"
 	@echo "#---------------------------------------------------"
-	dvc_set_env --global
 	dvc_set_env --local
+	dvc_get_env --local --all
 
 create: create_version
 create_version: $(SVN_ROOT)

@@ -3,8 +3,8 @@ setenv DOP_HOME `(cd ../..; pwd)`
 echo "DOP_HOME = $DOP_HOME"
 set path = ($DOP_HOME/dvc/bin $path)
 
-setenv SVN_ROOT $HOME/DATA_ROOT
-setenv SVN_URL  file://$SVN_ROOT
+#setenv SVN_ROOT $HOME/DATA_ROOT
+#setenv SVN_URL  file://$SVN_ROOT
 
 #setenv DESIGN_PROJT testcase
 #setenv DESIGN_PHASE P1-trial

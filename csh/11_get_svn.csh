@@ -6,10 +6,6 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
-   set verbose = 1
-   shift argv
-endif
-if ($1 == "--pvar") then
    set pvar = 1
    shift argv
 else
@@ -23,7 +19,9 @@ else if {(test -e $HOME/.dvc/env/SVN_ROOT)} then
 else if ($?SVN_ROOT == 0) then
   setenv SVN_ROOT  $HOME/SVN_ROOT
 endif
-#echo "SVN_ROOT     = $SVN_ROOT"
+if ( $pvar == 1) then
+  echo "SVN_ROOT     = $SVN_ROOT"
+endif
 
 if {(test -e .dvc/env/SVN_URL)} then
   setenv SVN_URL      `cat .dvc/env/SVN_URL`
