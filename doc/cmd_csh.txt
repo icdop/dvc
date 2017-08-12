@@ -2,17 +2,20 @@
 	Usage: $prog <variable> <value>
 
 01_set_svn.csh:
-	Usage: $prog <SVN_ROOT> <SVN_URL>
+	Usage: $prog <SVN_ROOT> [<SVN_URL>]
 
 02_set_version.csh:   
 	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE> <DESIGN_PROJT>
 
 10_get_env.csh:   	
-	Usage: $prog [-v] <variable>
+	Usage: $prog [--global|--local] [--all] <variable>"
+
 11_get_svn.csh:   	
 	Usage: $prog [-v]
+
 12_get_version.csh:   	
 	Usage: $prog [-v]
+
 13_get_container.csh:   	
 	Usage: $prog [-v] <CONTAINER>
 
@@ -21,11 +24,11 @@
 21_create_phase.csh:   	
 	Usage: $prog <DESIGN_PHASE>
 22_create_block.csh:   	
-	Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $prog <DESIGN_BLOCK> [<DESIGN_PHASE>]
 23_create_stage.csh:   	
 	Usage: $prog <DESIGN_STAGE>
 24_create_version.csh:   	
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
+	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
 25_create_container.csh:   	
 	Usage: $prog <CONTAINER>
 
@@ -34,11 +37,11 @@
 31_checkout_phase.csh:   	
 	Usage: $prog <DESIGN_PHASE>
 32_checkout_block.csh:   	
-	Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $prog <DESIGN_BLOCK> [<DESIGN_PHASE>]
 33_checkout_stage.csh:   	
 	Usage: $prog <DESIGN_STAGE>
 34_checkout_version.csh:   	
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
+	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
 35_checkout_container.csh:   	
 	Usage: $prog <CONTAINER>
 
@@ -47,11 +50,11 @@
 41_list_phase.csh:   	
 	Usage: $prog <DESIGN_PHASE>
 42_list_block.csh:   	
-	Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $prog <DESIGN_BLOCK> [<DESIGN_PHASE>]
 43_list_stage.csh:   	
 	Usage: $prog <DESIGN_STAGE>
 44_list_version.csh:   	
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
+	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
 45_list_container.csh:   	
 	Usage: $prog <CONTAINER>
 
@@ -60,9 +63,9 @@
 51_add_object.csh:   	
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
 52_copy_object.csh:   	
-	Usage: $prog <CONTAINER> <SRC_FILE> <DEST_NAME>
+	Usage: $prog <CONTAINER> <SRC_FILE> [<DEST_NAME>]
 53_link_object.csh:   	
-	Usage: $prog <CONTAINER> <SRC_FILE> <DEST_NAME>
+	Usage: $prog <CONTAINER> <SRC_FILE> [<DEST_NAME>]
 54_rename_object.csh:   	
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT> <DEST_NAME>
 55_delete_object.csh:   	
@@ -77,11 +80,11 @@ x0_remove_project.csh:
 x1_remove_phase.csh:   	
 	Usage: $0:t <DESIGN_PHASE>
 x2_remove_block.csh:   	
-	Usage: $0:t <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $0:t <DESIGN_BLOCK> [<DESIGN_PHASE>]
 x3_remove_stage.csh:   	
 	Usage: $0:t <DESIGN_STAGE>
 x4_remove_version.csh:   	
 	Usage: $0:t <DESIGN_VERSN>
 x5_remove_container.csh:   	
-	Usage: $0:t <DESIGN_VERSN> <DESIGN_STAGE>
+	Usage: $0:t <DESIGN_VERSN> [<DESIGN_STAGE>]
 
