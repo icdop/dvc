@@ -1,9 +1,21 @@
 GIT_PATH := https://github.com/VirtaulChip/dvc.git
+EMAIL    := hungchun.li@yahoo.com
+USER     := "Albert Li"
 BIN_PATH := bin
 CSH_PATH := csh
 
 help:
 	@echo "Usage: make bin"
+
+config:
+	git config user.email $(EMAIL)
+	git config user.name  $(USER)
+
+pull:
+	git pull $(GIT_PATH)
+
+push:
+	git push $(GIT_PATH)
 
 	
 $(BIN_PATH): $(CSH_PATH) Makefile
@@ -48,15 +60,4 @@ $(BIN_PATH): $(CSH_PATH) Makefile
 	ln -f -s ../$(CSH_PATH)/x3_remove_stage.csh		$(BIN_PATH)/dvc_remove_stage
 	ln -f -s ../$(CSH_PATH)/x4_remove_version.csh		$(BIN_PATH)/dvc_remove_version
 	ln -f -s ../$(CSH_PATH)/x5_remove_container.csh		$(BIN_PATH)/dvc_remove_container
-
-pull:
-	git pull $(GIT_PATH)
-
-push:
-	git push $(GIT_PATH)
-
-
-config:
-	git config user.name 
-	git config user.email 
 
