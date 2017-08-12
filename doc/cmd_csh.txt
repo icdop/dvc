@@ -11,13 +11,13 @@
 	Usage: $prog [--global|--local] [--all] <variable>"
 
 11_get_svn.csh:   	
-	Usage: $prog [-v]
+	Usage: $prog 
 
 12_get_version.csh:   	
-	Usage: $prog [-v]
+	Usage: $prog 
 
 13_get_container.csh:   	
-	Usage: $prog [-v] <CONTAINER>
+	Usage: $prog <CONTAINER>
 
 20_create_project.csh:   	
 	Usage: $prog <DESIGN_PROJT>
