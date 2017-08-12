@@ -22,7 +22,7 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
     echo "INFO: Remove Project Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
-    svn remove --quiet $PHASE_URL -m "remove Phase : /$DESIGN_PROJT/$DESIGN_PHASE"
+    svn remove $PHASE_URL -m "remove Phase : /$DESIGN_PROJT/$DESIGN_PHASE"
 else
     echo "ERROR: Can not find Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
 endif

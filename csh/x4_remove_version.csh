@@ -35,7 +35,7 @@ setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
    echo "INFO: Remove Project Design Version - $DESIGN_STAGE/$DESIGN_VERSN"
-   svn remove --quiet $VERSN_URL -m "Remove Design Version $DESIGN_VERSN"
+   svn remove $VERSN_URL -m "Remove Design Version $DESIGN_VERSN"
 else
     echo "ERROR: Can not find Design Version - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
 endif

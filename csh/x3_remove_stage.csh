@@ -30,7 +30,7 @@ setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
     echo "INFO: Remove Project Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
-    svn remove --quiet $STAGE_URL -m "Remove Design Stage : $DESIGN_STAGE"
+    svn remove $STAGE_URL -m "Remove Design Stage : $DESIGN_STAGE"
 else
     echo "ERROR: Can not find Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
 endif

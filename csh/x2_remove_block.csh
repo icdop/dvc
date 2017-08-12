@@ -26,7 +26,7 @@ setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
     echo "INFO: Remove Project Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
-    svn remove --quiet $BLOCK_URL -m "Remove Design Block : $DESIGN_BLOCK"
+    svn remove $BLOCK_URL -m "Remove Design Block : $DESIGN_BLOCK"
 else
     echo "ERROR: Can not find Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
 endif
