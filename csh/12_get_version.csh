@@ -25,7 +25,7 @@ if {(test -e .dvc/env/DESIGN_PHASE)} then
 else if {(test -e $HOME/.dvc/env/DESIGN_PHASE)} then
   setenv DESIGN_PHASE `cat $HOME/.dvc/env/DESIGN_PHASE`
 else if ($?DESIGN_PHASE == 0) then
-  setenv DESIGN_PHASE -
+  setenv DESIGN_PHASE :
 endif
 
 if {(test -e .dvc/env/DESIGN_BLOCK)} then
@@ -33,7 +33,7 @@ if {(test -e .dvc/env/DESIGN_BLOCK)} then
 else if {(test -e $HOME/.dvc/env/DESIGN_BLOCK)} then
   setenv DESIGN_BLOCK `cat $HOME/.dvc/env/DESIGN_BLOCK`
 else if ($?DESIGN_BLOCK == 0) then
-  setenv DESIGN_BLOCK -
+  setenv DESIGN_BLOCK :
 endif
 
 if {(test -e .dvc/env/DESIGN_STAGE)} then
@@ -41,7 +41,7 @@ if {(test -e .dvc/env/DESIGN_STAGE)} then
 else if {(test -e $HOME/.dvc/env/DESIGN_STAGE)} then
   setenv DESIGN_STAGE `cat $HOME/.dvc/env/DESIGN_STAGE`
 else if ($?DESIGN_STAGE == 0) then
-  setenv DESIGN_STAGE -
+  setenv DESIGN_STAGE :
 endif
 
 if {(test -e .dvc/env/DESIGN_VERSN)} then
@@ -49,7 +49,7 @@ if {(test -e .dvc/env/DESIGN_VERSN)} then
 else if {(test -e $HOME/.dvc/env/DESIGN_VERSN)} then
   setenv DESIGN_VERSN `cat $HOME/.dvc/env/DESIGN_VERSN`
 else if ($?DESIGN_VERSN == 0) then
-  setenv DESIGN_VERSN -
+  setenv DESIGN_VERSN :
 endif
 
 if ( $pvar == 1) then
