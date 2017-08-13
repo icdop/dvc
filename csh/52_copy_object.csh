@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <CONTAINER> <SRC_FILE> <DEST_NAME>"
+   echo "Usage: $prog <DESIGN_CONTR> <SRC_FILE> <DEST_NAME>"
    exit -1
 endif
 
@@ -12,7 +12,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
-source $DVC_CSH/13_get_container.csh
+source $DVC_CSH/15_get_container.csh
 if ($2 != "") then
     set src_name = $2
     set dst_name = $2:t

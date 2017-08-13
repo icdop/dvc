@@ -6,7 +6,7 @@ SVN_ROOT     := $(realpath $(PWD)/..)/PROJ_SVN
 DESIGN_PROJT := testcase
 DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip
-DESIGN_STAGE := S40-APR
+DESIGN_STAGE := 400-APR
 DESIGN_VERSN := 2017_0615-xxx
 DESIGN_CNTNR := place_opt
 

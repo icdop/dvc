@@ -8,11 +8,11 @@ ifndef DESIGN_BLOCK
 DESIGN_BLOCK := chip
 endif
 ifndef DESIGN_STAGE
-DESIGN_STAGE := S40-APR
+DESIGN_STAGE := 400-APR
 endif
 ifndef DESIGN_VERSN
 DESIGN_VERSN := 2017_0615-xxx
 endif
-ifndef DESIGN_CNTNR
-DESIGN_CNTNR := place_opt
+ifndef DESIGN_CONTR
+DESIGN_CONTR := place_opt
 endif

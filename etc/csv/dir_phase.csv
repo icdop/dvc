@@ -1,5 +1,5 @@
-#NAME           #FORMAT	#TITLE
-#############	#######	##########################
+;NAME           FORMAT	TITLE
+============    ======= ========================== 
 P1-trial	DIR	"Initial Trial Run Phase "
 P2-stable	DIR	"Stable Run Phase "
 P3-final	DIR	"Final Run Phase "

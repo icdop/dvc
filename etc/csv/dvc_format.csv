@@ -1,5 +1,5 @@
-#FORMAT #TYPE	#EXT	#ACTION
-#######	#####	######	################################
+;FORMAT TYPE	EXT	ACTION
+======= =====   ======  ================================ 
 VERILOG	FILE	*.vg	{view "vi $$"}
 DEF	FILE	*.def	{view "vi $$"}
 SDC	FILE	*.sdc	{view "vi $$"}

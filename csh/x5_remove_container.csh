@@ -10,7 +10,7 @@ if ($?DOP_HOME == 0) then
 endif
 source $DOP_HOME/dvc/csh/11_get_svn.csh
 source $DOP_HOME/dvc/csh/12_get_version.csh
-source $DOP_HOME/dvc/csh/13_get_container.csh
+source $DOP_HOME/dvc/csh/15_get_container.csh
 
 if {(test -d .project/$SVN_CONTAINER)} then
    echo "INFO: Remove Project Design Container - $SVN_CONTAINER ..."

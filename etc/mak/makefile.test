@@ -6,15 +6,15 @@ help:
 	@echo "CURDIR = $(CURDIR)"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
 	@echo "Usage:"
-	@echo "        make init     "
+	@echo "        make init      (reset_resository)"
 	@echo "        make project   (create_project)"
 	@echo "        make version   (create_version; checkout_version)"
 	@echo "        make container (create_container; checkout_container)"
-	@echo "        make object   "
-	@echo "        make commit   "
-	@echo "        make list     "
+	@echo "        make object    (checkin_object)"
+	@echo "        make commit    (commit_container)"
+	@echo "        make list      (list_version; list_container)"
 	@echo ""
-	@echo "Usage:  make clean    "
+	@echo "Usage:  make clean     (clean_data)"
 	@echo ""
 
 run:	test
@@ -28,14 +28,8 @@ test:
 	make list
 
 
-init: reset_repository svn
+init: reset_repository
 reset_repository:
-	@rm -fr $(SVN_ROOT) 
-
-$(SVN_ROOT):
-	@mkdir -p $(SVN_ROOT)
-
-svn: $(SVN_ROOT)
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Initial SVN ROOT"
 	@echo "#---------------------------------------------------"
@@ -70,15 +64,15 @@ create_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 4. Create container"
 	@echo "#---------------------------------------------------"
-	dvc_create_container	$(DESIGN_CNTNR)
+	dvc_create_container	$(DESIGN_CONTR)
 
 checkout_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 4. Checkout container"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_container	$(DESIGN_CNTNR)
+	dvc_checkout_container	$(DESIGN_CONTR)
 
-object: checkin_object
+object: clean_container checkin_object
 checkin_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5. Checkin file into container"
@@ -87,21 +81,20 @@ checkin_object:
 	make copy_object
 	make link_object
 
-empty: empty_container
-empty_container:
+clean_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-0 Empty data in container"
+	@echo "# 5-0 Clean design object in container"
 	@echo "#---------------------------------------------------"
-	dvc_empty_container 	$(DESIGN_CNTNR)
+	dvc_clean_container 	$(DESIGN_CONTR)
 
 add: add_object
 add_object:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-1 Add file to container"
+	@echo "# 5-1 Add existing object in container folder"
 	@echo "#---------------------------------------------------"
 	@echo "$(TMP_FILE)" > $(TMP_FILE)
 	cp -f $(TMP_FILE) .container
-	dvc_add_object	$(DESIGN_CNTNR)	$(TMP_FILE)
+	dvc_add_object	$(DESIGN_CONTR)	$(TMP_FILE)
 
 copy: copy_object
 copy_object:
@@ -109,8 +102,8 @@ copy_object:
 	@echo "# 5-2 Copy file to container"
 	@echo "#---------------------------------------------------"
 	@date +%Y%m%d_%H%M%S >> $(TEST_FILE)
-	dvc_copy_object	$(DESIGN_CNTNR)	$(TEST_FILE)
-	dvc_copy_object	$(DESIGN_CNTNR)	$(TEST_FILE)  newfile
+	dvc_copy_object	$(DESIGN_CONTR)	$(TEST_FILE)
+	dvc_copy_object	$(DESIGN_CONTR)	$(TEST_FILE)  newfile
 
 link: link_object
 link_object:
@@ -119,8 +112,8 @@ link_object:
 	@echo "#---------------------------------------------------"
 	@mkdir -p $(TEST_DIR_)
 	@date +%Y%m%d_%H%M%S >> $(TEST_DIR_)/$(TEST_FILE)
-	dvc_link_object	$(DESIGN_CNTNR)	$(TEST_DIR_)
-	dvc_link_object	$(DESIGN_CNTNR)	$(TEST_DIR_)  newdir
+	dvc_link_object	$(DESIGN_CONTR)	$(TEST_DIR_)
+	dvc_link_object	$(DESIGN_CONTR)	$(TEST_DIR_)  newdir
 
 rename: rename_object
 rename_object:
@@ -128,23 +121,23 @@ rename_object:
 	@echo "# 5-4 Rename file in container"
 	@echo "#---------------------------------------------------"
 	@mkdir -p old_$(TEST_DIR_)
-	dvc_copy_object	$(DESIGN_CNTNR)	old_$(TEST_DIR_)
-	dvc_rename_object	$(DESIGN_CNTNR)	old_$(TEST_DIR_)  new_$(TEST_DIR_)
+	dvc_copy_object	$(DESIGN_CONTR)	old_$(TEST_DIR_)
+	dvc_rename_object	$(DESIGN_CONTR)	old_$(TEST_DIR_)  new_$(TEST_DIR_)
 
 delete: delete_object
 delete_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-5 Remove files in container"
 	@echo "#---------------------------------------------------"
-	dvc_delete_object	$(DESIGN_CNTNR)	$(TEST_FILE)
-	dvc_delete_object	$(DESIGN_CNTNR)	$(TEST_DIR_)
+	dvc_delete_object	$(DESIGN_CONTR)	$(TEST_FILE)
+	dvc_delete_object	$(DESIGN_CONTR)	$(TEST_DIR_)
 
 update: update_container
 update_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-8 Update change into container"
 	@echo "#---------------------------------------------------"
-	dvc_update_container	$(DESIGN_CNTNR)
+	dvc_update_container	$(DESIGN_CONTR)
 
 
 commit: commit_container
@@ -152,7 +145,7 @@ commit_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-9 Commit change to SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_commit_container	$(DESIGN_CNTNR)
+	dvc_commit_container	$(DESIGN_CONTR)
 
 list: list_version list_container list_variable
 list_version:
@@ -183,6 +176,7 @@ clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_FILE) $(TEST_DIR_) tmpfile_*
 	@rm -fr .dvc .project .dvc_block .dvc_version .container
+	@rm -fr $(SVN_ROOT) 
 
 remove_project: remove_version
 	@echo "#---------------------------------------------------"
@@ -203,5 +197,5 @@ remove_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-1. Clean up container data"
 	@echo "#---------------------------------------------------"
-	dvc_remove_container	$(DESIGN_CNTNR)
+	dvc_remove_container	$(DESIGN_CONTR)
 

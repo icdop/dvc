@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <CONTAINER>"
+   echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
 
@@ -11,7 +11,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 source $DVC_CSH/11_get_svn.csh
 source $DVC_CSH/12_get_version.csh
-source $DVC_CSH/13_get_container.csh
+source $DVC_CSH/15_get_container.csh
 
 if {(test -d $DVC_CONTAINER)} then
    svn update $DVC_CONTAINER

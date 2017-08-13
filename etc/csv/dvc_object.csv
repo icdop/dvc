@@ -1,9 +1,9 @@
-#NAME	#FORMAT	#TITLE
-#####	#######	##########################
-VFILE	VERILOG	"Verilog Netlist File"
-SDC	SDC	"Timing Constraint File"
-DEF	DEF	"Physical Design File"
-SPEF	SPEF	"RC Extraction File"
-PT_RPT	DIR	"Primetime STA Report Directory"
-DQI	DIR	"Design Quality Indicator Report Directory"
+;NAME	FORMAT	DEFAULT		TITLE
+=====   =======	==========	==========================
+VFILE	VERILOG *.v		VERILOG	"Verilog Netlist File"
+SDC	SDC	*.sdc		"Timing Constraint File"
+DEF	DEF	*.def		"Physical Design File"
+SPEF	SPEF	*.spef		"RC Extraction File"
+PT_RPT	DIR	pt.log		"Primetime STA Report Directory"
+DQI	DIR	.dqi		"Design Quality Indicator Report Directory"
 

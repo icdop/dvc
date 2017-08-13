@@ -100,13 +100,12 @@ P5-silicon	DIR	"Silicon ramp up Phase "
 P6-production	DIR	"Production Phase "
 
 # ------------------------------------
-# VARIABLE.csv (etc/csv/dvc_variable.csv)
+# OBJECT.csv (etc/csv/dvc_object.csv)
 # ------------------------------------
-
-;NAME		FORMAT	DESCRIPTION
-;============== ======	===========================
-NETLIST_FILE	VG	"Verilog Netlist File"
-DEF_FILE	DEF	"Physical Design Data"
-SPEF_FILE	SPEF	"RC Extraction Data"
-PT_STA_RPT	DIR	"STA Report Directory"
+;NAME		FORMAT	DEFAULT		DESCRIPTION
+;============== ======	=======		===========================
+NETLIST_FILE	VG	design.v	"Verilog Netlist File"
+DEF_FILE	DEF	design.def	"Physical Design Data"
+SPEF_FILE	SPEF	design.spef	"RC Extraction Data"
+PT_STA_RPT	DIR	pt_sta.log	"STA Report Directory"
 

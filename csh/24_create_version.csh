@@ -28,12 +28,11 @@ endif
 
 echo "INFO: Create Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version /$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_VERSN ..." --parents
-svn mkdir --quiet $VERSN_URL/.dqi -m "Design Quality Indicator"
 svn mkdir --quiet $VERSN_URL/.dvc -m "Design Platform Config Directory"
 svn copy  --quiet $BLOCK_URL/.dvc/FILE_FORMAT.csv  $VERSN_URL/.dvc/FILE_FORMAT.csv -m 'Design Object Format' 
-svn copy  --quiet $BLOCK_URL/.dvc/VARIABLE.csv  $VERSN_URL/.dvc/VARIABLE.csv -m 'Design Variable Table' 
+svn copy  --quiet $BLOCK_URL/.dvc/FILE_OBJECT.csv  $VERSN_URL/.dvc/FILE_OBJECT.csv -m 'Design Object Table' 
 
-setenv README "/tmp/README.md"
+setenv README "/tmp/README.`date +%Y%m%d_%H%M%S`"
 echo -n "" > $README
 echo "# Design Version Control Directory" >> $README
 echo "=======================================" >> $README
@@ -47,7 +46,7 @@ echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README
 svn import --quiet $README $VERSN_URL/.dvc/README.md -m 'Initial Design Version Directory'
-rm -f $README
+rm -fr $README
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

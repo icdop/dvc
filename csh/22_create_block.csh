@@ -42,8 +42,8 @@ echo "INFO: Create Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
 svn mkdir --quiet $BLOCK_URL -m "Create Design $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
 svn import --quiet $DVC_ETC/csv/dir_stage.csv    $BLOCK_URL/.dvc/NAME_RULE.csv -m 'Stage Naming Rule'
-svn import --quiet $DVC_ETC/csv/dvc_format.csv   $BLOCK_URL/.dvc/FILE_FORMAT.csv -m 'Directory Format'  
-svn import --quiet $DVC_ETC/csv/dvc_variable.csv   $BLOCK_URL/.dvc/VARIABLE.csv -m 'Default Variable Table' 
+svn import --quiet $DVC_ETC/csv/dvc_format.csv   $BLOCK_URL/.dvc/FILE_FORMAT.csv -m 'Design Object Format'  
+svn import --quiet $DVC_ETC/csv/dvc_object.csv   $BLOCK_URL/.dvc/FILE_OBJECT.csv -m 'Design Object Table' 
 
 setenv README "/tmp/README.md"
 echo -n "" > $README

@@ -1,4 +1,4 @@
-#NAME           #FORMAT	#TITLE
-#############	#######	##########################
+;NAME           FORMAT	TITLE
+============    ======= ========================== 
 chip		DIR	"Top"
-*		DIR	"Block Design"
+.*		DIR	"Block Design"

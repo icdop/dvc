@@ -5,7 +5,9 @@ dvc_set_env:
 	Usage: $prog <variable> <value>
 
 dvc_set_svn:   
-	Usage: $prog <SVN_ROOT> <SVN_URL>
+	Usage: $prog <SVN_ROOT> [<SVN_MODE>]
+	Description:
+	  set the SVN data root and the svn server mode
 
 dvc_set_project:   
 	Usage: $prog <project>
@@ -14,6 +16,10 @@ dvc_set_version:
 	Usage: $prog <version> <stage> <block> <phase>
 	Description:
 	  Set the default design variable and store the value to .dvc/env/
+
+dvc_set_container:   
+	Usage: $prog <CONTAINER>
+	Description:
 
 dvc_get_env:   
 	Usage: $prog [--global|--local] [--all] <variable>
@@ -39,7 +45,7 @@ dvc_create_project:
 	  create project repository in SVN data
 
 dvc_checkout_project:   
-	Usage: $prog <DESIGN_PROJT>
+	Usage: $prog [--data] <DESIGN_PROJT>
 	Description:
 	  create a .project folder in current directory
 	  checkout project folder to .project/
@@ -55,37 +61,23 @@ dvc_set_project:
 dvc_create_phase:   
 	Usage: $prog <DESIGN_PHASE>
 dvc_create_block:   
-	Usage: $prog <DESIGN_BLOCK> [<DESIGN_PHASE>]
+	Usage: $prog <DESIGN_BLOCK>
 dvc_create_stage:   
 	Usage: $prog <DESIGN_STAGE>
 dvc_create_version:   
 	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
 
 #
-# List content under design folder
-#
-dvc_list_project:   
-	Usage: $prog <DESIGN_PROJT>
-dvc_list_phase:   
-	Usage: $prog <DESIGN_PHASE>
-dvc_list_block:   
-	Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>
-dvc_list_stage:   
-	Usage: $prog <DESIGN_STAGE>
-dvc_list_version:   
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
-
-#
 # Checkout Design Version directory
 #
 dvc_checkout_phase:   
-	Usage: $prog <DESIGN_PHASE>
+	Usage: $prog [--data] <DESIGN_PHASE>
 dvc_checkout_block:   
-	Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $prog [--data] <DESIGN_BLOCK>
 dvc_checkout_stage:   
-	Usage: $prog <DESIGN_STAGE>
+	Usage: $prog [--data] <DESIGN_STAGE>
 dvc_checkout_version:   
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
+	Usage: $prog [--data] <DESIGN_VERSN> <DESIGN_STAGE>
 	Description:
 	  This command will call dvc_set_version
 	checkout version folder to local working directory
@@ -100,20 +92,22 @@ dvc_checkout_version:
 #
 dvc_create_container:   
 	Usage: $prog <CONTAINER>
-	create a container folder in server
+	Description:
+	  create a container folder under version directory
 
 dvc_checkout_container:   
 	Usage: $prog <CONTAINER>
-	checkout container folder to local working directory
-	.project/<PROJT>/<PHASE>/<BLOCK>/<STAGE>/<VERSN>
-	create a .container link to .project/-/-/-/-/-/<CONTAINER> 
+	Description:
+	  1) checkout container folder to local working directory
+	     .project/<PROJT>/<PHASE>/<BLOCK>/<STAGE>/<VERSN>
+	  2) create a .container link to .project/-/-/-/-/-/<CONTAINER> 
 
-dvc_empty_container:   
-	Usage: $prog <CONTAINER>|:
+dvc_clean_container:   
+	Usage: $prog <CONTAINER>
 dvc_update_container:   
-	Usage: $prog <CONTAINER>|:
+	Usage: $prog <CONTAINER>
 dvc_commit_container:   
-	Usage: $prog <CONTAINER>|:
+	Usage: $prog <CONTAINER>
 
 dvc_list_container:   
 	Usage: $prog <CONTAINER>
@@ -130,6 +124,21 @@ dvc_rename_object:
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT> <DEST_NAME>
 dvc_delete_object:   
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
+
+#
+# List content under design folder
+#
+dvc_list_project:   
+	Usage: $prog <DESIGN_PROJT>
+dvc_list_phase:   
+	Usage: $prog <DESIGN_PHASE>
+dvc_list_block:   
+	Usage: $prog <DESIGN_BLOCK>
+dvc_list_stage:   
+	Usage: $prog <DESIGN_STAGE>
+dvc_list_version:   
+	Usage: $prog <DESIGN_VERSN>
+
 
 #
 # Remove
