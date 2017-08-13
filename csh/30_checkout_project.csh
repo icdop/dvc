@@ -34,8 +34,6 @@ endif
 
    mkdir -p .project/$DESIGN_PROJT
    svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
-   rm -f project/.current_project
-   ln -s $DESIGN_PROJT .project/.current_project
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

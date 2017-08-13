@@ -1,4 +1,5 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>"
@@ -38,33 +39,55 @@ if ($status == 1) then
    exit 1
 endif
 
-echo "INFO: Checkout Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
 mkdir -p .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+
+
+if {(test -d .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
+echo "INFO: Update Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
+svn update --quiet .project/$DESIGN_PROJT/.dvc
+svn update --quiet .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
+svn update --quiet .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+svn update --quiet .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+svn update --quiet .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dqi
+else
+echo "INFO: Checkout Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
 svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
 svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
 svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 svn checkout --quiet $VERSN_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
 svn checkout --quiet $VERSN_URL/.dqi .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dqi
-rm -f .project/$DESIGN_PROJT/-
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/-
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/-
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/-
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_STAGE/-
-ln -s $DESIGN_PROJT .project/-
-ln -s $DESIGN_PHASE .project/$DESIGN_PROJT/-
-ln -s $DESIGN_BLOCK .project/$DESIGN_PROJT/$DESIGN_PHASE/-
-ln -s $DESIGN_STAGE .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/-
-ln -s $DESIGN_VERSN .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/-
-
-if {(test -h .design)} then
-  rm -f .design
-else if {(test -d .design)} then
-  set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: .design folder exist, rename it to .design.$d !"
-  mv .design .design.$d
 endif
-ln -fs .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK .design
+
+rm -f .project/:
+rm -f .project/$DESIGN_PROJT/:
+rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/:
+rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/:
+ln -fs $DESIGN_PROJT .project/:
+ln -fs $DESIGN_PHASE .project/$DESIGN_PROJT/:
+ln -fs $DESIGN_BLOCK .project/$DESIGN_PROJT/$DESIGN_PHASE/:
+ln -fs $DESIGN_STAGE .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+ln -fs $DESIGN_VERSN .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+
+if {(test -h .dvc_block)} then
+  rm -f .dvc_block
+else if {(test -d .dvc_block)} then
+  set d = `date +%Y%m%d_%H%M%S`
+  echo "WARN: design folder .dvc_block exist, rename it to .dvc_block.$d !"
+  mv .dvc_block .dvc_block.$d
+endif
+ln -fs .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK .dvc_block
+
+if {(test -h .dvc_version)} then
+  rm -f .dvc_version
+else if {(test -d .dvc_version)} then
+  set d = `date +%Y%m%d_%H%M%S`
+  echo "WARN: design folder .dvc_version exist, rename it to .dvc_version.$d !"
+  mv .dvc_version .dvc_version.$d
+endif
+ln -fs .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN .dvc_version
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

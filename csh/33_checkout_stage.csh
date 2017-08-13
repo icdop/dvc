@@ -38,8 +38,6 @@ svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
 svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 svn checkout --quiet $STAGE_URL/ .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.current_version
-ln -s $DESIGN_STAGE .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.current_version
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

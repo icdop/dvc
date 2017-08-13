@@ -25,7 +25,8 @@
 # 1. Create design directory in SVN server
 #---------------------------------------------------
 
-  % make create
+  % make project
+  % make version
 
 #---------------------------------------------------
 # 2. Checkout version to local directory

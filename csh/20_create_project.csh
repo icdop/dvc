@@ -29,6 +29,7 @@ if ($status == 0) then
 endif
 
    echo "INFO: Initial Project Design Respository : $DESIGN_PROJT"
+   mkdir -p $SVN_ROOT
    svnadmin create $SVN_ROOT/$DESIGN_PROJT
    cp -fr $DVC_ETC/svn/* $SVN_ROOT/$DESIGN_PROJT/conf
 

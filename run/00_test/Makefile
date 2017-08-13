@@ -1,6 +1,6 @@
 ##################################
-DOP_HOME     := $(realpath $(PWD)/../..)
-SVN_ROOT     := $(DOP_HOME)/PROJ_SVN
+DOP_HOME     := $(realpath $(PWD)/../../..)
+SVN_ROOT     := $(realpath $(PWD)/..)/PROJ_SVN
 
 ##################################
 DESIGN_PROJT := testcase

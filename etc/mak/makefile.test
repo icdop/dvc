@@ -5,16 +5,14 @@ help:
 	@echo "PWD    = $(PWD)"
 	@echo "CURDIR = $(CURDIR)"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
-	@echo "Usage:  make test "
+	@echo "Usage:"
 	@echo "        make init     "
-	@echo "        make create   "
-	@echo "        make checkout "
-	@echo "        make container"
-	@echo "        make checkin  "
-	@echo "        make update   "
+	@echo "        make project   (create_project)"
+	@echo "        make version   (create_version; checkout_version)"
+	@echo "        make container (create_container; checkout_container)"
+	@echo "        make object   "
 	@echo "        make commit   "
 	@echo "        make list     "
-	@echo "        make varible  "
 	@echo ""
 	@echo "Usage:  make clean    "
 	@echo ""
@@ -22,43 +20,39 @@ help:
 run:	test
 test:
 	make init
-	make create
-	make checkout
+	make project
+	make version
 	make container
-	make checkin
-	make update
+	make object
 	make commit
 	make list
-	make variable
 
 
-init: reset_repository
+init: reset_repository svn
 reset_repository:
-	@echo "#---------------------------------------------------"
-	@echo "# 0. Reset project repository"
-	@echo "#---------------------------------------------------"
-	@rm -fr tmpfile_*
-	@rm -fr .dvc .project .design .container
-	@rm -fr $(HOME)/.dvc
-	@rm -fr $(SVN_ROOT)
+	@rm -fr $(SVN_ROOT) 
 
 $(SVN_ROOT):
 	@mkdir -p $(SVN_ROOT)
+
+svn: $(SVN_ROOT)
+	@echo "#---------------------------------------------------"
+	@echo "# 0. Initial SVN ROOT"
+	@echo "#---------------------------------------------------"
+	@echo "SVN_ROOT = $(SVN_ROOT)"
 	dvc_set_svn $(SVN_ROOT)
 
-variable:
+project: init
 	@echo "#---------------------------------------------------"
-	@echo "# 1. Default Variable"
-	@echo "#---------------------------------------------------"
-	dvc_set_env --local
-	dvc_get_env --local --all
-
-create: create_version
-create_version: $(SVN_ROOT)
-	@echo "#---------------------------------------------------"
-	@echo "# 2. Create project directory in SVN server"
+	@echo "# 1. Initial Project"
 	@echo "#---------------------------------------------------"
 	dvc_create_project	$(DESIGN_PROJT)
+
+version: create_version checkout_version
+create_version: $(SVN_ROOT)
+	@echo "#---------------------------------------------------"
+	@echo "# 2. Create version directory in SVN server"
+	@echo "#---------------------------------------------------"
 	dvc_create_phase	$(DESIGN_PHASE)
 	dvc_create_block	$(DESIGN_BLOCK)
 	dvc_create_stage	$(DESIGN_STAGE)
@@ -84,7 +78,7 @@ checkout_container:
 	@echo "#---------------------------------------------------"
 	dvc_checkout_container	$(DESIGN_CNTNR)
 
-checkin: checkin_object
+object: checkin_object
 checkin_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5. Checkin file into container"
@@ -106,7 +100,7 @@ add_object:
 	@echo "# 5-1 Add file to container"
 	@echo "#---------------------------------------------------"
 	@echo "$(TMP_FILE)" > $(TMP_FILE)
-	cp -f $(TMP_FILE) .container
+	cp -f $(TMP_FILE) .dvc_container
 	dvc_add_object	$(DESIGN_CNTNR)	$(TMP_FILE)
 
 copy: copy_object
@@ -160,7 +154,7 @@ commit_container:
 	@echo "#---------------------------------------------------"
 	dvc_commit_container	$(DESIGN_CNTNR)
 
-list: list_version list_container
+list: list_version list_container list_variable
 list_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
@@ -177,25 +171,37 @@ list_container:
 	@echo "#---------------------------------------------------"
 	dvc_list_container 
 
+list_variable:
+	@echo "#---------------------------------------------------"
+	@echo "# 6-3 List all variables"
+	@echo "#---------------------------------------------------"
+	dvc_set_env --local
+	dvc_get_env --local --all
+
+
 clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_FILE) $(TEST_DIR_) tmpfile_*
-	@rm -fr $(SVN_ROOT) 
-	@rm -fr .dvc .project .design .container
+	@rm -fr .dvc .project .dvc_block .dvc_version .dvc_container
 
-remove_project: remove_container
+remove_project: remove_version
 	@echo "#---------------------------------------------------"
-	@echo "# 7. Clean up proejct data"
+	@echo "# 7-3. Remove proejct"
+	@echo "#---------------------------------------------------"
+	dvc_remove_project	$(DESIGN_PROJT)
+
+remove_version: remove_container
+	@echo "#---------------------------------------------------"
+	@echo "# 7-2. Clean up design version data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
 	dvc_remove_stage	$(DESIGN_STAGE)
 	dvc_remove_block	$(DESIGN_BLOCK)
 	dvc_remove_phase	$(DESIGN_PHASE)
-	dvc_remove_project	$(DESIGN_PROJT)
 
 remove_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 6. Clean up container data"
+	@echo "# 7-1. Clean up container data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(DESIGN_CNTNR)
 

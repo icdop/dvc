@@ -16,9 +16,9 @@ if {(test -d .project/$SVN_CONTAINER)} then
    echo "INFO: Remove Project Design Container - $SVN_CONTAINER ..."
    rm -fr .project/$SVN_CONTAINER
    svn remove $SVN_URL/$SVN_CONTAINER -m "Remove Design Container $SVN_CONTAINER"
-   if {(test -d .container)} then
+   if {(test -d .dvc_container)} then
    else
-      rm -f .container
+      rm -f .dvc_container
    endif
 else
    echo "ERROR: Can not find Design Container - $DVC_CONTAINER"

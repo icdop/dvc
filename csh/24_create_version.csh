@@ -64,12 +64,6 @@ echo "=======================================" >> $README
 svn import --quiet $README $VERSN_URL/.dvc/README.md -m 'Initial Design Version Directory'
 rm -f $README
 
-rm -f /tmp/.current_version
-ln -s $DESIGN_VERSN /tmp/.current_version
-svn import --quiet --force /tmp/.current_version $STAGE_URL/.current_version -m 'Current Design Version $DESIGN_VERSN'
-rm -f /tmp/.current_version
-
-
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
 exit 0

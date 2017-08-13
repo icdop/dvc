@@ -34,8 +34,6 @@ echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 mkdir -p .project/$DESIGN_PROJT/$DESIGN_PHASE
 svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
 svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
-rm -f .project/$DESIGN_PROJT/.current_phase
-ln -s $DESIGN_PHASE .project/$DESIGN_PROJT/.current_phase
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

@@ -17,15 +17,17 @@ if (($1 != "") && ($1 != ":")) then
    if {(test -d $CONTAINER)} then
       # parameter is a directory
       setenv DVC_CONTAINER $CONTAINER
-   else if {(test -d .design/-/-/$CONTAINER)} then
-      setenv DVC_CONTAINER .design/-/-/$CONTAINER
-   else if {(test -d .project/-/-/-/-/-/$CONTAINER)} then
-      setenv DVC_CONTAINER .project/-/-/-/-/-/$CONTAINER
+   else if {(test -d .dvc_version/$CONTAINER)} then
+      setenv DVC_CONTAINER .dvc_version/$CONTAINER
+   else if {(test -d .dvc_block/:/:/$CONTAINER)} then
+      setenv DVC_CONTAINER .dvc_block/:/:/$CONTAINER
+   else if {(test -d .project/:/:/:/:/:/$CONTAINER)} then
+      setenv DVC_CONTAINER .project/:/:/:/:/:/$CONTAINER
    else
-      setenv DVC_CONTAINER .design/-/-/$CONTAINER
+      setenv DVC_CONTAINER .dvc_version/$CONTAINER
    endif
-else if {(test -h .container)} then
-  setenv DVC_CONTAINER .container
+else if {(test -h .dvc_container)} then
+  setenv DVC_CONTAINER .dvc_container
 else
   setenv DVC_CONTAINER .
 endif
@@ -36,7 +38,7 @@ endif
 if {(test -e $DVC_CONTAINER/.dvc/env/SVN_CONTAINER)} then
    setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dvc/env/SVN_CONTAINER`
 else
-   setenv SVN_CONTAINER "-/-/-/-/-/$CONTAINER"
+   setenv SVN_CONTAINER ":/:/:/:/:/$CONTAINER"
    echo "ERROR: Not a valid container : $DVC_CONTAINER"
    exit -1
 endif
