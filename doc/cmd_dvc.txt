@@ -61,21 +61,28 @@ dvc_checkout_stage:
 	Usage: $prog <DESIGN_STAGE>
 dvc_checkout_version:   
 	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>
+	checkout version folder to local working directory
+	create "-" point to default working path
 
 #
 # Container
 #
 dvc_create_container:   
 	Usage: $prog <CONTAINER>
+	create a container folder in server
+
 dvc_checkout_container:   
 	Usage: $prog <CONTAINER>
+	checkout container folder to local working directory
+	.project/<PROJT>/<PHASE>/<BLOCK>/<STAGE>/<VERSN>
+	create a .container link to .project/-/-/-/-/-/<CONTAINER> 
 
 dvc_empty_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <CONTAINER>|:
 dvc_update_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <CONTAINER>|:
 dvc_commit_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <CONTAINER>|:
 
 dvc_get_container:   
 	Usage: $prog <CONTAINER>
@@ -83,6 +90,8 @@ dvc_list_container:
 	Usage: $prog <CONTAINER>
 dvc_add_object:   
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
+	add object <CONTAINER>/<DESIGN_OBJECT> to SVN repository
+
 dvc_copy_object:   
 	Usage: $prog <CONTAINER> <SRC_FILE> [<DEST_NAME>]
 dvc_link_object:   

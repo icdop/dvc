@@ -16,34 +16,39 @@
 # DOP_ROOT       = /home/owner/CAD
 ########################################################
 # ============================
-# Variable
+# Default Variable
 # ============================
-# - Variable are stored in the dvc config directory
-#   and the search path sequency is as below:
-#
-#    1) Local : "$PWD/.dvc/env/#VARNAME#"
-#       % dvc_set_env --local  
-#
-#    2) Global : "$HOME/.dvc/env/#VARNAME#"
-#       % dvc_set_env --global  
-#
+  * Variable are stored in the dvc config directory(.dvc)
+    and the search path sequency is as below:
+
+    * Local : "$PWD/.dvc/env/#VARNAME#"
+       % dvc_set_env --local  
+
+    * Global : "$HOME/.dvc/env/#VARNAME#"
+       % dvc_set_env --global  
+
 # ----------------------------
-# SVN variable
+# SVN server variable
 # ----------------------------
-# SVN_ROOT = /home/owner/DATA_ROOT
-# SVN_URL = http://localhost/$SVN_ROOT
-# SVN_URL = svn://localhost/$SVN_ROOT
-# SVN_URL = file://$SVN_ROOT
-#
+  * SVN respository root
+
+     SVN_ROOT = /home/owner/DATA_ROOT
+
+  * SVN server mode URL (file, http, svn)
+
+     SVN_URL = file://$SVN_ROOT
+     SVN_URL = svn://localhost:port/$SVN_ROOT
+     SVN_URL = http://localhost:port/$SVN_ROOT
+ 
 # ----------------------------
-# DESIGN variable
+# DESIGN director variable
 # ----------------------------
-# DESIGN_PROJT = testcase
-# DESIGN_PHASE = P1-trial
-# DESIGN_BLOCK = chip
-# DESIGN_STAGE = S00-INIT_DATA
-# DESIGN_VERSN = 2017_0610-XXXX
-#
+  DESIGN_PROJT = testcase
+  DESIGN_PHASE = P1-trial
+  DESIGN_BLOCK = chip
+  DESIGN_STAGE = S00-INIT_DATA
+  DESIGN_VERSN = 2017_0610-XXXX
+
 # ========================================================
 # Project Design Directory Structure
 # ========================================================
