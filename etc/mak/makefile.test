@@ -100,7 +100,7 @@ add_object:
 	@echo "# 5-1 Add file to container"
 	@echo "#---------------------------------------------------"
 	@echo "$(TMP_FILE)" > $(TMP_FILE)
-	cp -f $(TMP_FILE) .dvc_container
+	cp -f $(TMP_FILE) .container
 	dvc_add_object	$(DESIGN_CNTNR)	$(TMP_FILE)
 
 copy: copy_object
@@ -182,7 +182,7 @@ list_variable:
 clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_FILE) $(TEST_DIR_) tmpfile_*
-	@rm -fr .dvc .project .dvc_block .dvc_version .dvc_container
+	@rm -fr .dvc .project .dvc_block .dvc_version .container
 
 remove_project: remove_version
 	@echo "#---------------------------------------------------"

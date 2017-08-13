@@ -13,20 +13,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
 source $DVC_CSH/11_get_svn.csh
-source $DVC_CSH/12_get_version.csh
-
-if ($1 != ".") then
-   setenv DESIGN_VERSN $1
-   echo "PARA: DESIGN_VERSN = $DESIGN_VERSN"
-   mkdir -p .dvc/env
-   echo $DESIGN_VERSN > .dvc/env/DESIGN_VERSN
-endif
-
-if (($2 != "") && ($2 != ".")) then
-    setenv DESIGN_STAGE $2
-    echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
-    echo "PARA: DESIGN_STAGE = $DESIGN_STAGE"
-endif
+source $DVC_CSH/02_set_version.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
@@ -79,6 +66,15 @@ else if {(test -d .dvc_block)} then
   mv .dvc_block .dvc_block.$d
 endif
 ln -fs .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK .dvc_block
+
+if {(test -h .dvc_stage)} then
+  rm -f .dvc_stage
+else if {(test -d .dvc_stage)} then
+  set d = `date +%Y%m%d_%H%M%S`
+  echo "WARN: design folder .dvc_stage exist, rename it to .dvc_stage.$d !"
+  mv .dvc_stage .dvc_stage.$d
+endif
+ln -fs .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE .dvc_stage
 
 if {(test -h .dvc_version)} then
   rm -f .dvc_version

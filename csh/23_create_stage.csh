@@ -16,7 +16,7 @@ source $DVC_CSH/12_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1
-   echo "INFO: DESIGN_STAGE = $DESIGN_STAGE"
+   echo "PARA: DESIGN_STAGE = $DESIGN_STAGE"
    mkdir -p .dvc/env
    echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
 endif

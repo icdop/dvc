@@ -26,8 +26,8 @@ if (($1 != "") && ($1 != ":")) then
    else
       setenv DVC_CONTAINER .dvc_version/$CONTAINER
    endif
-else if {(test -h .dvc_container)} then
-  setenv DVC_CONTAINER .dvc_container
+else if {(test -h .container)} then
+  setenv DVC_CONTAINER .container
 else
   setenv DVC_CONTAINER .
 endif

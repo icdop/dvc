@@ -12,28 +12,38 @@ else
 endif
 source $DVC_CSH/12_get_version.csh
 
-if (($1 != "") && ($1 != ".")) then
-    setenv DESIGN_VERSN $1
-    if (($2 != "") && ($2 != ".")) then
-        setenv DESIGN_STAGE $2
-        if (($3 != "") && ($3 != ".")) then
-            setenv DESIGN_BLOCK $3
-            if (($4 != "") && ($4 != ".")) then
-                setenv DESIGN_PHASE $4
-                if (($5 != "") && ($5 != ".")) then
-                    setenv DESIGN_PROJT $5
-                endif
-            endif
-        endif
-    endif
+mkdir -p .dvc/env
+
+if (($1 != "") && ($1 != ":") && ($1 != ".")) then
+   setenv DESIGN_VERSN $1
+   echo $DESIGN_VERSN > .dvc/env/DESIGN_VERSN
+   echo "PARA: DESIGN_VERSN = $DESIGN_VERSN"
 endif
 
-mkdir -p .dvc/env
-echo $DESIGN_VERSN > .dvc/env/DESIGN_VERSN
-echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
-echo $DESIGN_BLOCK > .dvc/env/DESIGN_BLOCK
-echo $DESIGN_PHASE > .dvc/env/DESIGN_PHASE
-echo $DESIGN_PROJT > .dvc/env/DESIGN_PROJT
+if (($2 != "") && ($2 != ":") && ($2 != ".")) then
+    setenv DESIGN_STAGE $2
+    echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
+    echo "PARA: DESIGN_STAGE = $DESIGN_STAGE"
+endif
+
+if (($3 != "") && ($3 != ":") && ($3 != ".")) then
+    setenv DESIGN_BLOCK $3
+    echo $DESIGN_BLOCK > .dvc/env/DESIGN_BLOCK
+    echo "PARA: DESIGN_BLOCK = $DESIGN_BLOCK"
+endif
+            
+if (($4 != "") && ($4 != ":") && ($4 != ".")) then
+    setenv DESIGN_PHASE $4
+    echo $DESIGN_PHASE > .dvc/env/DESIGN_PHASE
+    echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+endif
+
+if (($5 != "") && ($5 != ":") && ($5 != ".")) then
+    setenv DESIGN_PROJT $5
+    echo $DESIGN_PROJT > .dvc/env/DESIGN_PROJT
+    echo "PARA: DESIGN_PROJT = $DESIGN_PROJT"
+endif
+
 
 echo "==============================="
 echo "DESIGN_PROJT = $DESIGN_PROJT"

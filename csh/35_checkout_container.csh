@@ -32,15 +32,15 @@ svn checkout --quiet $CONTAINER_URL .project/$SVN_CONTAINER
 mkdir -p .project/$SVN_CONTAINER/.dvc/env
 echo $SVN_CONTAINER > .project/$SVN_CONTAINER/.dvc/env/SVN_CONTAINER
 
-if {(test -h .dvc_container)} then
-#  echo "WARN: remove old .dvc_container link!"
-  rm -f .dvc_container
-else if {(test -d .dvc_container)} then
+if {(test -h .container)} then
+#  echo "WARN: remove old .container link!"
+  rm -f .container
+else if {(test -d .container)} then
   set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: .dvc_container folder exist, rename it to .dvc_container.$d !"
-  mv .dvc_container .dvc_container.$d
+  echo "WARN: .container folder exist, rename it to .container.$d !"
+  mv .container .container.$d
 endif
-ln -fs .project/$SVN_CONTAINER .dvc_container
+ln -fs .project/$SVN_CONTAINER .container
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0
