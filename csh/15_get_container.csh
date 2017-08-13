@@ -42,7 +42,7 @@ endif
 if {(test -e $DVC_CONTAINER/.dqi/env/SVN_CONTAINER)} then
    setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dqi/env/SVN_CONTAINER`
 else
-   setenv SVN_CONTAINER ":/:/:/:/:/$DESIGN_CONTR"
+   setenv SVN_CONTAINER :/:/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container : $DVC_CONTAINER"
    exit -1
 endif
