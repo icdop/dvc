@@ -11,87 +11,149 @@
 #       add regressiion test
 # V1.4  2017/06/28 By Albert Li
 #       create dvc (design version control) sub-module 
+# V2.0  2017/08/12 By Albert Li
+#       add container level under design version
 # 
-########################################################
-# DOP_ROOT       = /home/owner/CAD
-########################################################
-# ============================
-# Default Variable
-# ============================
-  * Variable are stored in the dvc config directory(.dvc)
-    and the search path sequency is as below:
 
-    * Local : "$PWD/.dvc/env/#VARNAME#"
-       % dvc_set_env --local  
-
-    * Global : "$HOME/.dvc/env/#VARNAME#"
-       % dvc_set_env --global  
+########################################################
+# Global Environment Variables
+########################################################
 
 # ----------------------------
-# SVN server variable
+# System Variable
 # ----------------------------
+  * DVC package installation path
+
+     DOP_HOME = /home/owner/DOP_HOME
+
   * SVN respository root
 
-     SVN_ROOT = /home/owner/DATA_ROOT
+     SVN_ROOT = /home/owner/PROJ_SVN
 
   * SVN server mode URL (file, http, svn)
 
      SVN_URL = file://$SVN_ROOT
      SVN_URL = svn://localhost:port/$SVN_ROOT
      SVN_URL = http://localhost:port/$SVN_ROOT
- 
+
+# ============================
+# Variable Search Path
+# ============================
+  * Variable are stored in the config directory(.dvc)
+    and the search path sequency is as below:
+
+    1. Local : "$PWD/.dvc/env/#VARNAME#"
+       % dvc_set_env --local  
+
+    2. Global : "$HOME/.dvc/env/#VARNAME#"
+       % dvc_set_env --global  
+
 # ----------------------------
 # DESIGN director variable
 # ----------------------------
   DESIGN_PROJT = testcase
   DESIGN_PHASE = P1-trial
   DESIGN_BLOCK = chip
-  DESIGN_STAGE = S00-INIT_DATA
+  DESIGN_STAGE = 000-INIT_DATA
   DESIGN_VERSN = 2017_0610-XXXX
 
 # ========================================================
 # Project Design Directory Structure
 # ========================================================
 
+* Directory on local file system
 $SVN_ROOT/ (SVN Database Root Path)
-	$DESIGN_PROJT/conf (Project Repository Root)
-		$DESIGN_PHASE/.dvc
-       			$DESIGN_BLOCK/.dvc
-				$DESIGN_STAGE/.dvc
-					$DESIGN_VERSN/.dvc
-						 $CONTAINER/
+	$DESIGN_PROJT/conf/ (Project Repository Root)
+
+* Directory view in SVN server
+	$DESIGN_PROJT/
+		$DESIGN_PHASE/
+       			$DESIGN_BLOCK/
+				$DESIGN_STAGE/
+					$DESIGN_VERSN/
+						 $CONTAINER/.dqi
+
+* Directory view in local run directory after checkout 
+
+  ** The following directory will be created in checkout_project
+     .project/
+	: -> $current_project
+	$DESIGN_PROJT/
+
+  ** The following directory will be created in checkout_version
+     .project/
+	$DESIGN_PROJT/
+		: -> $current_phase
+		.dvc/
+		$DESIGN_PHASE/
+			: -> $current_block
+			.dvc/
+       			$DESIGN_BLOCK/
+				: -> $current_stage
+				.dvc/
+				$DESIGN_STAGE/
+					: -> $current_version
+					.dvc/
+					$DESIGN_VERSN/
+						.dvc/
+
+  ** The following links are created in checkout_version
+	.dvc_phase   -> .project/$phase
+	.dvc_block   -> .project/$phase/$block
+	.dvc_stage   -> .project/$phase/$block/$stage
+	.dvc_version -> .project/$phase/$block/$stage/$version
+
+  ** The following objects are created in checkout_container
+	.dvc_version/
+		$DESIGN_CONTR/
+			.dqi/
+
+	.container   -> .dvc_version/$DESIGN_CONTR
 
 # ========================================================
 # DVC Config Directory (.dvc/)
 # ========================================================
-# ------------------------------------
-# README.md
-# ------------------------------------
 
-# Design Version Control Directory
-=======================================
-* Project : testcase
-* Path    : .project/testcase/
-* Author  : username
-* Date    : 20170812_183836
-=======================================
+1. README file when directory is created 
+## ------------------------------------
+## README.md (project/.dvc/)
+## ------------------------------------
 
-# ------------------------------------
-# FILE_FORMAT.csv (etc/csv/format_obj.csv)
-# ------------------------------------
+> # Design Version Control Directory
+> =======================================
+> * Project : testcase
+> * Path    : .project/testcase/
+> * Author  : username
+> * Date    : 20170812_183836
+> =======================================
 
-[FORMAT]	[TYPE]	[NAME_RULE]	[ACTION]
+## ------------------------------------
+## FILE_FORMAT.csv (etc/csv/format_obj.csv)
+## ------------------------------------
+;FORMAT		TYPE	NAME_RULE	ACTIONS
+=============   =====	=========	================
 DEF		text	.def		{view "vi $1"}
-VG		text	.vg		{view "vi $1"}
+VERILOG		text	.vg		{view "vi $1"}
+RPT		text	.rpt		{view "vi $1"}
 LOG		text	.log		{view "vi $1"} 
 DIR		dir	/		{view "ls -al $1"}
 
-# ------------------------------------
-# NAME_RULE.csv (etc/csv/dir_phase.csv)
-# ------------------------------------
+## ------------------------------------
+## FILE_OBJECT.csv (etc/csv/dvc_object.csv)
+## ------------------------------------
+;NAME		FORMAT	DEFAULT		DESCRIPTION
+============== ======	=======		===========================
+NETLIST_FILE	VERILOG	design.vg	"Verilog Netlist File"
+DEF_FILE	DEF	design.def	"Physical Design Data"
+SPEF_FILE	SPEF	design.spef	"RC Extraction Data"
+PT_STA_RPT	DIR	pt_sta.log	"STA Report Directory"
 
+
+## ------------------------------------------
+## NAME_RULE.csv (etc/csv/dir_phase.csv)
+## ------------------------------------------
 ;NAME           FORMAT	TITLE
-;=============	======	===========================
+=============	======	===========================
 P1-trial	DIR	"Initial Trial Run Phase "
 P2-stable	DIR	"Stable Run Phase "
 P3-final	DIR	"Final Run Phase "
@@ -99,13 +161,21 @@ P4-tapeout	DIR	"Tapeout Phase "
 P5-silicon	DIR	"Silicon ramp up Phase "
 P6-production	DIR	"Production Phase "
 
-# ------------------------------------
-# OBJECT.csv (etc/csv/dvc_object.csv)
-# ------------------------------------
-;NAME		FORMAT	DEFAULT		DESCRIPTION
-;============== ======	=======		===========================
-NETLIST_FILE	VG	design.v	"Verilog Netlist File"
-DEF_FILE	DEF	design.def	"Physical Design Data"
-SPEF_FILE	SPEF	design.spef	"RC Extraction Data"
-PT_STA_RPT	DIR	pt_sta.log	"STA Report Directory"
-
+## ------------------------------------------
+## NAME_RULE.csv (etc/csv/dir_stage.csv)
+## ------------------------------------------
+;NAME           FORMAT TITLE
+============    ======= ========================== 
+000-NETLIST     DIR     "Initial Design Data"
+100-SIMULATION  DIR     "Simulation Stage"
+200-SYNTHESIS   DIR     "Synthesis Stage"
+300-DFT         DIR     "Design For Test"
+400-APR         DIR     "Auto Place & Route"
+410-FLOORPLAN   DIR     "APR Floorplan"
+420-PLACED      DIR     "APR Placed DB"
+430-CTS         DIR     "APR CTS"
+440-ROUTED      DIR     "APR Routed DB"
+450-OPTIMIZE    DIR     "APR Timing Optimization"
+460-ECO         DIR     "APR ECO"
+500-SIGNOFF     DIR     "Signoff Stage"
+600-TAPEOUT     DIR     "Tapeout Database"
