@@ -1,16 +1,18 @@
 #
-# Variable
+# Default Variable
 #
 dvc_set_env:   
-	Usage: $prog <variable> <value>
+	Usage: $prog [<variable> <value>]
+	Description:
+	  set variable value and store it in .dev/env
+	if <variable> is not specified, list all existing variables
 
 dvc_set_svn:   
 	Usage: $prog <SVN_ROOT> [<SVN_MODE>]
 	Description:
 	  set the SVN data root and the svn server mode
-
-dvc_set_project:   
-	Usage: $prog <project>
+	store the value in .dvc/env/
+	SVN_MODE could be "file", "http", "svn"
 
 dvc_set_version:   
 	Usage: $prog <version> <stage> <block> <phase>
@@ -18,23 +20,36 @@ dvc_set_version:
 	  Set the default design variable and store the value to .dvc/env/
 
 dvc_set_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <DESIGN_CONTR>
 	Description:
+	  Set default working container and create .container link
 
 dvc_get_env:   
-	Usage: $prog [--global|--local] [--all] <variable>
+	Usage: $prog [--global] [--all] <variable>
+	Description:
+	  get the value of variable from .dvc/env/
+	--global
+		search the variable in ~/.dvc/env
+		otherwise, find the variable in ./.dvc/env (--local)
+	--all
+		list all varaibles value 
 
 dvc_get_svn:   
 	Usage: $prog [-v]
-
-dvc_get_project:   
-	Usage: $prog [-v]
+	Description:
+	  fetch the SVN server setting from .dvc/env/
+	SVN_ROOT , SVN_URL
 
 dvc_get_version:   
 	Usage: $prog [-v]
+	Description:
+	  fetch working design folder name from .dvc/env/
+	DESIGN_PROJT, DESIGN_PHASE, DESIGN_BLOCK, DESIGN_STAGE, DESIGN_VERSN
 
 dvc_get_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <DESIGN_CONTR>
+	Description:
+	  fectch working container name from .dvc/env/	
 
 #
 # Create Design Project
@@ -42,13 +57,14 @@ dvc_get_container:
 dvc_create_project:   
 	Usage: $prog <DESIGN_PROJT>
 	Description:
-	  create project repository in SVN data
+	  create project repository in SVN data folder($SVN_ROOT)
+	copy the default config files (/etc/svn/*) to conf/ folder
 
 dvc_checkout_project:   
 	Usage: $prog [--data] <DESIGN_PROJT>
 	Description:
 	  create a .project folder in current directory
-	  checkout project folder to .project/
+	checkout project folder to .project/
 
 dvc_set_project:
 	Usage: $prog <DESIGN_PROJT>
@@ -72,83 +88,150 @@ dvc_create_version:
 #
 dvc_checkout_phase:   
 	Usage: $prog [--data] <DESIGN_PHASE>
+	Description:
+	  checkout phase folder to .project/
+	dy default, only .dvc/ is checkout
+	--data
+		checkout all data and subfolder under phase
+
 dvc_checkout_block:   
 	Usage: $prog [--data] <DESIGN_BLOCK>
+	Description:
+	  checkout block folder to .project/
+	dy default, only .dvc/ is checkout
+	--data
+		checkout all data and subfolder under block
+
 dvc_checkout_stage:   
 	Usage: $prog [--data] <DESIGN_STAGE>
-dvc_checkout_version:   
-	Usage: $prog [--data] <DESIGN_VERSN> <DESIGN_STAGE>
 	Description:
-	  This command will call dvc_set_version
-	checkout version folder to local working directory
+	  checkout stage folder to .project/
+	dy default, only .dvc/ is checkout
+	--data
+		checkout all data and subfolder under stage
+
+dvc_checkout_version:   
+	Usage: $prog [--data] <DESIGN_VERSN> <DESIGN_STAGE> ...
+	Description:
+	  This command will call dvc_set_version first
+	checkout version folder to local working directory .project
+	dy default, only .dvc/ is checkout
 	create the following link
 		.dvc_block -> .project/
 		.dvc_stage -> .project/
 		.dvc_version -> .project/
-	create ":" link in all four levels
+	create ":" link in all four levels, point to current version
+	--data
+		checkout all data and sub folder 
 
 #
 # Container
 #
 dvc_create_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  create a container folder under version directory
 
 dvc_checkout_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  1) checkout container folder to local working directory
-	     .project/<PROJT>/<PHASE>/<BLOCK>/<STAGE>/<VERSN>
-	  2) create a .container link to .project/-/-/-/-/-/<CONTAINER> 
+	     .project/<project>/<phase>/<block>/<stage>/<version>/$container
+	  2) create a .container link to .project/:/:/:/:/:/$container
+	.container ->	.dvc_version/$container
 
 dvc_clean_container:   
-	Usage: $prog <CONTAINER>
+	Usage: $prog [<CONTAINER>]
+	Description:
+	  clean up design object in container (on server side)
+
 dvc_update_container:   
 	Usage: $prog <CONTAINER>
+	Description:
+	  update design object change from SVN server,
+	merge the change with local modification.
+
 dvc_commit_container:   
 	Usage: $prog <CONTAINER>
-
-dvc_list_container:   
-	Usage: $prog <CONTAINER>
+	Description:
+	  commit the design object change to SVN server
+	change by add, copy, link, rename, delete will only affect the
+	local respository, it will only be push to server when you commit
+	it.
 
 dvc_add_object:   
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
-	add object <CONTAINER>/<DESIGN_OBJECT> to SVN repository
+	Description:
+	  add exiting file <CONTAINER>/<DESIGN_OBJECT> to SVN repository
 
 dvc_copy_object:   
 	Usage: $prog <CONTAINER> <SRC_FILE> [<DEST_NAME>]
+	Description:
+	  copy the <SRC_FILE> to container, change name to <DEST_NAME>
+	checkin the file into local repository
+
 dvc_link_object:   
 	Usage: $prog <CONTAINER> <SRC_FILE> [<DEST_NAME>]
+	Description:
+	  create a link to the source file <SRC_FILE>
+	checkin the link into local repository
+
 dvc_rename_object:   
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT> <DEST_NAME>
+	Description:
+	  rename the design object to new name
+
 dvc_delete_object:   
 	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
+	Description:
+	  delete the design object from local repository
+
 
 #
 # List content under design folder
 #
 dvc_list_project:   
 	Usage: $prog <DESIGN_PROJT>
+	Description:
+	  list existing phases under project directory
+
 dvc_list_phase:   
 	Usage: $prog <DESIGN_PHASE>
+	Description:
+	  list existing blocks under phase directory
+
 dvc_list_block:   
 	Usage: $prog <DESIGN_BLOCK>
+	Description:
+	  list existing stages under block directory
+
 dvc_list_stage:   
 	Usage: $prog <DESIGN_STAGE>
+	Description:
+	  list existing versions under stage directory
+
 dvc_list_version:   
 	Usage: $prog <DESIGN_VERSN>
+	Description:
+	  list existing containers under version directory
+
+dvc_list_container:   
+	Usage: $prog <CONTAINER>
+	Description:
+	Description:
+	  list existing objects under container directory
+
 
 
 #
-# Remove
+# Remove design folder
 #
 dvc_remove_project:   
 	Usage: $0:t <DESIGN_PROJT>
 dvc_remove_phase:   
 	Usage: $0:t <DESIGN_PHASE>
 dvc_remove_block:   
-	Usage: $0:t <DESIGN_BLOCK> <DESIGN_PHASE>
+	Usage: $0:t <DESIGN_BLOCK>
 dvc_remove_stage:   
 	Usage: $0:t <DESIGN_STAGE>
 dvc_remove_version:   
