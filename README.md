@@ -1,12 +1,5 @@
-#dvc : Design Version Control
+# dvc : Design Version Control
 ===============================================
-Steps:
-1) create bin/ directory and link c-shell command script
-  % make bin
-2) regress test
-  % cd run/00_test
-  % make test
-========================================
 - This package is intended to manage the IC design data in a systematic directory structure.
 - The underneath version control enginer is SVN server
   * SVN_ROOT : svn server repository root<br>
@@ -28,7 +21,7 @@ Steps:
       Ex. 2017_0610-xxxx, 2017_0702-xxxx, ...
 
 ***
-**Project Design Database Directory Structure<br>**
+** Project Design Database Directory Structure<br>**
 ***
 *  $SVN_ROOT/ (SVN Database Root Path) <BR>
        * $DESIGN_PROJT/conf (Project Repository Root) <BR>
@@ -37,9 +30,3 @@ Steps:
        * $DESIGN_STAGE/<BR>
        * $DESIGN_VERSN/<BR>
 ===============================================
-Steps:
-1) create bin/ directory and link c-shell command script
-  % make bin
-2) regress test
-  % cd run/00_test
-  % make test
