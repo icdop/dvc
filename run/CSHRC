@@ -1,6 +1,7 @@
 #!/bin/csh -f
-unalias cd
-setenv DOP_HOME `(cd ../..; pwd)`
+cd ../..
+setenv DOP_HOME `pwd`
+cd -
 echo "DOP_HOME = $DOP_HOME"
 set path = ($DOP_HOME/dvc/bin $path)
 
