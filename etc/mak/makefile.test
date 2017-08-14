@@ -95,8 +95,8 @@ add_object:
 	@echo "# 5-1 Add existing object in container folder"
 	@echo "#---------------------------------------------------"
 	TIMESTAMP=`date +%Y%m%d_%H%M%S` 
-	@echo "$(TIMESTAMP)" > $(TEST_FILE):$(TIME_STAP)
-	cp -f $(TEST_FILE):$(TIME_STAP) .container
+	@echo "$(TIMESTAMP)" > $(TEST_FILE):$(TIME_STAMP)
+	cp -f $(TEST_FILE):$(TIME_STAMP) .container
 	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE):$(TIME_STAP)
 
 copy: copy_object
@@ -177,7 +177,7 @@ list_variable:
 
 clean: clean_data
 clean_data: remove_project
-	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE) :*
+	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE)\:*
 	@rm -fr .dvc .project  .container .dvc_*
 	@rm -fr $(SVN_ROOT) 
 
