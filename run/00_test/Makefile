@@ -2,6 +2,8 @@
 DOP_HOME     := $(realpath $(PWD)/../../..)
 SVN_ROOT     := $(realpath $(PWD)/..)/PROJ_SVN
 
+PATH         := $(PATH):$(DOP_HOME)/dvc/bin
+
 ##################################
 DESIGN_PROJT := testcase
 DESIGN_PHASE := P1-trial

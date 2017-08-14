@@ -1,9 +1,11 @@
-PATH	:= $(PATH):$(DOP_HOME)/dvc/bin
-TMP_FILE:= tmpfile_`date +%Y%m%d_%H%M%S`
+#
+#
+#
+#
 
 help:
-	@echo "PWD    = $(PWD)"
-	@echo "CURDIR = $(CURDIR)"
+	@echo "PWD      = $(PWD)"
+	@echo "CURDIR   = $(CURDIR)"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
 	@echo "Usage:"
 	@echo "        make init      (reset_resository)"
@@ -31,14 +33,14 @@ test:
 init: reset_repository
 reset_repository:
 	@echo "#---------------------------------------------------"
-	@echo "# 0. Initial SVN ROOT"
+	@echo "# 0. Assign SVN ROOT Path"
 	@echo "#---------------------------------------------------"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
 	dvc_set_svn $(SVN_ROOT)
 
 project: init
 	@echo "#---------------------------------------------------"
-	@echo "# 1. Initial Project"
+	@echo "# 1. Initiatize Project Repository"
 	@echo "#---------------------------------------------------"
 	dvc_create_project	$(DESIGN_PROJT)
 
@@ -92,9 +94,10 @@ add_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-1 Add existing object in container folder"
 	@echo "#---------------------------------------------------"
-	@echo "$(TMP_FILE)" > $(TMP_FILE)
-	cp -f $(TMP_FILE) .container
-	dvc_add_object	$(DESIGN_CONTR)	$(TMP_FILE)
+	TIMESTAMP=`date +%Y%m%d_%H%M%S` 
+	@echo "$(TIMESTAMP)" > $(TEST_FILE):$(TIME_STAP)
+	cp -f $(TEST_FILE):$(TIME_STAP) .container
+	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE):$(TIME_STAP)
 
 copy: copy_object
 copy_object:
