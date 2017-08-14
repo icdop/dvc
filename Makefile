@@ -1,4 +1,4 @@
-GIT_PATH := https://github.com/VirtaulChip/dvc.git
+GIT_PATH := https://github.com/VirtualChip/dvc.git
 EMAIL    := hungchun.li@yahoo.com
 USER     := VirtualChip
 
