@@ -12,7 +12,7 @@ source $DOP_HOME/dvc/csh/11_get_svn.csh
 source $DOP_HOME/dvc/csh/12_get_version.csh
 source $DOP_HOME/dvc/csh/15_get_container.csh
 
-if {(test -d .project/$SVN_CONTAINER)} then
+if {((test -d $DVC_CONTAINER)&&(test -d .project/$SVN_CONTAINER))} then
    echo "INFO: Remove Project Design Container - $SVN_CONTAINER ..."
    rm -fr .project/$SVN_CONTAINER
    svn remove $SVN_URL/$SVN_CONTAINER -m "Remove Design Container $SVN_CONTAINER"

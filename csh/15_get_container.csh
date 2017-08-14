@@ -26,13 +26,14 @@ if (($1 != "") && ($1 != ":")) then
       setenv DVC_CONTAINER .project/:/:/:/:/:/$DESIGN_CONTR
    else
       setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
+      setenv SVN_CONTAINER :/:/:/:/:/$DESIGN_CONTR
       echo "ERROR: Not a valid container : $DESIGN_CONTR"
       exit -1
    endif
 else if {(test -d .container)} then
   setenv DVC_CONTAINER .container
 else
-  setenv DVC_CONTAINER .
+  setenv DVC_CONTAINER .project/:/:/:/:/:/.
 endif
 
 if ($pvar == 1) then

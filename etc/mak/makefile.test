@@ -177,8 +177,8 @@ list_variable:
 
 clean: clean_data
 clean_data: remove_project
-	@rm -fr $(TEST_FILE) $(TEST_DIR_) tmpfile_*
-	@rm -fr .dvc .project .dvc_block .dvc_version .container
+	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE) :*
+	@rm -fr .dvc .project  .container .dvc_*
 	@rm -fr $(SVN_ROOT) 
 
 remove_project: remove_version
