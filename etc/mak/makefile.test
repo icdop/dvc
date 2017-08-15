@@ -1,12 +1,15 @@
 #
+# Regress test suite
 #
 #
-#
+TIME_STAMP := `date +%Y%m%d_%H%M%S` 
 
 help:
+	@echo "=============================================================="
 	@echo "PWD      = $(PWD)"
-	@echo "CURDIR   = $(CURDIR)"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
+	@echo "SVN_URL  = $(SVN_URL)"
+	@echo "=============================================================="
 	@echo "Usage:"
 	@echo "        make init      (reset_resository)"
 	@echo "        make project   (create_project)"
@@ -36,7 +39,7 @@ reset_repository:
 	@echo "# 0. Assign SVN ROOT Path"
 	@echo "#---------------------------------------------------"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
-	dvc_set_svn $(SVN_ROOT)
+	dvc_set_svn $(SVN_ROOT)  $(SVN_URL)
 
 project: init
 	@echo "#---------------------------------------------------"
@@ -45,7 +48,7 @@ project: init
 	dvc_create_project	$(DESIGN_PROJT)
 
 version: create_version checkout_version
-create_version: $(SVN_ROOT)
+create_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 2. Create version directory in SVN server"
 	@echo "#---------------------------------------------------"
@@ -85,19 +88,18 @@ checkin_object:
 
 clean_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-0 Clean design object in container"
+	@echo "# 5-0 Clean up design object in container"
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
 add: add_object
 add_object:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-1 Add existing object in container folder"
+	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
-	TIMESTAMP=`date +%Y%m%d_%H%M%S` 
-	@echo "$(TIMESTAMP)" > $(TEST_FILE):$(TIME_STAMP)
-	cp -f $(TEST_FILE):$(TIME_STAMP) .container
-	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE):$(TIME_STAP)
+	@echo "$(TIME_STAMP)" > $(TEST_FILE):$(TIME_STAMP)
+	cp -f $(TEST_FILE):$(TIME_STAMP) .container/
+	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE):$(TIME_STAMP)
 
 copy: copy_object
 copy_object:
@@ -111,7 +113,7 @@ copy_object:
 link: link_object
 link_object:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-3 Link directory to container"
+	@echo "# 5-3 Crearte symbolic link in container"
 	@echo "#---------------------------------------------------"
 	@mkdir -p $(TEST_DIR_)
 	@date +%Y%m%d_%H%M%S >> $(TEST_DIR_)/$(TEST_FILE)
@@ -179,7 +181,6 @@ clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE)\:*
 	@rm -fr .dvc .project  .container .dvc_*
-	@rm -fr $(SVN_ROOT) 
 
 remove_project: remove_version
 	@echo "#---------------------------------------------------"

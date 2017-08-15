@@ -2,8 +2,10 @@
 DOP_HOME     := $(realpath $(PWD)/../../..)
 PATH         := $(PATH):$(DOP_HOME)/dvc/bin
 
-SVN_ROOT     := $(realpath $(PWD)/..)/PROJ_SVN
-SVN_URL      := file://$(SVN_ROOT)
+SVN_ROOT     := /var/svn/project
+SVN_HOST     := localhost
+SVN_PORT     := 3690
+SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 
 ##################################
 DESIGN_PROJT := testcase
@@ -18,3 +20,9 @@ TEST_DIR_    := testdir
 
 include $(DOP_HOME)/dvc/etc/mak/makefile.design
 include $(DOP_HOME)/dvc/etc/mak/makefile.test
+
+svnserve:
+	mkdir -p $(SVN_ROOT)
+	svnserve -d -r $(SVN_ROOT) --listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT)
+	
+

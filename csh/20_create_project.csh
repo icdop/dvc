@@ -29,11 +29,17 @@ if ($status == 0) then
 endif
 
    echo "INFO: Initial Project Design Respository : $DESIGN_PROJT"
-   mkdir -p $SVN_ROOT
-   svnadmin create $SVN_ROOT/$DESIGN_PROJT
-   cp -fr $DVC_ETC/svn/* $SVN_ROOT/$DESIGN_PROJT/conf
+   if {(test -d $SVN_ROOT)} then
+   else
+     mkdir -p $SVN_ROOT
+   endif 
+   if {(test -d $SVN_ROOT/DESIGN_PROJT)} then
+   else
+     svnadmin create $SVN_ROOT/$DESIGN_PROJT
+     cp -fr $DVC_ETC/svn/* $SVN_ROOT/$DESIGN_PROJT/conf
+   endif
 
-   #svn auth  $PROJT_URL --username db --password dvc
+#   svn auth  $PROJT_URL --username pm --password pm
 
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn import --quiet  $DVC_ETC/csv/dir_phase.csv    $PROJT_URL/.dvc/NAME_RULE.csv -m 'Phase Naming Rule' 

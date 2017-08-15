@@ -4,6 +4,8 @@
 
   % make help
 
+  % make svnserve   ; Start SVN server
+
 #---------------------------------------------------
 # 0. Init SVN project repository
 #---------------------------------------------------

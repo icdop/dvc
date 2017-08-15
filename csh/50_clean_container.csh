@@ -16,7 +16,7 @@ source $DVC_CSH/15_get_container.csh
 if {(test -d $DVC_CONTAINER)} then
    ( \
    cd $DVC_CONTAINER; \
-   svn remove --quiet --force `glob *`; \
+   svn remove --quiet --force `glob *` ; \
    svn commit --quiet . -m "Empty all data in the version"; \
    svn update --quiet . ; \
    )

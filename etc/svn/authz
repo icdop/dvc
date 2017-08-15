@@ -1,8 +1,14 @@
 
 [/]
-PM = rw
-* = r
+@PM = rw
+@BE = rw
+@FE = rw
+@ME = rw
+* = rw
 
 [repository:/]
 @PM = rw
-* = r
+@BE = rw
+@FE = rw
+@ME = rw
+* = rw
