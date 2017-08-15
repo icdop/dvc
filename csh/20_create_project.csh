@@ -42,8 +42,8 @@ endif
 #   svn auth  $PROJT_URL --username pm --password pm
 
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
-   svn import --quiet  $DVC_ETC/csv/dir_phase.csv    $PROJT_URL/.dvc/NAME_RULE.csv -m 'Phase Naming Rule' 
-   svn import --quiet  $DVC_ETC/csv/dvc_format.csv   $PROJT_URL/.dvc/FILE_FORMAT.csv -m 'Directory Format' 
+   svn import --quiet  $DVC_ETC/rule/RULE_PHASE    $PROJT_URL/.dvc/NAME_RULE -m 'Phase Naming Rule' 
+   svn import --quiet  $DVC_ETC/rule/FILE_FORMAT   $PROJT_URL/.dvc/FILE_FORMAT -m 'Directory Format' 
 
 
 setenv README "/tmp/README.md"

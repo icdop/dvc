@@ -33,8 +33,8 @@ endif
 echo "INFO: Create Project Design Phase : $DESIGN_PHASE"
 svn mkdir --quiet $PHASE_URL -m "Create Design Phase $DESIGN_PHASE." --parents
 svn mkdir --quiet $PHASE_URL/.dvc -m "Design Platform Config Directory" --parents
-svn import --quiet $DVC_ETC/csv/dvc_format.csv   $PHASE_URL/.dvc/FILE_FORMAT.csv -m 'Directory Format'
-svn import --quiet $DVC_ETC/csv/dir_block.csv   $PHASE_URL/.dvc/NAME_RULE.csv -m 'Block Naming Rule'
+svn import --quiet $DVC_ETC/rule/RULE_BLOCK   $PHASE_URL/.dvc/NAME_RULE -m 'Block Naming Rule'
+svn import --quiet $DVC_ETC/rule/FILE_FORMAT  $PHASE_URL/.dvc/FILE_FORMAT  -m 'Directory Format'
 
 setenv README "/tmp/README.md"
 echo -n "" > $README

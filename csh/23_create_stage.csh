@@ -35,8 +35,8 @@ endif
 echo "INFO: Create Project Design Stage : $DESIGN_STAGE"
 svn mkdir --quiet $STAGE_URL -m "Create Design Stage /$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE ..." --parents
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config" 
-svn import --quiet $DVC_ETC/csv/dir_version.csv $STAGE_URL/.dvc/NAME_RULE.csv -m 'Version Naming Rule'
-svn import --quiet $DVC_ETC/csv/dvc_format.csv $STAGE_URL/.dvc/FILE_FORMAT.csv -m 'Directory Format'
+svn import --quiet $DVC_ETC/rule/RULE_VERSN  $STAGE_URL/.dvc/NAME_RULE -m 'Version Naming Rule'
+svn import --quiet $DVC_ETC/rule/FILE_FORMAT $STAGE_URL/.dvc/FILE_FORMAT -m 'Directory Format'
 
 setenv README "/tmp/README.md"
 echo -n "" > $README
