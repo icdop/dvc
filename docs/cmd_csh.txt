@@ -2,12 +2,15 @@
 	Usage: $prog <variable> <value>
 
 01_set_svn.csh:
-	Usage: $prog <SVN_ROOT> [<SVN_MODE>]
+	Usage: $prog <SVN_ROOT> [<SVN_URL>] [<PROJT_URL>]
+
+03_set_project.csh:
+	Usage: $prog <DESIGN_PROJT>
 
 02_set_version.csh:   
-	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE> <DESIGN_PROJT>
+	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE>
 
-05_get_container.csh:   	
+05_set_container.csh:   	
 	Usage: $prog <DESIGN_CONTR>
 
 10_get_env.csh:   	
@@ -15,6 +18,9 @@
 
 11_get_svn.csh:   	
 	Usage: $prog 
+
+13_get_project.csh:
+	Usage: $prog <DESIGN_PROJT>
 
 12_get_version.csh:   	
 	Usage: $prog 

@@ -56,5 +56,5 @@ else if ($?PROJT_URL == 0) then
 endif
 
 if ( $pvar == 1) then
-  echo "PROJT_URL      = $PROJT_URL"
+  echo "PROJT_URL    = $PROJT_URL"
 endif

@@ -4,13 +4,13 @@
 		% chmod g+rwx /var/svn/project
 
 	1.2. setup SVN server
-		% svnserv -d -r /var/svn/project
+		% svnserv -d -r /var/svn/project --listen-port=2390
 
 		edit server config file, you can copy it from
 		$DOP_HOME/dvc/etc/svn/* to conf/
 
 	2-2. create repository for each project
-		% dvc_set_svn /var/svn/project http://localhost/project
+		% dvc_set_svn /var/svn/project svn://localhost:3290/project
 		% dvc_create_project testcase
 		# svnadmin create /var/svn/project/testcase
 		# setenv PROJT_URL http://localhost/project

@@ -8,16 +8,21 @@ dvc_set_env:
 	if <variable> is not specified, list all existing variables
 
 dvc_set_svn:   
-	Usage: $prog <SVN_ROOT> [<SVN_MODE>]
+	Usage: $prog <SVN_ROOT> [<SVN_URL>] [<PROJT_URL>]
 	Description:
 	  set the SVN data root and the svn server mode
-	store the value in .dvc/env/
+	store the value in .dvc/svn/
 	SVN_MODE could be "file", "http", "svn"
+
+dvc_set_project:   
+	Usage: $prog <project>
+	Description:
+	  Set the default project name and store the value to .dvc/svn/
 
 dvc_set_version:   
 	Usage: $prog <version> <stage> <block> <phase>
 	Description:
-	  Set the default design variable and store the value to .dvc/env/
+	  Set the default version path and store the value to .dvc/env/
 
 dvc_set_container:   
 	Usage: $prog <DESIGN_CONTR>
@@ -35,16 +40,21 @@ dvc_get_env:
 		list all varaibles value 
 
 dvc_get_svn:   
-	Usage: $prog [-v]
+	Usage: $prog
 	Description:
-	  fetch the SVN server setting from .dvc/env/
-	SVN_ROOT , SVN_URL
+	  fetch the SVN server setting from .dvc/svn/
+	SVN_ROOT , SVN_URL , PROJT_URL
+
+dvc_get_project:   
+	Usage: $prog
+	Description:
+	  fetch the PROJT_URL from .dvc/svn/
 
 dvc_get_version:   
-	Usage: $prog [-v]
+	Usage: $prog 
 	Description:
 	  fetch working design folder name from .dvc/env/
-	DESIGN_PROJT, DESIGN_PHASE, DESIGN_BLOCK, DESIGN_STAGE, DESIGN_VERSN
+	DESIGN_PHASE, DESIGN_BLOCK, DESIGN_STAGE, DESIGN_VERSN
 
 dvc_get_container:   
 	Usage: $prog <DESIGN_CONTR>
