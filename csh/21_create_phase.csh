@@ -16,7 +16,7 @@ source $DVC_CSH/12_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_PHASE $1
-   echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+   echo "SETP: DESIGN_PHASE = $DESIGN_PHASE"
    mkdir -p .dvc/env
    echo $DESIGN_PHASE > .dvc/env/DESIGN_PHASE
 endif

@@ -6,10 +6,14 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
-   set pvar = 1
+   set verbose = 1
    shift argv
-else
+endif
+if (($1 == "-q") || ($1 == "--quiet")) then
    set pvar = 0
+   shift argv
+else if ($?pvar == 0) then
+   set pvar = 1
 endif
 
 if (($1 != "") && ($1 != ":")) then
@@ -33,7 +37,7 @@ if (($1 != "") && ($1 != ":")) then
 else if {(test -d .container)} then
   setenv DVC_CONTAINER .container
 else
-  setenv DVC_CONTAINER .project/:/:/:/:/:/.
+  setenv DVC_CONTAINER .dvc_version
 endif
 
 if ($pvar == 1) then

@@ -7,10 +7,12 @@ bin: csh
 	ln -f -s $(CSH_PATH)/00_set_env.csh			$(BIN_PATH)/dvc_set_env
 	ln -f -s $(CSH_PATH)/01_set_svn.csh			$(BIN_PATH)/dvc_set_svn
 	ln -f -s $(CSH_PATH)/02_set_version.csh			$(BIN_PATH)/dvc_set_version
+	ln -f -s $(CSH_PATH)/03_set_project.csh			$(BIN_PATH)/dvc_set_project
 	ln -f -s $(CSH_PATH)/05_set_container.csh		$(BIN_PATH)/dvc_set_container
 	ln -f -s $(CSH_PATH)/10_get_env.csh			$(BIN_PATH)/dvc_get_env
 	ln -f -s $(CSH_PATH)/11_get_svn.csh			$(BIN_PATH)/dvc_get_svn
 	ln -f -s $(CSH_PATH)/12_get_version.csh			$(BIN_PATH)/dvc_get_version
+	ln -f -s $(CSH_PATH)/13_get_project.csh			$(BIN_PATH)/dvc_get_project
 	ln -f -s $(CSH_PATH)/15_get_container.csh		$(BIN_PATH)/dvc_get_container
 	ln -f -s $(CSH_PATH)/20_create_project.csh		$(BIN_PATH)/dvc_create_project
 	ln -f -s $(CSH_PATH)/21_create_phase.csh		$(BIN_PATH)/dvc_create_phase

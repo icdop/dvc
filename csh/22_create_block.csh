@@ -16,7 +16,7 @@ source $DVC_CSH/12_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_BLOCK $1
-   echo "PARA: DESIGN_BLOCK = $DESIGN_BLOCK"
+   echo "SETP: DESIGN_BLOCK = $DESIGN_BLOCK"
    mkdir -p .dvc/env
    echo $DESIGN_BLOCK > .dvc/env/DESIGN_BLOCK
 endif

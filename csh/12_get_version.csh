@@ -6,19 +6,16 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
-   set pvar = 1
+   set verbose = 1
    shift argv
-else
+endif
+if (($1 == "-q") || ($1 == "--quiet")) then
    set pvar = 0
+   shift argv
+else if ($?pvar == 0) then
+   set pvar = 1 
 endif
 
-if {(test -e .dvc/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat .dvc/env/DESIGN_PROJT`
-else if {(test -e $HOME/.dvc/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat $HOME/.dvc/env/DESIGN_PROJT`
-else if ($?DESIGN_PROJT == 0) then
-  setenv DESIGN_PROJT :
-endif
 
 if {(test -e .dvc/env/DESIGN_PHASE)} then
   setenv DESIGN_PHASE `cat .dvc/env/DESIGN_PHASE`
@@ -52,10 +49,9 @@ else if ($?DESIGN_VERSN == 0) then
   setenv DESIGN_VERSN :
 endif
 
-if ( $pvar == 1) then
-  echo "DESIGN_PROJT = $DESIGN_PROJT"
-  echo "DESIGN_PHASE = $DESIGN_PHASE"
-  echo "DESIGN_BLOCK = $DESIGN_BLOCK"
-  echo "DESIGN_STAGE = $DESIGN_STAGE"
-  echo "DESIGN_VERSN = $DESIGN_VERSN"
+if ($pvar == 1) then
+  echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
+  echo "PARM: DESIGN_BLOCK = $DESIGN_BLOCK"
+  echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"
+  echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
 endif

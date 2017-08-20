@@ -6,10 +6,14 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
-   set pvar = 1
+   set verbose = 1
    shift argv
-else
+endif
+if (($1 == "-q") || ($1 == "--quiet")) then
    set pvar = 0
+   shift argv
+else if ($?pvar == 0) then
+   set pvar = 1 
 endif
 
 if {(test -e .dvc/env/SVN_ROOT)} then
@@ -33,4 +37,24 @@ endif
 
 if ( $pvar == 1) then
   echo "SVN_URL      = $SVN_URL"
+endif
+
+if {(test -e .dvc/env/DESIGN_PROJT)} then
+  setenv DESIGN_PROJT `cat .dvc/env/DESIGN_PROJT`
+else if {(test -e $HOME/.dvc/env/DESIGN_PROJT)} then
+  setenv DESIGN_PROJT `cat $HOME/.dvc/env/DESIGN_PROJT`
+else if ($?DESIGN_PROJT == 0) then
+  setenv DESIGN_PROJT :
+endif
+
+if {(test -e .dvc/env/PROJT_URL)} then
+  setenv PROJT_URL      `cat .dvc/env/PROJT_URL`
+else if {(test -e $HOME/.dvc/svn/PROJT_URL)} then
+  setenv PROJT_URL      `cat $HOME/.dvc/svn/PROJT_URL`
+else if ($?PROJT_URL == 0) then
+  setenv PROJT_URL      $SVN_URL/$DESIGN_PROJT
+endif
+
+if ( $pvar == 1) then
+  echo "PROJT_URL      = $PROJT_URL"
 endif

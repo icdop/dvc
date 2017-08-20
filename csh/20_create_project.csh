@@ -1,4 +1,5 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_PROJT>"
@@ -12,13 +13,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
 source $DVC_CSH/11_get_svn.csh
-
-if ($1 != ".") then
-   setenv DESIGN_PROJT $1
-   echo "PARA: DESIGN_PROJT = $DESIGN_PROJT"
-   mkdir -p .dvc/env
-   echo $DESIGN_PROJT > .dvc/env/DESIGN_PROJT
-endif
+source $DVC_CSH/03_set_project.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 svn info $PROJT_URL >& /dev/null
