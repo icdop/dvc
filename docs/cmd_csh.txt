@@ -7,7 +7,7 @@
 03_set_project.csh:
 	Usage: $prog <DESIGN_PROJT>
 
-02_set_version.csh:   
+04_set_version.csh:   
 	Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE> <DESIGN_BLOCK> <DESIGN_PHASE>
 
 05_set_container.csh:   	
@@ -22,7 +22,7 @@
 13_get_project.csh:
 	Usage: $prog <DESIGN_PROJT>
 
-12_get_version.csh:   	
+14_get_version.csh:   	
 	Usage: $prog 
 
 15_get_container.csh:   	

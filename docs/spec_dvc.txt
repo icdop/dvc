@@ -76,13 +76,10 @@ $SVN_ROOT/ (SVN Database Root Path)
 * Directory view in local run directory after checkout 
 
   ** The following directory will be created in checkout_project
-     .project/
-	: -> $current_project
-	$DESIGN_PROJT/
+     .project/ will be the project data root
 
   ** The following directory will be created in checkout_version
      .project/
-	$DESIGN_PROJT/
 		: -> $current_phase
 		.dvc/
 		$DESIGN_PHASE/
@@ -128,7 +125,7 @@ $SVN_ROOT/ (SVN Database Root Path)
 > =======================================
 
 ## ------------------------------------
-## FILE_FORMAT.csv (etc/csv/format_obj.csv)
+## FILE_FORMAT (etc/rule/FILE_FORMAT)
 ## ------------------------------------
 ;FORMAT		TYPE	NAME_RULE	ACTIONS
 =============   =====	=========	================
@@ -139,7 +136,7 @@ LOG		text	.log		{view "vi $1"}
 DIR		dir	/		{view "ls -al $1"}
 
 ## ------------------------------------
-## FILE_OBJECT.csv (etc/csv/dvc_object.csv)
+## FILE_OBJECT (etc/rule/FILE_OBJECT)
 ## ------------------------------------
 ;NAME		FORMAT	DEFAULT		DESCRIPTION
 ============== ======	=======		===========================
@@ -150,7 +147,7 @@ PT_STA_RPT	DIR	pt_sta.log	"STA Report Directory"
 
 
 ## ------------------------------------------
-## NAME_RULE.csv (etc/csv/dir_phase.csv)
+## phase/.dvc/NAME_RULE (etc/rule/RULE_PAHSE)
 ## ------------------------------------------
 ;NAME           FORMAT	TITLE
 =============	======	===========================
@@ -162,7 +159,7 @@ P5-silicon	DIR	"Silicon ramp up Phase "
 P6-production	DIR	"Production Phase "
 
 ## ------------------------------------------
-## NAME_RULE.csv (etc/csv/dir_stage.csv)
+## stage/.dvc/NAME_RULE (etc/rule/RULE_STAGE)
 ## ------------------------------------------
 ;NAME           FORMAT TITLE
 ============    ======= ========================== 
