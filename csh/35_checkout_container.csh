@@ -11,7 +11,7 @@ if ($?DOP_HOME == 0) then
 endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 source $DVC_CSH/11_get_svn.csh
-source $DVC_CSH/12_get_version.csh
+source $DVC_CSH/14_get_version.csh
 if ($1 != "") then
    setenv DESIGN_CONTR $1
    echo "PARA: DESIGN_CONTR = $DESIGN_CONTR"

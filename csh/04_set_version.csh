@@ -10,7 +10,7 @@ if ($?DOP_HOME == 0) then
 else
    setenv DVC_CSH $DOP_HOME/dvc/csh 
 endif
-source $DVC_CSH/12_get_version.csh
+source $DVC_CSH/14_get_version.csh
 
 mkdir -p .dvc/env
 

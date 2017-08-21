@@ -12,7 +12,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
 source $DVC_CSH/11_get_svn.csh
-source $DVC_CSH/02_set_version.csh
+source $DVC_CSH/04_set_version.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE

@@ -19,7 +19,7 @@ endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
 source $DVC_CSH/11_get_svn.csh
-source $DVC_CSH/12_get_version.csh
+source $DVC_CSH/14_get_version.csh
 
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
