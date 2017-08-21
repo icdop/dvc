@@ -29,6 +29,7 @@ if ($2 != "") then
        # if dest is file, remove the orginal file
        rm -fr $DVC_CONTAINER/$dst_name
     endif
+    set src_name=`realpath $src_name`
     ln -f -s $src_name $DVC_CONTAINER/$dst_name
     (cd $DVC_CONTAINER; svn add $dst_name --force)
 endif

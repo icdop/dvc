@@ -29,8 +29,8 @@ endif
 echo "INFO: Create Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version /$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_VERSN ..." --parents
 svn mkdir --quiet $VERSN_URL/.dvc -m "Design Platform Config Directory"
-svn copy  --quiet $BLOCK_URL/.dvc/FILE_FORMAT.csv  $VERSN_URL/.dvc/FILE_FORMAT.csv -m 'Design Object Format' 
-svn copy  --quiet $BLOCK_URL/.dvc/FILE_OBJECT.csv  $VERSN_URL/.dvc/FILE_OBJECT.csv -m 'Design Object Table' 
+svn copy  --quiet $BLOCK_URL/.dvc/FILE_FORMAT  $VERSN_URL/.dvc/FILE_FORMAT -m 'Design Object Format' 
+svn copy  --quiet $BLOCK_URL/.dvc/FILE_OBJECT  $VERSN_URL/.dvc/FILE_OBJECT -m 'Design Object Table' 
 svn mkdir --quiet $VERSN_URL/.dqi -m "Create Design Container" --parents
 
 setenv README "/tmp/README.`date +%Y%m%d_%H%M%S`"
