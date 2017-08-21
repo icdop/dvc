@@ -45,16 +45,16 @@ if ($status == 1) then
 endif
 
 echo "INFO: Checkout Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
-mkdir -p .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
-svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
-svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
+mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK
+svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
+svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
 if ($all_data == 1) then
-   svn checkout --quiet $BLOCK_URL .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
+   svn checkout --quiet $BLOCK_URL .project/$DESIGN_PHASE/$DESIGN_BLOCK
 else
-   svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
+   svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 endif
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/:
-ln -s $DESIGN_BLOCK .project/$DESIGN_PROJT/$DESIGN_PHASE/:
+rm -f .project/$DESIGN_PHASE/:
+ln -s $DESIGN_BLOCK .project/$DESIGN_PHASE/:
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

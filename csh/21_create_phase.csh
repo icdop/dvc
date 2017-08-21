@@ -42,7 +42,7 @@ echo "# Design Version Control Directory" >> $README
 echo "=======================================" >> $README
 echo "* Project : $DESIGN_PROJT" >> $README
 echo "* Phase   : $DESIGN_PHASE" >> $README
-echo "* Path    : .project/$DESIGN_PROJT/$DESIGN_PHASE/" >> $README
+echo "* Path    : .project/$DESIGN_PHASE/" >> $README
 echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README

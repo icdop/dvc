@@ -39,15 +39,15 @@ endif
 
 echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 
-mkdir -p .project/$DESIGN_PROJT/$DESIGN_PHASE
-svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
+mkdir -p .project/$DESIGN_PHASE
+svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
 if ($all_data == 1) then
-   svn checkout --quiet $PHASE_URL .project/$DESIGN_PROJT/$DESIGN_PHASE
+   svn checkout --quiet $PHASE_URL .project/$DESIGN_PHASE
 else
-   svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
+   svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
 endif
-rm -f .project/$DESIGN_PROJT/:
-ln -s $DESIGN_PHASE .project/$DESIGN_PROJT/:
+rm -f .project/:
+ln -s $DESIGN_PHASE .project/:
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

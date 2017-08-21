@@ -26,11 +26,11 @@ if (($1 != "") && ($1 != ":")) then
       setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
    else if {(test -d .dvc_block/:/:/$DESIGN_CONTR/.dqi)} then
       setenv DVC_CONTAINER .dvc_block/:/:/$DESIGN_CONTR
-   else if {(test -d .project/:/:/:/:/:/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .project/:/:/:/:/:/$DESIGN_CONTR
+   else if {(test -d .project/:/:/:/:/$DESIGN_CONTR/.dqi)} then
+      setenv DVC_CONTAINER .project/:/:/:/:/$DESIGN_CONTR
    else
       setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
-      setenv SVN_CONTAINER :/:/:/:/:/$DESIGN_CONTR
+      setenv SVN_CONTAINER :/:/:/:/$DESIGN_CONTR
       echo "ERROR: Not a valid container : $DESIGN_CONTR"
       exit -1
    endif
@@ -47,7 +47,7 @@ endif
 if {(test -e $DVC_CONTAINER/.dqi/env/SVN_CONTAINER)} then
    setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dqi/env/SVN_CONTAINER`
 else
-   setenv SVN_CONTAINER :/:/:/:/:/$DESIGN_CONTR
+   setenv SVN_CONTAINER :/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container : $DVC_CONTAINER"
    exit -1
 endif

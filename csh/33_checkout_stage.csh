@@ -39,17 +39,17 @@ if ($status == 1) then
 endif
 
 echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
-mkdir -p .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
-svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
-svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/.dvc
-svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
+mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
+svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
+svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 if ($all_data == 1) then
-   svn checkout --quiet $STAGE_URL      .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+   svn checkout --quiet $STAGE_URL      .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
 else
-   svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+   svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 endif
-rm -f .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_STAGE .project/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+rm -f .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
+ln -s $DESIGN_STAGE .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

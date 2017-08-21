@@ -18,7 +18,7 @@ if {(test -d $DVC_CONTAINER)} then
    echo "DVC_PATH: $DVC_CONTAINER"
    echo "SVN_PATH: $SVN_CONTAINER"
    echo "------------------------------------------------------------"
-   svn list $SVN_URL/$SVN_CONTAINER -v
+   svn list $SVN_URL/$DESIGN_PROJT/$SVN_CONTAINER -v
 #   svn list $DVC_CONTAINER -v
 else
    echo "ERROR: Can not find Container : $DVC_CONTAINER"

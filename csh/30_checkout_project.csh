@@ -41,10 +41,8 @@ svn info $PROJT_URL
 echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password dvc
 
-mkdir -p .project/$DESIGN_PROJT  
-svn checkout --quiet $PROJT_URL/.dvc .project/$DESIGN_PROJT/.dvc
-rm -f .project/:
-ln -s $DESIGN_PROJT .project/:
+mkdir -p .project
+svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
