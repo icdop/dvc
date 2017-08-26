@@ -25,7 +25,7 @@ else if ($?SVN_URL == 0) then
     setenv SVN_URL  file://$SVN_ROOT
 endif
 
-echo "SVN_URL  = $SVN_URL"
+echo "SETP: SVN_URL  = $SVN_URL"
 
 if (($3 != "") && ($3 != ":")) then
     setenv PROJT_URL  $2
@@ -36,4 +36,4 @@ else if ($?PROJT_URL == 0) then
     setenv PROJT_URL  $SVN_URL/testcase
 endif
 
-echo "PROJT_URL  = $PROJT_URL"
+echo "SETP: PROJT_URL  = $PROJT_URL"

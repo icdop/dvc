@@ -24,7 +24,7 @@ else if ($?SVN_ROOT == 0) then
   setenv SVN_ROOT  $HOME/SVN_ROOT
 endif
 if ( $pvar == 1) then
-  echo "SVN_ROOT     = $SVN_ROOT"
+  echo "PARA: SVN_ROOT     = $SVN_ROOT"
 endif
 
 if {(test -e .dvc/env/SVN_URL)} then
@@ -36,7 +36,7 @@ else if ($?SVN_URL == 0) then
 endif
 
 if ( $pvar == 1) then
-  echo "SVN_URL      = $SVN_URL"
+  echo "PARA: SVN_URL      = $SVN_URL"
 endif
 
 if {(test -e .dvc/env/DESIGN_PROJT)} then
@@ -56,5 +56,5 @@ else if ($?PROJT_URL == 0) then
 endif
 
 if ( $pvar == 1) then
-  echo "PROJT_URL    = $PROJT_URL"
+  echo "PARA: PROJT_URL    = $PROJT_URL"
 endif
