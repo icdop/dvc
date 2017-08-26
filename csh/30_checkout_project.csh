@@ -19,7 +19,7 @@ if ($?DOP_HOME == 0) then
 endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/11_get_svn.csh
+source $DVC_CSH/12_get_server.csh
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    setenv DESIGN_PROJT $1

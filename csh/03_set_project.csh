@@ -14,7 +14,7 @@ endif
 source $DVC_CSH/13_get_project.csh
 
 mkdir -p .dvc/env
-mkdir -p .dvc/svn
+mkdir -p .dvc/server
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
     setenv DESIGN_PROJT $1
@@ -26,11 +26,11 @@ endif
 
 if (($2 != "") && ($2 != ":")) then
     setenv PROJT_URL  $2
-    echo $PROJT_URL   > .dvc/svn/PROJT_URL
+    echo $PROJT_URL   > .dvc/server/PROJT_URL
     echo "SETP: PROJT_URL  = $PROJT_URL"
 else if ($?SVN_URL == 1) then
     setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-    echo $PROJT_URL   > .dvc/svn/PROJT_URL
+    echo $PROJT_URL   > .dvc/server/PROJT_URL
     echo "PARM: PROJT_URL  = $PROJT_URL"
 else
     setenv PROJT_URL ""

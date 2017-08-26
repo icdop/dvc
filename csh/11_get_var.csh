@@ -20,26 +20,19 @@ else
 endif
 
 if ($1 == "--all") then
-   set envpat="*"
+   set varpat="*"
    shift argv
 else if ($1 != "") then
-   set envpat=$1
+   set varpat=$1
 else
-   set envpat="*"
+   set varpat="*"
 endif
 
-foreach fname ( `ls $dvcpath/.dvc/env/$envpat` )
-   set envname=$fname:t
+foreach fname ( `ls $dvcpath/.dvc/var/$varpat` )
+   set varname=$fname:t
    if { (test -e $fname) } then
-      echo "$envname `cat $fname`"
+      echo "$varname `cat $fname`"
    else
-      echo "ERROR: env '$envname' does not exist."
+      echo "ERROR: variable '$varname' does not exist."
    endif
 end
-
-
-#if ($?DOP_HOME == 0) then
-#   setenv DOP_HOME $0:h/../..
-#endif
-#setenv DVC_CSH $DOP_HOME/dvc/csh
-

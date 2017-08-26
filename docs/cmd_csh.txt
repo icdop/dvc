@@ -1,7 +1,10 @@
 00_set_env.csh:   
 	Usage: $prog <variable> <value>
 
-01_set_svn.csh:
+01_set_var.csh:   
+	Usage: $prog <variable> <value>
+
+02_set_server.csh:
 	Usage: $prog <SVN_ROOT> [<SVN_URL>] [<PROJT_URL>]
 
 03_set_project.csh:
@@ -16,7 +19,10 @@
 10_get_env.csh:   	
 	Usage: $prog [--global|--local] [--all] <variable>"
 
-11_get_svn.csh:   	
+11_get_var.csh:   	
+	Usage: $prog [--global|--local] [--all] <variable>"
+
+12_get_server.csh:   	
 	Usage: $prog 
 
 13_get_project.csh:
@@ -85,15 +91,14 @@
 	Usage: $prog <DESIGN_CONTR>
 
 x0_remove_project.csh:   	
-	Usage: $0:t <DESIGN_PROJT>
+	Usage: $prog <DESIGN_PROJT>
 x1_remove_phase.csh:   	
-	Usage: $0:t <DESIGN_PHASE>
+	Usage: $prog <DESIGN_PHASE>
 x2_remove_block.csh:   	
-	Usage: $0:t <DESIGN_BLOCK> [<DESIGN_PHASE>]
+	Usage: $prog <DESIGN_BLOCK> [<DESIGN_PHASE>]
 x3_remove_stage.csh:   	
-	Usage: $0:t <DESIGN_STAGE>
+	Usage: $prog <DESIGN_STAGE>
 x4_remove_version.csh:   	
-	Usage: $0:t <DESIGN_VERSN>
+	Usage: $prog <DESIGN_VERSN>
 x5_remove_container.csh:   	
-	Usage: $0:t <DESIGN_VERSN> [<DESIGN_STAGE>]
-
+	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]

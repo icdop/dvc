@@ -39,7 +39,7 @@ reset_repository:
 	@echo "# 0. Assign SVN ROOT Path"
 	@echo "#---------------------------------------------------"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
-	dvc_set_svn $(SVN_ROOT)  $(SVN_URL)
+	dvc_set_server $(SVN_ROOT)  $(SVN_URL)
 
 project: init
 	@echo "#---------------------------------------------------"
@@ -152,7 +152,7 @@ commit_container:
 	@echo "#---------------------------------------------------"
 	dvc_commit_container	$(DESIGN_CONTR)
 
-list: list_version list_container list_variable
+list: list_version list_container list_env
 list_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
@@ -169,7 +169,7 @@ list_container:
 	@echo "#---------------------------------------------------"
 	dvc_list_container 
 
-list_variable:
+list_env:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-3 List all variables"
 	@echo "#---------------------------------------------------"

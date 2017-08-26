@@ -24,22 +24,22 @@ else
    set reset=0
 endif
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
-   set envname = $1
+   set varname = $1
    if ($2 == "--reset") then
-      echo "INFO: remove env('$envname')"
-      rm -f $dvcpath/.dvc/env/$envname
+      echo "INFO: remove var('$varname')"
+      rm -f $dvcpath/.dvc/var/$varname
    else if ($2 != "") then
-      set envval = $2
+      set varval = $2
       echo "SETP: $1 = $2"
-      echo $envval  > $dvcpath/.dvc/env/$envname
+      echo $varval  > $dvcpath/.dvc/var/$varname
    else if ($reset == 1) then
-      echo "INFO: remove env('$envname')"
-      rm -f $dvcpath/.dvc/env/$envname
-   else if {(test -e $dvcpath/.dvc/env/$envname)} then
-      echo "$envname =  `cat $dvcpath/.dvc/env/$envname`"
+      echo "INFO: remove var('$varname')"
+      rm -f $dvcpath/.dvc/var/$varname
+   else if {(test -e $dvcpath/.dvc/var/$varname)} then
+      echo "$varname =  `cat $dvcpath/.dvc/var/$varname`"
    else 
-      echo "ERROR: env '$envname' is not defined in '$dvcpath'!"
+      echo "ERROR: var '$varname' is not defined in '$dvcpath'!"
    endif
 else
-   echo `ls $dvcpath/.dvc/env/`
+   echo `ls $dvcpath/.dvc/var/`
 endif

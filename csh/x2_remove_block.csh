@@ -7,7 +7,8 @@ endif
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-source $DOP_HOME/dvc/csh/11_get_svn.csh
+source $DOP_HOME/dvc/csh/12_get_server.csh
+source $DOP_HOME/dvc/csh/13_get_project.csh
 source $DOP_HOME/dvc/csh/14_get_version.csh
 
 if ($1 != "") then

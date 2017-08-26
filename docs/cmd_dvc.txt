@@ -2,22 +2,28 @@
 # Default Variable
 #
 dvc_set_env:   
-	Usage: $prog [<variable> <value>]
+	Usage: $prog [--global|--local] [--reset] <variable> <value>
 	Description:
 	  set variable value and store it in .dev/env
 	if <variable> is not specified, list all existing variables
 
-dvc_set_svn:   
-	Usage: $prog <SVN_ROOT> [<SVN_URL>] [<PROJT_URL>]
+dvc_set_var:   
+	Usage: $prog [--global|-local] [--reset] <variable> <value>
+	Description:
+	  set variable value and store it in .dev/var
+	if <variable> is not specified, list all existing variables
+
+dvc_set_server:   
+	Usage: $prog <SVN_ROOT> <SVN_URL> <PROJT_URL>
 	Description:
 	  set the SVN data root and the svn server mode
-	store the value in .dvc/svn/
+	store the value in .dvc/server/
 	SVN_MODE could be "file", "http", "svn"
 
 dvc_set_project:   
 	Usage: $prog <project>
 	Description:
-	  Set the default project name and store the value to .dvc/svn/
+	  Set the default project name and store the value to .dvc/env/
 
 dvc_set_version:   
 	Usage: $prog <version> <stage> <block> <phase>
@@ -29,7 +35,7 @@ dvc_set_container:
 	Description:
 	  Set default working container and create .container link
 
-dvc_get_env:   
+dvc_get_env:
 	Usage: $prog [--global] [--all] <variable>
 	Description:
 	  get the value of variable from .dvc/env/
@@ -39,16 +45,26 @@ dvc_get_env:
 	--all
 		list all varaibles value 
 
-dvc_get_svn:   
+dvc_get_var:
+	Usage: $prog [--global] [--all] <variable>
+	Description:
+	  get the value of variable from .dvc/var/
+	--global
+		search the variable in ~/.dvc/var
+		otherwise, find the variable in ./.dvc/var (--local)
+	--all
+		list all varaibles value 
+
+dvc_get_server:
 	Usage: $prog
 	Description:
-	  fetch the SVN server setting from .dvc/svn/
+	  fetch the SVN server setting from .dvc/server/
 	SVN_ROOT , SVN_URL , PROJT_URL
 
 dvc_get_project:   
 	Usage: $prog
 	Description:
-	  fetch the PROJT_URL from .dvc/svn/
+	  fetch the PROJT_URL from .dvc/env/
 
 dvc_get_version:   
 	Usage: $prog 
@@ -68,7 +84,7 @@ dvc_create_project:
 	Usage: $prog <DESIGN_PROJT>
 	Description:
 	  create project repository in SVN data folder($SVN_ROOT)
-	copy the default config files (/etc/svn/*) to conf/ folder
+	copy the default config files (/etc/conf/*) to conf/ folder
 
 dvc_checkout_project:   
 	Usage: $prog [--data] <DESIGN_PROJT>

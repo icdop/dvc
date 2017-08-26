@@ -18,8 +18,8 @@ endif
 
 if {(test -e .dvc/env/SVN_ROOT)} then
   setenv SVN_ROOT  `cat .dvc/env/SVN_ROOT`
-else if {(test -e $HOME/.dvc/svn/SVN_ROOT)} then
-  setenv SVN_ROOT  `cat $HOME/.dvc/svn/SVN_ROOT`
+else if {(test -e $HOME/.dvc/server/SVN_ROOT)} then
+  setenv SVN_ROOT  `cat $HOME/.dvc/server/SVN_ROOT`
 else if ($?SVN_ROOT == 0) then
   setenv SVN_ROOT  $HOME/SVN_ROOT
 endif
@@ -29,8 +29,8 @@ endif
 
 if {(test -e .dvc/env/SVN_URL)} then
   setenv SVN_URL      `cat .dvc/env/SVN_URL`
-else if {(test -e $HOME/.dvc/svn/SVN_URL)} then
-  setenv SVN_URL      `cat $HOME/.dvc/svn/SVN_URL`
+else if {(test -e $HOME/.dvc/server/SVN_URL)} then
+  setenv SVN_URL      `cat $HOME/.dvc/server/SVN_URL`
 else if ($?SVN_URL == 0) then
   setenv SVN_URL      file://$SVN_ROOT
 endif
@@ -49,8 +49,8 @@ endif
 
 if {(test -e .dvc/env/PROJT_URL)} then
   setenv PROJT_URL      `cat .dvc/env/PROJT_URL`
-else if {(test -e $HOME/.dvc/svn/PROJT_URL)} then
-  setenv PROJT_URL      `cat $HOME/.dvc/svn/PROJT_URL`
+else if {(test -e $HOME/.dvc/server/PROJT_URL)} then
+  setenv PROJT_URL      `cat $HOME/.dvc/server/PROJT_URL`
 else if ($?PROJT_URL == 0) then
   setenv PROJT_URL      $SVN_URL/$DESIGN_PROJT
 endif

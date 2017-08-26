@@ -12,7 +12,7 @@ if ($?DOP_HOME == 0) then
 endif
 setenv DVC_CSH $DOP_HOME/dvc/csh
 setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/11_get_svn.csh
+source $DVC_CSH/12_get_server.csh
 source $DVC_CSH/03_set_project.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -31,7 +31,7 @@ endif
    if {(test -d $SVN_ROOT/DESIGN_PROJT)} then
    else
      svnadmin create $SVN_ROOT/$DESIGN_PROJT
-     cp -fr $DVC_ETC/svn/* $SVN_ROOT/$DESIGN_PROJT/conf
+     cp -fr $DVC_ETC/conf/* $SVN_ROOT/$DESIGN_PROJT/conf
    endif
 
 #   svn auth  $PROJT_URL --username pm --password pm

@@ -16,5 +16,5 @@ DESIGN_CNTNR := place_opt
 TEST_FILE    := testfile
 TEST_DIR_    := testdir
 
-include $(DOP_HOME)/dvc/etc/mak/makefile.design
-include $(DOP_HOME)/dvc/etc/mak/makefile.test
+include $(DOP_HOME)/dvc/etc/inc/makefile.design
+include $(DOP_HOME)/dvc/etc/inc/makefile.test
