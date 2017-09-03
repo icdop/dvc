@@ -13,7 +13,7 @@ source $DOP_HOME/dvc/csh/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
     setenv DESIGN_VERSN $1
-    echo "PARA: DESIGN_VERSN = $DESIGN_VERSN"
+    echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
     if ($2 != "") then
         setenv DESIGN_STAGE $2
         if ($3 != "") then

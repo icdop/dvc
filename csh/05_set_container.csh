@@ -20,7 +20,7 @@ else
    setenv DESIGN_CONTR `cat .dvc/env/DESIGN_CONTR`
 endif
 
-echo "PARM: DESIGN_CONTR = $DESIGN_CONTR"
+echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
 
 if {(test -d .dvc_version)} then
    setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR

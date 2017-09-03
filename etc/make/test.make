@@ -2,7 +2,7 @@
 # Regress test suite
 #
 #
-TIME_STAMP := `date +%Y%m%d_%H%M%S` 
+TEST_FILE0 = $(TEST_FILE):`date +%Y%m%d` 
 
 help:
 	@echo "=============================================================="
@@ -11,6 +11,8 @@ help:
 	@echo "SVN_URL  = $(SVN_URL)"
 	@echo "=============================================================="
 	@echo "Usage:"
+	@echo "        make run       run the following steps"
+	@echo ""
 	@echo "        make init      (reset_resository)"
 	@echo "        make project   (create_project)"
 	@echo "        make version   (create_version; checkout_version)"
@@ -22,8 +24,7 @@ help:
 	@echo "Usage:  make clean     (clean_data)"
 	@echo ""
 
-run:	test
-test:
+run:
 	make init
 	make project
 	make version
@@ -78,6 +79,7 @@ checkout_container:
 	dvc_checkout_container	$(DESIGN_CONTR)
 
 object: clean_container checkin_object
+checkin: checkin_object
 checkin_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5. Checkin file into container"
@@ -97,9 +99,9 @@ add_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
-	@echo "$(TIME_STAMP)" > $(TEST_FILE):$(TIME_STAMP)
-	cp -f $(TEST_FILE):$(TIME_STAMP) .container/
-	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE):$(TIME_STAMP)
+	@date +%Y%m%d_%H%M%S >> $(TEST_FILE0)
+	cp -f $(TEST_FILE0) .container/
+	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE0)
 
 copy: copy_object
 copy_object:

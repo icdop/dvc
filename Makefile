@@ -17,4 +17,4 @@ push:
 
 	
 bin: csh
-	make -f etc/inc/makefile.bin bin
+	make -f etc/makefile/bin.make

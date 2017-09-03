@@ -16,12 +16,12 @@ source $DVC_CSH/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
    setenv DESIGN_VERSN $1
-   echo "PARA: DESIGN_VERSN = $DESIGN_VERSN"
+   echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
 endif
 
 if (($2 != "") && ($2 != ".")) then
-    setenv DESIGN_STAGE $2
-    echo "PARA: DESIGN_STAGE = $DESIGN_STAGE"
+   setenv DESIGN_STAGE $2
+   echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT

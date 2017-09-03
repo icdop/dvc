@@ -31,7 +31,7 @@ if (($2 != "") && ($2 != ":")) then
 else if ($?SVN_URL == 1) then
     setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
     echo $PROJT_URL   > .dvc/server/PROJT_URL
-    echo "PARM: PROJT_URL  = $PROJT_URL"
+    echo "SETP: PROJT_URL  = $PROJT_URL"
 else
     setenv PROJT_URL ""
 endif

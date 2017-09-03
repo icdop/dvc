@@ -23,13 +23,13 @@ source $DVC_CSH/12_get_server.csh
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    setenv DESIGN_PROJT $1
-   echo "PARA: DESIGN_PROJT = $DESIGN_PROJT"
+   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
    mkdir -p .dvc/env
    echo $DESIGN_PROJT > .dvc/env/DESIGN_PROJT
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-echo "PARA: PROJ_URL = $PROJT_URL"
+echo "PARM: PROJ_URL = $PROJT_URL"
 svn info $PROJT_URL >& /dev/null
 if ($status == 1) then
    echo "ERROR: Can not find Project Design Respository : $DESIGN_PROJT"

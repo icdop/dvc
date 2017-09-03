@@ -12,7 +12,7 @@ source $DOP_HOME/dvc/csh/12_get_server.csh
 setenv DESIGN_PROJT $1
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-echo "PARA: PROJ_URL = $PROJT_URL"
+echo "PARM: PROJ_URL = $PROJT_URL"
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
    echo "INFO: Delete Project Respository - $DESIGN_PROJT"

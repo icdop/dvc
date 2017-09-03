@@ -13,13 +13,12 @@ DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip
 DESIGN_STAGE := 400-APR
 DESIGN_VERSN := 2017_0615-xxx
-DESIGN_CNTNR := place_opt
+DESIGN_CONTR := place_opt
 
 TEST_FILE    := testfile
 TEST_DIR_    := testdir
 
-include $(DOP_HOME)/dvc/etc/inc/makefile.design
-include $(DOP_HOME)/dvc/etc/inc/makefile.test
+include $(DOP_HOME)/dvc/etc/make/test.make
 
 svnserve:
 	mkdir -p $(SVN_ROOT)

@@ -16,7 +16,7 @@ source $DVC_CSH/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
    setenv DESIGN_PHASE $1
-   echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT

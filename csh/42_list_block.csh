@@ -16,12 +16,12 @@ source $DVC_CSH/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
    setenv DESIGN_BLOCK $1
-   echo "PARA: DESIGN_BLOCK = $DESIGN_BLOCK"
+   echo "PARM: DESIGN_BLOCK = $DESIGN_BLOCK"
 endif
 
 if (($2 != "") && ($2 != ".")) then
-    setenv DESIGN_PHASE $1
-    echo "PARA: DESIGN_PHASE = $DESIGN_PHASE"
+   setenv DESIGN_PHASE $1
+   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
 endif
 
 

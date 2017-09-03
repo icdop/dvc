@@ -15,7 +15,7 @@ source $DVC_CSH/13_get_project.csh
 source $DVC_CSH/14_get_version.csh
 if ($1 != "") then
    setenv DESIGN_CONTR $1
-   echo "PARA: DESIGN_CONTR = $DESIGN_CONTR"
+   echo "PARM: DESIGN_CONTR = $DESIGN_CONTR"
    mkdir -p .dvc/env
    echo $DESIGN_CONTR > .dvc/env/DESIGN_CONTR
 endif
