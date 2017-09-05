@@ -1,17 +1,18 @@
-# dvc : Design Version Control
+# Design Version Control
 
-- This package is intended to manage the IC design data in a systematic directory structure.
+- This utility package is intended to manage the chip design data in a predefined directory structure.
 
-- The underneath version control enginer is SVN server
-  * SVN_ROOT : svn server repository root<br>
-  * SVN_URL  : svn access URL <br>
+- The underneath version control engine is SVN server
+  * SVN_ROOT : svn repository root<br>
+  * SVN_URL  : svn access URL<br>
      * svn  server - svn://localserver:port/$SVN_ROOT
-     * http server - http://localserver:port/$SVN_ROOT
      * file system - file:://$SVN_ROOT/
      
 - Each project has it own repository associated:
   * $SVN_ROOT/$DESIGN_PROJT/ : <br>
       Ex. testcase, S10A, ...
+  * conf/ <br>
+      initial files copied from dvc/etc/conf
       
 - There are 4 levels of directories under project respository
   * Phase : <br>
@@ -41,7 +42,8 @@
 3. checkout source design data to local disk - Designer
 4. execute specific design flow - Designer 
 5. submit design quality report (dqi) for review - Designer
-6. validate design quality report and approve - Design Manager
+6. validate design quality report and approve for checkin - Design Manager
 7. checkin design output data to destinate design folder - Designer
-8. complete design quality check - QA
+8. release design output and quality check report - Project Manager
+
 
