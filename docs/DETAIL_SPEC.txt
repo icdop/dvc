@@ -39,7 +39,7 @@
 # ============================
 # Variable Search Path
 # ============================
-  * Variable are stored in the config directory(.dvc)
+  * Variable are stored in the config directory(.dop)
     and the search path sequency is as below:
 
     1. Local : "$PWD/.dvc/env/#VARNAME#"
@@ -71,7 +71,7 @@ $SVN_ROOT/ (SVN Database Root Path)
        			$DESIGN_BLOCK/
 				$DESIGN_STAGE/
 					$DESIGN_VERSN/
-						 $CONTAINER/.dqi
+						 $DESIGN_CONTR/.dqi
 
 * Directory view in local run directory after checkout 
 
@@ -95,13 +95,12 @@ $SVN_ROOT/ (SVN Database Root Path)
 						.dvc/
 
   ** The following links are created in checkout_version
-	.dvc_phase   -> .project/$phase
-	.dvc_block   -> .project/$phase/$block
-	.dvc_stage   -> .project/$phase/$block/$stage
-	.dvc_version -> .project/$phase/$block/$stage/$version
+	.design_block -> .project/$phase/$block
+	.design_stage -> .project/$phase/$block/$stage
+	.design_versn -> .project/$phase/$block/$stage/$version
 
   ** The following objects are created in checkout_container
-	.dvc_version/
+	.design_version/
 		$DESIGN_CONTR/
 			.dqi/
 
