@@ -43,8 +43,8 @@ else if {(test -d .container)} then
   mv .container .container.$d
 endif
 
-if {(test -e .dvc_version)} then
-  ln -fs .dvc_version/$DESIGN_CONTR .container
+if {(test -e .design_versn)} then
+  ln -fs .design_versn/$DESIGN_CONTR .container
 else
   ln -fs .project/$SVN_CONTAINER .container
 endif

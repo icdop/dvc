@@ -22,8 +22,8 @@ endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
 
-if {(test -d .dvc_version)} then
-   setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
+if {(test -d .design_versn)} then
+   setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
    if {(test -e $DVC_CONTAINER/.dqi/env/SVN_CONTAINER)} then
       setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dqi/env/SVN_CONTAINER`
    endif
