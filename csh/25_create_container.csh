@@ -14,8 +14,7 @@ setenv CSH_DIR $DOP_HOME/dvc/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
-source $CSH_DIR
-/05_set_container.csh
+source $CSH_DIR/05_set_container.csh
 
 setenv SVN_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$SVN_CONTAINER

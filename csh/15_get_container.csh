@@ -16,6 +16,14 @@ else if ($?pvar == 0) then
    set pvar = 1
 endif
 
+if {(test -e .dvc/env/DESIGN_CONTR)} then
+  setenv DESIGN_CONTR `cat .dvc/env/DESIGN_CONTR`
+else if {(test -e $HOME/.dvc/env/DESIGN_CONTR)} then
+  setenv DESIGN_CONTR `cat $HOME/.dvc/env/DESIGN_CONTR`
+else if ($?DESIGN_CONTR == 0) then
+  setenv DESIGN_CONTR :
+endif
+
 if (($1 != "") && ($1 != ":")) then
    setenv DESIGN_CONTR $1
    if {(test -d $DESIGN_CONTR/.dqi)} then
@@ -37,7 +45,7 @@ if (($1 != "") && ($1 != ":")) then
 else if {(test -d .container)} then
   setenv DVC_CONTAINER .container
 else
-  setenv DVC_CONTAINER .dvc_version
+  setenv DVC_CONTAINER .
 endif
 
 if ($pvar == 1) then

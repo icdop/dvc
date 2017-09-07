@@ -13,6 +13,7 @@ setenv CSH_DIR $DOP_HOME/dvc/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
+
 if ($1 != "") then
    setenv DESIGN_CONTR $1
    echo "PARM: DESIGN_CONTR = $DESIGN_CONTR"
@@ -41,7 +42,11 @@ else if {(test -d .container)} then
   echo "WARN: .container folder exist, rename it to .container.$d !"
   mv .container .container.$d
 endif
-ln -fs .project/$SVN_CONTAINER .container
 
+if {(test -e .dvc_version)} then
+  ln -fs .dvc_version/$DESIGN_CONTR .container
+else
+  ln -fs .project/$SVN_CONTAINER .container
+endif
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0
