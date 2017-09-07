@@ -30,14 +30,14 @@ if (($1 != "") && ($1 != ":")) then
       # parameter is a container
       setenv DVC_CONTAINER $DESIGN_CONTR
       setenv DESIGN_CONTR `cat $DVC_CONTAINER/.dqi/env/DESIGN_CONTR`
-   else if {(test -d .dvc_version/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
-   else if {(test -d .dvc_block/:/:/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .dvc_block/:/:/$DESIGN_CONTR
+   else if {(test -d .design_versn/$DESIGN_CONTR/.dqi)} then
+      setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
+   else if {(test -d .design_block/:/:/$DESIGN_CONTR/.dqi)} then
+      setenv DVC_CONTAINER .design_block/:/:/$DESIGN_CONTR
    else if {(test -d .project/:/:/:/:/$DESIGN_CONTR/.dqi)} then
       setenv DVC_CONTAINER .project/:/:/:/:/$DESIGN_CONTR
    else
-      setenv DVC_CONTAINER .dvc_version/$DESIGN_CONTR
+      setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
       setenv SVN_CONTAINER :/:/:/:/$DESIGN_CONTR
       echo "ERROR: Not a valid container : $DESIGN_CONTR"
       exit -1
