@@ -1,6 +1,6 @@
 ;FORMAT TYPE	EXT	ACTION
 ======= =====   ======  ================================ 
-VERILOG	FILE	*.vg	{view "vi $$"}
+VERILOG	FILE	{*.vg *.v}	{view "vi $$"}
 DEF	FILE	*.def	{view "vi $$"}
 SDC	FILE	*.sdc	{view "vi $$"}
 SPEC	FILE	*.spef	{view "vi $$"}

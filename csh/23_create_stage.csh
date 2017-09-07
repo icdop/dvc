@@ -9,11 +9,11 @@ echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-setenv DVC_CSH $DOP_HOME/dvc/csh
-setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/12_get_server.csh
-source $DVC_CSH/13_get_project.csh
-source $DVC_CSH/14_get_version.csh
+setenv CSH_DIR $DOP_HOME/dvc/csh
+setenv ETC_DIR $DOP_HOME/dvc/etc
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1
@@ -36,8 +36,8 @@ endif
 echo "INFO: Create Project Design Stage : $DESIGN_STAGE"
 svn mkdir --quiet $STAGE_URL -m "Create Design Stage /$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE ..." --parents
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config" 
-svn import --quiet $DVC_ETC/rule/RULE_VERSN  $STAGE_URL/.dvc/NAME_RULE -m 'Version Naming Rule'
-svn import --quiet $DVC_ETC/rule/FILE_FORMAT $STAGE_URL/.dvc/FILE_FORMAT -m 'Directory Format'
+svn import --quiet $ETC_DIR/rule/RULE_VERSN  $STAGE_URL/.dvc/NAME_RULE -m 'Version Naming Rule'
+svn import --quiet $ETC_DIR/rule/FILE_FORMAT $STAGE_URL/.dvc/FILE_FORMAT -m 'Directory Format'
 
 setenv README "/tmp/README.md"
 echo -n "" > $README

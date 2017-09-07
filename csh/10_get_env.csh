@@ -41,5 +41,5 @@ end
 #if ($?DOP_HOME == 0) then
 #   setenv DOP_HOME $0:h/../..
 #endif
-#setenv DVC_CSH $DOP_HOME/dvc/csh
+#setenv CSH_DIR $DOP_HOME/dvc/csh
 

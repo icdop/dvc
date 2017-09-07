@@ -7,11 +7,11 @@ if (($1 == "-h") || ($1 == "--help")) then
 endif
 
 if ($?DOP_HOME == 0) then
-   setenv DVC_CSH $0:h/../csh
+   setenv CSH_DIR $0:h/../csh
 else
-   setenv DVC_CSH $DOP_HOME/dvc/csh 
+   setenv CSH_DIR $DOP_HOME/dvc/csh 
 endif
-source $DVC_CSH/13_get_project.csh
+source $CSH_DIR/13_get_project.csh
 
 mkdir -p .dvc/env
 mkdir -p .dvc/server

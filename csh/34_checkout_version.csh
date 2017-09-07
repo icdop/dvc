@@ -17,11 +17,10 @@ endif
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-setenv DVC_CSH $DOP_HOME/dvc/csh
-setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/12_get_server.csh
-source $DVC_CSH/13_get_project.csh
-source $DVC_CSH/04_set_version.csh
+setenv CSH_DIR $DOP_HOME/dvc/csh
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/04_set_version.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE

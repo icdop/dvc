@@ -7,11 +7,11 @@ endif
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-setenv DVC_CSH $DOP_HOME/dvc/csh
-source $DVC_CSH/12_get_server.csh
-source $DVC_CSH/13_get_project.csh
-source $DVC_CSH/14_get_version.csh
-source $DVC_CSH/15_get_container.csh
+setenv CSH_DIR $DOP_HOME/dvc/csh
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/15_get_container.csh
 
 if ($2 != "") then
     set src_name = $2

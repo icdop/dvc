@@ -10,10 +10,10 @@ echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-setenv DVC_CSH $DOP_HOME/dvc/csh
-setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/12_get_server.csh
-source $DVC_CSH/03_set_project.csh
+setenv CSH_DIR $DOP_HOME/dvc/csh
+setenv ETC_DIR $DOP_HOME/dvc/etc
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/03_set_project.csh
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 svn info $PROJT_URL >& /dev/null
@@ -31,14 +31,14 @@ endif
    if {(test -d $SVN_ROOT/DESIGN_PROJT)} then
    else
      svnadmin create $SVN_ROOT/$DESIGN_PROJT
-     cp -fr $DVC_ETC/conf/* $SVN_ROOT/$DESIGN_PROJT/conf
+     cp -fr $ETC_DIR/conf/* $SVN_ROOT/$DESIGN_PROJT/conf
    endif
 
 #   svn auth  $PROJT_URL --username pm --password pm
 
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
-   svn import --quiet  $DVC_ETC/rule/RULE_PHASE    $PROJT_URL/.dvc/NAME_RULE -m 'Phase Naming Rule' 
-   svn import --quiet  $DVC_ETC/rule/FILE_FORMAT   $PROJT_URL/.dvc/FILE_FORMAT -m 'Directory Format' 
+   svn import --quiet  $ETC_DIR/rule/RULE_PHASE    $PROJT_URL/.dvc/NAME_RULE -m 'Phase Naming Rule' 
+   svn import --quiet  $ETC_DIR/rule/FILE_FORMAT   $PROJT_URL/.dvc/FILE_FORMAT -m 'Directory Format' 
 
 
 setenv README "/tmp/README.md"

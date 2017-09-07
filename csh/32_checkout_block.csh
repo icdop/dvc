@@ -15,11 +15,10 @@ else
 if ($?DOP_HOME == 0) then
    setenv DOP_HOME $0:h/../..
 endif
-setenv DVC_CSH $DOP_HOME/dvc/csh
-setenv DVC_ETC $DOP_HOME/dvc/etc
-source $DVC_CSH/12_get_server.csh
-source $DVC_CSH/13_get_project.csh
-source $DVC_CSH/14_get_version.csh
+setenv CSH_DIR $DOP_HOME/dvc/csh
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_version.csh
 endif
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
