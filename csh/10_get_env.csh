@@ -36,10 +36,3 @@ foreach fname ( `ls $dvcpath/.dvc/env/$envpat` )
       echo "ERROR: env '$envname' does not exist."
    endif
 end
-
-
-#if ($?DOP_HOME == 0) then
-#   setenv DOP_HOME $0:h/../..
-#endif
-#setenv CSH_DIR $DOP_HOME/dvc/csh
-

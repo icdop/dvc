@@ -69,9 +69,11 @@
 43_list_stage.csh:   	
 	Usage: $prog <DESIGN_STAGE>
 44_list_version.csh:   	
-	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
+	Usage: $prog <DESIGN_VERSN>
 45_list_container.csh:   	
 	Usage: $prog <DESIGN_CONTR>
+49_list_design.csh:   	
+	Usage: $prog <project/phase/block/stage/version>
 
 50_clean_container.csh:   	
 	Usage: $prog <DESIGN_CONTR>

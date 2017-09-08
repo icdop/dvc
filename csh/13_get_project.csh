@@ -6,15 +6,12 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 if (($1 == "-v") || ($1 == "--verbose")) then
-   set verbose = 1
+   set verbose_mode = 1
    shift argv
+else if ($?verbose_mode == 0) then
+   set verbose_mode = 0
 endif
-if (($1 == "-q") || ($1 == "--quiet")) then
-   set pvar = 0
-   shift argv
-else if ($?pvar == 0) then
-   set pvar = 1 
-endif
+set pvar = $verbose_mode
 
 if {(test -e .dvc/env/DESIGN_PROJT)} then
   setenv DESIGN_PROJT `cat .dvc/env/DESIGN_PROJT`

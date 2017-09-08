@@ -14,10 +14,10 @@ else
    set all_data = 0
 endif
 
-if ($?DOP_HOME == 0) then
-   setenv DOP_HOME $0:h/../..
+if ($?DVC_HOME == 0) then
+   setenv DVC_HOME $0:h/..
 endif
-setenv CSH_DIR $DOP_HOME/dvc/csh
+setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then

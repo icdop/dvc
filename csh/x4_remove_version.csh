@@ -4,12 +4,12 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 
-if ($?DOP_HOME == 0) then
-   setenv DOP_HOME $0:h/../..
+if ($?DVC_HOME == 0) then
+   setenv DVC_HOME $0:h/..
 endif
-source $DOP_HOME/dvc/csh/12_get_server.csh
-source $DOP_HOME/dvc/csh/13_get_project.csh
-source $DOP_HOME/dvc/csh/14_get_version.csh
+source $DVC_HOME/csh/12_get_server.csh
+source $DVC_HOME/csh/13_get_project.csh
+source $DVC_HOME/csh/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
     setenv DESIGN_VERSN $1

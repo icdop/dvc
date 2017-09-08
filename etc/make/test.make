@@ -159,17 +159,17 @@ list_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
 	@echo "#---------------------------------------------------"
-	dvc_list_project
-	dvc_list_phase
-	dvc_list_block
-	dvc_list_stage
-	dvc_list_version
+	dvc_list_project -v
+	dvc_list_phase -v
+	dvc_list_block -v
+	dvc_list_stage -v
+	dvc_list_version -v
 
 list_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-2 List all data in container"
 	@echo "#---------------------------------------------------"
-	dvc_list_container 
+	dvc_list_container -v 
 
 list_env:
 	@echo "#---------------------------------------------------"
