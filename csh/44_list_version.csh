@@ -1,14 +1,20 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
-
-if ($?DOP_HOME == 0) then
-   setenv DOP_HOME $0:h/../..
+if ($1 == "--verbose") then
+   set verbose_mode = 1
+   shift argv
+else if ($?verbose_mode == 0) then 
+   set verbose_mode = 0
 endif
-setenv CSH_DIR $DOP_HOME/dvc/csh
+
+if ($?DVC_HOME == 0) then
+   setenv DVC_HOME $0:h/..
+endif
+setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
@@ -18,25 +24,13 @@ if (($1 != "") && ($1 != ".")) then
    echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
 endif
 
-if (($2 != "") && ($2 != ".")) then
-   setenv DESIGN_STAGE $2
-   echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"
-endif
-
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
-svn info $VERSN_URL >& /dev/null
-if ($status == 1) then
-   echo "ERROR: Cannot find Project Design Version : $DESIGN_VERSN"
-   exit 1
-endif
 
-#svn info $VERSN_URL
-echo "URL: $VERSN_URL"
-echo "------------------------------------------------------------"
-svn list $VERSN_URL -v
+setenv DESIGN_URL $VERSN_URL
+source $CSH_DIR/49_list_design.csh
 
 exit 0

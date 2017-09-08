@@ -5,10 +5,10 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 
-if ($?DOP_HOME == 0) then
-   setenv DOP_HOME $0:h/../..
+if ($?DVC_HOME == 0) then
+   setenv DVC_HOME $0:h/..
 endif
-setenv CSH_DIR $DOP_HOME/dvc/csh
+setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
@@ -19,16 +19,9 @@ if (($1 != "") && ($1 != ".")) then
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-svn info $PROJT_URL >& /dev/null
-if ($status == 1) then
-   echo "ERROR: Cannot find Project Design Respository : $DESIGN_PROJT"
-   exit 1
-endif
 
-#svn info $PROJT_URL
-echo "URL: $PROJT_URL"
-echo "------------------------------------------------------------"
-svn list $PROJT_URL -v
+setenv DESIGN_URL $PROJT_URL
+source $CSH_DIR/49_list_design.csh
 
 exit 0
  
