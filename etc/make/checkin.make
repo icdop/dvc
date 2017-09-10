@@ -1,9 +1,8 @@
+##################################
 #
-# Regress test suite
+# Design Object Checkin Example
 #
-#
-TEST_FILE0 = $(TEST_FILE):`date +%Y%m%d` 
-
+##################################
 help:
 	@echo "=============================================================="
 	@echo "PWD      = $(PWD)"
@@ -24,6 +23,7 @@ help:
 	@echo "Usage:  make clean     (clean_data)"
 	@echo ""
 
+
 run:
 	make init
 	make project
@@ -31,7 +31,6 @@ run:
 	make container
 	make object
 	make commit
-	make list
 
 
 init: reset_repository
@@ -63,7 +62,7 @@ checkout_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout version"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
+	dvc_checkout_version	$(DESIGN_VERSN)
 
 container: create_container checkout_container
 create_container:
@@ -78,14 +77,15 @@ checkout_container:
 	@echo "#---------------------------------------------------"
 	dvc_checkout_container	$(DESIGN_CONTR)
 
-object: clean_container checkin_object
+object: checkin_object
 checkin: checkin_object
-checkin_object:
+checkin_object: 
 	@echo "#---------------------------------------------------"
 	@echo "# 5. Checkin file into container"
 	@echo "#---------------------------------------------------"
 	make add_object
 	make copy_object
+	make copy_folder
 	make link_object
 
 clean_container:
@@ -94,50 +94,62 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
-add: add_object
 add_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
-	@date +%Y%m%d_%H%M%S >> $(TEST_FILE0)
-	cp -f $(TEST_FILE0) .container/
-	dvc_add_object	$(DESIGN_CONTR)	$(TEST_FILE0)
+	@for object in $(ADD_OBJECTS) ;  do \
+		dvc_add_object	$(DESIGN_CONTR)	$$object ; \
+	done
 
-copy: copy_object
-copy_object:
+copy_object: $(OBJECT_FILES)
 	@echo "#---------------------------------------------------"
-	@echo "# 5-2 Copy file to container"
+	@echo "# 5-2 Copy objects to container"
 	@echo "#---------------------------------------------------"
-	@date +%Y%m%d_%H%M%S >> $(TEST_FILE)
-	dvc_copy_object	$(DESIGN_CONTR)	$(TEST_FILE)
-	dvc_copy_object	$(DESIGN_CONTR)	$(TEST_FILE)  newfile
+	@for object in $(OBJECT_FILES); do (\
+		echo "Copying file '$$object' into container ..."; \
+		if (test -e $$object) then \
+			dvc_copy_object	$(DESIGN_CONTR)	$$object $$object ; \
+		fi ; \
+	); done
 
-link: link_object
-link_object:
+copy_folder: $(OBJECT_FOLDER)
+	@echo "#---------------------------------------------------"
+	@echo "# 5-2 Copy folders to container"
+	@echo "#---------------------------------------------------"
+	@for dir in $(OBJECT_FOLDER); do (\
+		echo "Copying directory '$$dir' into container ..."; \
+		if (test -d $$dir) then \
+			dvc_copy_object	$(DESIGN_CONTR)	$$dir $$dir; \
+		else \
+			echo "ERROR: $$dir is not a directory"; \
+		fi ; \
+	); done
+
+link_object: $(OBJECT_LINKS)
 	@echo "#---------------------------------------------------"
 	@echo "# 5-3 Crearte symbolic link in container"
 	@echo "#---------------------------------------------------"
-	@mkdir -p $(TEST_DIR_)
-	@date +%Y%m%d_%H%M%S >> $(TEST_DIR_)/$(TEST_FILE)
-	dvc_link_object	$(DESIGN_CONTR)	$(TEST_DIR_)
-	dvc_link_object	$(DESIGN_CONTR)	$(TEST_DIR_)  newdir
+	@for object in $(OBJECT_LINKS); do \
+		echo "Linking object '$$object' in container ..."; \
+		if (test -e $$object) then \
+			dvc_link_object	$(DESIGN_CONTR)	$$object ; \
+		fi ; \
+	done
 
-rename: rename_object
 rename_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-4 Rename file in container"
 	@echo "#---------------------------------------------------"
-	@mkdir -p old_$(TEST_DIR_)
-	dvc_copy_object	$(DESIGN_CONTR)	old_$(TEST_DIR_)
-	dvc_rename_object	$(DESIGN_CONTR)	old_$(TEST_DIR_)  new_$(TEST_DIR_)
+	eval dvc_rename_object	$(DESIGN_CONTR)	$(RENAME_PAIR)  
 
-delete: delete_object
 delete_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-5 Remove files in container"
 	@echo "#---------------------------------------------------"
-	dvc_delete_object	$(DESIGN_CONTR)	$(TEST_FILE)
-	dvc_delete_object	$(DESIGN_CONTR)	$(TEST_DIR_)
+	@for object in $(DEL_OBJECTS) ;  do \
+		dvc_delete_object	$(DESIGN_CONTR)	$$object ; \
+	done
 
 update: update_container
 update_container:
@@ -154,7 +166,7 @@ commit_container:
 	@echo "#---------------------------------------------------"
 	dvc_commit_container	$(DESIGN_CONTR)
 
-list: list_version list_container list_env
+list: list_version list_container
 list_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
@@ -182,7 +194,7 @@ list_env:
 clean: clean_data
 clean_data: remove_project
 	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE)\:*
-	@rm -fr .dvc .project  .container .dvc_*
+	@rm -fr .dop .project  .container .design_*
 
 remove_project: remove_version
 	@echo "#---------------------------------------------------"
@@ -205,3 +217,12 @@ remove_container:
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(DESIGN_CONTR)
 
+
+$(OBJECT_FILES) $(OBJECT_LINKS):
+	@echo "INFO: file '$@' does not exist, create a stamp file."
+	@echo "`date +%D_$T`" > $@
+
+$(OBJECT_FOLDER):
+	@echo "INFO: dir '$@' does not exist, create it."
+	@mkdir -p $@
+	@echo "`date +%D_$T`" > $@/HISTORY.md

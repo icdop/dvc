@@ -27,19 +27,19 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set varname = $1
    if ($2 == "--reset") then
       echo "INFO: remove var('$varname')"
-      rm -f $dvcpath/.dvc/var/$varname
+      rm -f $dvcpath/.dop/var/$varname
    else if ($2 != "") then
       set varval = $2
       echo "SETP: $1 = $2"
-      echo $varval  > $dvcpath/.dvc/var/$varname
+      echo $varval  > $dvcpath/.dop/var/$varname
    else if ($reset == 1) then
       echo "INFO: remove var('$varname')"
-      rm -f $dvcpath/.dvc/var/$varname
-   else if {(test -e $dvcpath/.dvc/var/$varname)} then
-      echo "$varname =  `cat $dvcpath/.dvc/var/$varname`"
+      rm -f $dvcpath/.dop/var/$varname
+   else if {(test -e $dvcpath/.dop/var/$varname)} then
+      echo "$varname =  `cat $dvcpath/.dop/var/$varname`"
    else 
       echo "ERROR: var '$varname' is not defined in '$dvcpath'!"
    endif
 else
-   echo `ls $dvcpath/.dvc/var/`
+   echo `ls $dvcpath/.dop/var/`
 endif

@@ -1,3 +1,0 @@
-;NAME           FORMAT	TITLE
-============    ======= ========================== 
-(\S+)\-(\S+)	DIR	"Version Directory"

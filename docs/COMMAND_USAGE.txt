@@ -220,11 +220,6 @@ dvc_clean_container:
 #
 # List content under design folder
 #
-dvc_list_design:   
-	Usage: $prog <project/phase/block/stage/version>
-	Description:
-	  list all objects under design path directory
-
 dvc_list_project:   
 	Usage: $prog <DESIGN_PROJT>
 	Description:
@@ -254,6 +249,12 @@ dvc_list_container:
 	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  list existing objects under container directory
+
+dvc_list_path:   
+	Usage: $prog <project/phase/block/stage/version/container>
+	Description:
+	  list all objects under design path directory
+	default is to list objects in current container
 
 
 #

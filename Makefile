@@ -1,9 +1,9 @@
 GIT_PATH := https://github.com/VirtualChip/dvc.git
-EMAIL    := hungchun.li@yahoo.com
+EMAIL    := hclia@hotmail.com
 USER     := VirtualChip
 
 help:
-	@echo "Usage: make bin"
+	@echo "Usage: make pull"
 
 config:
 	git config user.email $(EMAIL)
@@ -16,5 +16,4 @@ push:
 	git push $(GIT_PATH)
 
 	
-bin: csh
-	make -f etc/make/bin.make
+include etc/make/bin.make

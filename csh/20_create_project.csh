@@ -18,8 +18,10 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Reuse Project Design Respository : $DESIGN_PROJT"
-   svn info $PROJT_URL
+   echo "INFO: Project Design Respository : $DESIGN_PROJT"
+   if ($?info_mode) then
+      svn info $PROJT_URL
+   endif
    exit 0
 endif
 
@@ -37,11 +39,11 @@ endif
 #   svn auth  $PROJT_URL --username pm --password pm
 
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
-   svn import --quiet  $ETC_DIR/rule/RULE_PHASE    $PROJT_URL/.dvc/NAME_RULE -m 'Phase Naming Rule' 
-   svn import --quiet  $ETC_DIR/rule/FILE_FORMAT   $PROJT_URL/.dvc/FILE_FORMAT -m 'Directory Format' 
+   svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDER_RULE -m 'Phase Naming Rule' 
+   svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
 
-setenv README "/tmp/README.md"
+setenv README "/tmp/README_PROJT.md"
 echo -n "" > $README
 echo "# Design Version Control Directory" >> $README
 echo "=======================================" >> $README

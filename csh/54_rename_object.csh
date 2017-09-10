@@ -18,7 +18,7 @@ if ($2 != "") then
     if ($3 != "") then
         set dst_name = $3
         echo "INFO: mv $src_name $dst_name"
-        (cd $DVC_CONTAINER; svn mv $src_name $dst_name --force --parents)
+        (cd $CONTAINER_DIR; svn mv $src_name $dst_name --force --parents)
     endif
 endif
 

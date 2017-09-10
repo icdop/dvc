@@ -16,6 +16,6 @@ source $CSH_DIR/15_get_container.csh
 
  if ($2 != "") then
      set filename =  $2
-     (cd $DVC_CONTAINER; svn del $filename --force)
+     (cd $CONTAINER_DIR; svn del $filename --force)
  endif
 

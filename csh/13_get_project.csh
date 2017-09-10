@@ -13,10 +13,10 @@ else if ($?verbose_mode == 0) then
 endif
 set pvar = $verbose_mode
 
-if {(test -e .dvc/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat .dvc/env/DESIGN_PROJT`
-else if {(test -e $HOME/.dvc/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat $HOME/.dvc/env/DESIGN_PROJT`
+if {(test -e .dop/env/DESIGN_PROJT)} then
+  setenv DESIGN_PROJT `cat .dop/env/DESIGN_PROJT`
+else if {(test -e $HOME/.dop/env/DESIGN_PROJT)} then
+  setenv DESIGN_PROJT `cat $HOME/.dop/env/DESIGN_PROJT`
 else if ($?DESIGN_PROJT == 0) then
   setenv DESIGN_PROJT :
 endif

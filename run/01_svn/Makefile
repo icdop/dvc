@@ -1,10 +1,8 @@
 ##################################
-DOP_HOME     := $(realpath $(PWD)/../../..)
-PATH         := $(PATH):$(DOP_HOME)/dvc/bin
-
-SVN_ROOT     := /var/svn/project
-SVN_HOST     := localhost
-SVN_PORT     := 3690
+SVN_ROOT     := $(HOME)/proj_svn
+SVN_HOST     := `hostname`
+SVN_PORT     := 3691
+SVN_PID      := svnserve.pid
 SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 
 ##################################
@@ -15,13 +13,31 @@ DESIGN_STAGE := 400-APR
 DESIGN_VERSN := 2017_0615-xxx
 DESIGN_CONTR := place_opt
 
-TEST_FILE    := testfile
-TEST_DIR_    := testdir
+# The following file/dir in working dir will be checkin to container
+OBJECT_FILES := design.def  apt.log 
+OBJECT_DIRS  := report/
+OBJECT_LINKS := design.spef
 
-include $(DOP_HOME)/dvc/etc/make/test.make
+# The following files in .container will be added to the repo
+ADD_OBJECTS  := 
 
-svnserve:
+# The following files in .container will be added to the repo
+DEL_OBJECTS  := 
+
+#
+RENAME_PAIR  :=
+
+
+####################################################################
+
+include ../../etc/make/checkin.make
+
+####################################################################
+
+server: $(SVN_PID)
+	
+$(SVN_PID): 
 	mkdir -p $(SVN_ROOT)
-	svnserve -d -r $(SVN_ROOT) --listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT)
+	svnserve -d -r $(SVN_ROOT) --listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT) --pid-file=$(SVN_PID)
 	
 

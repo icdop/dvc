@@ -1,11 +1,10 @@
 #!/bin/csh -f
-cd ../..
-setenv DOP_HOME `pwd`
+cd ..
+setenv DVC_HOME `pwd`
 cd -
-echo "DOP_HOME = $DOP_HOME"
-set path = ($DOP_HOME/dvc/bin $path)
+echo "DVC_HOME = $DVC_HOME"
+set path = ($DVC_HOME/bin $path)
 
-setenv SVN_ROOT $PWD/PROJ_SVN
+setenv SVN_ROOT $HOME/proj_svn
 setenv SVN_URL  file://$SVN_ROOT
-
 

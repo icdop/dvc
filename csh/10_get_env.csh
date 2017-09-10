@@ -28,7 +28,7 @@ else
    set envpat="*"
 endif
 
-foreach fname ( `ls $dvcpath/.dvc/env/$envpat` )
+foreach fname ( `ls $dvcpath/.dop/env/$envpat` )
    set envname=$fname:t
    if { (test -e $fname) } then
       echo "$envname `cat $fname`"

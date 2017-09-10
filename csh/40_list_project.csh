@@ -21,7 +21,7 @@ endif
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 setenv DESIGN_URL $PROJT_URL
-source $CSH_DIR/49_list_design.csh
+source $CSH_DIR/49_list_path.csh
 
 exit 0
  

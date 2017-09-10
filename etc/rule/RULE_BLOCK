@@ -1,4 +1,0 @@
-;NAME           FORMAT	TITLE
-============    ======= ========================== 
-chip		DIR	"Top"
-.*		DIR	"Block Design"

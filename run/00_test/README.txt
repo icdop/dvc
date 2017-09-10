@@ -30,10 +30,10 @@
   % make container
 
 #---------------------------------------------------
-# 4. Checkin file into container
+# 4. Checkin design objects into container
 #---------------------------------------------------
 
-  % make checkin
+  % make object
 
 #---------------------------------------------------
 # 5. Commit change into container

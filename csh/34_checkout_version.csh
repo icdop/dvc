@@ -30,7 +30,7 @@ setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 svn info $VERSN_URL >& /dev/null
 if ($status == 1) then
    echo "ERROR: Cannot find Project Design Version : $DESIGN_VERSN"
-   exit 1
+   exit -1
 endif
 
 mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
@@ -59,33 +59,6 @@ ln -s $DESIGN_PHASE .project/:
 ln -s $DESIGN_BLOCK .project/$DESIGN_PHASE/:
 ln -s $DESIGN_STAGE .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_VERSN .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
-
-if {(test -h .design_block)} then
-  rm -f .design_block
-else if {(test -d .design_block)} then
-  set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: design folder .design_block exist, rename it to .design_block.$d !"
-  mv .design_block .design_block.$d
-endif
-ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK .design_block
-
-if {(test -h .design_stage)} then
-  rm -f .design_stage
-else if {(test -d .design_stage)} then
-  set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: design folder .design_stage exist, rename it to .design_stage.$d !"
-  mv .design_stage .design_stage.$d
-endif
-ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE .design_stage
-
-if {(test -h .design_versn)} then
-  rm -f .design_versn
-else if {(test -d .design_versn)} then
-  set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: design folder .design_versn exist, rename it to .design_versn.$d !"
-  mv .design_versn .design_versn.$d
-endif
-ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN .design_versn
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

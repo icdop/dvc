@@ -22,9 +22,7 @@ source $CSH_DIR/12_get_server.csh
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    setenv DESIGN_PROJT $1
-   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
-   mkdir -p .dvc/env
-   echo $DESIGN_PROJT > .dvc/env/DESIGN_PROJT
+   $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT

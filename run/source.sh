@@ -1,10 +1,11 @@
 #!/bin/sh 
 cd ../..
-DOP_HOME=`pwd`
-export DOP_HOME
+DVC_HOME=`pwd`
+export DVC_HOME
 cd -
-echo "DOP_HOME = $DOP_HOME"
+echo "DVP_HOME = $DVP_HOME"
 PATH=$DOP_HOME/dvc/bin:$PATH; export PATH
-SVN_ROOT=$PWD/PROJ_SVN; export SVN_ROOT
-SVN_URL=file://$SVN_ROOT; export SVN_URL
+
+SVN_ROOT=$HOME/proj_svn; export SVN_ROOT
+#SVN_URL=file://$SVN_ROOT; export SVN_URL
  

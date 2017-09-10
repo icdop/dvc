@@ -31,6 +31,6 @@ setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 
 setenv DESIGN_URL $VERSN_URL
-source $CSH_DIR/49_list_design.csh
+source $CSH_DIR/49_list_path.csh
 
 exit 0

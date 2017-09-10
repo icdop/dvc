@@ -24,9 +24,7 @@ source $CSH_DIR/14_get_version.csh
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    setenv DESIGN_PHASE $1
-   echo "INFO: DESIGN_PHASE = $DESIGN_PHASE"
-   mkdir -p .dvc/env
-   echo $DESIGN_PHASE > .dvc/env/DESIGN_PHASE
+   $CSH_DIR/00_set_env.csh DESIGN_PHASE $DESIGN_PHASE
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT

@@ -14,13 +14,13 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
-if {(test -d $DVC_CONTAINER)} then
+if {(test -d $CONTAINER_DIR)} then
    ( \
-   cd $DVC_CONTAINER; \
+   cd $CONTAINER_DIR; \
    svn remove --quiet --force `glob *` ; \
    svn commit --quiet . -m "Empty all data in the version"; \
    svn update --quiet . ; \
    )
 else
-   echo "ERROR: Cannot find Container : $DVC_CONTAINER"
+   echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
 endif

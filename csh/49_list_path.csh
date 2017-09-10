@@ -10,13 +10,14 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
-source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
 
 if (($1 != "") && ($1 != ":")) then
    setenv DESIGN_URL $SVN_URL/$1
 else if ($?DESIGN_URL == 0) then
-   setenv DESIGN_URL .container
+   source $CSH_DIR/13_get_project.csh
+   source $CSH_DIR/14_get_version.csh
+   source $CSH_DIR/15_get_container.csh
+   setenv DESIGN_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
 endif
 
 svn info $DESIGN_URL >& /dev/null
@@ -29,14 +30,17 @@ if ($verbose_mode == 1) then
    echo "------------------------------------------------------------"
    echo "URL: $DESIGN_URL"
    echo "------------------------------------------------------------"
-   svn info $DESIGN_URL
-   echo "------------------------------------------------------------"
+   if ($?info_mode == 1) then
+      svn info $DESIGN_URL
+      echo "------------------------------------------------------------"
+   endif
    svn list $DESIGN_URL -v
+   echo "------------------------------------------------------------"
 else if ($?recursive_mode == 1) then
 #   svn list $DESIGN_URL --recursive --depth immediates
-   svn list $DESIGN_URL --recursive
+   svn list $DESIGN_URL --recursive | grep -v -e \.dvc\/ -e \.dqi\/
 else if ($?xml_mode == 1) then
    svn list $DESIGN_URL --xml
 else
-   svn list $DESIGN_URL
+   svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/
 endif

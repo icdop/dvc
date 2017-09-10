@@ -16,12 +16,12 @@ source $CSH_DIR/15_get_container.csh
 
 if (($2 != "") && ($2 != ".")) then
     set src_name = $2
-    if { (test -e $DVC_CONTAINER/$src_name) } then
-       (cd $DVC_CONTAINER; svn add $src_name --force)
+    if { (test -e $CONTAINER_DIR/$src_name) } then
+       (cd $CONTAINER_DIR; svn add $src_name --force)
     else
        echo "ERROR: $src_name does not exist in container."
     endif
 else
-    (cd $DVC_CONTAINER; svn add `glob *` --force)
+    (cd $CONTAINER_DIR; svn add `glob *` --force)
 endif
 

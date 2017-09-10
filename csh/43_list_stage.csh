@@ -4,12 +4,6 @@ if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
-if ($1 == "--verbose") then
-   set verbose_mode = 1
-   shift argv
-else if ($?verbose_mode == 0) then 
-   set verbose_mode = 0
-endif
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -30,6 +24,6 @@ setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 
 setenv DESIGN_URL $STAGE_URL
-source $CSH_DIR/49_list_design.csh
+source $CSH_DIR/49_list_path.csh
 
 exit 0

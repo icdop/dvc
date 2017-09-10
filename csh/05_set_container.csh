@@ -14,17 +14,24 @@ endif
 
 if (($1 != "") && ($1 != ":")) then
    setenv DESIGN_CONTR $1
-   mkdir -p .dvc/env
-   echo $DESIGN_CONTR > .dvc/env/DESIGN_CONTR
+   mkdir -p .dop/env
+   echo $DESIGN_CONTR > .dop/env/DESIGN_CONTR
 else
-   setenv DESIGN_CONTR `cat .dvc/env/DESIGN_CONTR`
+   setenv DESIGN_CONTR `cat .dop/env/DESIGN_CONTR`
+endif
+
+if {(test -h .container)} then
+#  echo "WARN: remove old .container link!"
+   rm -f .container
+else if {(test -d .container)} then
+   echo "ERROR: .container is a folder, rename it!"
+   mv .container .container.`date +%Y%m%d_%H%M%S`
+endif
+
+if {(test -e .design_versn)} then
+  ln -fs .design_versn/$DESIGN_CONTR .container
+else
+  ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR .container
 endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
-
-if {(test -d .design_versn)} then
-   setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
-   if {(test -e $DVC_CONTAINER/.dqi/env/SVN_CONTAINER)} then
-      setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dqi/env/SVN_CONTAINER`
-   endif
-endif

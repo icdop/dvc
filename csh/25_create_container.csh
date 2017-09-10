@@ -16,16 +16,17 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/05_set_container.csh
 
-setenv SVN_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
-setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$SVN_CONTAINER
+setenv DVC_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
 svn info $CONTR_URL/.dqi >& /dev/null
 if ($status == 1) then
-   svn mkdir --quiet $CONTR_URL/.dqi -m "Create Design Container $DESIGN_CONTR" --parents
+   svn mkdir --quiet $CONTR_URL/.dqi -m "Create Design Container '$DESIGN_CONTR'." --parents
 else
    echo "INFO: Container already exist : $DESIGN_CONTR"
-   svn info $CONTR_URL
+   if ($?info_mode) then
+      svn info $CONTR_URL
+   endif
 endif
-
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0

@@ -23,23 +23,26 @@ if ($1 == "--reset") then
 else
    set reset=0
 endif
+
+mkdir -p $dvcpath/.dop/env
+
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set envname = $1
    if ($2 == "--reset") then
       echo "INFO: remove env('$envname')"
-      rm -f $dvcpath/.dvc/env/$envname
+      rm -f $dvcpath/.dop/env/$envname
    else if ($2 != "") then
       set envval = $2
       echo "SETP: $1 = $2"
-      echo $envval  > $dvcpath/.dvc/env/$envname
+      echo $envval  > $dvcpath/.dop/env/$envname
    else if ($reset == 1) then
       echo "INFO: remove env('$envname')"
-      rm -f $dvcpath/.dvc/env/$envname
-   else if {(test -e $dvcpath/.dvc/env/$envname)} then
-      echo "$envname =  `cat $dvcpath/.dvc/env/$envname`"
+      rm -f $dvcpath/.dop/env/$envname
+   else if {(test -e $dvcpath/.dop/env/$envname)} then
+      echo "$envname =  `cat $dvcpath/.dop/env/$envname`"
    else 
       echo "ERROR: env '$envname' is not defined in '$dvcpath'!"
    endif
 else
-   echo `ls $dvcpath/.dvc/env/`
+   echo `ls $dvcpath/.dop/env/`
 endif

@@ -16,10 +16,10 @@ else if ($?pvar == 0) then
    set pvar = 1
 endif
 
-if {(test -e .dvc/env/DESIGN_CONTR)} then
-  setenv DESIGN_CONTR `cat .dvc/env/DESIGN_CONTR`
-else if {(test -e $HOME/.dvc/env/DESIGN_CONTR)} then
-  setenv DESIGN_CONTR `cat $HOME/.dvc/env/DESIGN_CONTR`
+if {(test -e .dop/env/DESIGN_CONTR)} then
+  setenv DESIGN_CONTR `cat .dop/env/DESIGN_CONTR`
+else if {(test -e $HOME/.dop/env/DESIGN_CONTR)} then
+  setenv DESIGN_CONTR `cat $HOME/.dop/env/DESIGN_CONTR`
 else if ($?DESIGN_CONTR == 0) then
   setenv DESIGN_CONTR :
 endif
@@ -28,34 +28,32 @@ if (($1 != "") && ($1 != ":")) then
    setenv DESIGN_CONTR $1
    if {(test -d $DESIGN_CONTR/.dqi)} then
       # parameter is a container
-      setenv DVC_CONTAINER $DESIGN_CONTR
-      setenv DESIGN_CONTR `cat $DVC_CONTAINER/.dqi/env/DESIGN_CONTR`
+      setenv CONTAINER_DIR $DESIGN_CONTR
+      setenv DESIGN_CONTR $1:t
    else if {(test -d .design_versn/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
+      setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
    else if {(test -d .design_block/:/:/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .design_block/:/:/$DESIGN_CONTR
+      setenv CONTAINER_DIR .design_block/:/:/$DESIGN_CONTR
    else if {(test -d .project/:/:/:/:/$DESIGN_CONTR/.dqi)} then
-      setenv DVC_CONTAINER .project/:/:/:/:/$DESIGN_CONTR
+      setenv CONTAINER_DIR .project/:/:/:/:/$DESIGN_CONTR
    else
-      setenv DVC_CONTAINER .design_versn/$DESIGN_CONTR
-      setenv SVN_CONTAINER :/:/:/:/$DESIGN_CONTR
+      setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
+      setenv DVC_CONTAINER :/:/:/:/$DESIGN_CONTR
       echo "ERROR: Not a valid container : $DESIGN_CONTR"
       exit -1
    endif
-else if {(test -d .container)} then
-  setenv DVC_CONTAINER .container
 else
-  setenv DVC_CONTAINER .
+   setenv CONTAINER_DIR .container
 endif
 
 if ($pvar == 1) then
-   echo "PARM: DVC_CONTAINER = $DVC_CONTAINER"
+   echo "PARM: CONTAINER_DIR = $CONTAINER_DIR"
 endif
 
-if {(test -e $DVC_CONTAINER/.dqi/env/SVN_CONTAINER)} then
-   setenv SVN_CONTAINER `cat $DVC_CONTAINER/.dqi/env/SVN_CONTAINER`
+if {(test -e $CONTAINER_DIR/.DVC_CONTAINER)} then
+   setenv DVC_CONTAINER `cat $CONTAINER_DIR/.DVC_CONTAINER`
 else
-   setenv SVN_CONTAINER :/:/:/:/$DESIGN_CONTR
-   echo "ERROR: Not a valid container : $DVC_CONTAINER"
+   setenv DVC_CONTAINER :/:/:/:/$DESIGN_CONTR
+   echo "ERROR: Not a valid container path : $CONTAINER_DIR"
    exit -1
 endif

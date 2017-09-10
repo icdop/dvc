@@ -14,8 +14,8 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
-if {(test -d $DVC_CONTAINER)} then
-   svn update $DVC_CONTAINER
+if {(test -d $CONTAINER_DIR)} then
+   svn update $CONTAINER_DIR
 else
-   echo "ERROR: Cannot find Container : $DVC_CONTAINER"
+   echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
 endif

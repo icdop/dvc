@@ -13,40 +13,26 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/05_set_container.csh
 
-if ($1 != "") then
-   setenv DESIGN_CONTR $1
-   echo "PARM: DESIGN_CONTR = $DESIGN_CONTR"
-   mkdir -p .dvc/env
-   echo $DESIGN_CONTR > .dvc/env/DESIGN_CONTR
+if {(test -d .design_versn)} then
+   setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
+   if {(test -e $CONTAINER_DIR/.DVC_CONTAINER)} then
+      setenv DVC_CONTAINER `cat $CONTAINER_DIR/.DVC_CONTAINER`
+   endif
 endif
 
-setenv SVN_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
-setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$SVN_CONTAINER
+setenv DVC_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
 svn info $CONTR_URL >& /dev/null
 if ($status == 1) then
-   echo "ERROR: Cannot find container : $SVN_CONTAINER"
+   echo "ERROR: Cannot find container : $DVC_CONTAINER"
    echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
    exit 1
 endif
 
-svn checkout --quiet $CONTR_URL .project/$SVN_CONTAINER
-mkdir -p .project/$SVN_CONTAINER/.dqi/env
-echo $SVN_CONTAINER > .project/$SVN_CONTAINER/.dqi/env/SVN_CONTAINER
+svn checkout --quiet $CONTR_URL .project/$DVC_CONTAINER
+echo $DVC_CONTAINER > .project/$DVC_CONTAINER/.DVC_CONTAINER
 
-if {(test -h .container)} then
-#  echo "WARN: remove old .container link!"
-  rm -f .container
-else if {(test -d .container)} then
-  set d = `date +%Y%m%d_%H%M%S`
-  echo "WARN: .container folder exist, rename it to .container.$d !"
-  mv .container .container.$d
-endif
-
-if {(test -e .design_versn)} then
-  ln -fs .design_versn/$DESIGN_CONTR .container
-else
-  ln -fs .project/$SVN_CONTAINER .container
-endif
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0

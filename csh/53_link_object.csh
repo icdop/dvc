@@ -20,18 +20,18 @@ if ($2 != "") then
     if ($3 != "") then
         set dst_name = $3
     endif
-    if {(test -h $DVC_CONTAINER/$dst_name)} then
+    if {(test -h $CONTAINER_DIR/$dst_name)} then
        # if dest is link, remove the link first
-       rm -f $DVC_CONTAINER/$dst_name
-    else if {(test -d $DVC_CONTAINER/$dst_name)} then
+       rm -f $CONTAINER_DIR/$dst_name
+    else if {(test -d $CONTAINER_DIR/$dst_name)} then
        # if dest is dir, add the link
        set destname = $dst_name/$src_name:t
-    else if {(test -e $DVC_CONTAINER/$dst_name)} then
+    else if {(test -e $CONTAINER_DIR/$dst_name)} then
        # if dest is file, remove the orginal file
-       rm -fr $DVC_CONTAINER/$dst_name
+       rm -fr $CONTAINER_DIR/$dst_name
     endif
     set src_name=`realpath $src_name`
-    ln -f -s $src_name $DVC_CONTAINER/$dst_name
-    (cd $DVC_CONTAINER; svn add $dst_name --force)
+    ln -fs $src_name $CONTAINER_DIR/$dst_name
+    (cd $CONTAINER_DIR; svn add $dst_name --force)
 endif
 

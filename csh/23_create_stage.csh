@@ -17,9 +17,7 @@ source $CSH_DIR/14_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1
-   echo "SETP: DESIGN_STAGE = $DESIGN_STAGE"
-   mkdir -p .dvc/env
-   echo $DESIGN_STAGE > .dvc/env/DESIGN_STAGE
+   $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -28,18 +26,20 @@ setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Reuse Project Design Stage : $DESIGN_STAGE"
-   svn info $STAGE_URL
-   exit 0
-endif
+   echo "INFO: Project Design Stage : $DESIGN_STAGE"
+   if ($?info_mode) then
+      svn info $STAGE_URL
+   endif
+else
 
+#=========================================================
 echo "INFO: Create Project Design Stage : $DESIGN_STAGE"
-svn mkdir --quiet $STAGE_URL -m "Create Design Stage /$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE ..." --parents
-svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config" 
-svn import --quiet $ETC_DIR/rule/RULE_VERSN  $STAGE_URL/.dvc/NAME_RULE -m 'Version Naming Rule'
-svn import --quiet $ETC_DIR/rule/FILE_FORMAT $STAGE_URL/.dvc/FILE_FORMAT -m 'Directory Format'
+svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parents
+svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
+svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDER_RULE -m 'Version Naming Rule'
+svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
-setenv README "/tmp/README.md"
+setenv README "/tmp/README_STAGE.md"
 echo -n "" > $README
 echo "# Design Version Control Directory" >> $README
 echo "=======================================" >> $README
@@ -52,8 +52,11 @@ echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README
 
-svn import --quiet $README $STAGE_URL/.dvc/README.md -m 'Initial Design Version Directory'
+svn import --quiet $README $STAGE_URL/.dvc/README.md -m 'Initial Design Stage Directory'
 rm -fr $README
+#=========================================================
+
+endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

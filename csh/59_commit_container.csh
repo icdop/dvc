@@ -14,10 +14,10 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
-if {(test -d $DVC_CONTAINER)} then
-   svn commit $DVC_CONTAINER -m "Commit Design Container $SVN_CONTAINER"
+if {(test -d $CONTAINER_DIR)} then
+   svn commit $CONTAINER_DIR -m "Commit Design Container Folder"
 else
-   echo "ERROR: Cannot find Container : $DVC_CONTAINER"
+   echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
 endif
 
 
