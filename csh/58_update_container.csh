@@ -14,6 +14,10 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
+if ($status < 0) then 
+   exit $status 
+endif
+
 if {(test -d $CONTAINER_DIR)} then
    svn update $CONTAINER_DIR
 else

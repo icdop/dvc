@@ -14,8 +14,12 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
- if ($2 != "") then
-     set filename =  $2
-     (cd $CONTAINER_DIR; svn del $filename --force)
- endif
+if ($status < 0) then 
+   exit $status 
+endif
+
+if ($2 != "") then
+   set filename =  $2
+   (cd $CONTAINER_DIR; svn del $filename --force)
+endif
 

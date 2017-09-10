@@ -1,5 +1,6 @@
-#!/bin/csh -f set prog = $0:t if (($1 == "") || ($1 == "-h") || ($1 ==
-"--help")) then
+#!/bin/csh -f 
+set prog = $0:t
+if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR> <DESIGN_OBJECT> <DEST_NAME>"
    exit -1
 endif
@@ -12,6 +13,10 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
+
+if ($status < 0) then 
+   exit $status 
+endif
 
 if ($2 != "") then
     set src_name = $2

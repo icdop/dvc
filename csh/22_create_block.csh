@@ -49,7 +49,7 @@ echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README
 
-svn import --quiet $README $BLOCK_URL/.dvc/README.md -m 'Initial Design Block Directory'
+svn import --quiet $README $BLOCK_URL/.dvc/README.txt -m 'Initial Design Block Directory'
 rm -fr $README
 #=========================================================
 

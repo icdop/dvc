@@ -19,9 +19,7 @@ if ($status < 0) then
 endif
 
 if {(test -d $CONTAINER_DIR)} then
-   svn commit $CONTAINER_DIR -m "Commit Design Container Folder"
+   (cd $CONTAINER_DIR; svn add  . --force)
 else
    echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
 endif
-
-

@@ -65,36 +65,31 @@
 # Project Design Directory Structure
 ********************************************************
 
-* SVN Repository directory in unix file system
+## Project Repository 
 
-  ** create_project
+  * create_project :
 
 	$SVN_ROOT/ (SVN Database Root Path)
 		$DESIGN_PROJT/(Project Root)
 				conf/ (configuration file)
 
-* Directory view within server db after create_version
+  * checkuot_project : 
+
+	$CWD/.project/
+			.dvc/README
+
+
+## Design Directory
   
-  ** create_version
+  * create_version :
 	
 	/$DESIGN_PHASE/.dvc
        		/$DESIGN_BLOCK/.dvc
 			/$DESIGN_STAGE/.dvc
 				/$DESIGN_VERSN/.dvc
+					       .dqi
 
-  ** create_container
-
-	/$phase	/$block	/$stage	/$versn	/$DESIGN_CONTR/.dqi
-
-
-* Design Directory in local working directory after checkout 
-
-  ** checkuot_project : project root directory is checkout
-
-	.project/
-		.dvc/
-
-  ** checkout_version : following directories are checkout
+  * checkout_version :
 
 	.project/
 		: -> $current_phase
@@ -110,16 +105,23 @@
 					.dvc/
 					$DESIGN_VERSN/
 						.dvc/
+						.dqi/
 
 	.design_block -> .project/$phase/$block
 	.design_stage -> .project/$phase/$block/$stage
 	.design_versn -> .project/$phase/$block/$stage/$version
 
-  ** checkout_container : following directory is checkout
+* Design Object Container
 
-	.design_versn/
-		$DESIGN_CONTR/
-			.dqi/
+  * create_container :
+
+	/$phase	/$block	/$stage	/$versn	/$DESIGN_CONTR/
+						.DVC_CONTAINER
+
+  * checkout_container :
+
+	.design_versn/$DESIGN_CONTR/.DVC_CONTAINER
+
 	.container -> .dvc_version/$DESIGN_CONTR
 
 
@@ -127,10 +129,10 @@
 # Design Folder Configuration (.dvc/)
 * ========================================================
 
-## 1. README.md file is created in each design folder
+## 1. README file is created in each design folder
 
   ** ------------------------------------
-  ** README.md (project/.dvc/)
+  ** README (project/.dvc/)
   ** ------------------------------------
 
 	* Design Version Control Directory

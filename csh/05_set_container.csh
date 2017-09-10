@@ -31,7 +31,10 @@ endif
 if {(test -e .design_versn)} then
   ln -fs .design_versn/$DESIGN_CONTR .container
 else
-  ln -fs .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR .container
+  echo "ERROR: checkout version first before assigning container!" 
+  exit -1
 endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
+
+exit 0

@@ -42,6 +42,7 @@ svn update --quiet .project/.dvc
 svn update --quiet .project/$DESIGN_PHASE/.dvc
 svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/:DVC_CONTAINER
 else
 echo "INFO: Checkout Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
 svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
@@ -49,6 +50,7 @@ svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
 svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 svn checkout --quiet $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+svn checkout --quiet $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/:DVC_CONTAINER
 endif
 
 rm -f .project/:

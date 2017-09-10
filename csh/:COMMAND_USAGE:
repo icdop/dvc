@@ -26,24 +26,24 @@
 	Usage: $prog 
 
 13_get_project.csh:
-	Usage: $prog <DESIGN_PROJT>
+	Usage: $prog
 
 14_get_version.csh:   	
 	Usage: $prog 
 
-15_get_container.csh:   	
-	Usage: $prog <DESIGN_CONTR>
+15_get_container.csh: <DESIGN_CONTR>   	
+	Usage: $prog 
 
 20_create_project.csh:   	
-	Usage: $prog [--data] <DESIGN_PROJT>
+	Usage: $prog <DESIGN_PROJT>
 21_create_phase.csh:   	
-	Usage: $prog [--data] <DESIGN_PHASE>
+	Usage: $prog <DESIGN_PHASE>
 22_create_block.csh:   	
-	Usage: $prog [--data] <DESIGN_BLOCK>
+	Usage: $prog <DESIGN_BLOCK>
 23_create_stage.csh:   	
-	Usage: $prog [--data] <DESIGN_STAGE>
+	Usage: $prog <DESIGN_STAGE>
 24_create_version.csh:   	
-	Usage: $prog [--data] <DESIGN_VERSN> [<DESIGN_STAGE>]
+	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
 25_create_container.csh:   	
 	Usage: $prog <DESIGN_CONTR>
 
@@ -72,7 +72,7 @@
 	Usage: $prog <DESIGN_VERSN>
 45_list_container.csh:   	
 	Usage: $prog <DESIGN_CONTR>
-49_list_design.csh:   	
+49_list_path.csh:   	
 	Usage: $prog <project/phase/block/stage/version>
 
 50_clean_container.csh:   	

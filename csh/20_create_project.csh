@@ -43,7 +43,7 @@ endif
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
 
-setenv README "/tmp/README_PROJT.md"
+setenv README "/tmp/README_PROJT.txt"
 echo -n "" > $README
 echo "# Design Version Control Directory" >> $README
 echo "=======================================" >> $README
@@ -52,7 +52,7 @@ echo "* Path    : .project/" >> $README
 echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README
-svn import --quiet $README $PROJT_URL/.dvc/README.md -m 'Initial Design Version Directory'
+svn import --quiet $README $PROJT_URL/.dvc/README.txt -m 'Initial Design Version Directory'
 rm -fr $README
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

@@ -15,13 +15,6 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/05_set_container.csh
 
-if {(test -d .design_versn)} then
-   setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
-   if {(test -e $CONTAINER_DIR/.DVC_CONTAINER)} then
-      setenv DVC_CONTAINER `cat $CONTAINER_DIR/.DVC_CONTAINER`
-   endif
-endif
-
 setenv DVC_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
 svn info $CONTR_URL >& /dev/null
@@ -32,7 +25,6 @@ if ($status == 1) then
 endif
 
 svn checkout --quiet $CONTR_URL .project/$DVC_CONTAINER
-echo $DVC_CONTAINER > .project/$DVC_CONTAINER/.DVC_CONTAINER
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0

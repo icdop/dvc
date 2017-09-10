@@ -41,6 +41,7 @@ bin: csh/*
 	ln -f -s $(CSH_PATH)/53_link_object.csh			$(BIN_PATH)/dvc_link_object
 	ln -f -s $(CSH_PATH)/54_rename_object.csh		$(BIN_PATH)/dvc_rename_object
 	ln -f -s $(CSH_PATH)/55_delete_object.csh		$(BIN_PATH)/dvc_delete_object
+	ln -f -s $(CSH_PATH)/57_checkin_container.csh		$(BIN_PATH)/dvc_checkin_container
 	ln -f -s $(CSH_PATH)/58_update_container.csh		$(BIN_PATH)/dvc_update_container
 	ln -f -s $(CSH_PATH)/59_commit_container.csh		$(BIN_PATH)/dvc_commit_container
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project

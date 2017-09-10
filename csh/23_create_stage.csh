@@ -52,7 +52,7 @@ echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README
 
-svn import --quiet $README $STAGE_URL/.dvc/README.md -m 'Initial Design Stage Directory'
+svn import --quiet $README $STAGE_URL/.dvc/README.txt -m 'Initial Design Stage Directory'
 rm -fr $README
 #=========================================================
 

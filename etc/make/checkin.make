@@ -16,7 +16,7 @@ help:
 	@echo "        make project   (create_project)"
 	@echo "        make version   (create_version; checkout_version)"
 	@echo "        make container (create_container; checkout_container)"
-	@echo "        make object    (checkin_object)"
+	@echo "        make checkin   (checkin_object)"
 	@echo "        make commit    (commit_container)"
 	@echo "        make list      (list_version; list_container)"
 	@echo ""
@@ -78,21 +78,14 @@ checkout_container:
 	dvc_checkout_container	$(DESIGN_CONTR)
 
 object: checkin_object
-checkin: checkin_object
 checkin_object: 
 	@echo "#---------------------------------------------------"
-	@echo "# 5. Checkin file into container"
+	@echo "# 5. Checkin object into container"
 	@echo "#---------------------------------------------------"
 	make add_object
 	make copy_object
 	make copy_folder
 	make link_object
-
-clean_container:
-	@echo "#---------------------------------------------------"
-	@echo "# 5-0 Clean up design object in container"
-	@echo "#---------------------------------------------------"
-	dvc_clean_container 	$(DESIGN_CONTR)
 
 add_object:
 	@echo "#---------------------------------------------------"
@@ -145,11 +138,19 @@ rename_object:
 
 delete_object:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-5 Remove files in container"
+	@echo "# 5-5 Delete files in container"
 	@echo "#---------------------------------------------------"
 	@for object in $(DEL_OBJECTS) ;  do \
 		dvc_delete_object	$(DESIGN_CONTR)	$$object ; \
 	done
+
+checkin: checkin_container
+checkin_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-7 Checkin all files inside container"
+	@echo "#---------------------------------------------------"
+	dvc_add_object	$(DESIGN_CONTR)
+
 
 update: update_container
 update_container:
@@ -162,9 +163,16 @@ update_container:
 commit: commit_container
 commit_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-9 Commit change to SVN server"
+	@echo "# 5-9 Commit container checkin to SVN server"
 	@echo "#---------------------------------------------------"
 	dvc_commit_container	$(DESIGN_CONTR)
+
+clean_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 5-0 Clean up design object in container"
+	@echo "#---------------------------------------------------"
+	dvc_clean_container 	$(DESIGN_CONTR)
+
 
 list: list_version list_container
 list_version:
