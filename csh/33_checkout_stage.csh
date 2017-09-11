@@ -6,13 +6,6 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
 endif
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
-if (($1 == "--data")) then
-   set all_data = 1
-   shift argv
-else
-   set all_data = 0
-endif
-
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
 endif
@@ -38,14 +31,17 @@ endif
 
 echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
 mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
-svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
-svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
-svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
-if ($all_data == 1) then
-   svn checkout --quiet $STAGE_URL      .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
-else
-   svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+
+if ($?depth_mode) then
+   svn checkout --quiet --force $STAGE_URL .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
 endif
+
+if {(test -e .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
+   svn update --quiet --force .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+else
+   svn checkout --force $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+endif
+
 rm -f .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_STAGE .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
 

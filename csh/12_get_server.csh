@@ -19,6 +19,13 @@ if ($1 == "--recursive") then
    set recursive_mode = 1
    shift argv
 endif
+
+if (($1 == "--depth")) then
+   shift argv
+   set depth_mode = $1
+   shift argv
+endif
+
 if ($1 == "--xml") then
    set xml_mode = 1
    shift argv

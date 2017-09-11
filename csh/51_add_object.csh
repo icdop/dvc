@@ -26,6 +26,6 @@ if (($2 != "") && ($2 != ".")) then
        echo "ERROR: $src_name does not exist in container."
     endif
 else
-    (cd $CONTAINER_DIR; svn add `glob *` --force)
+    (cd $CONTAINER_DIR; svn add . --force)
 endif
 

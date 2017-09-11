@@ -24,7 +24,7 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Project Design Phase : $DESIGN_PHASE"
+   echo "INFO: Reuse Project Design Phase : $DESIGN_PHASE"
    if ($?info_mode) then
       svn info $PHASE_URL
    endif

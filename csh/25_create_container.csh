@@ -18,17 +18,18 @@ source $CSH_DIR/05_set_container.csh
 
 setenv DVC_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
-svn info $CONTR_URL/:DVC_CONTAINER >& /dev/null
-if ($status == 1) then
+
+svn info $CONTR_URL >& /dev/null
+if ($status == 0) then
+   echo "INFO: Reuse Design Container : $DESIGN_CONTR"
+   if ($?info_mode) then
+      svn info $CONTR_URL
+   endif
+else
    svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
    svn checkout --quiet $CONTR_URL .project/$DVC_CONTAINER
    echo $DVC_CONTAINER > .project/$DVC_CONTAINER/:DVC_CONTAINER
    svn add --quiet --force .project/$DVC_CONTAINER/:DVC_CONTAINER --parents
-else
-   echo "INFO: Container already exist : $DESIGN_CONTR"
-   if ($?info_mode) then
-      svn info $CONTR_URL
-   endif
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

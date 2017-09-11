@@ -25,7 +25,7 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Project Design Block : $DESIGN_BLOCK"
+   echo "INFO: Reuse Project Design Block : $DESIGN_BLOCK"
    if ($?info_mode) then
       svn info $BLOCK_URL
    endif

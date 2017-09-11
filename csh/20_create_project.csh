@@ -18,14 +18,13 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Project Design Respository : $DESIGN_PROJT"
+   echo "INFO: Reuse Project Design Respository : $DESIGN_PROJT"
    if ($?info_mode) then
       svn info $PROJT_URL
    endif
-   exit 0
-endif
+else
 
-   echo "INFO: Initial Project Design Respository : $DESIGN_PROJT"
+   echo "INFO: Create Project Design Respository : $DESIGN_PROJT"
    if {(test -d $SVN_ROOT)} then
    else
      mkdir -p $SVN_ROOT
@@ -42,18 +41,19 @@ endif
    svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDER_RULE -m 'Phase Naming Rule' 
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
-
-setenv README "/tmp/README_PROJT.txt"
-echo -n "" > $README
-echo "# Design Version Control Directory" >> $README
-echo "=======================================" >> $README
-echo "* Project : $DESIGN_PROJT" >> $README
-echo "* Path    : .project/" >> $README
-echo "* Author  : $USER" >> $README
-echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
-echo "=======================================" >> $README
-svn import --quiet $README $PROJT_URL/.dvc/README.txt -m 'Initial Design Version Directory'
-rm -fr $README
+   setenv README "/tmp/README_PROJT.txt"
+   echo -n "" > $README
+   echo "# Design Version Control Directory" >> $README
+   echo "=======================================" >> $README
+   echo "* Project : $DESIGN_PROJT" >> $README
+   echo "* Path    : .project/" >> $README
+   echo "* Author  : $USER" >> $README
+   echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
+   echo "=======================================" >> $README
+   svn import --quiet $README $PROJT_URL/.dvc/README.txt -m 'Initial Design Version Directory'
+   rm -fr $README
+   
+endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

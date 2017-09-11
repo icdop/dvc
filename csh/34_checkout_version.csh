@@ -2,17 +2,10 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
-
-if (($1 == "--data")) then
-   set all_data = 1
-   shift argv
-else
-   set all_data = 0
-endif
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -27,30 +20,24 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
+
 svn info $VERSN_URL >& /dev/null
 if ($status == 1) then
    echo "ERROR: Cannot find Project Design Version : $DESIGN_VERSN"
    exit -1
 endif
 
+echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
 mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
+if ($?depth_mode) then
+   svn checkout --quiet --force $VERSN_URL .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN --depth $depth_mode
+endif
 
-if {(test -d .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
-echo "INFO: Update Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
-svn update --quiet .project/.dvc
-svn update --quiet .project/$DESIGN_PHASE/.dvc
-svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
-svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
-svn update --quiet .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/:DVC_CONTAINER
+if {(test -e .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
+   svn update --quiet --force .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
 else
-echo "INFO: Checkout Project Design Version : $DESIGN_STAGE/$DESIGN_VERSN"
-svn checkout --quiet $PROJT_URL/.dvc .project/.dvc
-svn checkout --quiet $PHASE_URL/.dvc .project/$DESIGN_PHASE/.dvc
-svn checkout --quiet $BLOCK_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
-svn checkout --quiet $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
-svn checkout --quiet $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
-svn checkout --quiet $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/:DVC_CONTAINER
+   svn checkout --force $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
 endif
 
 rm -f .project/:

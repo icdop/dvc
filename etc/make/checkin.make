@@ -16,10 +16,10 @@ help:
 	@echo "        make project   (create_project)"
 	@echo "        make version   (create_version; checkout_version)"
 	@echo "        make container (create_container; checkout_container)"
-	@echo "        make checkin   (checkin_object)"
+	@echo "        make object    (checkin_object)"
 	@echo "        make commit    (commit_container)"
-	@echo "        make list      (list_version; list_container)"
 	@echo ""
+	@echo "Usage:  make list      (list_version; list_container)"
 	@echo "Usage:  make clean     (clean_data)"
 	@echo ""
 
@@ -33,8 +33,8 @@ run:
 	make commit
 
 
-init: reset_repository
-reset_repository:
+init: init_repository
+init_repository:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Assign SVN ROOT Path"
 	@echo "#---------------------------------------------------"
@@ -91,9 +91,15 @@ add_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
-	@for object in $(ADD_OBJECTS) ;  do \
-		dvc_add_object	$(DESIGN_CONTR)	$$object ; \
-	done
+	@for object in $(ADD_OBJECTS) ;  do (\
+		if (test -e .design_versn/$(DESIGN_CONTR)/$$object) then \
+			echo "dvc_add_object	$(DESIGN_CONTR)	$$object" ; \
+			dvc_add_object	$(DESIGN_CONTR)	$$object ; \
+		else \
+			echo "WARNING: object '$$object' is not found."; \
+		fi ;\
+	); done
+
 
 copy_object: $(OBJECT_FILES)
 	@echo "#---------------------------------------------------"
@@ -105,6 +111,11 @@ copy_object: $(OBJECT_FILES)
 			dvc_copy_object	$(DESIGN_CONTR)	$$object $$object ; \
 		fi ; \
 	); done
+
+$(OBJECT_FILES):
+	@echo "WARNING: file '$@' does not exist, create a dummy file."
+	@echo "`date +%D_$T`" > $@
+
 
 copy_folder: $(OBJECT_FOLDER)
 	@echo "#---------------------------------------------------"
@@ -119,6 +130,12 @@ copy_folder: $(OBJECT_FOLDER)
 		fi ; \
 	); done
 
+$(OBJECT_FOLDER):
+	@echo "WARNING: dir '$@' does not exist, create a dummy folder."
+	@mkdir -p $@
+	@echo "`date +%D_$T`" > $@/HISTORY.txt
+
+
 link_object: $(OBJECT_LINKS)
 	@echo "#---------------------------------------------------"
 	@echo "# 5-3 Crearte symbolic link in container"
@@ -130,11 +147,15 @@ link_object: $(OBJECT_LINKS)
 		fi ; \
 	done
 
+$(OBJECT_LINKS):
+	@echo "WARNING: link '$@' does not exist, create a dummy file."
+	@echo "`date +%D_$T`" > $@
+
 rename_object:
 	@echo "#---------------------------------------------------"
 	@echo "# 5-4 Rename file in container"
 	@echo "#---------------------------------------------------"
-	eval dvc_rename_object	$(DESIGN_CONTR)	$(RENAME_PAIR)  
+	dvc_rename_object	$(DESIGN_CONTR)	$(RENAME_PAIR)  
 
 delete_object:
 	@echo "#---------------------------------------------------"
@@ -199,18 +220,26 @@ list_env:
 	dvc_get_env --local --all
 
 
-clean: clean_data
-clean_data: remove_project
-	@rm -fr $(TEST_DIR_) $(TEST_FILE) $(TEST_FILE)\:*
-	@rm -fr .dop .project  .container .design_*
+clean:
+	make clean_files
+	make remove_container
+	make remove_version
+	make remove_project
 
-remove_project: remove_version
+clean_files:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-3. Remove proejct"
+	@echo "# 7-0. Clean up related files in working directory"
 	@echo "#---------------------------------------------------"
-	dvc_remove_project	$(DESIGN_PROJT)
+	rm -fr .dop .project  .container .design_*
+	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
 
-remove_version: remove_container
+remove_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-1. Clean up container data"
+	@echo "#---------------------------------------------------"
+	dvc_remove_container	$(DESIGN_CONTR)
+
+remove_version: 
 	@echo "#---------------------------------------------------"
 	@echo "# 7-2. Clean up design version data"
 	@echo "#---------------------------------------------------"
@@ -219,18 +248,11 @@ remove_version: remove_container
 	dvc_remove_block	$(DESIGN_BLOCK)
 	dvc_remove_phase	$(DESIGN_PHASE)
 
-remove_container:
+remove_project:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-1. Clean up container data"
+	@echo "# 7-3. Remove proejct repository"
 	@echo "#---------------------------------------------------"
-	dvc_remove_container	$(DESIGN_CONTR)
+	dvc_remove_project	$(DESIGN_PROJT)
 
 
-$(OBJECT_FILES) $(OBJECT_LINKS):
-	@echo "INFO: file '$@' does not exist, create a stamp file."
-	@echo "`date +%D_$T`" > $@
 
-$(OBJECT_FOLDER):
-	@echo "INFO: dir '$@' does not exist, create it."
-	@mkdir -p $@
-	@echo "`date +%D_$T`" > $@/HISTORY.md
