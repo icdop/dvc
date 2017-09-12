@@ -1,12 +1,13 @@
+PATH         :=	../../bin:$(PATH)
 ####################################################################
-#SVN_ROOT     := $(HOME)/proj_svn
+SVN_ROOT     := $(HOME)/proj_svn
 SVN_URL      := file://$(SVN_ROOT)
 ####################################################################
 
 DESIGN_PROJT := testcase
 DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip
-DESIGN_STAGE := 520-STA
+DESIGN_STAGE := 520-sta
 DESIGN_VERSN := 2017_0615-xxx
 DESIGN_CONTR := ttt_0p80V_25C_rctyp
 

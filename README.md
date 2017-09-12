@@ -1,36 +1,19 @@
 # Design Version Control
 
-- DVC utility is intended to manage chip design data in a predefined directory structure.
+- Utility to manage chip design data in a pre-defined directory structure
 
-## Project Design Database Directory Structure**
+## Design Database Directory Structure
+- There are 4 levels of directories under project respository
+
+Directory:
+
+	$DESIGN_PROJT/		(Project Repository Root)
+		$DESIGN_PHASE/
+			$DESIGN_BLOCK/
+				$DESIGN_STAGE/
+					$DESIGN_VERSN/
 
 Example:
-
-	$SVN_ROOT/ (SVN Database Root Path)
-		$DESIGN_PROJT/conf (Project Repository Root)
-			$DESIGN_PHASE/
-				$DESIGN_BLOCK/
-					$DESIGN_STAGE/
-						$DESIGN_VERSN/
-
-- The underneath version control engine is SVN server
-
-  * SVN_ROOT : svn repository root
-
-  * SVN_URL  : svn access mode
-
-     * svn  server - svn://localserver:port/$SVN_ROOT
-
-     * file access - file:://$SVN_ROOT/
-     
-- Each project has it own repository:
-
-  * $DESIGN_PROJT/conf/ :
-
-	Initial config files are copied from dvc/etc/conf
-
-      
-- There are 4 levels of directories under project respository
 
   * Phase :
 	Ex. P1-trial , P2-stable, P3-final, P4-tapeout
@@ -39,10 +22,31 @@ Example:
 	Ex. chip, cpu, gpu, ddr, sub1, ...
 
   * Stage :
-	Ex. 000-INIT_DATA, 100-CIRCUIT, 200-LOGIC, 300-DFT, 400-APR, 500-SIGNOFF
+	Ex. 000-DATA, 100-CIRCUIT, 200-LOGIC, 300-DFT, 400-APR, 500-SIGNOFF
 
   * Version :
 	Ex. 2017_0610-xxxx, 2017_0702-xxxx, ...
+
+
+- The version control mechanism is SVN server
+
+  * SVN_ROOT : svn repository root path
+
+  * SVN_URL  : svn access mode
+
+     * svn  server - svn://server:port/
+
+     * file access - file:://$SVN_ROOT/
+
+     
+- Each project has it own repository under:
+
+  * $SVN_ROOT/$DESIGN_PROJT/
+
+- Initial server config files are copied from dvc/etc/conf
+
+  * $SVN_ROOT/$DESIGN_PROJT/conf/
+      
 
 ***
 ## Design Operation Flow:

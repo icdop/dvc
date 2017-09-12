@@ -1,16 +1,10 @@
 ;NAME           TITLE
 ;============	========================== 
-000-INIT_DATA	"Initial Design Data"
+000-DATA	"Initial Design Data"
 100-CIRCUIT	"Circuit Design Stage"
-200-FUNCTION	"Function Verfication Stage"
+200-LOGIC	"Logic Verfication Stage"
 300-DFT         "Design For Test"
 400-APR         "Auto Place & Route"
-410-floorplan   "APR Floorplan Stage"
-420-place	"APR Placement Stage"
-430-cts         "APR CTS Stage"
-440-route	"APR Routing Stage"
-450-opt_timing	"APR Timing Optimization"
-460-opt_power	"APR ECO"
 500-SIGNOFF     "Signoff Stage"
 600-TAPEOUT     "Tapeout Stage"
 700-TESTING	"Wafer Testing Stage"
