@@ -18,10 +18,10 @@ endif
 
 
 if (($1 != "") && ($1 != ":")) then
-   if {(test -e $1/:DVC_CONTAINER)} then
+   if {(test -e $1/:CONTAINER)} then
       # parameter is a container
       setenv CONTAINER_DIR $1
-      setenv DVC_CONTAINER `cat $CONTAINER_DIR/:DVC_CONTAINER`
+      setenv DVC_CONTAINER `cat $CONTAINER_DIR/:CONTAINER`
       setenv DESIGN_CONTR $DVC_CONTAINER:t
       exit 0
    else
@@ -33,17 +33,17 @@ else
   vsetenv DESIGN_CONTR .
 endif
    
-if {(test -e .design_versn/$DESIGN_CONTR/:DVC_CONTAINER)} then
+if {(test -e .design_versn/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
-else if {(test -e .project/$DESIGN_CONTR/:DVC_CONTAINER)} then
+else if {(test -e .project/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .project/$DESIGN_CONTR
-else if {(test -e .project/:/$DESIGN_CONTR/:DVC_CONTAINER)} then
+else if {(test -e .project/:/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .project/:/$DESIGN_CONTR
-else if {(test -e .project/:/:/$DESIGN_CONTR/:DVC_CONTAINER)} then
+else if {(test -e .project/:/:/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .project/:/:/$DESIGN_CONTR
-else if {(test -e .project/:/:/:/$DESIGN_CONTR/:DVC_CONTAINER)} then
+else if {(test -e .project/:/:/:/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .project/:/:/:/$DESIGN_CONTR
-else if {(test -e .project/:/:/:/:/$DESIGN_CONTR/:DVC_CONTAINER)} then
+else if {(test -e .project/:/:/:/:/$DESIGN_CONTR/:CONTAINER)} then
    setenv CONTAINER_DIR .project/:/:/:/:/$DESIGN_CONTR
 else
    setenv CONTAINER_DIR .design_versn/$DESIGN_CONTR
@@ -51,8 +51,8 @@ endif
 
 echo "CONTAINER_DIR = $CONTAINER_DIR"
 
-if {(test -e $CONTAINER_DIR/:DVC_CONTAINER)} then
-   setenv DVC_CONTAINER `cat $CONTAINER_DIR/:DVC_CONTAINER`
+if {(test -e $CONTAINER_DIR/:CONTAINER)} then
+   setenv DVC_CONTAINER `cat $CONTAINER_DIR/:CONTAINER`
 else
    setenv DVC_CONTAINER :/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container path : $CONTAINER_DIR"

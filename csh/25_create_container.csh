@@ -28,8 +28,8 @@ if ($status == 0) then
 else
    svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
    svn checkout --quiet $CONTR_URL .project/$DVC_CONTAINER
-   echo $DVC_CONTAINER > .project/$DVC_CONTAINER/:DVC_CONTAINER
-   svn add --quiet --force .project/$DVC_CONTAINER/:DVC_CONTAINER --parents
+   echo $DVC_CONTAINER > .project/$DVC_CONTAINER/:CONTAINER
+   svn add --quiet --force .project/$DVC_CONTAINER/:CONTAINER --parents
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
