@@ -17,6 +17,8 @@
 *       re-defined the .dvc/ configuration file
 * V0.9  2017/09/10 By Albert Li
 *       prepare for release
+* V1.0  2017/09/14 By Albert Li
+*       release for road test
 
 ********************************************************
 # Global Variables
@@ -73,10 +75,10 @@
 		$DESIGN_PROJT/(Project Root)
 				conf/ (configuration file)
 
-  * checkuot_project : 
+  * checkuot_project :
 
-	$CWD/.project/
-			.dvc/README
+	:project/
+			.dvc/README.txt
 
 
 ## Design Directory
@@ -91,7 +93,7 @@
 
   * checkout_version :
 
-	.project/
+	:project/
 		: -> $current_phase
 		.dvc/
 		$DESIGN_PHASE/
@@ -107,20 +109,20 @@
 						.dvc/
 						.dqi/
 
-	.design_block -> .project/$phase/$block
-	.design_stage -> .project/$phase/$block/$stage
-	.design_versn -> .project/$phase/$block/$stage/$version
+	:block -> .project/$phase/$block
+	:stage -> .project/$phase/$block/$stage
+	:version -> .project/$phase/$block/$stage/$version
 
-* Design Object Container
+* Design Object Container (check if .dvc_path exist)
 
   * create_container :
 
 	/$phase	/$block	/$stage	/$versn	/$DESIGN_CONTR/
-						.DVC_CONTAINER
+						.dvc_path
 
   * checkout_container :
 
-	.design_versn/$DESIGN_CONTR/.DVC_CONTAINER
+	.design_versn/$DESIGN_CONTR/.dvc_path
 
 	.container -> .dvc_version/$DESIGN_CONTR
 
@@ -132,13 +134,13 @@
 ## 1. README file is created in each design folder
 
   ** ------------------------------------
-  ** README (project/.dvc/)
+  ** README.txt (project/.dvc/)
   ** ------------------------------------
 
 	* Design Version Control Directory
 	=======================================
 	* Project : testcase
-	* Path    : .project/testcase/
+	* Path    : project/<path>
 	* Author  : username
 	* Date    : 20170812_183836
 	=======================================
