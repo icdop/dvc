@@ -35,8 +35,10 @@ help:
 	@echo "        make object    (checkin_object)"
 	@echo "        make commit    (commit_container)"
 	@echo ""
-	@echo "Usage:  make list      (list_version; list_container)"
-	@echo "Usage:  make clean     (clean_data)"
+	@echo "Usage:  make tree      (tree .project)"
+	@echo "Usage:  make list      (dvc_list_project --recurrsive)"
+	@echo "Usage:  make remove    (remove specific objects)"
+	@echo "Usage:  make _clean    (clean all data on server)"
 	@echo ""
 
 
@@ -47,7 +49,8 @@ run:
 	make container
 	make object
 	make commit
-
+	make list
+	make tree
 
 init: init_repository
 init_repository:
@@ -57,7 +60,7 @@ init_repository:
 	dvc_set_server SVN_ROOT $(SVN_ROOT)
 	dvc_init_server $(SVN_MODE)
 
-project: init clean_links
+project: init remove_links
 	@echo "#---------------------------------------------------"
 	@echo "# 1. Initiatize Project Repository"
 	@echo "#---------------------------------------------------"
@@ -210,9 +213,13 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
+tree:
+	tree .project
 
-list: list_version list_container
-list_version:
+list: 
+	dvc_list_project --recursive
+
+list_all:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all data in version"
 	@echo "#---------------------------------------------------"
@@ -221,6 +228,7 @@ list_version:
 	dvc_list_block -v
 	dvc_list_stage -v
 	dvc_list_version -v
+	dvc_list_container -v 
 
 list_container:
 	@echo "#---------------------------------------------------"
@@ -235,51 +243,68 @@ list_env:
 	dvc_set_env --local
 	dvc_get_env --local --all
 
+remove:
+	@echo "Usage:"
+	@echo "        make remove_container  ; remove current container"
+	@echo "        make remove_version    ; remove current version"
+	@echo "        make remove_block      ; remove current block"
+	@echo "        make remove_links       ; remove links"
+	@echo ""
 
-clean:
+_clean:
 	make remove_container
-	make remove_version
 	make remove_project
-	make clean_links
-	make clean_files
-	make clean_setup
+	make remove_links
+	make remove_files
+	make remove_setup
 
 remove_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-1. Clean up container data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(DESIGN_CONTR)
+	rm -f .container
 
 remove_version: 
 	@echo "#---------------------------------------------------"
 	@echo "# 7-2. Clean up design version data"
 	@echo "#---------------------------------------------------"
-	dvc_remove_version	$(DESIGN_VERSN) $(DESIGN_STAGE)
-	dvc_remove_stage	$(DESIGN_STAGE)
+	dvc_remove_version	$(DESIGN_VERSN)
+	rm -f .design_versn
+
+remove_block: 
+	@echo "#---------------------------------------------------"
+	@echo "# 7-2. Clean up design block data"
+	@echo "#---------------------------------------------------"
 	dvc_remove_block	$(DESIGN_BLOCK)
-	dvc_remove_phase	$(DESIGN_PHASE)
+	rm -f .design*
 
 remove_project:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-3. Remove proejct repository"
+	@echo "# 7-3. Remove proejct repository (For TEST ONLY)"
 	@echo "#---------------------------------------------------"
+	dvc_remove_version	$(DESIGN_VERSN)
+	dvc_remove_stage	$(DESIGN_STAGE)
+	dvc_remove_block	$(DESIGN_BLOCK)
+	dvc_remove_phase	$(DESIGN_PHASE)
 	dvc_remove_project	$(DESIGN_PROJT)
+	rm -fr .project
 
-clean_links:
+remove_links:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-4. Clean up related links in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr .project  .container .design_*
 
-clean_files:
+remove_files:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-5. Clean up related files in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
 
-clean_setup:
+remove_setup:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-6. Clean up enviroment setup"
+	@echo "# 7-6. Clean up enviroment setup directory"
 	@echo "#---------------------------------------------------"
 	rm -fr .dop
 
