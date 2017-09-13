@@ -52,13 +52,12 @@ run:
 init: init_repository
 init_repository:
 	@echo "#---------------------------------------------------"
-	@echo "# 0. Assign SVN ROOT Path"
+	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
-	@echo "SVN_ROOT = $(SVN_ROOT)"
-	dvc_set_server $(SVN_ROOT)  $(SVN_URL)
-	make init_server
+	dvc_set_server SVN_ROOT $(SVN_ROOT)
+	dvc_init_server $(SVN_MODE)
 
-project: init
+project: init clean_links
 	@echo "#---------------------------------------------------"
 	@echo "# 1. Initiatize Project Repository"
 	@echo "#---------------------------------------------------"
@@ -241,14 +240,9 @@ clean:
 	make remove_container
 	make remove_version
 	make remove_project
+	make clean_links
 	make clean_files
-
-clean_files:
-	@echo "#---------------------------------------------------"
-	@echo "# 7-4. Clean up related files in working directory"
-	@echo "#---------------------------------------------------"
-	rm -fr .dop .project  .container .design_*
-	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
+	make clean_setup
 
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -271,23 +265,31 @@ remove_project:
 	@echo "#---------------------------------------------------"
 	dvc_remove_project	$(DESIGN_PROJT)
 
+clean_links:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-4. Clean up related links in working directory"
+	@echo "#---------------------------------------------------"
+	rm -fr .project  .container .design_*
+
+clean_files:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-5. Clean up related files in working directory"
+	@echo "#---------------------------------------------------"
+	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
+
+clean_setup:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-6. Clean up enviroment setup"
+	@echo "#---------------------------------------------------"
+	rm -fr .dop
+
+
 
 SVN_PID	:= $(SVN_ROOT)/svnserve.pid
 SVN_LOG	:= $(SVN_ROOT)/svnserve.log
 
-ifdef SVN_MODE
-init_server: stop_server
-	@mkdir -p $(SVN_ROOT)
-	svnserve -d -r $(SVN_ROOT) \
-		--listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT) \
-		--pid-file=$(SVN_PID) --log-file=$(SVN_LOG)
-else
 init_server:
-	@mkdir -p $(SVN_ROOT)
-endif
+	dvc_init_server $(SVN_MODE)
 
 stop_server:
-	@if (test -s $(SVN_PID)) then \
-	   kill -9 `cat $(SVN_PID)` ; \
-	fi
-	@rm -f $(SVN_PID)
+	dvc_init_server stop

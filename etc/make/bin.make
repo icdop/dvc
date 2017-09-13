@@ -44,6 +44,7 @@ bin: csh/*
 	ln -f -s $(CSH_PATH)/57_checkin_container.csh		$(BIN_PATH)/dvc_checkin_container
 	ln -f -s $(CSH_PATH)/58_update_container.csh		$(BIN_PATH)/dvc_update_container
 	ln -f -s $(CSH_PATH)/59_commit_container.csh		$(BIN_PATH)/dvc_commit_container
+	ln -f -s $(CSH_PATH)/60_init_server.csh			$(BIN_PATH)/dvc_init_server
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s $(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase
 	ln -f -s $(CSH_PATH)/x2_remove_block.csh		$(BIN_PATH)/dvc_remove_block

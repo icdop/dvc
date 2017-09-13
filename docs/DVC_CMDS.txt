@@ -1,6 +1,13 @@
 ##############################################################################
 # DVC COMMAND USAGE
 ##############################################################################
+dvc_init_server:
+	Usage: $prog [file|svn|stop]
+	Description:
+	  file -  set to local file access mode
+	  svn  -  set to svn server mode and start svn server	
+	  stop -  stop svn server
+ 
 #
 # Environment Variable Access
 #
@@ -17,11 +24,14 @@ dvc_set_var:
 	if <variable> is not specified, list all existing variables
 
 dvc_set_server:   
-	Usage: $prog <SVN_ROOT> <SVN_URL> <PROJT_URL>
+	Usage: $prog <var> <value>
 	Description:
 	  set the SVN data root and the svn server mode
 	store the value in .dop/server/
-	SVN_MODE could be "file", "http", "svn"
+	  SVN_ROOT - server data root
+	  SVN_MODE - "file", "svn"
+	  SVN_HOST - svn server hostname
+	  SVN_PORT - svn server port
 
 dvc_set_project:   
 	Usage: $prog <project>

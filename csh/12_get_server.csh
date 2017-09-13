@@ -38,8 +38,29 @@ else if {(test -e $HOME/.dop/server/SVN_ROOT)} then
 else if ($?SVN_ROOT == 0) then
   setenv SVN_ROOT  $HOME/SVN_ROOT
 endif
-if ( $?info_mode == 1) then
-  echo "PARM: SVN_ROOT     = $SVN_ROOT"
+
+if {(test -e .dop/server/SVN_MODE)} then
+  setenv SVN_MODE      `cat .dop/server/SVN_MODE`
+else if {(test -e $HOME/.dop/server/SVN_MODE)} then
+  setenv SVN_MODE      `cat $HOME/.dop/server/SVN_MODE`
+else if ($?SVN_MODE == 0) then
+  setenv SVN_MODE      file
+endif
+
+if {(test -e .dop/server/SVN_HOST)} then
+  setenv SVN_HOST      `cat .dop/server/SVN_HOST`
+else if {(test -e $HOME/.dop/server/SVN_HOST)} then
+  setenv SVN_HOST      `cat $HOME/.dop/server/SVN_HOST`
+else if ($?SVN_HOST == 0) then
+  setenv SVN_HOST      `hostname`
+endif
+
+if {(test -e .dop/server/SVN_PORT)} then
+  setenv SVN_PORT      `cat .dop/server/SVN_PORT`
+else if {(test -e $HOME/.dop/server/SVN_PORT)} then
+  setenv SVN_PORT      `cat $HOME/.dop/server/SVN_PORT`
+else if ($?SVN_PORT == 0) then
+  setenv SVN_PORT      3690
 endif
 
 if {(test -e .dop/server/SVN_URL)} then
@@ -47,29 +68,10 @@ if {(test -e .dop/server/SVN_URL)} then
 else if {(test -e $HOME/.dop/server/SVN_URL)} then
   setenv SVN_URL      `cat $HOME/.dop/server/SVN_URL`
 else if ($?SVN_URL == 0) then
-  setenv SVN_URL      file://$SVN_ROOT
+  if ($SVN_MODE == "svn") then
+     setenv SVN_URL = "svn://$SVN_HOST"":$SVN_PORT/"
+  else
+     setenv SVN_URL = "file://$SVN_ROOT"
+  endif
 endif
 
-if ( $?info_mode == 1) then
-  echo "PARM: SVN_URL      = $SVN_URL"
-endif
-
-if {(test -e .dop/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat .dop/env/DESIGN_PROJT`
-else if {(test -e $HOME/.dop/env/DESIGN_PROJT)} then
-  setenv DESIGN_PROJT `cat $HOME/.dop/env/DESIGN_PROJT`
-else if ($?DESIGN_PROJT == 0) then
-  setenv DESIGN_PROJT :
-endif
-
-if {(test -e .dop/server/PROJT_URL)} then
-  setenv PROJT_URL      `cat .dop/server/PROJT_URL`
-else if {(test -e $HOME/.dop/server/PROJT_URL)} then
-  setenv PROJT_URL      `cat $HOME/.dop/server/PROJT_URL`
-else if ($?PROJT_URL == 0) then
-  setenv PROJT_URL      $SVN_URL/$DESIGN_PROJT
-endif
-
-if ( $?info_mode == 1) then
-  echo "PARM: PROJT_URL    = $PROJT_URL"
-endif

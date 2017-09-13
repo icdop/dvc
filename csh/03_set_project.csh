@@ -25,11 +25,11 @@ endif
 
 if (($2 != "") && ($2 != ":")) then
     setenv PROJT_URL  $2
-    echo $PROJT_URL   > .dop/server/PROJT_URL
+    echo $PROJT_URL   > .dop/env/PROJT_URL
     echo "SETP: PROJT_URL  = $PROJT_URL"
 else if ($?SVN_URL == 1) then
     setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-    echo $PROJT_URL   > .dop/server/PROJT_URL
+    echo $PROJT_URL   > .dop/env/PROJT_URL
     echo "SETP: PROJT_URL  = $PROJT_URL"
 else
     setenv PROJT_URL ""

@@ -1,39 +1,38 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <SVN_ROOT> <SVN_URL> <PROJT_URL>"
+   echo "Usage: $prog <variable> <value>"
    exit -1
 endif
+
+if ($1 == "--reset") then
+   set reset=1
+   shift argv
+else
+   set reset=0
+endif
+
 mkdir -p $HOME/.dop/server
 
-if (($1 != "") && ($1 != ":")) then
-    setenv SVN_ROOT  $1
-    mkdir -p $SVN_ROOT
-    echo $SVN_ROOT  > $HOME/.dop/server/SVN_ROOT
-else if {(test -e $HOME/.dop/server/SVN_ROOT)} then
-    setenv SVN_ROOT  `cat $HOME/.dop/server/SVN_ROOT`
-else if ($?SVN_ROOT == 0) then
-    setenv SVN_ROOT  $HOME/SVN_ROOT
+
+if (($1 != "") && ($1 != ":") && ($1 != ".")) then
+   set envname = $1
+   if ($2 == "--reset") then
+      echo "INFO: remove env('$envname')"
+      rm -f $dvcpath/.dop/server/$envname
+   else if ($2 != "") then
+      set envval = $2
+      echo "SETP: $1 = $2"
+      echo $envval  > $HOME/.dop/server/$envname
+   else if ($reset == 1) then
+      echo "INFO: remove env('$envname')"
+      rm -f $HOME/.dop/server/$envname
+   else if {(test -e $HOME/.dop/server/$envname)} then
+      echo "$envname =  `cat $HOME/.dop/server/$envname`"
+   else 
+      echo "ERROR: env '$envname' is not defined in '$dvcpath'!"
+   endif
+else
+   echo `ls $HOME/.dop/server/`
 endif
 
-if (($2 != "") && ($2 != ":")) then
-    setenv SVN_URL  $2
-    echo $SVN_URL   > $HOME/.dop/server/SVN_URL
-else if {(test -e $HOME/.dop/server/SVN_URL)} then
-    setenv SVN_URL  `cat $HOME/.dop/server/SVN_URL`
-else if ($?SVN_URL == 0) then
-    setenv SVN_URL  file://$SVN_ROOT
-endif
-
-echo "SETP: SVN_URL  = $SVN_URL"
-
-if (($3 != "") && ($3 != ":")) then
-    setenv PROJT_URL  $2
-    echo $PROJT_URL   > $HOME/.dop/server/PROJT_URL
-else if {(test -e $HOME/.dop/server/PROJT_URL)} then
-    setenv PROJT_URL  `cat $HOME/.dop/server/PROJT_URL`
-else if ($?PROJT_URL == 0) then
-    setenv PROJT_URL  $SVN_URL/testcase
-endif
-
-echo "SETP: PROJT_URL  = $PROJT_URL"

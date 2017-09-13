@@ -1,7 +1,8 @@
 PATH         :=	../../bin:$(PATH)
 ####################################################################
 SVN_ROOT     := $(HOME)/proj_svn
-SVN_URL      = file://$(SVN_ROOT)
+SVN_MODE     := file
+#SVN_URL      := file://$(SVN_ROOT)
 ####################################################################
 
 DESIGN_PROJT := testcase
