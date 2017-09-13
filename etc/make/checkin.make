@@ -1,8 +1,24 @@
-##################################
+########################################################################
 #
-# Design Object Checkin Example
+# Design Version Control Checkin Example
 #
-##################################
+########################################################################
+ifndef SVN_ROOT
+SVN_ROOT     := $(HOME)/proj_svn
+endif
+
+ifndef SVN_HOST
+SVN_HOST     := `hostname`
+endif
+
+ifndef SVN_PORT
+SVN_PORT     := 3691
+endif
+
+ifndef SVN_URL
+SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
+endif
+
 help:
 	@echo "=============================================================="
 	@echo "PWD      = $(PWD)"
@@ -40,6 +56,7 @@ init_repository:
 	@echo "#---------------------------------------------------"
 	@echo "SVN_ROOT = $(SVN_ROOT)"
 	dvc_set_server $(SVN_ROOT)  $(SVN_URL)
+	make init_server
 
 project: init
 	@echo "#---------------------------------------------------"
@@ -221,14 +238,14 @@ list_env:
 
 
 clean:
-	make clean_files
 	make remove_container
 	make remove_version
 	make remove_project
+	make clean_files
 
 clean_files:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-0. Clean up related files in working directory"
+	@echo "# 7-4. Clean up related files in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr .dop .project  .container .design_*
 	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
@@ -255,4 +272,22 @@ remove_project:
 	dvc_remove_project	$(DESIGN_PROJT)
 
 
+SVN_PID	:= $(SVN_ROOT)/svnserve.pid
+SVN_LOG	:= $(SVN_ROOT)/svnserve.log
 
+ifdef SVN_MODE
+init_server: stop_server
+	@mkdir -p $(SVN_ROOT)
+	svnserve -d -r $(SVN_ROOT) \
+		--listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT) \
+		--pid-file=$(SVN_PID) --log-file=$(SVN_LOG)
+else
+init_server:
+	@mkdir -p $(SVN_ROOT)
+endif
+
+stop_server:
+	@if (test -s $(SVN_PID)) then \
+	   kill -9 `cat $(SVN_PID)` ; \
+	fi
+	@rm -f $(SVN_PID)

@@ -1,10 +1,10 @@
 PATH         :=	../../bin:$(PATH)
 ##################################
 SVN_ROOT     := $(HOME)/proj_svn
-SVN_HOST     := `hostname`
-SVN_PORT     := 3691
-SVN_PID      := svnserve.pid
-SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
+SVN_MODE     := svn
+#SVN_HOST     := `hostname`
+#SVN_PORT     := 3691
+#SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 
 ##################################
 DESIGN_PROJT := testcase
@@ -30,11 +30,3 @@ DEL_OBJECTS  := .cache/
 include ../../etc/make/checkin.make
 
 ####################################################################
-
-server: $(SVN_PID)
-	
-$(SVN_PID): 
-	mkdir -p $(SVN_ROOT)
-	svnserve -d -r $(SVN_ROOT) --listen-host=$(SVN_HOST) --listen-port=$(SVN_PORT) --pid-file=$(SVN_PID)
-	
-
