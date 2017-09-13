@@ -13,7 +13,6 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/13_get_project.csh
 
 mkdir -p .dop/env
-mkdir -p .dop/server
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
     setenv DESIGN_PROJT $1
