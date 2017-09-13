@@ -25,6 +25,17 @@ if ($pvar == 1) then
   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
+if {(test -e .dop/env/CURR_PROJT)} then
+  setenv CURR_PROJT      `cat .dop/env/CURR_PROJT`
+else if {(test -e $HOME/.dop/env/CURR_PROJT)} then
+  setenv CURR_PROJT      `cat $HOME/.dop/env/CURR_PROJT`
+else if ($?CURR_PROJT == 0) then
+  setenv CURR_PROJT      ":project"
+endif
+
+if ( $?info_mode == 1) then
+  echo "PARM: CURR_PROJT  = $CURR_PROJT"
+endif
 
 if {(test -e .dop/env/PROJT_URL)} then
   setenv PROJT_URL      `cat .dop/env/PROJT_URL`
@@ -37,3 +48,4 @@ endif
 if ( $?info_mode == 1) then
   echo "PARM: PROJT_URL    = $PROJT_URL"
 endif
+

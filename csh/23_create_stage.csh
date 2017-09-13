@@ -47,7 +47,7 @@ echo "* Project : $DESIGN_PROJT" >> $README
 echo "* Phase   : $DESIGN_PHASE" >> $README
 echo "* Block   : $DESIGN_BLOCK" >> $README
 echo "* Stage   : $DESIGN_STAGE" >> $README
-echo "* Path    : .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $README
+echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $README
 echo "* Author  : $USER" >> $README
 echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
 echo "=======================================" >> $README

@@ -15,7 +15,6 @@ setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/03_set_project.csh
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
    echo "INFO: Reuse Project Design Respository : $DESIGN_PROJT"
@@ -46,7 +45,7 @@ else
    echo "# Design Version Control Directory" >> $README
    echo "=======================================" >> $README
    echo "* Project : $DESIGN_PROJT" >> $README
-   echo "* Path    : .project/" >> $README
+   echo "* Path    : $DESIGN_PROJT/" >> $README
    echo "* Author  : $USER" >> $README
    echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
    echo "=======================================" >> $README

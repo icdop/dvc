@@ -18,8 +18,6 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
     setenv DESIGN_PROJT $1
     echo $DESIGN_PROJT > .dop/env/DESIGN_PROJT
     echo "SETP: DESIGN_PROJT = $DESIGN_PROJT"
-else if ($?DESIGN_PROJT == 0) then
-    setenv DESIGN_PROJT ":"
 endif
 
 if (($2 != "") && ($2 != ":")) then
@@ -30,7 +28,4 @@ else if ($?SVN_URL == 1) then
     setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
     echo $PROJT_URL   > .dop/env/PROJT_URL
     echo "SETP: PROJT_URL  = $PROJT_URL"
-else
-    setenv PROJT_URL ""
 endif
-

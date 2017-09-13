@@ -31,7 +31,7 @@ endif
 foreach fname ( `ls $dvcpath/.dvc/var/$varpat` )
    set varname=$fname:t
    if { (test -e $fname) } then
-      echo "$varname `cat $fname`"
+      echo "$varname = `cat $fname`"
    else
       echo "ERROR: variable '$varname' does not exist."
    endif

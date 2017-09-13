@@ -52,3 +52,36 @@ if ($pvar == 1) then
   echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"
   echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
 endif
+
+if {(test -e .dop/env/CURR_PHASE)} then
+  setenv CURR_PHASE `cat .dop/env/CURR_PHASE`
+else if {(test -e $HOME/.dop/env/CURR_PHASE)} then
+  setenv CURR_PHASE `cat $HOME/.dop/env/CURR_PHASE`
+else if ($?CURR_PHASE == 0) then
+  setenv CURR_PHASE :phase
+endif
+
+if {(test -e .dop/env/CURR_BLOCK)} then
+  setenv CURR_BLOCK `cat .dop/env/CURR_BLOCK`
+else if {(test -e $HOME/.dop/env/CURR_BLOCK)} then
+  setenv CURR_BLOCK `cat $HOME/.dop/env/CURR_BLOCK`
+else if ($?CURR_BLOCK == 0) then
+  setenv CURR_BLOCK :block
+endif
+
+if {(test -e .dop/env/CURR_STAGE)} then
+  setenv CURR_STAGE `cat .dop/env/CURR_STAGE`
+else if {(test -e $HOME/.dop/env/CURR_STAGE)} then
+  setenv CURR_STAGE `cat $HOME/.dop/env/CURR_STAGE`
+else if ($?CURR_STAGE == 0) then
+  setenv CURR_STAGE :stage
+endif
+
+if {(test -e .dop/env/CURR_VERSN)} then
+  setenv CURR_VERSN `cat .dop/env/CURR_VERSN`
+else if {(test -e $HOME/.dop/env/CURR_VERSN)} then
+  setenv CURR_VERSN `cat $HOME/.dop/env/CURR_VERSN`
+else if ($?CURR_VERSN == 0) then
+  setenv CURR_VERSN :version
+endif
+

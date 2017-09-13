@@ -12,11 +12,23 @@ SVN_HOST     := `hostname`
 endif
 
 ifndef SVN_PORT
-SVN_PORT     := 3691
+SVN_PORT     := 3690
 endif
 
 ifndef SVN_URL
 SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
+endif
+
+ifndef CURR_PROJT
+CURR_PROJT   := :project
+endif
+
+ifndef CURR_VERSN
+CURR_VERSN   := :version
+endif
+
+ifndef CURR_CONTR
+CURR_CONTR   := :container
 endif
 
 help:
@@ -25,18 +37,17 @@ help:
 	@echo "SVN_ROOT = $(SVN_ROOT)"
 	@echo "SVN_URL  = $(SVN_URL)"
 	@echo "=============================================================="
-	@echo "Usage:"
-	@echo "        make run       run the following steps"
+	@echo "Usage:  make run       run the following steps"
 	@echo ""
 	@echo "        make init      (reset_resository)"
-	@echo "        make project   (create_project)"
+	@echo "        make project   (create_project; checkout_project)"
 	@echo "        make version   (create_version; checkout_version)"
 	@echo "        make container (create_container; checkout_container)"
 	@echo "        make object    (checkin_object)"
 	@echo "        make commit    (commit_container)"
 	@echo ""
 	@echo "Usage:  make tree      (tree .project)"
-	@echo "Usage:  make list      (dvc_list_project --recurrsive)"
+	@echo "Usage:  make list      (dvc_list_project --recursive)"
 	@echo "Usage:  make remove    (remove specific objects)"
 	@echo "Usage:  make _clean    (clean all data on server)"
 	@echo ""
@@ -52,7 +63,15 @@ run:
 	make list
 	make tree
 
-init: init_repository
+init: init_setup init_repository
+init_setup:
+	@echo "#---------------------------------------------------"
+	@echo "# 0. Set Enviroment Variable"
+	@echo "#---------------------------------------------------"
+	dvc_set_env CURR_VERSN $(CURR_PROJT)
+	dvc_set_env CURR_VERSN $(CURR_VERSN)
+	dvc_set_env CURR_CONTR $(CURR_CONTR)
+
 init_repository:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Start SVN server"
@@ -60,7 +79,8 @@ init_repository:
 	dvc_set_server SVN_ROOT $(SVN_ROOT)
 	dvc_init_server $(SVN_MODE)
 
-project: init remove_links
+project: create_project checkout_project
+create_project:
 	@echo "#---------------------------------------------------"
 	@echo "# 1. Initiatize Project Repository"
 	@echo "#---------------------------------------------------"
@@ -76,23 +96,34 @@ create_version:
 	dvc_create_stage	$(DESIGN_STAGE)
 	dvc_create_version	$(DESIGN_VERSN)
 
-checkout: checkout_version
+checkout: checkout_project checkout_version
+
+checkout_project:
+	@echo "#---------------------------------------------------"
+	@echo "# 3 Checkout project to '$(CURR_PROJT)' dir"
+	@echo "#---------------------------------------------------"
+	rm -fr $(CURR_PROJT)
+	dvc_checkout_project	$(DESIGN_PROJT)
+
 checkout_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout version"
 	@echo "#---------------------------------------------------"
+	dvc_checkout_phase	$(DESIGN_PHASE)
+	dvc_checkout_block	$(DESIGN_BLOCK)
+	dvc_checkout_stage	$(DESIGN_STAGE)
 	dvc_checkout_version	$(DESIGN_VERSN)
 
 container: create_container checkout_container
 create_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 4. Create container"
+	@echo "# 4-1 Create container"
 	@echo "#---------------------------------------------------"
 	dvc_create_container	$(DESIGN_CONTR)
 
 checkout_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 4. Checkout container"
+	@echo "# 4-2 Checkout container"
 	@echo "#---------------------------------------------------"
 	dvc_checkout_container	$(DESIGN_CONTR)
 
@@ -111,7 +142,7 @@ add_object:
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
 	@for object in $(ADD_OBJECTS) ;  do (\
-		if (test -e .design_versn/$(DESIGN_CONTR)/$$object) then \
+		if (test -e $(CURR_VERSN)/$(DESIGN_CONTR)/$$object) then \
 			echo "dvc_add_object	$(DESIGN_CONTR)	$$object" ; \
 			dvc_add_object	$(DESIGN_CONTR)	$$object ; \
 		else \
@@ -214,7 +245,7 @@ clean_container:
 	dvc_clean_container 	$(DESIGN_CONTR)
 
 tree:
-	tree .project
+	tree $(CURR_PROJT)
 
 list: 
 	dvc_list_project --recursive
@@ -248,8 +279,18 @@ remove:
 	@echo "        make remove_container  ; remove current container"
 	@echo "        make remove_version    ; remove current version"
 	@echo "        make remove_block      ; remove current block"
-	@echo "        make remove_links       ; remove links"
+	@echo "        make remove_links      ; remove links"
 	@echo ""
+
+clean:
+	@echo
+	@echo "************** WARNING *************************"
+	@echo
+	@echo " This will remove all project data on the server"
+	@echo " 'make clean' is changed to 'make _clean'"
+	@echo
+	@echo "************** WARNING *************************"
+	@echo
 
 _clean:
 	make remove_container
@@ -263,21 +304,19 @@ remove_container:
 	@echo "# 7-1. Clean up container data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(DESIGN_CONTR)
-	rm -f .container
+	rm -f $(CURR_CONTR)
 
 remove_version: 
 	@echo "#---------------------------------------------------"
 	@echo "# 7-2. Clean up design version data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_version	$(DESIGN_VERSN)
-	rm -f .design_versn
 
 remove_block: 
 	@echo "#---------------------------------------------------"
 	@echo "# 7-2. Clean up design block data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_block	$(DESIGN_BLOCK)
-	rm -f .design*
 
 remove_project:
 	@echo "#---------------------------------------------------"
@@ -288,13 +327,12 @@ remove_project:
 	dvc_remove_block	$(DESIGN_BLOCK)
 	dvc_remove_phase	$(DESIGN_PHASE)
 	dvc_remove_project	$(DESIGN_PROJT)
-	rm -fr .project
 
 remove_links:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-4. Clean up related links in working directory"
 	@echo "#---------------------------------------------------"
-	rm -fr .project  .container .design_*
+	rm -fr $(CURR_CONTR) $(CURR_VERSN) :phase :block :stage
 
 remove_files:
 	@echo "#---------------------------------------------------"
@@ -306,7 +344,7 @@ remove_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-6. Clean up enviroment setup directory"
 	@echo "#---------------------------------------------------"
-	rm -fr .dop
+	rm -fr .dop $(CURR_PROJT)
 
 
 

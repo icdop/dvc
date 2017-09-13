@@ -31,7 +31,7 @@ endif
 foreach fname ( `ls $dvcpath/.dop/env/$envpat` )
    set envname=$fname:t
    if { (test -e $fname) } then
-      echo "$envname `cat $fname`"
+      echo "$envname = `cat $fname`"
    else
       echo "ERROR: env '$envname' does not exist."
    endif

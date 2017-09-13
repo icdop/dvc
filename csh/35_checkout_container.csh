@@ -24,7 +24,7 @@ if ($status == 1) then
    exit 1
 endif
 
-svn checkout --force $CONTR_URL .project/$DVC_CONTAINER --depth infinity
+svn checkout --force $CONTR_URL $CURR_PROJT/$DVC_CONTAINER --depth infinity
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 exit 0

@@ -54,9 +54,12 @@ case "svn":
      svnserve -d -r $SVN_ROOT \
                 --listen-host=$SVN_HOST --listen-port=$SVN_PORT \
                 --pid-file=$SVN_ROOT/svnserve.pid --log-file=$SVN_ROOT/svnserve.log
+     if {(test -e $SVN_ROOT/svnserve.pid)} then
+        setenv SVN_PID      `cat $SVN_ROOT/svnserve.pid`
+        ps -f -p $SVN_PID
+     endif
      echo $SVN_HOST > $SVN_ROOT/svnserve.host
      echo $SVN_PORT > $SVN_ROOT/svnserve.port
-     echo "SVN_PID = `cat $SVN_ROOT/svnserve.pid`"
      $CSH_DIR/02_set_server.csh SVN_MODE "svn"
      $CSH_DIR/02_set_server.csh SVN_HOST $SVN_HOST
      $CSH_DIR/02_set_server.csh SVN_PORT $SVN_PORT

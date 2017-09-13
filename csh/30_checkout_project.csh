@@ -12,14 +12,8 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/03_set_project.csh
 
-if (($1 != "") && ($1 != ":") && ($1 != ".")) then
-   setenv DESIGN_PROJT $1
-   $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
-   shift argv
-endif
-
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 echo "PARM: PROJ_URL = $PROJT_URL"
 svn info $PROJT_URL >& /dev/null
 if ($status == 1) then
@@ -34,17 +28,17 @@ endif
 echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password dvc
 
-mkdir -p .project
+mkdir -p $CURR_PROJT
 
 if ($?depth_mode) then
-   svn checkout --quiet --force $PROJT_URL .project --depth $depth_mode
-#   svn update --quiet --force .project
+   svn checkout --quiet --force $PROJT_URL $CURR_PROJT --depth $depth_mode
+#   svn update --quiet --force $CURR_PROJT
 endif
 
-if {(test -e .project/.dvc)} then
-   svn update --quiet --force .project/.dvc
+if {(test -e $CURR_PROJT/.dvc)} then
+   svn update --quiet --force $CURR_PROJT/.dvc
 else
-   svn checkout --force $PROJT_URL/.dvc .project/.dvc
+   svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc
 endif
 
 

@@ -30,20 +30,20 @@ if ($status == 1) then
 endif
 
 echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
-mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
 
 if ($?depth_mode) then
-   svn checkout --quiet --force $STAGE_URL .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
+   svn checkout --quiet --force $STAGE_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
 endif
 
-if {(test -e .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
-   svn update --quiet --force .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 else
-   svn checkout --force $STAGE_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
+   svn checkout --force $STAGE_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 endif
 
-rm -f .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_STAGE .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
+rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

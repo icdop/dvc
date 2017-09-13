@@ -28,26 +28,26 @@ if ($status == 1) then
 endif
 
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
-mkdir -p .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
 if ($?depth_mode) then
-   svn checkout --quiet --force $VERSN_URL .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN --depth $depth_mode
+   svn checkout --quiet --force $VERSN_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN --depth $depth_mode
 endif
 
-if {(test -e .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
-   svn update --quiet --force .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
 else
-   svn checkout --force $VERSN_URL/.dvc .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
 endif
 
-rm -f .project/:
-rm -f .project/$DESIGN_PHASE/:
-rm -f .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
-rm -f .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
-ln -s $DESIGN_PHASE .project/:
-ln -s $DESIGN_BLOCK .project/$DESIGN_PHASE/:
-ln -s $DESIGN_STAGE .project/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_VERSN .project/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+rm -f $CURR_PROJT/:
+rm -f $CURR_PROJT/$DESIGN_PHASE/:
+rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+ln -s $DESIGN_PHASE $CURR_PROJT/:
+ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
+ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+ln -s $DESIGN_VERSN $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

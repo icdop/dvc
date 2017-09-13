@@ -20,16 +20,22 @@ else
    setenv DESIGN_CONTR `cat .dop/env/DESIGN_CONTR`
 endif
 
-if {(test -h .container)} then
-#  echo "WARN: remove old .container link!"
-   rm -f .container
-else if {(test -d .container)} then
-   echo "ERROR: .container is a folder, rename it!"
-   mv .container .container.`date +%Y%m%d_%H%M%S`
+if {(test -e .dop/env/CURR_CONTR)} then
+  setenv CURR_CONTR `cat .dop/env/CURR_CONTR`
+else
+  setenv CURR_CONTR :container
 endif
 
-if {(test -e .design_versn)} then
-  ln -fs .design_versn/$DESIGN_CONTR .container
+if {(test -h $CURR_CONTR)} then
+#  echo "WARN: remove old $CURR_CONTR link!"
+   rm -f $CURR_CONTR
+else if {(test -d $CURR_CONTR)} then
+   echo "ERROR: $CURR_CONTR is a folder, rename it!"
+   mv $CURR_CONTR container.`date +%Y%m%d_%H%M%S`
+endif
+
+if {(test -e :version)} then
+  ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 else
   echo "ERROR: checkout version first before assigning container!" 
   exit -1
