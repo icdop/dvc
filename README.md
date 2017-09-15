@@ -53,55 +53,70 @@ Example:
 
 1. setup svn file server and project account - CAD/IT
 
-   Example:
+	Example:
 
 	% dvc_set_server SVN_MODE file
 	% dvc_init_server start
 
+
 2. create project respository - Project Manager
 
-   Example:
+	Example:
 
 	% dvc_create_project testcase
 
+
 3. create design version and prepare initial design data - Design Manager
 
-   Example:
+	Example:
 
 	% dvc_create_version P1-trial/chip/000-DATA/2017_0910-xxx
 	% dvc_create_container netlist
 	% dvc_copy_object :container /ftp_src/design.v design.v
 
+
 4. checkout initial design data to working directory - Designer
 
-   Example:
+	Example:
 
 	% dvc_checkout_version P1-trial/chip/000-DATA/2017_0910-xxx --data
 
 
 4. execute specific design flow - Designer 
 
-   Example:
+	Example:
 
 	% run your own flow
 
+
 5. submit design quality report for review - Designer
 
-  Example:
+	Example:
 
 	% dvc_create_container     sta
 	% dvc_checkout_container   sta
 	% dvc_copy_object  	run_sta/sta.log
 	% dvc_copy_object  	run_sta/sta.vio.rpt
 
+
 6. validate design quality report and approve for checkin - Design Manager
+
+	Example:
+
+	% import_dc_dqi.tcl
+
 
 7. checkin output result to destinate design folder - Designer
 
-  Example:
- 
+	Example:
+
 	% dvc_commit_container
 
+
 8. release design folder and quality check report - Project Manager
+
+	Example:
+
+	% dvc_checkout
 
 
