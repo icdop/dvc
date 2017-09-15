@@ -160,7 +160,7 @@ copy_object: $(OBJECT_FILES)
 	@for object in $(OBJECT_FILES); do (\
 		echo "Copying file '$$object' into container ..."; \
 		if (test -e $$object) then \
-			dvc_copy_object	-c $(DESIGN_CONTR) $$object $$object ; \
+			dvc_copy_object	$$object ; \
 		fi ; \
 	); done
 
@@ -195,7 +195,7 @@ link_object: $(OBJECT_LINKS)
 	@for object in $(OBJECT_LINKS); do \
 		echo "Linking object '$$object' in container ..."; \
 		if (test -e $$object) then \
-			dvc_link_object	$$object ; \
+			dvc_link_object	$$object $$object; \
 		fi ; \
 	done
 
