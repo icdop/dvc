@@ -4,7 +4,7 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
-echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -17,7 +17,7 @@ source $CSH_DIR/14_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1
-   $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
+   $CSH_DIR/00_set_env.csh --quiet DESIGN_STAGE $DESIGN_STAGE
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -39,25 +39,25 @@ svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parent
 svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDER_RULE -m 'Version Naming Rule'
 svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
-setenv README "/tmp/README_STAGE.md"
-echo -n "" > $README
-echo "# Design Version Control Directory" >> $README
-echo "=======================================" >> $README
-echo "* Project : $DESIGN_PROJT" >> $README
-echo "* Phase   : $DESIGN_PHASE" >> $README
-echo "* Block   : $DESIGN_BLOCK" >> $README
-echo "* Stage   : $DESIGN_STAGE" >> $README
-echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $README
-echo "* Author  : $USER" >> $README
-echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
-echo "=======================================" >> $README
+set readme="/tmp/readme_STAGE.md"
+echo -n "" > $readme
+echo "# Design Version Control Directory" >> $readme
+echo "=======================================" >> $readme
+echo "* Project : $DESIGN_PROJT" >> $readme
+echo "* Phase   : $DESIGN_PHASE" >> $readme
+echo "* Block   : $DESIGN_BLOCK" >> $readme
+echo "* Stage   : $DESIGN_STAGE" >> $readme
+echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $readme
+echo "* Author  : $USER" >> $readme
+echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
+echo "=======================================" >> $readme
 
-svn import --quiet $README $STAGE_URL/.dvc/README.txt -m 'Initial Design Stage Directory'
-rm -fr $README
+svn import --quiet $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
+rm -fr $readme
 #=========================================================
 
 endif
 
-echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
 exit 0

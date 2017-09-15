@@ -49,22 +49,22 @@ endif
 
 if (($?phase != 0) && ($phase != "") && ($phase != ":") && ($phase != ".")) then
     setenv DESIGN_PHASE $phase
-    $CSH_DIR/00_set_env.csh DESIGN_PHASE $DESIGN_PHASE
+    $CSH_DIR/00_set_env.csh --quiet DESIGN_PHASE $DESIGN_PHASE
 endif
 
 if (($?block != 0) && ($block != "") && ($block != ":") && ($block != ".")) then
     setenv DESIGN_BLOCK $block
-    $CSH_DIR/00_set_env.csh DESIGN_BLOCK $DESIGN_BLOCK
+    $CSH_DIR/00_set_env.csh --quiet DESIGN_BLOCK $DESIGN_BLOCK
 endif
 
 if (($?stage != 0) && ($stage != "") && ($stage != ":") && ($stage != ".")) then
     setenv DESIGN_STAGE $stage
-    $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
+    $CSH_DIR/00_set_env.csh --quiet DESIGN_STAGE $DESIGN_STAGE
 endif
 
 if (($?version != 0) && ($version != "") && ($version != ":") && ($version != ".")) then
     setenv DESIGN_VERSN $version
-    $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
+    $CSH_DIR/00_set_env.csh --quiet DESIGN_VERSN $DESIGN_VERSN
 endif
 
 if ($?no_curr_link == 0) then

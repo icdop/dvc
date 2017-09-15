@@ -11,27 +11,49 @@ if (($1 == "-v") || ($1 == "--verbose")) then
 else if ($?verbose_mode == 0) then
    set verbose_mode = 0
 endif
-if ($1 == "--info") then
-   set info_mode = 1
-   shift argv
-endif
-if ($1 == "--recursive") then
-   set recursive_mode = 1
-   shift argv
-endif
-
-if (($1 == "--depth")) then
-   shift argv
-   set depth_mode = $1
-   shift argv
-else
-   set depth_mode = empty
-endif
 
 if ($1 == "--xml") then
    set xml_mode = 1
    shift argv
 endif
+
+if ($1 == "--info") then
+   set info_mode = 1
+   shift argv
+endif
+
+if ($1 == "--recursive") then
+   set recursive_mode = 1
+   set depth_mode = infinity
+   shift argv
+endif
+
+switch($1)
+case "-all_data":
+   set depth_mode = infinity
+   shift argv
+   breaksw
+cace "--empty":
+   set depth_mode = empty
+   shift argv
+   breaksw
+case "--files":
+   set depth_mode = files
+   shift argv
+   breaksw
+case "--immediates":
+   set depth_mode = immediates
+   shift argv
+   breaksw
+case "--depth")) then
+   shift argv
+   set depth_mode = $1
+   shift argv
+   breaksw
+default:
+   set depth_mode = empty
+endsw
+
 
 if {(test -e .dop/server/SVN_ROOT)} then
   setenv SVN_ROOT  `cat .dop/server/SVN_ROOT`

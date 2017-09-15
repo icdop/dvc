@@ -5,7 +5,7 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_PROJT>"
    exit -1
 endif
-echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -40,20 +40,20 @@ else
    svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDER_RULE -m 'Phase Naming Rule' 
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
-   setenv README "/tmp/README_PROJT.txt"
-   echo -n "" > $README
-   echo "# Design Version Control Directory" >> $README
-   echo "=======================================" >> $README
-   echo "* Project : $DESIGN_PROJT" >> $README
-   echo "* Path    : $DESIGN_PROJT/" >> $README
-   echo "* Author  : $USER" >> $README
-   echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
-   echo "=======================================" >> $README
-   svn import --quiet $README $PROJT_URL/.dvc/README.txt -m 'Initial Design Version Directory'
-   rm -fr $README
+   set readme="/tmp/README_PROJT.txt"
+   echo -n "" > $readme
+   echo "# Design Version Control Directory" >> $readme
+   echo "=======================================" >> $readme
+   echo "* Project : $DESIGN_PROJT" >> $readme
+   echo "* Path    : $DESIGN_PROJT/" >> $readme
+   echo "* Author  : $USER" >> $readme
+   echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
+   echo "=======================================" >> $readme
+   svn import --quiet $readme $PROJT_URL/.dvc/README -m 'Initial Design Version Directory'
+   rm -fr $readme
    
 endif
 
-echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
 exit 0

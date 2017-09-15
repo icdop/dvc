@@ -4,7 +4,7 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_BLOCK>"
    exit -1
 endif
-echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -17,7 +17,7 @@ source $CSH_DIR/14_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_BLOCK $1
-   $CSH_DIR/00_set_env.csh DESIGN_BLOCK $DESIGN_BLOCK
+   $CSH_DIR/00_set_env.csh --quiet DESIGN_BLOCK $DESIGN_BLOCK
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -37,24 +37,24 @@ svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
 svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDER_RULE -m 'Stage Naming Rule'
 
-setenv README "/tmp/README_BLOCK.md"
-echo -n "" > $README
-echo "# Design Version Control Directory" >> $README
-echo "=======================================" >> $README
-echo "* Project : $DESIGN_PROJT" >> $README
-echo "* Phase   : $DESIGN_PHASE" >> $README
-echo "* Block   : $DESIGN_BLOCK" >> $README
-echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/" >> $README
-echo "* Author  : $USER" >> $README
-echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $README
-echo "=======================================" >> $README
+set readme="/tmp/readme_BLOCK.md"
+echo -n "" > $readme
+echo "# Design Version Control Directory" >> $readme
+echo "=======================================" >> $readme
+echo "* Project : $DESIGN_PROJT" >> $readme
+echo "* Phase   : $DESIGN_PHASE" >> $readme
+echo "* Block   : $DESIGN_BLOCK" >> $readme
+echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/" >> $readme
+echo "* Author  : $USER" >> $readme
+echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
+echo "=======================================" >> $readme
 
-svn import --quiet $README $BLOCK_URL/.dvc/README.txt -m 'Initial Design Block Directory'
-rm -fr $README
+svn import --quiet $readme $BLOCK_URL/.dvc/README -m 'Initial Design Block Directory'
+rm -fr $readme
 #=========================================================
 
 endif
 
-echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""
 exit 0
