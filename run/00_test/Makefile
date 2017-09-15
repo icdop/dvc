@@ -8,11 +8,11 @@ SVN_MODE     := file
 # The follwing parameter are checkout pointer configuration.
 # Do not change it unless you need to
 CURR_PROJT   := :
-#CURR_PHASE   := :phase
+CURR_PHASE   := :phase
 CURR_BLOCK   := :block
 CURR_STAGE   := :stage
-#CURR_VERSN   := :version
-#CURR_CONTR   := :container
+CURR_VERSN   := :version
+CURR_CONTR   := :container
 
 ####################################################################
 DESIGN_PROJT := testcase
