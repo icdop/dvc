@@ -77,23 +77,23 @@
 
   * checkuot_project :
 
-	:project/
-			.dvc/README.txt
+	:/      (project checkout root, $CURR_PROJT)
+		.dvc/README.txt
 
 
 ## Design Directory
   
   * create_version :
 	
-	/$DESIGN_PHASE/.dvc
+	:/$DESIGN_PHASE/.dvc
        		/$DESIGN_BLOCK/.dvc
 			/$DESIGN_STAGE/.dvc
 				/$DESIGN_VERSN/.dvc
 					       .dqi
 
-  * checkout_version :
+  * checkout_version 
 
-	:project/
+	:/	(project checkout root, $CURR_PROJT)
 		: -> $current_phase
 		.dvc/
 		$DESIGN_PHASE/
@@ -109,22 +109,23 @@
 						.dvc/
 						.dqi/
 
-	:block -> .project/$phase/$block
-	:stage -> .project/$phase/$block/$stage
-	:version -> .project/$phase/$block/$stage/$version
+	:phase -> :/$phase
+	:block -> :/$phase/$block
+	:stage -> :/$phase/$block/$stage
+	:version -> :/$phase/$block/$stage/$version
 
 * Design Object Container (check if .dvc_path exist)
 
-  * create_container :
+  * create_container 
 
-	/$phase	/$block	/$stage	/$versn	/$DESIGN_CONTR/
+	:/$phase/$block	/$stage	/$versn	/$DESIGN_CONTR/
 						.dvc_path
 
-  * checkout_container :
+  * checkout_container 
 
-	.design_versn/$DESIGN_CONTR/.dvc_path
+	:version/$DESIGN_CONTR/.dvc_path
 
-	.container -> .dvc_version/$DESIGN_CONTR
+	:container -> .dvc_version/$DESIGN_CONTR
 
 
 * ========================================================

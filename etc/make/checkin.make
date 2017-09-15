@@ -19,18 +19,6 @@ ifndef SVN_URL
 SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 endif
 
-ifndef CURR_PROJT
-CURR_PROJT   := :project
-endif
-
-ifndef CURR_VERSN
-CURR_VERSN   := :version
-endif
-
-ifndef CURR_CONTR
-CURR_CONTR   := :container
-endif
-
 help:
 	@echo "=============================================================="
 	@echo "PWD      = $(PWD)"
@@ -47,7 +35,7 @@ help:
 	@echo "        make commit    (commit_container)"
 	@echo ""
 	@echo "Usage:  make tree      (tree .project)"
-	@echo "Usage:  make list      (dvc_list_project --recursive)"
+	@echo "Usage:  make list      (dvc_list_phases --recursive)"
 	@echo "Usage:  make remove    (remove specific objects)"
 	@echo "Usage:  make _clean    (clean all data on server)"
 	@echo ""
@@ -68,7 +56,10 @@ init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
-	dvc_set_env CURR_VERSN $(CURR_PROJT)
+	dvc_set_env CURR_PROJT $(CURR_PROJT)
+	dvc_set_env CURR_PHASE $(CURR_PHASE)
+	dvc_set_env CURR_BLOCK $(CURR_BLOCK)
+	dvc_set_env CURR_STAGE $(CURR_STAGE)
 	dvc_set_env CURR_VERSN $(CURR_VERSN)
 	dvc_set_env CURR_CONTR $(CURR_CONTR)
 
@@ -248,24 +239,23 @@ tree:
 	tree $(CURR_PROJT)
 
 list: 
-	dvc_list_project --recursive
+	dvc_list_phases --recursive
 
 list_all:
 	@echo "#---------------------------------------------------"
-	@echo "# 6-1 List all data in version"
+	@echo "# 6-1 List all sub folders"
 	@echo "#---------------------------------------------------"
-	dvc_list_project -v
-	dvc_list_phase -v
-	dvc_list_block -v
-	dvc_list_stage -v
-	dvc_list_version -v
-	dvc_list_container -v 
+	dvc_list_phases -v
+	dvc_list_blocks -v
+	dvc_list_stages -v
+	dvc_list_versions -v
+	dvc_list_containers -v 
 
-list_container:
+list_objects:
 	@echo "#---------------------------------------------------"
-	@echo "# 6-2 List all data in container"
+	@echo "# 6-2 List all objects in container"
 	@echo "#---------------------------------------------------"
-	dvc_list_container -v 
+	dvc_list_objects -v 
 
 list_env:
 	@echo "#---------------------------------------------------"
@@ -348,8 +338,8 @@ remove_setup:
 
 
 
-SVN_PID	:= $(SVN_ROOT)/svnserve.pid
-SVN_LOG	:= $(SVN_ROOT)/svnserve.log
+SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
+SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
 
 init_server:
 	dvc_init_server $(SVN_MODE)

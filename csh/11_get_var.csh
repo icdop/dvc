@@ -7,16 +7,16 @@ if (($1 == "-h") || ($1 == "--help")) then
 endif
 if ($1 == "--global") then
    set local=0
-   set dvcpath=$HOME
+   set var_home=$HOME
    shift argv
    echo "INFO: Global Parameter Setting"
 else if ($1 == "--local") then
    set local=1
-   set dvcpath=$PWD
+   set var_home=$PWD
    shift argv
 else
    set local=1
-   set dvcpath=.
+   set var_home=.
 endif
 
 if ($1 == "--all") then
@@ -28,7 +28,7 @@ else
    set varpat="*"
 endif
 
-foreach fname ( `ls $dvcpath/.dvc/var/$varpat` )
+foreach fname ( `ls $var_home/.dvc/var/$varpat` )
    set varname=$fname:t
    if { (test -e $fname) } then
       echo "$varname = `cat $fname`"

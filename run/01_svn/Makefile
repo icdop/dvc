@@ -9,7 +9,10 @@ SVN_HOST     := `hostname`
 ####################################################################
 # The follwing parameter are checkout pointer configuration.
 # Do not change it unless you need to
-CURR_PROJT   := :project
+CURR_PROJT   := :
+CURR_PHASE   := :phase
+CURR_BLOCK   := :block
+CURR_STAGE   := :stage
 CURR_VERSN   := :version
 CURR_CONTR   := :container
 

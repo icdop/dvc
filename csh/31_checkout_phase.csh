@@ -32,14 +32,11 @@ echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 
 mkdir -p $CURR_PROJT/$DESIGN_PHASE
 
-if ($?depth_mode) then
-   svn checkout --quiet --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --depth $depth_mode
-#   svn update --quiet --force $CURR_PROJT/DESIGN_PHASE
-endif
-
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/.dvc)} then
+   svn update --quiet --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/.dvc
 else
+   svn checkout --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --depth $depth_mode
    svn checkout --force $PHASE_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/.dvc
 endif
 

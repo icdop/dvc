@@ -1,7 +1,7 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PHASE>"
+   echo "Usage: $prog <DESIGN_PROJT>"
    exit -1
 endif
 
@@ -14,15 +14,15 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
-   setenv DESIGN_PHASE $1
-   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
-   shift argv
+   setenv DESIGN_PROJT $1
 endif
 
+# Use "source list_dir.csh" and specify DESIGN_URL 
+# is to preserve option modes and pass them to list_dir.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 
-setenv DESIGN_URL $PHASE_URL
-source $CSH_DIR/49_list_path.csh
+setenv DESIGN_URL $PROJT_URL
+source $CSH_DIR/49_list_dvc_path.csh
 
 exit 0
+ 

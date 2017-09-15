@@ -1,5 +1,5 @@
 #!/bin/csh -f
-# set verbose=1
+#set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
@@ -15,9 +15,11 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
+# Use "source list_dir.csh" and specify DESIGN_URL 
+# is to preserve option modes and pass them to list_dir.csh
 if {(test -d $CONTAINER_DIR)} then
    setenv DESIGN_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
-   source $CSH_DIR/49_list_path.csh
+   source $CSH_DIR/49_list_dvc_path.csh
 else
    echo "ERROR: Can not find Container Directory: $CONTAINER_DIR"
 endif

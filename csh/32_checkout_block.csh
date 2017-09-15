@@ -31,14 +31,11 @@ endif
 echo "INFO: Checkout Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
 mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 
-if ($?depth_mode) then
-   svn checkout --quiet --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
-endif
-
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
+   svn update --quiet --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 else
+   svn checkout --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
    svn checkout --force $BLOCK_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 endif
 

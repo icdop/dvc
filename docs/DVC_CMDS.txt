@@ -232,40 +232,40 @@ dvc_clean_container:
 #
 # List content under design folder
 #
-dvc_list_project:   
+dvc_list_phases:
 	Usage: $prog <DESIGN_PROJT>
 	Description:
-	  list existing phases under project directory
+	  list all phases under project directory
 
-dvc_list_phase:   
+dvc_list_blocks:   
 	Usage: $prog <DESIGN_PHASE>
 	Description:
-	  list existing blocks under phase directory
+	  list all blocks under phase directory
 
-dvc_list_block:   
+dvc_list_stages:   
 	Usage: $prog <DESIGN_BLOCK>
 	Description:
-	  list existing stages under block directory
+	  list all stages under block directory
 
-dvc_list_stage:   
+dvc_list_versions:   
 	Usage: $prog <DESIGN_STAGE>
 	Description:
-	  list existing versions under stage directory
+	  list all versions under stage directory
 
-dvc_list_version:   
+dvc_list_containers:   
 	Usage: $prog <DESIGN_VERSN>
 	Description:
-	  list existing containers under version directory
+	  list all containers under version directory
 
-dvc_list_container:   
+dvc_list_objects:   
 	Usage: $prog <DESIGN_CONTR>
 	Description:
-	  list existing objects under container directory
+	  list all objects under container directory
 
-dvc_list_path:   
+dvc_list_dir:   
 	Usage: $prog <project/phase/block/stage/version/container>
 	Description:
-	  list all objects under design path directory
+	  list all subfolders under design path directory
 	default is to list objects in current container
 
 

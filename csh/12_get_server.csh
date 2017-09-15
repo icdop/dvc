@@ -24,6 +24,8 @@ if (($1 == "--depth")) then
    shift argv
    set depth_mode = $1
    shift argv
+else
+   set depth_mode = empty
 endif
 
 if ($1 == "--xml") then
@@ -69,9 +71,9 @@ else if {(test -e $HOME/.dop/server/SVN_URL)} then
   setenv SVN_URL      `cat $HOME/.dop/server/SVN_URL`
 else if ($?SVN_URL == 0) then
   if ($SVN_MODE == "svn") then
-     setenv SVN_URL = "svn://$SVN_HOST"":$SVN_PORT/"
+     setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
   else
-     setenv SVN_URL = "file://$SVN_ROOT"
+     setenv SVN_URL "file://$SVN_ROOT"
   endif
 endif
 

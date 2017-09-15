@@ -17,16 +17,13 @@ mkdir -p $HOME/.dop/server
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set envname = $1
-   if ($2 == "--reset") then
+   if (($reset == 1)||($2 == "--reset")) then
       echo "INFO: remove env('$envname')"
       rm -f $HOME/.dop/server/$envname
    else if ($2 != "") then
       set envval = $2
       echo "SETP: $1 = $2"
       echo $envval  > $HOME/.dop/server/$envname
-   else if ($reset == 1) then
-      echo "INFO: remove env('$envname')"
-      rm -f $HOME/.dop/server/$envname
    else if {(test -e $HOME/.dop/server/$envname)} then
       echo "$envname =  `cat $HOME/.dop/server/$envname`"
    else 

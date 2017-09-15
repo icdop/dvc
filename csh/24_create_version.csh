@@ -1,10 +1,14 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+
+# do not set current link in creation mode
+set no_curr_link=1
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
