@@ -25,6 +25,6 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 
 setenv DESIGN_URL $PHASE_URL
-source $CSH_DIR/49_list_dvc_path.csh
+source $CSH_DIR/49_list_dir.csh
 
 exit 0

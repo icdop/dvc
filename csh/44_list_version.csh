@@ -1,8 +1,14 @@
 #!/bin/csh -f
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PROJT>"
+   echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
+endif
+if ($1 == "--verbose") then
+   set verbose_mode = 1
+   shift argv
+else if ($?verbose_mode == 0) then 
+   set verbose_mode = 0
 endif
 
 if ($?DVC_HOME == 0) then
@@ -14,15 +20,19 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 
 if (($1 != "") && ($1 != ".")) then
-   setenv DESIGN_PROJT $1
+   setenv DESIGN_VERSN $1
+   echo "PARM: DESIGN_VERSN = $DESIGN_VERSN"
 endif
 
 # Use "source list_dir.csh" and specify DESIGN_URL 
 # is to preserve option modes and pass them to list_dir.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
+setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
+setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 
-setenv DESIGN_URL $PROJT_URL
-source $CSH_DIR/49_list_dvc_path.csh
+setenv DESIGN_URL $VERSN_URL
+source $CSH_DIR/49_list_dir.csh
 
 exit 0
- 

@@ -32,7 +32,7 @@ echo "INFO: Checkout Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
 mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
-   svn update --quiet --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
 else
    svn checkout --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
@@ -41,6 +41,14 @@ endif
 
 rm -f $CURR_PROJT/$DESIGN_PHASE/:
 ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
+
+if {(test -h $CURR_BLOCK)} then
+   rm -f $CURR_BLOCK
+else if {(test -d $CURR_BLOCK)} then
+   echo "ERROR: $CURR_BLOCK is a folder, rename it!"
+   mv $CURR_BLOCK block.`date +%Y%m%d_%H%M%S`
+endif
+ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK $CURR_BLOCK
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

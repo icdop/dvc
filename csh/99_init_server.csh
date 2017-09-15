@@ -5,7 +5,7 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <start|stop|file|svn> [SVN_ROOT]"
    exit -1
 endif
-echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -90,9 +90,14 @@ case "stop":
      echo "WARNING: No PID file is found."
   endif
   breaksw
-case "pid":
+case "job":
   if ($?SVN_PID) then
      ps -f -p $SVN_PID
+  endif
+  breaksw
+case "pid":
+  if ($?SVN_PID) then
+     echo $SVN_PID
   endif
   breaksw
 default:
@@ -100,6 +105,6 @@ default:
   exit -1
 endsw
 
-echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-echo ""
+#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+#echo ""
 exit 0

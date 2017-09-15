@@ -5,14 +5,18 @@ if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog [-v]"
    exit -1
 endif
+
 if (($1 == "-v") || ($1 == "--verbose")) then
    set verbose_mode = 1
    shift argv
 else if ($?verbose_mode == 0) then
    set verbose_mode = 0
 endif
-set pvar = $verbose_mode
 
+if ($1 == "--info") then
+   set info_mode = 1
+   shift argv
+endif
 
 if {(test -e .dop/env/DESIGN_PHASE)} then
   setenv DESIGN_PHASE `cat .dop/env/DESIGN_PHASE`
@@ -46,7 +50,7 @@ else if ($?DESIGN_VERSN == 0) then
   setenv DESIGN_VERSN :
 endif
 
-if ($pvar == 1) then
+if ( $?info_mode == 1) then
   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
   echo "PARM: DESIGN_BLOCK = $DESIGN_BLOCK"
   echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"

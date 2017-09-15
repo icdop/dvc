@@ -33,7 +33,7 @@ echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 mkdir -p $CURR_PROJT/$DESIGN_PHASE
 
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/.dvc)} then
-   svn update --quiet --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --set-depth $depth_mode
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/.dvc
 else
    svn checkout --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --depth $depth_mode
@@ -42,6 +42,14 @@ endif
 
 rm -f $CURR_PROJT/:
 ln -s $DESIGN_PHASE $CURR_PROJT/:
+
+if {(test -h $CURR_PHASE)} then
+   rm -f $CURR_PHASE
+else if {(test -d $CURR_PHASE)} then
+   echo "ERROR: $CURR_PHASE is a folder, rename it!"
+   mv $CURR_PHASE phase.`date +%Y%m%d_%H%M%S`
+endif
+ln -fs $CURR_PROJT/$DESIGN_PHASE $CURR_PHASE
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

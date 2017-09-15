@@ -51,7 +51,8 @@ run:
 	make list
 	make tree
 
-init: init_setup init_repository
+	
+init: init_setup init_server
 init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
@@ -63,12 +64,19 @@ init_setup:
 	dvc_set_env CURR_VERSN $(CURR_VERSN)
 	dvc_set_env CURR_CONTR $(CURR_CONTR)
 
-init_repository:
+SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
+SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
+
+init_server:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
 	dvc_set_server SVN_ROOT $(SVN_ROOT)
 	dvc_init_server $(SVN_MODE)
+
+stop_server:
+	dvc_init_server stop
+
 
 project: create_project checkout_project
 create_project:
@@ -128,16 +136,19 @@ checkin_object:
 	make copy_folder
 	make link_object
 
-add_object:
+add_object: 
 	@echo "#---------------------------------------------------"
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
 	@for object in $(ADD_OBJECTS) ;  do (\
 		if (test -e $(CURR_VERSN)/$(DESIGN_CONTR)/$$object) then \
-			echo "dvc_add_object	$(DESIGN_CONTR)	$$object" ; \
-			dvc_add_object	$(DESIGN_CONTR)	$$object ; \
+			echo "dvc_add_object	$$object" ; \
+			dvc_add_object	$$object ; \
 		else \
-			echo "WARNING: object '$$object' is not found."; \
+			echo "WARNING: object '$$object' is not found, create a dummy file."; \
+			echo "`date +%D_$T`" > $(CURR_VERSN)/$(DESIGN_CONTR)/$$object; \
+			echo "dvc_add_object	$$object" ; \
+			dvc_add_object	$$object ; \
 		fi ;\
 	); done
 
@@ -149,7 +160,7 @@ copy_object: $(OBJECT_FILES)
 	@for object in $(OBJECT_FILES); do (\
 		echo "Copying file '$$object' into container ..."; \
 		if (test -e $$object) then \
-			dvc_copy_object	$(DESIGN_CONTR)	$$object $$object ; \
+			dvc_copy_object	-c $(DESIGN_CONTR) $$object $$object ; \
 		fi ; \
 	); done
 
@@ -158,20 +169,20 @@ $(OBJECT_FILES):
 	@echo "`date +%D_$T`" > $@
 
 
-copy_folder: $(OBJECT_FOLDER)
+copy_folder: $(OBJECT_DIRS)
 	@echo "#---------------------------------------------------"
 	@echo "# 5-2 Copy folders to container"
 	@echo "#---------------------------------------------------"
-	@for dir in $(OBJECT_FOLDER); do (\
+	@for dir in $(OBJECT_DIRS); do (\
 		echo "Copying directory '$$dir' into container ..."; \
 		if (test -d $$dir) then \
-			dvc_copy_object	$(DESIGN_CONTR)	$$dir $$dir; \
+			dvc_copy_object	$$dir $$dir; \
 		else \
 			echo "ERROR: $$dir is not a directory"; \
 		fi ; \
 	); done
 
-$(OBJECT_FOLDER):
+$(OBJECT_DIRS):
 	@echo "WARNING: dir '$@' does not exist, create a dummy folder."
 	@mkdir -p $@
 	@echo "`date +%D_$T`" > $@/HISTORY.txt
@@ -184,7 +195,7 @@ link_object: $(OBJECT_LINKS)
 	@for object in $(OBJECT_LINKS); do \
 		echo "Linking object '$$object' in container ..."; \
 		if (test -e $$object) then \
-			dvc_link_object	$(DESIGN_CONTR)	$$object ; \
+			dvc_link_object	$$object ; \
 		fi ; \
 	done
 
@@ -206,18 +217,10 @@ delete_object:
 		dvc_delete_object	$(DESIGN_CONTR)	$$object ; \
 	done
 
-checkin: checkin_container
-checkin_container:
-	@echo "#---------------------------------------------------"
-	@echo "# 5-7 Checkin all files inside container"
-	@echo "#---------------------------------------------------"
-	dvc_add_object	$(DESIGN_CONTR)
-
-
 update: update_container
 update_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-8 Update change into container"
+	@echo "# 5-6 Update change into container"
 	@echo "#---------------------------------------------------"
 	dvc_update_container	$(DESIGN_CONTR)
 
@@ -225,37 +228,53 @@ update_container:
 commit: commit_container
 commit_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-9 Commit container checkin to SVN server"
+	@echo "# 5-6 Commit container checkin to SVN server"
 	@echo "#---------------------------------------------------"
 	dvc_commit_container	$(DESIGN_CONTR)
 
 clean_container:
 	@echo "#---------------------------------------------------"
-	@echo "# 5-0 Clean up design object in container"
+	@echo "# 5-9 Clean up design object in container"
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
+
+checkin: checkin_version
+
+checkin_version:
+	@echo "#---------------------------------------------------"
+	@echo "# 6-4 Checkin all files inside container"
+	@echo "#---------------------------------------------------"
+	dvc_checkin_container	$(DESIGN_VERSN)
+
+checkin_container:
+	@echo "#---------------------------------------------------"
+	@echo "# 6-5 Checkin all files inside container"
+	@echo "#---------------------------------------------------"
+	dvc_checkin_container	$(DESIGN_CONTR)
+
 
 tree:
 	tree $(CURR_PROJT)
 
 list: 
-	dvc_list_phases --recursive
+	dvc_list_project --recursive
 
 list_all:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-1 List all sub folders"
 	@echo "#---------------------------------------------------"
-	dvc_list_phases -v
-	dvc_list_blocks -v
-	dvc_list_stages -v
-	dvc_list_versions -v
-	dvc_list_containers -v 
+	dvc_list_project -v 
+	dvc_list_phase -v
+	dvc_list_block -v
+	dvc_list_stage -v
+	dvc_list_version -v
+	dvc_list_container -v 
 
-list_objects:
+list_dir:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-2 List all objects in container"
 	@echo "#---------------------------------------------------"
-	dvc_list_objects -v 
+	dvc_list_dir -v 
 
 list_env:
 	@echo "#---------------------------------------------------"
@@ -288,6 +307,7 @@ _clean:
 	make remove_links
 	make remove_files
 	make remove_setup
+	make stop_server
 
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -328,7 +348,7 @@ remove_files:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-5. Clean up related files in working directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(OBJECT_FILES) $(OBJECT_FOLDER) $(OBJECT_LINKS)
+	rm -fr $(OBJECT_FILES) $(OBJECT_DIRS) $(OBJECT_LINKS)
 
 remove_setup:
 	@echo "#---------------------------------------------------"
@@ -338,11 +358,3 @@ remove_setup:
 
 
 
-SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
-SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
-
-init_server:
-	dvc_init_server $(SVN_MODE)
-
-stop_server:
-	dvc_init_server stop

@@ -2,20 +2,15 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [--global|--local] [--all] <variable>"
+   echo "Usage: $prog [--all] <variable>"
    exit -1
 endif
-if ($1 == "--global") then
-   set local=0
-   set var_home=$HOME
+
+if ($1 == "--dir") then
    shift argv
-   echo "INFO: Global Parameter Setting"
-else if ($1 == "--local") then
-   set local=1
-   set var_home=$PWD
+   set var_home=$1
    shift argv
 else
-   set local=1
    set var_home=.
 endif
 

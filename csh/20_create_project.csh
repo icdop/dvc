@@ -17,7 +17,7 @@ source $CSH_DIR/03_set_project.csh
 
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Reuse Project Design Respository : $DESIGN_PROJT"
+   echo "INFO: Exist Project Design Respository : $DESIGN_PROJT"
    if ($?info_mode) then
       svn info $PROJT_URL
    endif

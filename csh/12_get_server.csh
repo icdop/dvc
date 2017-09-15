@@ -12,11 +12,6 @@ else if ($?verbose_mode == 0) then
    set verbose_mode = 0
 endif
 
-if ($1 == "--xml") then
-   set xml_mode = 1
-   shift argv
-endif
-
 if ($1 == "--info") then
    set info_mode = 1
    shift argv
@@ -29,7 +24,7 @@ if ($1 == "--recursive") then
 endif
 
 switch($1)
-case "-all_data":
+case "--infinity":
    set depth_mode = infinity
    shift argv
    breaksw
@@ -53,6 +48,11 @@ case "--depth")) then
 default:
    set depth_mode = empty
 endsw
+
+if ($1 == "--xml") then
+   set xml_mode = 1
+   shift argv
+endif
 
 
 if {(test -e .dop/server/SVN_ROOT)} then

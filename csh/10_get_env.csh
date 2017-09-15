@@ -19,20 +19,17 @@ else
    set env_home=.
 endif
 
-if ($1 == "--all") then
-   set envpat="*"
-   shift argv
-else if ($1 != "") then
-   set envpat=$1
-else
-   set envpat="*"
-endif
+while ($1!="")
 
-foreach fname ( `ls $env_home/.dop/env/$envpat` )
-   set envname=$fname:t
-   if { (test -e $fname) } then
-      echo "$envname = `cat $fname`"
-   else
-      echo "ERROR: env '$envname' does not exist."
-   endif
+   set flist = `glob $env_home/.dop/env/$1`
+   foreach fname ( $flist  )
+      set envname=$fname:t
+      if { (test -e $fname) } then
+         echo "$envname = `cat $fname`"
+      else
+         echo "ERROR: env '$envname' does not exist."
+      endif
+   end
+   shift argv
+   
 end

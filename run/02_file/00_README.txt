@@ -1,29 +1,28 @@
 # ========================================================
-# Command Line Execution Example:
+# DVC File Access Mode Example:
 # ========================================================
 
   % make help
-
-  % make server   ; Start SVN server
 
 #---------------------------------------------------
 # 0. Init SVN project repository
 #---------------------------------------------------
 
-  % make init
+  % make init    ; create SVN root path
 
 #---------------------------------------------------
-# 1. Create design directory in SVN server
+# 1. Create project directory in SVN server
 #---------------------------------------------------
 
   % make project
-  % make version
 
 #---------------------------------------------------
-# 2. Checkout version to local directory
+# 2. Create and Checkout version to local directory
 #---------------------------------------------------
 
-  % make checkout
+  % make version    ; create and checkout
+
+  % make checkout   ; only checkout
 
 #---------------------------------------------------
 # 3. Create container
@@ -32,25 +31,29 @@
   % make container
 
 #---------------------------------------------------
-# 4. Checkin file into container
+# 4. copy files into container and tag for checkin
 #---------------------------------------------------
 
-  % make checkin
+  % make object    ;
 
 #---------------------------------------------------
-# 5. Commit change into container
+# 5. Commit change and checkin files to server
 #---------------------------------------------------
 
-  % make commit
+  % make commit    ; only commit files been tagged
+    or
+  % make checkin   ; checkin all files in container  
 
 #---------------------------------------------------
 # 6. List files in direcotry
 #---------------------------------------------------
 
-  % make list
+  % make tree   ; local checkout directory
+
+  % make list   ; file checked into server
 
 #---------------------------------------------------
-# 7. Clean up project data
+# 7. Clean up all release files of this testcase
 #---------------------------------------------------
 
   % make clean

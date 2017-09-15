@@ -24,7 +24,7 @@ DESIGN_CONTR := ttt_0p80V_25C_rctyp
 
 # The following object will be checkin to container
 OBJECT_FILES := design.v run_sta.log
-OBJECT_FOLDER:= report/  cache/
+OBJECT_DIRS  := report/  cache/
 OBJECT_LINKS := design.spef
 
 # The following files in :container will be added to repo

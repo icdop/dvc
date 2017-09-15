@@ -33,7 +33,7 @@ echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
 mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
 
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
-   svn update --quiet --force $STAGE_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc
 else
    svn checkout --force $STAGE_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE  --depth $depth_mode
@@ -42,6 +42,14 @@ endif
 
 rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+
+if {(test -h $CURR_STAGE)} then
+   rm -f $CURR_STAGE
+else if {(test -d $CURR_STAGE)} then
+   echo "ERROR: $CURR_STAGE is a folder, rename it!"
+   mv $CURR_STAGE stage.`date +%Y%m%d_%H%M%S`
+endif
+ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE $CURR_STAGE
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

@@ -5,6 +5,11 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 
+if (($1 == "-q") || ($1 == "--quiet")) then
+   set quiet_mode=1
+   shift argv
+endif
+
 if ($1 == "--global") then
    set local=0
    set env_home=$HOME
@@ -26,10 +31,6 @@ else
    set reset=0
 endif
 
-if (($1 == "-q") || ($1 == "--quiet")) then
-   set quite_mode=1
-   shift argv
-endif
 
 mkdir -p $env_home/.dop/env
 
@@ -38,21 +39,27 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    if (($reset == 1) || ($2 == "--reset")) then
       unsetenv $envname
       rm -f $env_home/.dop/env/$envname
-      if ($?quite_mode == 0) then
+      if ($?quiet_mode == 0) then
          echo "INFO: remove env('$envname')"
       endif
    else if ($2 != "") then
       set envval = $2
       setenv $envname $envval
       echo $envval  > $env_home/.dop/env/$envname
-      if ($?quite_mode == 0) then
-         echo "SETP: $1 = $2"
+      if ($?quiet_mode) then
+         echo $envval
+      else
+         echo "SETP: $envname = $envval"
       endif
    else if {(test -e $env_home/.dop/env/$envname)} then
-      echo "$envname =  `cat $env_home/.dop/env/$envname`"
-   else 
+      if ($?quiet_mode) then
+         echo "`cat $env_home/.dop/env/$envname`"
+      else
+         echo "$envname =  `cat $env_home/.dop/env/$envname`"
+      endif
+   else if ($?quiet_mode == 0) then
       echo "ERROR: env '$envname' is not defined!"
    endif
-else
+else if ($?quiet_mode == 0) then
    echo `ls $env_home/.dop/env/`
 endif

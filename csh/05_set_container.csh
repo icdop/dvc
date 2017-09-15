@@ -1,7 +1,7 @@
 #!/bin/csh -f
 #set verbose = 1
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
@@ -32,13 +32,6 @@ if {(test -h $CURR_CONTR)} then
 else if {(test -d $CURR_CONTR)} then
    echo "ERROR: $CURR_CONTR is a folder, rename it!"
    mv $CURR_CONTR container.`date +%Y%m%d_%H%M%S`
-endif
-
-if {(test -e :version)} then
-  ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
-else
-  echo "ERROR: checkout version first before assigning container!" 
-  exit -1
 endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"

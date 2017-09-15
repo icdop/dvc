@@ -1,7 +1,7 @@
 #!/bin/csh -f
 #set verbose=1
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
@@ -28,18 +28,18 @@ if ($status == 1) then
 endif
 
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
-mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
-if ($?depth_mode) then
-endif
+setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+mkdir -p $CURR_PROJT/$DVC_PATH
 
-if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc)} then
-   svn update --quiet --force $VERSN_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN --set-depth $depth_mode
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
+   svn update --quiet --force $CURR_PROJT/$DVC_PATH --set-depth $depth_mode
+   svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dvc
 else
-   svn checkout --force $VERSN_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN --depth $depth_mode
-   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/.dvc
+   svn checkout --force $VERSN_URL $CURR_PROJT/$DVC_PATH --depth $depth_mode
+   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc
 endif
+$CSH_DIR/05_set_container.csh "."
 
 rm -f $CURR_PROJT/:
 rm -f $CURR_PROJT/$DESIGN_PHASE/:
@@ -49,6 +49,14 @@ ln -s $DESIGN_PHASE $CURR_PROJT/:
 ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
 ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_VERSN $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+
+if {(test -h $CURR_VERSN)} then
+   rm -f $CURR_VERSN
+else if {(test -d $CURR_VERSN)} then
+   echo "ERROR: $CURR_VERSN is a folder, rename it!"
+   mv $CURR_VERSN version.`date +%Y%m%d_%H%M%S`
+endif
+ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

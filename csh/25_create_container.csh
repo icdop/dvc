@@ -16,12 +16,12 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/05_set_container.csh
 
-setenv DVC_CONTAINER $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
-setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_CONTAINER
+setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_PATH
 
-svn info $CONTR_URL/.dvc_path >& /dev/null
+svn info $CONTR_URL/.dvc/CONTAINER >& /dev/null
 if ($status == 0) then
-   echo "INFO: Reuse Design Container : $DESIGN_CONTR"
+   echo "INFO: Exist Design Container : $DESIGN_CONTR"
    if ($?info_mode) then
       svn info $CONTR_URL
    endif
@@ -29,10 +29,14 @@ else
    svn info $CONTR_URL >& /dev/null
    if ($status != 0) then
       svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
+      svn mkdir --quiet $CONTR_URL/.dvc -m "DVC Config Directory." --parents
+#      svn mkdir --quiet $CONTR_URL/.dqi -m "Create DQI Folder." --parents
+      set tmpfile=`mktemp`
+      echo -n $DVC_PATH > $tmpfile
+      svn import --quiet $tmpfile $CONTR_URL/.dvc/CONTAINER -m 'Design Container Path'
+      rm -fr $tmpfile
    endif
-   svn checkout --quiet $CONTR_URL $CURR_PROJT/$DVC_CONTAINER
-   echo $DVC_CONTAINER > $CURR_PROJT/$DVC_CONTAINER/.dvc_path
-   svn add --quiet --force $CURR_PROJT/$DVC_CONTAINER/.dvc_path --parents
+   svn checkout --quiet $CONTR_URL $CURR_PROJT/$DVC_PATH --depth infinity
 endif
 
 #echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

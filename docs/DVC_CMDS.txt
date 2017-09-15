@@ -2,11 +2,15 @@
 # DVC COMMAND USAGE
 ##############################################################################
 dvc_init_server:
-	Usage: $prog [file|svn|stop]
+	Usage: $prog [svn|file|start|stop]
 	Description:
-	  file -  set to local file access mode
-	  svn  -  set to svn server mode and start svn server	
-	  stop -  stop svn server
+	  svn   -  set to svn server mode 
+	  file  -  set to local file access mode
+
+	  start -  start server with current SVN_MODE mode
+	  stop  -  stop svn server
+	  pid   -  display current server pid and job
+
  
 #
 # Environment Variable Access
@@ -232,32 +236,32 @@ dvc_clean_container:
 #
 # List content under design folder
 #
-dvc_list_phases:
+dvc_list_project:
 	Usage: $prog <DESIGN_PROJT>
 	Description:
 	  list all phases under project directory
 
-dvc_list_blocks:   
+dvc_list_phase:   
 	Usage: $prog <DESIGN_PHASE>
 	Description:
 	  list all blocks under phase directory
 
-dvc_list_stages:   
+dvc_list_block:   
 	Usage: $prog <DESIGN_BLOCK>
 	Description:
 	  list all stages under block directory
 
-dvc_list_versions:   
+dvc_list_stage:   
 	Usage: $prog <DESIGN_STAGE>
 	Description:
 	  list all versions under stage directory
 
-dvc_list_containers:   
+dvc_list_version:   
 	Usage: $prog <DESIGN_VERSN>
 	Description:
 	  list all containers under version directory
 
-dvc_list_objects:   
+dvc_list_container:   
 	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  list all objects under container directory
@@ -265,9 +269,8 @@ dvc_list_objects:
 dvc_list_dir:   
 	Usage: $prog <project/phase/block/stage/version/container>
 	Description:
-	  list all subfolders under design path directory
+	  list all sub-folders under design path directory
 	default is to list objects in current container
-
 
 #
 # Remove design folder

@@ -13,19 +13,22 @@ Directory:
 				$DESIGN_STAGE/
 					$DESIGN_VERSN/
 
-Example:
 
 * Phase :
-	Ex. P1-trial , P2-stable, P3-final, P4-tapeout
+
+	P1-trial , P2-stable, P3-final, P4-tapeout
 
 * Block :
-	Ex. chip, cpu, gpu, ddr, sub1, ...
+
+	chip, cpu, gpu, ddr, sub1, ...
 
 * Stage :
-	Ex. 000-DATA, 100-CIRCUIT, 200-LOGIC, 300-DFT, 400-APR, 500-SIGNOFF
+
+	000-DATA, 100-CIRCUIT, 200-LOGIC, 300-DFT, 400-APR, 500-SIGNOFF
 
 * Version :
-	Ex. 2017_0610-xxxx, 2017_0702-xxxx, ...
+
+	2017_0610-xxxx, 2017_0702-xxxx, ...
 
 
 - The version control mechanism is SVN server
@@ -49,74 +52,36 @@ Example:
       
 
 ***
-## Design Operation Flow:
+## Design Version Management Flow:
 
-1. setup svn file server and project account - CAD/IT
+### 1. Setup svn file server and project account - CAD/IT
 
 Example:
 
+	; set server configuration variable
+	% dvc_set_server SVN_ROOT /home/owner/proj_svn
 	% dvc_set_server SVN_MODE file
-	% dvc_init_server start
 
+	; start server
+	% dvc_init_server start	
 
-2. create project respository - Project Manager
+### 2. Create project respository - Project Manager
 
 Example:
 
 	% dvc_create_project testcase
 
 
-3. create design version and prepare initial design data - Design Manager
+### 3. Create design version folder and checkin design data - Design Manager
 
 Example:
 
 	% dvc_create_version P1-trial/chip/000-DATA/2017_0910-xxx
-	% dvc_create_container netlist
-	% dvc_copy_object :container /ftp_src/design.v design.v
 
+	% dvc_checkout_version P1-trial/chip/000-DATA/2017_0910-xxx
 
-4. checkout initial design data to working directory - Designer
+	% dvc_copy_object :version /ftp_path/design.v design.v
 
-Example:
-
-	% dvc_checkout_version P1-trial/chip/000-DATA/2017_0910-xxx --data
-
-
-4. execute specific design flow - Designer 
-
-Example:
-
-	% run your own flow
-
-
-5. submit design quality report for review - Designer
-
-Example:
-
-	% dvc_create_container     sta
-	% dvc_checkout_container   sta
-	% dvc_copy_object  	run_sta/sta.log
-	% dvc_copy_object  	run_sta/sta.vio.rpt
-
-
-6. validate design quality report and approve for checkin - Design Manager
-
-Example:
-
-	% import_dc_dqi.tcl
-
-
-7. checkin output result to destinate design folder - Designer
-
-Example:
-
-	% dvc_commit_container
-
-
-8. release design folder and quality check report - Project Manager
-
-	Example:
-
-	% dvc_checkout
+	% dvc_checkin_version 
 
 

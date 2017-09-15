@@ -18,6 +18,8 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_version.csh
 
+setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
@@ -41,7 +43,7 @@ endif
 
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Reuse Project Design Version : $DESIGN_VERSN"
+   echo "INFO: Exist Project Design Version : $DESIGN_VERSN"
    if ($?info_mode) then
       svn info $VERSN_URL
    endif
@@ -50,26 +52,34 @@ else
 #=========================================================
 echo "INFO: Create Project Design Version : $DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version $DESIGN_VERSN ..." --parents
-svn mkdir --quiet $VERSN_URL/.dvc -m "Design Platform Config Directory" --parents
+svn mkdir --quiet $VERSN_URL/.dvc -m "DVC Config Directory" --parents
 svn copy  --quiet $STAGE_URL/.dvc/DESIGN_FILES  $VERSN_URL/.dvc/DESIGN_FILES -m 'Design Object Table' 
-svn mkdir --quiet $VERSN_URL/.dqi -m "Create Design Quality Factor Folder" --parents
+#svn mkdir --quiet $VERSN_URL/.dqi -m "Create Design Quality Indicator Folder" --parents
 
-set readme="/tmp/readme.`date +%Y%m%d_%H%M%S`"
-echo -n "" > $readme
-echo "# Design Version Control Directory" >> $readme
-echo "=======================================" >> $readme
-echo "* Project : $DESIGN_PROJT" >> $readme
-echo "* Phase   : $DESIGN_PHASE" >> $readme
-echo "* Block   : $DESIGN_BLOCK" >> $readme
-echo "* Stage   : $DESIGN_STAGE" >> $readme
-echo "* Version : $DESIGN_VERSN" >> $readme
-echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/" >> $readme
-echo "* Author  : $USER" >> $readme
-echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
-echo "=======================================" >> $readme
+#set tmpfile="/tmp/tmpfile.`date +%Y%m%d_%H%M%S`"
+set tmpfile=`mktemp`
+echo -n "" > $tmpfile
+echo "# Design Version Control Directory" >> $tmpfile
+echo "=======================================" >> $tmpfile
+echo "* Project : $DESIGN_PROJT" >> $tmpfile
+echo "* Phase   : $DESIGN_PHASE" >> $tmpfile
+echo "* Block   : $DESIGN_BLOCK" >> $tmpfile
+echo "* Stage   : $DESIGN_STAGE" >> $tmpfile
+echo "* Version : $DESIGN_VERSN" >> $tmpfile
+echo "* Path    : $DESIGN_PROJT/$DVC_PATH/" >> $tmpfile
+echo "* Author  : $USER" >> $tmpfile
+echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $tmpfile
+echo "=======================================" >> $tmpfile
 
-svn import --quiet $readme $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
-rm -fr $readme
+svn import --quiet $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
+
+echo -n "$DVC_PATH" > $tmpfile
+svn import --quiet $tmpfile $VERSN_URL/.dvc/VERSION -m 'Design Version Path'
+
+echo -n "$DVC_PATH/." > $tmpfile
+svn import --quiet $tmpfile $VERSN_URL/.dvc/CONTAINER -m 'Design Container Path'
+
+rm -fr $tmpfile
 #=========================================================
 
 endif

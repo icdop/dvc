@@ -14,12 +14,13 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
-if ($status < 0) then 
-   exit $status 
-endif
+#if ($status < 0) then 
+#   exit $status 
+#endif
 
 if {(test -d $CONTAINER_DIR)} then
-   (cd $CONTAINER_DIR; svn add  . --force)
+   (cd $CONTAINER_DIR; svn add  . --force --depth infinity)
+   svn commit $CONTAINER_DIR -m 'Update container' 
 else
    echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
 endif

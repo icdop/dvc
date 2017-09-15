@@ -26,7 +26,7 @@ DESIGN_CONTR := place_opt
 
 # The following object will be checkin to container
 OBJECT_FILES := design.def  run_apr.log 
-OBJECT_DIRS  := report/ .cache/
+OBJECT_DIRS  := report/ cache/
 OBJECT_LINKS := design.spef
 
 # The following files in :container will be added to repo
@@ -34,7 +34,7 @@ OBJECT_LINKS := design.spef
 ADD_OBJECTS  := design.v
 
 # The following files in .container will be removed from repo
-DEL_OBJECTS  := .cache/
+DEL_OBJECTS  := cache/
 
 
 ####################################################################

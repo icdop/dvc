@@ -31,7 +31,7 @@ echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 mkdir -p $CURR_PROJT
 
 if {(test -e $CURR_PROJT/.dvc)} then
-   svn update --quiet --force $PROJT_URL $CURR_PROJT --set-depth $depth_mode
+   svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/.dvc
 else
    svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
