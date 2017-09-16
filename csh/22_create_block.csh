@@ -35,9 +35,15 @@ else
 echo "INFO: Create Project Design Block : $DESIGN_BLOCK"
 svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
-svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDER_RULE -m 'Stage Naming Rule'
+svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
-set readme="/tmp/readme_BLOCK.md"
+set tmpfile=`mktemp`
+echo -n "" > $tmpfile
+echo "/$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
+svn import --quiet $tmpfile $PROJT_URL/.dvc/BLOCK -m 'Block Name'
+rm -f $tmpfile
+
+set readme=`mktemp`
 echo -n "" > $readme
 echo "# Design Version Control Directory" >> $readme
 echo "=======================================" >> $readme

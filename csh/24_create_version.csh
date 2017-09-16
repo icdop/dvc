@@ -73,10 +73,10 @@ echo "=======================================" >> $tmpfile
 
 svn import --quiet $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
 
-echo -n "$DVC_PATH" > $tmpfile
+echo -n "/$DVC_PATH" > $tmpfile
 svn import --quiet $tmpfile $VERSN_URL/.dvc/VERSION -m 'Design Version Path'
 
-echo -n "$DVC_PATH/." > $tmpfile
+echo -n "/$DVC_PATH/." > $tmpfile
 svn import --quiet $tmpfile $VERSN_URL/.dvc/CONTAINER -m 'Design Container Path'
 
 rm -fr $tmpfile

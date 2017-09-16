@@ -36,10 +36,16 @@ else
 echo "INFO: Create Project Design Stage : $DESIGN_STAGE"
 svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parents
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
-svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDER_RULE -m 'Version Naming Rule'
+svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
 svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
-set readme="/tmp/readme_STAGE.md"
+set tmpfile=`mktemp`
+echo -n "" > $tmpfile
+echo "/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile
+svn import --quiet $tmpfile $PROJT_URL/.dvc/STAGE -m 'Stage Name'
+rm -f $tmpfile
+
+set readme=`mktemp`
 echo -n "" > $readme
 echo "# Design Version Control Directory" >> $readme
 echo "=======================================" >> $readme

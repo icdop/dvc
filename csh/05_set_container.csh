@@ -22,17 +22,19 @@ endif
 
 if {(test -e .dop/env/CURR_CONTR)} then
   setenv CURR_CONTR `cat .dop/env/CURR_CONTR`
-else
+else if {(test -e $HOME/.dop/env/CURR_VERSN)} then
+  setenv CURR_CONTR `cat $HOME/.dop/env/CURR_CONTR`
+else if ($?CURR_CONTR == 0) then
   setenv CURR_CONTR :container
 endif
 
 if {(test -h $CURR_CONTR)} then
-#  echo "WARN: remove old $CURR_CONTR link!"
    rm -f $CURR_CONTR
 else if {(test -d $CURR_CONTR)} then
    echo "ERROR: $CURR_CONTR is a folder, rename it!"
    mv $CURR_CONTR container.`date +%Y%m%d_%H%M%S`
 endif
+ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
 

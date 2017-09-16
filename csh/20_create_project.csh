@@ -37,10 +37,17 @@ else
 #   svn auth  $PROJT_URL --username pm --password pm
 
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
-   svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDER_RULE -m 'Phase Naming Rule' 
+   svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
-   set readme="/tmp/README_PROJT.txt"
+   set tmpfile=`mktemp`
+   echo -n "" > $tmpfile
+   echo $DESIGN_PROJT > $tmpfile
+   svn import --quiet $tmpfile $PROJT_URL/.dvc/PROJECT -m 'Project Name'
+   rm -f $tmpfile
+
+#   set readme="/tmp/README_PROJT.txt"
+   set readme=`mktemp`
    echo -n "" > $readme
    echo "# Design Version Control Directory" >> $readme
    echo "=======================================" >> $readme

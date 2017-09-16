@@ -39,7 +39,6 @@ else
    svn checkout --force $VERSN_URL $CURR_PROJT/$DVC_PATH --depth $depth_mode
    svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc
 endif
-$CSH_DIR/05_set_container.csh "."
 
 rm -f $CURR_PROJT/:
 rm -f $CURR_PROJT/$DESIGN_PHASE/:
@@ -57,6 +56,8 @@ else if {(test -d $CURR_VERSN)} then
    mv $CURR_VERSN version.`date +%Y%m%d_%H%M%S`
 endif
 ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
+
+$CSH_DIR/05_set_container.csh .
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo ""

@@ -141,12 +141,12 @@ add_object:
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
 	@for object in $(ADD_OBJECTS) ;  do (\
-		if (test -e $(CURR_VERSN)/$(DESIGN_CONTR)/$$object) then \
+		if (test -e $(CURR_CONTR)/$$object) then \
 			echo "dvc_add_object	$$object" ; \
 			dvc_add_object	$$object ; \
 		else \
 			echo "WARNING: object '$$object' is not found, create a dummy file."; \
-			echo "`date +%D_$T`" > $(CURR_VERSN)/$(DESIGN_CONTR)/$$object; \
+			echo "`date +%D_$T`" > $(CURR_CONTR)/$$object; \
 			echo "dvc_add_object	$$object" ; \
 			dvc_add_object	$$object ; \
 		fi ;\

@@ -63,8 +63,8 @@ if (($version != "") && ($version != ":") && ($version != ".")) then
 endif
 
 echo "==============================="
-echo "DESIGN_PROJT = $DESIGN_PROJT"
-echo "-------------------------------"
+#echo "DESIGN_PROJT = $DESIGN_PROJT"
+#echo "-------------------------------"
 echo "DESIGN_PHASE = $DESIGN_PHASE"
 echo "DESIGN_BLOCK = $DESIGN_BLOCK"
 echo "DESIGN_STAGE = $DESIGN_STAGE"

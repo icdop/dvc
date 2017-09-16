@@ -43,8 +43,8 @@ endif
 
 if {(test -e .dop/env/CURR_PROJT)} then
   setenv CURR_PROJT      `cat .dop/env/CURR_PROJT`
-else if {(test -e $HOME/.dop/env/CURR_PROJT)} then
-  setenv CURR_PROJT      `cat $HOME/.dop/env/CURR_PROJT`
+#else if {(test -e $HOME/.dop/env/CURR_PROJT)} then
+#  setenv CURR_PROJT      `cat $HOME/.dop/env/CURR_PROJT`
 else if ($?CURR_PROJT == 0) then
 #  setenv CURR_PROJT      ":project"
   setenv CURR_PROJT      ":"

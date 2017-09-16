@@ -20,32 +20,32 @@ endif
 
 if {(test -e .dop/env/DESIGN_PHASE)} then
   setenv DESIGN_PHASE `cat .dop/env/DESIGN_PHASE`
-else if {(test -e $HOME/.dop/env/DESIGN_PHASE)} then
-  setenv DESIGN_PHASE `cat $HOME/.dop/env/DESIGN_PHASE`
+#else if {(test -e $HOME/.dop/env/DESIGN_PHASE)} then
+#  setenv DESIGN_PHASE `cat $HOME/.dop/env/DESIGN_PHASE`
 else if ($?DESIGN_PHASE == 0) then
   setenv DESIGN_PHASE :
 endif
 
 if {(test -e .dop/env/DESIGN_BLOCK)} then
   setenv DESIGN_BLOCK `cat .dop/env/DESIGN_BLOCK`
-else if {(test -e $HOME/.dop/env/DESIGN_BLOCK)} then
-  setenv DESIGN_BLOCK `cat $HOME/.dop/env/DESIGN_BLOCK`
+#else if {(test -e $HOME/.dop/env/DESIGN_BLOCK)} then
+#  setenv DESIGN_BLOCK `cat $HOME/.dop/env/DESIGN_BLOCK`
 else if ($?DESIGN_BLOCK == 0) then
   setenv DESIGN_BLOCK :
 endif
 
 if {(test -e .dop/env/DESIGN_STAGE)} then
   setenv DESIGN_STAGE `cat .dop/env/DESIGN_STAGE`
-else if {(test -e $HOME/.dop/env/DESIGN_STAGE)} then
-  setenv DESIGN_STAGE `cat $HOME/.dop/env/DESIGN_STAGE`
+#else if {(test -e $HOME/.dop/env/DESIGN_STAGE)} then
+#  setenv DESIGN_STAGE `cat $HOME/.dop/env/DESIGN_STAGE`
 else if ($?DESIGN_STAGE == 0) then
   setenv DESIGN_STAGE :
 endif
 
 if {(test -e .dop/env/DESIGN_VERSN)} then
   setenv DESIGN_VERSN `cat .dop/env/DESIGN_VERSN`
-else if {(test -e $HOME/.dop/env/DESIGN_VERSN)} then
-  setenv DESIGN_VERSN `cat $HOME/.dop/env/DESIGN_VERSN`
+#else if {(test -e $HOME/.dop/env/DESIGN_VERSN)} then
+#  setenv DESIGN_VERSN `cat $HOME/.dop/env/DESIGN_VERSN`
 else if ($?DESIGN_VERSN == 0) then
   setenv DESIGN_VERSN :
 endif
@@ -89,3 +89,10 @@ else if ($?CURR_VERSN == 0) then
   setenv CURR_VERSN :version
 endif
 
+if {(test -e .dop/env/CURR_CONTR)} then
+  setenv CURR_CONTR `cat .dop/env/CURR_CONTR`
+else if {(test -e $HOME/.dop/env/CURR_VERSN)} then
+  setenv CURR_CONTR `cat $HOME/.dop/env/CURR_CONTR`
+else if ($?CURR_CONTR == 0) then
+  setenv CURR_CONTR :container
+endif
