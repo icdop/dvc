@@ -42,7 +42,7 @@ svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'D
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile
-svn import --quiet $tmpfile $PROJT_URL/.dvc/STAGE -m 'Stage Name'
+svn import --quiet $tmpfile $STAGE_URL/.dvc/STAGE -m 'Stage Name'
 rm -f $tmpfile
 
 set readme=`mktemp`

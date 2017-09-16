@@ -38,7 +38,7 @@ svn mkdir --quiet $PHASE_URL/.dvc -m "Design Platform Config Directory" --parent
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile
 echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet $tmpfile $PROJT_URL/.dvc/PHASE -m 'Project Phase Name'
+svn import --quiet $tmpfile $PHASE_URL/.dvc/PHASE -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
