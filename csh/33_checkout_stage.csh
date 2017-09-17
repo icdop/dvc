@@ -25,7 +25,7 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
-if ($status == 1) then
+if ($status != 0) then
    echo "ERROR: Cannot find Project Design Stage : $DESIGN_STAGE"
    exit 1
 endif

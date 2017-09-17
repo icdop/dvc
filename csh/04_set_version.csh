@@ -66,7 +66,7 @@ if (($version != "") && ($version != ":") && ($version != ".")) then
     $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
 endif
 
-if ($verbose_mode == 1) then
+if ($?verbose_mode) then
 echo "==============================="
 echo "DESIGN_PHASE = $DESIGN_PHASE"
 echo "DESIGN_BLOCK = $DESIGN_BLOCK"

@@ -34,20 +34,20 @@ if ($status == 1) then
    exit 1
 endif
 
-if ($verbose_mode == 1) then
+if ($?verbose_mode) then
    echo "------------------------------------------------------------"
    echo "URL: $DESIGN_URL"
    echo "------------------------------------------------------------"
-   if ($?info_mode == 1) then
+   if ($?info_mode) then
       svn info $DESIGN_URL
       echo "------------------------------------------------------------"
    endif
    svn list $DESIGN_URL -v
    echo "------------------------------------------------------------"
-else if ($?recursive_mode == 1) then
+else if ($?recursive_mode) then
 #   svn list $DESIGN_URL --recursive --depth immediates
    svn list $DESIGN_URL --recursive | grep -v -e \.dvc\/ -e \.dqi\/
-else if ($?xml_mode == 1) then
+else if ($?xml_mode) then
    svn list $DESIGN_URL --xml
 else
    svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/

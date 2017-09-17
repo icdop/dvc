@@ -22,7 +22,6 @@ if ($status == 0) then
    rm -fr $SVN_ROOT/$DESIGN_PROJT
 else
    echo "ERROR: Can not find Project Respository - $DESIGN_PROJT"
-   exit 1
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

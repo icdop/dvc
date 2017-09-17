@@ -33,7 +33,6 @@ if ($status == 0) then
     svn remove $BLOCK_URL -m "Remove Design Block : $DESIGN_BLOCK"
 else
     echo "ERROR: Can not find Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
-    exit 1
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

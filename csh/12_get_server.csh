@@ -8,8 +8,6 @@ endif
 if (($1 == "-v") || ($1 == "--verbose")) then
    set verbose_mode = 1
    shift argv
-else if ($?verbose_mode == 0) then
-   set verbose_mode = 0
 endif
 
 if ($1 == "--info") then

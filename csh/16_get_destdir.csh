@@ -30,7 +30,7 @@ if (($1 == "-d") || ($1 == "--dir")) then
       exit 0
    else
       echo "ERROR: Not a valid container dir : '$dir'"
-      exit -1
+      exit 1
    endif
 endif
 
@@ -68,7 +68,7 @@ if {(test -e $CONTAINER_DIR/.dvc/CONTAINER)} then
 else
    setenv DVC_PATH :/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container dir : '$CONTAINER_DIR'"
-   exit -1
+   exit 1
 endif
 
 exit 0

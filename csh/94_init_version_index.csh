@@ -113,7 +113,7 @@ echo "<p>Table created by $USER @ `date`</p>" >> $idxhtml
 echo "</body>" >> $idxhtml
 echo "</html>" >> $idxhtml
 
-if ($?idx_exist == 1) then
+if ($?idx_exist) then
    svn add --quiet --force $idxhtml
    svn commit --quiet  $idxhtml -m 'Update Directory Index' 
 else

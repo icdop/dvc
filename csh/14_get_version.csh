@@ -9,8 +9,6 @@ endif
 if (($1 == "-v") || ($1 == "--verbose")) then
    set verbose_mode = 1
    shift argv
-else if ($?verbose_mode == 0) then
-   set verbose_mode = 0
 endif
 
 if ($1 == "--info") then
@@ -50,7 +48,7 @@ else if ($?DESIGN_VERSN == 0) then
   setenv DESIGN_VERSN :
 endif
 
-if ( $?info_mode == 1) then
+if ($?info_mode) then
   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
   echo "PARM: DESIGN_BLOCK = $DESIGN_BLOCK"
   echo "PARM: DESIGN_STAGE = $DESIGN_STAGE"

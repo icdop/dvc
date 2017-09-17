@@ -18,7 +18,7 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
-if ($status == 1) then
+if ($status != 0) then
    echo "ERROR: Can not find Project Design Respository : $DESIGN_PROJT"
    exit 1
 endif
@@ -29,14 +29,14 @@ echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 if {(test -e $CURR_PROJT/.dvc/PROJECT)} then
    set orig_project=`cat $CURR_PROJT/.dvc/PROJECT`
    if (($orig_project != "") && ($orig_project != $DESIGN_PROJT)) then
-      if ($?force_mode == 1) then
+      if ($?force_mode) then
          echo "WARNING: removing previous project checkout data - $orig_project"
          rm -fr $CURR_PROJT
       else
          echo "ERROR: there is existing project checkout data - $orig_project"
          echo "       use --force option to replace it."
          setenv DESIGN_PROJT $orig_project
-         exit -1
+         exit 1
       endif
    endif 
 endif

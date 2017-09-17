@@ -37,7 +37,6 @@ if ($status == 0) then
     svn remove $STAGE_URL -m "Remove Design Stage : $DESIGN_STAGE"
 else
     echo "ERROR: Can not find Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
-    exit 1
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

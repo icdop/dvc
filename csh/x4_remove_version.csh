@@ -26,7 +26,6 @@ if ($status == 0) then
    svn remove $VERSN_URL -m "Remove Design Version $DESIGN_VERSN"
 else
    echo "ERROR: Can not find Design Version - $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
-   exit 1
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

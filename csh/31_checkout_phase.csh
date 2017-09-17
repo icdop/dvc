@@ -24,7 +24,7 @@ endif
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
-if ($status == 1) then
+if ($status != 0) then
    echo "ERROR: Cannot find Project Design Phase : $DESIGN_PHASE"
    exit 1
 endif

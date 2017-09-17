@@ -47,7 +47,7 @@ case "svn":
      set curr_port = `cat $SVN_ROOT/.dvc/svnserve.port`
      if ($SVN_HOST != $curr_host) then
         echo "EORROR: other SVN server is already runining on another host - $curr_host $curr_port"
-        exit -1
+        exit 1
      else if ($SVN_PORT != $curr_port) then
         echo "WARNING: other SVN server is already runining on another port - $curr_port "
         echo "Stoping SVN server : $SVN_PID"
@@ -103,7 +103,7 @@ case "pid":
   breaksw
 default:
   echo "ERROR: Unsupported option '$1'"
-  exit -1
+  exit 1
 endsw
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

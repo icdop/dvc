@@ -39,6 +39,8 @@ else
    endif
    svn checkout --quiet $CONTR_URL $CURR_PROJT/$DVC_PATH --depth infinity
 endif
+    
+$CSH_DIR/00_set_env.csh DESIGN_CONTR $DESIGN_CONTR
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="

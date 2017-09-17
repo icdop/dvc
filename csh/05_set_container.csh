@@ -25,10 +25,8 @@ if {(test -e $CURR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
    setenv CONTAINER_DIR $CURR_VERSN/$DESIGN_CONTR
    setenv DVC_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
 else
-   echo "ERROR: Not a valid container name : '$DESIGN_CONTR', roll back to root container"
-   setenv DESIGN_CONTR .
-   setenv CONTAINER_DIR $CURR_VERSN/.
-   setenv DVC_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
+   setenv CONTAINER_DIR $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+   setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 endif
 
 if {(test -h $CURR_CONTR)} then

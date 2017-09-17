@@ -4,12 +4,6 @@ if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
-if ($1 == "--verbose") then
-   set verbose_mode = 1
-   shift argv
-else if ($?verbose_mode == 0) then 
-   set verbose_mode = 0
-endif
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..

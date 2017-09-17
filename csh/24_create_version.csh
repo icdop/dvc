@@ -32,7 +32,7 @@ svn info $PHASE_URL >& /dev/null
 if ($status != 0) then
    $CSH_DIR/21_create_phase.csh $DESIGN_PHASE
 endif
-echo "$BLOCK_URL"
+
 svn info $BLOCK_URL >& /dev/null
 if ($status != 0) then
    $CSH_DIR/22_create_block.csh $DESIGN_BLOCK

@@ -20,9 +20,8 @@ source $CSH_DIR/05_set_container.csh
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_PATH
 svn info $CONTR_URL >& /dev/null
-if ($status == 1) then
+if ($status != 0) then
    echo "ERROR: Cannot find container : $DVC_PATH"
-   echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
    exit 1
 endif
 
@@ -36,7 +35,7 @@ if {(test -e $CURR_VERSN)} then
   ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 else
   echo "ERROR: checkout version first before assigning container!" 
-  exit -1
+  exit 1
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

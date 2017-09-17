@@ -23,9 +23,9 @@ setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 
 svn info $VERSN_URL >& /dev/null
-if ($status == 1) then
+if ($status != 0) then
    echo "ERROR: Cannot find Project Design Version : $DESIGN_VERSN"
-   exit -1
+   exit 1
 endif
 
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
