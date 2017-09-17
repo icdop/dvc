@@ -5,7 +5,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_PROJT>"
    exit -1
 endif
-#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -14,6 +15,8 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/03_set_project.csh
+
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
 if ($status == 0) then
@@ -39,6 +42,7 @@ else
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
+   svn import --quiet  $ETC_DIR/css/   $PROJT_URL/.dvc/css -m 'HTML/CSS template' 
 
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile
@@ -46,21 +50,21 @@ else
    svn import --quiet $tmpfile $PROJT_URL/.dvc/PROJECT -m 'Project Name'
    rm -f $tmpfile
 
-#   set readme="/tmp/README_PROJT.txt"
    set readme=`mktemp`
    echo -n "" > $readme
-   echo "# Design Version Control Directory" >> $readme
-   echo "=======================================" >> $readme
+   echo "# Design Project Root Directory" >> $readme
+   echo "====================================" >> $readme
    echo "* Project : $DESIGN_PROJT" >> $readme
-   echo "* Path    : $DESIGN_PROJT/" >> $readme
    echo "* Author  : $USER" >> $readme
-   echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
-   echo "=======================================" >> $readme
+   echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
+   echo "====================================" >> $readme
    svn import --quiet $readme $PROJT_URL/.dvc/README -m 'Initial Design Version Directory'
    rm -fr $readme
    
 endif
 
-#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-echo ""
+$CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
 exit 0

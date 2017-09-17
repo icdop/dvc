@@ -5,7 +5,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
-#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -39,5 +40,6 @@ else
    svn checkout --quiet $CONTR_URL $CURR_PROJT/$DVC_PATH --depth infinity
 endif
 
-#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
 exit 0

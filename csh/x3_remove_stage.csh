@@ -1,8 +1,11 @@
 #!/bin/csh -f
+set prog=$0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -34,8 +37,9 @@ if ($status == 0) then
     svn remove $STAGE_URL -m "Remove Design Stage : $DESIGN_STAGE"
 else
     echo "ERROR: Can not find Design Stage - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE"
+    exit 1
 endif
 
-
-
-
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
+exit 0

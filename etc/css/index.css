@@ -1,0 +1,10 @@
+
+html {min-width: 776px; }
+body {background: #6D89DD; font-family: arial;}
+
+#indextable {border:10px;width:100%;text-align:left;background-color:#0080FF;}
+#indextable tr.header{vertical-align:center;background-color:#20A0FF;}
+#indextable tr.title{vertical-align:center;background-color:#20A0FF;}
+#indextable td.col1{width:10%;vertical-align:center;background-color:#20E8FF;}
+#indextable td.col2{width:30%;vertical-align:top;background-color:#20E8FF;}
+#indextable td.col3{width:60%;vertical-align:center;background-color:#20E8FF;}

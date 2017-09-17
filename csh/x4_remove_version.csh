@@ -1,8 +1,11 @@
 #!/bin/csh -f
+set prog=$0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_VERSN>"
+   echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -16,10 +19,16 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
+
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
-   echo "INFO: Remove Project Design Version - :/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
+   echo "INFO: Remove Project Design Version - $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
    svn remove $VERSN_URL -m "Remove Design Version $DESIGN_VERSN"
 else
-   echo "ERROR: Can not find Design Version - :/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
+   echo "ERROR: Can not find Design Version - $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN"
+   exit 1
 endif
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
+exit 0

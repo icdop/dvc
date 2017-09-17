@@ -101,7 +101,6 @@ checkout_project:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout project to '$(CURR_PROJT)' dir"
 	@echo "#---------------------------------------------------"
-	rm -fr $(CURR_PROJT)
 	dvc_checkout_project	$(DESIGN_PROJT)
 
 checkout_version:
@@ -254,7 +253,7 @@ checkin_container:
 
 
 tree:
-	tree $(CURR_PROJT)
+	dvc_list_tree $(CURR_PROJT)
 
 list: 
 	dvc_list_project --recursive
@@ -357,4 +356,9 @@ remove_setup:
 	rm -fr .dop $(CURR_PROJT)
 
 
-
+report:
+	dvc_init_project_index
+	dvc_init_phase_index
+	dvc_init_block_index
+	dvc_init_stage_index
+	dvc_init_version_index

@@ -29,13 +29,13 @@ if ( $?info_mode == 1) then
   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
-if {(test -e .dop/env/PROJT_URL)} then
-  setenv PROJT_URL      `cat .dop/env/PROJT_URL`
+#if {(test -e .dop/env/PROJT_URL)} then
+#  setenv PROJT_URL      `cat .dop/env/PROJT_URL`
 #else if {(test -e $HOME/.dop/env/PROJT_URL)} then
 #  setenv PROJT_URL      `cat $HOME/.dop/env/PROJT_URL`
-else if ($?PROJT_URL == 0) then
-  setenv PROJT_URL      $SVN_URL/$DESIGN_PROJT
-endif
+#else if ($?PROJT_URL == 0) then
+#  setenv PROJT_URL      $SVN_URL/$DESIGN_PROJT
+#endif
 
 if ( $?info_mode == 1) then
   echo "PARM: PROJT_URL    = $PROJT_URL"

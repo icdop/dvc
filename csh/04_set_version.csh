@@ -11,8 +11,12 @@ endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/14_get_version.csh
 
-set dvc_path = $1
-if ($dvc_path != "") then
+if ($1 != "") then 
+   set dvc_path = $1
+   shift argv
+endif
+
+if ($?dvc_path != 0) then
    set version  = $dvc_path:t
    if ($dvc_path != $version) then
       set dvc_path = $dvc_path:h
@@ -44,29 +48,29 @@ endif
 
 if (($phase != "") && ($phase != ":") && ($phase != ".")) then
     setenv DESIGN_PHASE $phase
-    $CSH_DIR/00_set_env.csh --quiet DESIGN_PHASE $DESIGN_PHASE
+    $CSH_DIR/00_set_env.csh DESIGN_PHASE $DESIGN_PHASE
 endif
 
 if (($block != "") && ($block != ":") && ($block != ".")) then
     setenv DESIGN_BLOCK $block
-    $CSH_DIR/00_set_env.csh --quiet DESIGN_BLOCK $DESIGN_BLOCK
+    $CSH_DIR/00_set_env.csh DESIGN_BLOCK $DESIGN_BLOCK
 endif
 
 if (($stage != "") && ($stage != ":") && ($stage != ".")) then
     setenv DESIGN_STAGE $stage
-    $CSH_DIR/00_set_env.csh --quiet DESIGN_STAGE $DESIGN_STAGE
+    $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
 endif
 
 if (($version != "") && ($version != ":") && ($version != ".")) then
     setenv DESIGN_VERSN $version
-    $CSH_DIR/00_set_env.csh --quiet DESIGN_VERSN $DESIGN_VERSN
+    $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
 endif
 
+if ($verbose_mode == 1) then
 echo "==============================="
-#echo "DESIGN_PROJT = $DESIGN_PROJT"
-#echo "-------------------------------"
 echo "DESIGN_PHASE = $DESIGN_PHASE"
 echo "DESIGN_BLOCK = $DESIGN_BLOCK"
 echo "DESIGN_STAGE = $DESIGN_STAGE"
 echo "DESIGN_VERSN = $DESIGN_VERSN"
 echo "==============================="
+endif

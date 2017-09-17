@@ -52,3 +52,5 @@ else if ($?xml_mode == 1) then
 else
    svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/
 endif
+
+exit 0

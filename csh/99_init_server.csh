@@ -5,7 +5,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <start|stop|file|svn> [SVN_ROOT]"
    exit -1
 endif
-#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -36,7 +37,7 @@ case "start":
      $CSH_DIR/02_set_server.csh SVN_MODE "file"
      $CSH_DIR/02_set_server.csh SVN_URL  "file://$SVN_ROOT"
      echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-     echo ""
+     echo "======================================================="
      exit 0
      
   endif
@@ -61,7 +62,7 @@ case "svn":
         $CSH_DIR/02_set_server.csh SVN_PORT $SVN_PORT
         $CSH_DIR/02_set_server.csh SVN_URL  "svn://$SVN_HOST"":$SVN_PORT/"
         echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-        echo ""
+        echo "======================================================="
         exit 0
      endif
   endif
@@ -105,6 +106,6 @@ default:
   exit -1
 endsw
 
-#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-#echo ""
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
 exit 0

@@ -14,20 +14,16 @@ source $CSH_DIR/13_get_project.csh
 
 mkdir -p .dop/env
 
-if (($1 != "") && ($1 != ":") && ($1 != ".")) then
-    setenv DESIGN_PROJT $1
-    echo $DESIGN_PROJT > .dop/env/DESIGN_PROJT
-    echo "SETP: DESIGN_PROJT = $DESIGN_PROJT"
+if ($1 == "--force") then
+   set force_mode=1
+   shift argv
 endif
 
-if (($2 != "") && ($2 != ":")) then
-    setenv PROJT_URL  $2
-    echo $PROJT_URL   > .dop/env/PROJT_URL
-    echo "SETP: PROJT_URL  = $PROJT_URL"
-else if ($?SVN_URL != 0) then
-    setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-    echo $PROJT_URL   > .dop/env/PROJT_URL
-    echo "SETP: PROJT_URL  = $PROJT_URL"
+if ($1 != "") then
+  if (($1 != ":") && ($1 != ".")) then
+    setenv DESIGN_PROJT $1
+  endif
+  shift argv
 endif
 
 exit 0

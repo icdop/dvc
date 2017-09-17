@@ -4,7 +4,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
-#echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -17,7 +18,8 @@ source $CSH_DIR/14_get_version.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1
-   $CSH_DIR/00_set_env.csh --quiet DESIGN_STAGE $DESIGN_STAGE
+   shift argv
+   $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -38,6 +40,7 @@ svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parent
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
 svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
 svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
+svn import --quiet $ETC_DIR/css/    $STAGE_URL/.dvc/css -m 'HTML/CSS template'
 
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile
@@ -47,16 +50,13 @@ rm -f $tmpfile
 
 set readme=`mktemp`
 echo -n "" > $readme
-echo "# Design Version Control Directory" >> $readme
-echo "=======================================" >> $readme
-echo "* Project : $DESIGN_PROJT" >> $readme
+echo "====================================" >> $readme
 echo "* Phase   : $DESIGN_PHASE" >> $readme
 echo "* Block   : $DESIGN_BLOCK" >> $readme
 echo "* Stage   : $DESIGN_STAGE" >> $readme
-echo "* Path    : $DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/" >> $readme
 echo "* Author  : $USER" >> $readme
-echo "* Date    : `date +%Y%m%d_%H%M%S`" >> $readme
-echo "=======================================" >> $readme
+echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
+echo "====================================" >> $readme
 
 svn import --quiet $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
 rm -fr $readme
@@ -64,6 +64,6 @@ rm -fr $readme
 
 endif
 
-#echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-echo ""
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
 exit 0

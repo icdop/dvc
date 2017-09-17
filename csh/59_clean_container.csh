@@ -4,6 +4,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -23,4 +25,9 @@ if {(test -d $CONTAINER_DIR)} then
    )
 else
    echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
+   exit 1
 endif
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
+exit 0

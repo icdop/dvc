@@ -4,6 +4,7 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_BLOCK>"
    exit -1
 endif
+echo "======================================================="
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
@@ -51,5 +52,5 @@ endif
 ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK $CURR_BLOCK
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-echo ""
+echo "======================================================="
 exit 0

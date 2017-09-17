@@ -5,6 +5,7 @@ if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
+echo "======================================================="
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
@@ -39,4 +40,5 @@ else
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
 exit 0

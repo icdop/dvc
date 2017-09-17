@@ -5,6 +5,7 @@ if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN>"
    exit -1
 endif
+echo "======================================================="
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
@@ -60,5 +61,5 @@ ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR
 $CSH_DIR/05_set_container.csh .
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
-echo ""
+echo "======================================================="
 exit 0

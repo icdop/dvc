@@ -13,10 +13,11 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 
-if (($1 != "") && ($1 != ".")) then
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
    setenv DESIGN_PHASE $1
-   echo "PARM: DESIGN_PHASE = $DESIGN_PHASE"
    shift argv
+   endif
 endif
 
 # Use "source list_dir.csh" and specify DESIGN_URL 

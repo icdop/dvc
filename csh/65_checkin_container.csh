@@ -4,6 +4,8 @@ if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -14,13 +16,13 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 source $CSH_DIR/15_get_container.csh
 
-#if ($status < 0) then 
-#   exit $status 
-#endif
-
 if {(test -d $CONTAINER_DIR)} then
    (cd $CONTAINER_DIR; svn add  . --force --depth infinity)
    svn commit $CONTAINER_DIR -m 'Update container' 
 else
    echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
+   exit 1
 endif
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="

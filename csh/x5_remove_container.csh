@@ -1,9 +1,12 @@
 #!/bin/csh -f
 #set verbose=1
+set prog=$0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_VERSN> <DESIGN_STAGE>"
+   echo "Usage: $prog <DESIGN_VERSN> <DESIGN_STAGE>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -20,4 +23,9 @@ if {((test -d $CONTAINER_DIR)&&(test -d $CURR_PROJT/$DVC_PATH))} then
 #   rm -fr $CURR_CONTR
 else
    echo "ERROR: Can not remove Design Container '$CONTAINER_DIR'!"
+   exit 1
 endif
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
+exit 0

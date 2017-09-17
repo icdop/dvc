@@ -46,10 +46,10 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
       set envval = $2
       setenv $envname $envval
       echo $envval  > $env_home/.dop/env/$envname
-      if ($?quiet_mode) then
-         echo $envval
-      else
+      if ($?quiet_mode == 0) then
          echo "SETP: $envname = $envval"
+      else
+         echo $envval
       endif
    else if {(test -e $env_home/.dop/env/$envname)} then
       if ($?quiet_mode) then

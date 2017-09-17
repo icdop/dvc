@@ -1,8 +1,11 @@
 #!/bin/csh -f
+set prog=$0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $0:t <DESIGN_BLOCK> <DESIGN_PHASE>"
+   echo "Usage: $prog <DESIGN_BLOCK> <DESIGN_PHASE>"
    exit -1
 endif
+echo "======================================================="
+echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
@@ -30,4 +33,9 @@ if ($status == 0) then
     svn remove $BLOCK_URL -m "Remove Design Block : $DESIGN_BLOCK"
 else
     echo "ERROR: Can not find Design Block - /$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK"
+    exit 1
 endif
+
+echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
+echo "======================================================="
+exit 0
