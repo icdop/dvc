@@ -114,18 +114,18 @@
 	:stage -> :/$phase/$block/$stage
 	:version -> :/$phase/$block/$stage/$version
 
-* Design Object Container (check if .dvc_path exist)
+* Design Object Container Folder (check if .dvc/CONTAINER exist)
 
   * create_container 
 
 	:/$phase/$block	/$stage	/$versn	/$DESIGN_CONTR/
-						.dvc_path
+						.dvc/CONTAINER
 
   * checkout_container 
 
-	:version/$DESIGN_CONTR/.dvc_path
+	:version/$DESIGN_CONTR/.dvc/CONTAINER
 
-	:container -> .dvc_version/$DESIGN_CONTR
+	:container -> :version/$DESIGN_CONTR
 
 
 * ========================================================
@@ -181,7 +181,7 @@
 ## 4. Sub folder naming rule
 
   ** ------------------------------------------
-  ** $project/.dvc/SUB_FOLDER_RULE 
+  ** $project/.dvc/SUB_FOLDERS
   ** ------------------------------------------
 
   Example: (etc/rule/DEFINE_PAHSE)
@@ -195,7 +195,7 @@
 
 
   ** ------------------------------------------
-  ** $block/.dvc/SUB_FOLDER_RULE 
+  ** $block/.dvc/SUB_FOLDERS 
   ** ------------------------------------------
 
   Example: (etc/rule/DEFINE_STAGE)

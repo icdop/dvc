@@ -87,7 +87,6 @@ foreach name ($name_list)
        echo "</pre></td>" >> $idxhtml
        echo "<td class=col3><pre>" >> $idxhtml
        echo '<object name="design_files" type="text/html" data="../$dir/.dvc/DESIGN_FILES"></object>'>> $idxhtml
-       tree $CURR_PROJT/$DVC_PATH >> $idxhtml
        echo "</pre></td></tr>" >> $idxhtml
     else
        set flist="$flist $name"

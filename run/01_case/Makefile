@@ -6,7 +6,7 @@ clean:
 	rm -fr :version
 	rm -fr .dop	
 
-report:
+index:
 	dvc_init_project_index
 	dvc_init_phase_index
 	dvc_init_block_index

@@ -14,7 +14,7 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
-source $CSH_DIR/15_get_container.csh
+source $CSH_DIR/15_set_container.csh
 
 if {(test -d $CONTAINER_DIR)} then
    (cd $CONTAINER_DIR; svn add  . --force --depth infinity)

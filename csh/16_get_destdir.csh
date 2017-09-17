@@ -10,6 +10,8 @@ if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/
 endif
 setenv CSH_DIR $DVC_HOME/csh 
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_version.csh
 
 if (($1 == "-v") || ($1 == "--verbose")) then
    set verbose_mode = 1
@@ -32,8 +34,6 @@ if (($1 == "-d") || ($1 == "--dir")) then
    endif
 endif
 
-source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
 
 if (($1 == "-c") || ($1 == "--container")) then
    shift argv

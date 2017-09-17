@@ -4,53 +4,41 @@
 dvc_init_server:
 	Usage: $prog [svn|file|start|stop]
 	Description:
-	  svn   -  set to svn server mode 
-	  file  -  set to local file access mode
+	  svn   -  start with svn server mode 
+	  file  -  start with file access mode
 
-	  start -  start server with current SVN_MODE mode
+	  start -  start server using SVN_MODE mode
 	  stop  -  stop svn server
-	  pid   -  display current server pid and job
+
+	  pid   -  return current server pid
+	  pid   -  show current server job with ps command
 
  
 #
 # Environment Variable Access
 #
-dvc_set_env:   
-	Usage: $prog [--global|--local] [--reset] <variable> <value>
-	Description:
-	  set variable value and store it in .dop/env
-	if <variable> is not specified, list all existing variables
-
-dvc_set_var:   
-	Usage: $prog [--global|-local] [--reset] <variable> <value>
-	Description:
-	  set variable value and store it in .dop/var
-	if <variable> is not specified, list all existing variables
-
 dvc_set_server:   
 	Usage: $prog <var> <value>
 	Description:
 	  set the SVN data root and the svn server mode
-	store the value in .dop/server/
+	store the value in ~/.dop/server/,
+	available server variable:
 	  SVN_ROOT - server data root
 	  SVN_MODE - "file", "svn"
 	  SVN_HOST - svn server hostname
 	  SVN_PORT - svn server port
 
-dvc_set_project:   
-	Usage: $prog <project>
+dvc_get_server:
+	Usage: $prog
 	Description:
-	  Set the default project name and store the value to .dop/env/
+	  fetch the SVN server setting from ~/.dop/server/
 
-dvc_set_version:   
-	Usage: $prog <version> <stage> <block> <phase>
-	Description:
-	  Set the default version path and store the value to .dop/env/
 
-dvc_set_container:   
-	Usage: $prog <DESIGN_CONTR>
+dvc_set_env:   
+	Usage: $prog [--global|--local] [--reset] <variable> <value>
 	Description:
-	  Set default working container and create .container link
+	  set variable value and store it in .dop/env
+	if <variable> is not specified, list all existing variables
 
 dvc_get_env:
 	Usage: $prog [--global] [--all] <variable>
@@ -62,37 +50,59 @@ dvc_get_env:
 	--all
 		list all varaibles value 
 
+
+dvc_set_var:   
+	Usage: $prog [--reset] <variable> <value>
+	Description:
+	  set variable value and store it in .dop/var
+	if <variable> is not specified, list all existing variables
+
+
 dvc_get_var:
-	Usage: $prog [--global] [--all] <variable>
+	Usage: $prog [--all] <variable>
 	Description:
 	  get the value of variable from .dop/var/
-	--global
-		search the variable in ~/.dop/var
-		otherwise, find the variable in ./.dop/var (--local)
 	--all
 		list all varaibles value 
 
-dvc_get_server:
-	Usage: $prog
+
+#
+# Design Variable Access
+#
+
+dvc_set_project:   
+	Usage: $prog <project>
 	Description:
-	  fetch the SVN server setting from .dop/server/
-	SVN_ROOT , SVN_URL , PROJT_URL
+	  Set the default project name and store the value to .dop/env/
+
+dvc_set_version:   
+	Usage: $prog /<phase>/<block>/<stage>/<version> 
+	Description:
+	  Assign default version path and store the value to .dop/env/
+
+dvc_set_container:   
+	Usage: $prog <container>
+	Description:
+	  Assign default working container, 
+	  set the value of DESIGN_CONTR, CONTAINER_DIR and DVC_PATH
 
 dvc_get_project:   
 	Usage: $prog
 	Description:
-	  fetch the PROJT_URL from .dop/env/
+	  fetch the DESIGN_PROJT value from .dop/env/
 
 dvc_get_version:   
 	Usage: $prog 
 	Description:
 	  fetch working design folder name from .dop/env/
 	DESIGN_PHASE, DESIGN_BLOCK, DESIGN_STAGE, DESIGN_VERSN
+	CURR_PHASE, CURR_BLOCK, CURR_STAGE, CURR_VERSN
 
 dvc_get_container:   
-	Usage: $prog <DESIGN_CONTR>
+	Usage: $prog 
 	Description:
-	  fectch working container name from .d/env/	
+	  fectch working container name from .dop/env/
+	DESIGN_CONTR, CURR_CONTR
 
 #
 # Handle Design Project
@@ -111,13 +121,8 @@ dvc_checkout_project:
 	--depth infinity
 		checkout all data and subfolder under version folder 
 
-dvc_set_project:
-	Usage: $prog <DESIGN_PROJT>
-	Description:
-	  set current working project
-
 #
-# Create Design Version Folder in Server
+# Create Design Version Folder at Server side
 #
 dvc_create_phase:   
 	Usage: $prog <DESIGN_PHASE>
@@ -126,7 +131,7 @@ dvc_create_block:
 dvc_create_stage:   
 	Usage: $prog <DESIGN_STAGE>
 dvc_create_version:   
-	Usage: $prog <DESIGN_VERSN> [<DESIGN_STAGE>]
+	Usage: $prog <DESIGN_VERSN> | <FULL_VERSION_PATH>
 
 #
 # Checkout Design Version Folder to Working Directory
@@ -185,39 +190,53 @@ dvc_checkout_container:
 	  2) create a .container link to .project/:/:/:/:/:/$container
 	.container ->	.design_versn/$container
 
-dvc_update_container:   
+dvc_checkin_container:   
 	Usage: $prog <CONTAINER>
 	Description:
-	  update change of design objects from SVN server,
-	merge the change with local modification.
+	  add all objects in container folder and then commit to SVN server
 
+dvc_clean_container:   
+	Usage: $prog [<CONTAINER>]
+	Description:
+	  clean up design object in container (on server side)
+
+
+
+#
+# Handle Design Objects Individually and Commit the change
+#
 dvc_add_object:   
-	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
+	Usage: $prog <DESIGN_OBJECT>
 	Description:
 	  add exiting file <CONTAINER>/<DESIGN_OBJECT> to SVN repository
 
 dvc_copy_object:   
-	Usage: $prog <CONTAINER> <SRC_FILE> [<DESIGN_OBJECT>]
+	Usage: $prog <SRC_FILE> [<DESIGN_OBJECT>]
 	Description:
 	  copy the <SRC_FILE> to container, change name to <DESIGN_OBJECT>
 	checkin the file into local repository
 
 dvc_link_object:   
-	Usage: $prog <CONTAINER> <SRC_FILE> [<OBJECT_LINK>]
+	Usage: $prog <SRC_FILE> [<OBJECT_LINK>]
 	Description:
 	  create a link to the source file <SRC_FILE>
 	checkin the link into local repository
 
 dvc_rename_object:   
-	Usage: $prog <CONTAINER> <DESIGN_OBJECT> <NEW_NAME>
+	Usage: $prog <DESIGN_OBJECT> <NEW_NAME>
 	Description:
 	  rename the design object to new name
 
 dvc_delete_object:   
-	Usage: $prog <CONTAINER> <DESIGN_OBJECT>
+	Usage: $prog <DESIGN_OBJECT>
 	Description:
 	  delete the design object from local repository
 
+dvc_update_container:   
+	Usage: $prog <CONTAINER>
+	Description:
+	  update change of design objects from SVN server,
+	merge the change with local modification.
 
 dvc_commit_container:   
 	Usage: $prog <CONTAINER>
@@ -226,11 +245,6 @@ dvc_commit_container:
 	change by add, copy, link, rename, delete will only affect the
 	local respository, it will only be push to server when you commit
 	it.
-
-dvc_clean_container:   
-	Usage: $prog [<CONTAINER>]
-	Description:
-	  clean up design object in container (on server side)
 
 
 #
@@ -265,6 +279,11 @@ dvc_list_container:
 	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  list all objects under container directory
+
+dvc_list_tree:   
+	Usage: $prog <dir>
+	Description:
+	  call unix tree command to print out tree structure
 
 dvc_list_dir:   
 	Usage: $prog <project/phase/block/stage/version/container>

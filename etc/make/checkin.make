@@ -356,7 +356,7 @@ remove_setup:
 	rm -fr .dop $(CURR_PROJT)
 
 
-report:
+index:
 	dvc_init_project_index
 	dvc_init_phase_index
 	dvc_init_block_index

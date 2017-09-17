@@ -13,7 +13,7 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
-source $CSH_DIR/15_get_container.csh
+source $CSH_DIR/05_set_container.csh
 
 # Use "source list_dir.csh" and specify DESIGN_URL 
 # is to preserve option modes and pass them to list_dir.csh
