@@ -35,33 +35,41 @@ dvc_get_server:
 
 
 dvc_set_env:   
-	Usage: $prog [--global|--local] [--reset] <variable> <value>
+	Usage: $prog [--global|--local] [--reset] <env_name> <value>
 	Description:
-	  set variable value and store it in .dop/env
-	if <variable> is not specified, list all existing variables
+	  set variable value and store it in .dop/env  $env(env_name)
+	if <env_name> is not specified, list all existing variables
 
 dvc_get_env:
-	Usage: $prog [--global] [--all] <variable>
+	Usage: $prog [--global] [--all] <env_name>
 	Description:
-	  get the value of variable from .dop/env/
+	  get the value of env_name from .dop/env/
+	--local (default)
+		search the env_name in $(PWD)/.dop/env
 	--global
-		search the variable in ~/.dop/env
-		otherwise, find the variable in ./.dop/env (--local)
+		search the env_name in $(HOME)/.dop/env
+	--script
+		print the value in shell script mode
+	--tcl
+		print the value in tcl script mode
 	--all
 		list all varaibles value 
 
 
-dvc_set_var:   
-	Usage: $prog [--reset] <variable> <value>
+dvc_set_dqi:
+	Usage: $prog [--root <dqi_root>] [--reset] <dqi_name> [<dqi_value>]
 	Description:
-	  set variable value and store it in .dop/var
-	if <variable> is not specified, list all existing variables
+	  store the dqi_value into file $dqi_root/.dqi/$dqi_name
+	if <dqi_name> is not specified, list all existing dqi name
+
+	--root $dqi_root : dqi variable are stored in $dqi_root/.dqi
+		    default dqi root is stored in env(DQI_ROOT) 
 
 
-dvc_get_var:
-	Usage: $prog [--all] <variable>
+dvc_get_dqi:
+	Usage: $prog [-roor <dqi_root>] [--all] <dqi_name>
 	Description:
-	  get the value of variable from .dop/var/
+	  return the value of dqi variable
 	--all
 		list all varaibles value 
 

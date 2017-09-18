@@ -8,8 +8,6 @@ endif
 if ($1 == "--reset") then
    set reset=1
    shift argv
-else
-   set reset=0
 endif
 
 mkdir -p $HOME/.dop/server
@@ -17,7 +15,7 @@ mkdir -p $HOME/.dop/server
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set envname = $1
-   if (($reset == 1)||($2 == "--reset")) then
+   if (($?reset)||($2 == "--reset")) then
       echo "INFO: remove env('$envname')"
       rm -f $HOME/.dop/server/$envname
    else if ($2 != "") then

@@ -5,13 +5,13 @@ bin: csh/*
 	mkdir -p $(BIN_PATH)
 	rm -f $(BIN_PATH)/dvc_*
 	ln -f -s $(CSH_PATH)/00_set_env.csh			$(BIN_PATH)/dvc_set_env
-	ln -f -s $(CSH_PATH)/01_set_var.csh			$(BIN_PATH)/dvc_set_var
+	ln -f -s $(CSH_PATH)/01_set_dqi.csh			$(BIN_PATH)/dvc_set_dqi
 	ln -f -s $(CSH_PATH)/02_set_server.csh			$(BIN_PATH)/dvc_set_server
 	ln -f -s $(CSH_PATH)/03_set_project.csh			$(BIN_PATH)/dvc_set_project
 	ln -f -s $(CSH_PATH)/04_set_version.csh			$(BIN_PATH)/dvc_set_version
 	ln -f -s $(CSH_PATH)/05_set_container.csh		$(BIN_PATH)/dvc_set_container
 	ln -f -s $(CSH_PATH)/10_get_env.csh			$(BIN_PATH)/dvc_get_env
-	ln -f -s $(CSH_PATH)/11_get_var.csh			$(BIN_PATH)/dvc_get_var
+	ln -f -s $(CSH_PATH)/11_get_dqi.csh			$(BIN_PATH)/dvc_get_dqi
 	ln -f -s $(CSH_PATH)/12_get_server.csh			$(BIN_PATH)/dvc_get_server
 	ln -f -s $(CSH_PATH)/13_get_project.csh			$(BIN_PATH)/dvc_get_project
 	ln -f -s $(CSH_PATH)/14_get_version.csh			$(BIN_PATH)/dvc_get_version
