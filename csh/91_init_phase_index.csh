@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PROJT>"
+   echo "Usage: $prog <DESIGN_PHASE>"
    exit -1
 endif
 echo "======================================================="

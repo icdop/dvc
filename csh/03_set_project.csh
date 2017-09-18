@@ -12,8 +12,6 @@ endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/13_get_project.csh
 
-mkdir -p .dop/env
-
 if ($1 == "--force") then
    set force_mode=1
    shift argv
