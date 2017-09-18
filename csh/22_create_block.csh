@@ -38,7 +38,6 @@ echo "INFO: Create Project Design Block : $DESIGN_BLOCK"
 svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
 svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
-svn import --quiet $ETC_DIR/css/    $BLOCK_URL/.dvc/css -m 'HTML/CSS template'
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile

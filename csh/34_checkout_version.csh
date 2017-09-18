@@ -35,10 +35,10 @@ mkdir -p $CURR_PROJT/$DVC_PATH
 
 if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
    svn update --quiet --force $CURR_PROJT/$DVC_PATH --set-depth $depth_mode
-   svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dvc
+   svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dvc --set-depth infinity
 else
    svn checkout --force $VERSN_URL $CURR_PROJT/$DVC_PATH --depth $depth_mode
-   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc
+   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc --depth infinity
 endif
 
 rm -f $CURR_PROJT/:

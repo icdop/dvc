@@ -15,48 +15,47 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/08_set_report.csh
 
-$CSH_DIR/30_checkout_project.csh $DESIGN_PROJT
-svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc --depth immediates
-
-set phase_list=`$CSH_DIR/40_list_project.csh $DESIGN_PROJT`
-if ($status != 0) then
-   echo "ERROR: Can access project folder: $DESIGN_PROJT"
-   exit 1
-endif
-
-set idxhtml="$CURR_PROJT/.dvc/index.htm"
-if {(test -e $idxhtml)} then
-   set idx_exist=1
-else
-   set idxhtml=`mktemp`
-endif
-
-set dvcpath=$DESIGN_PROJT
 set project=$DESIGN_PROJT
+#rm -fr $CURR_PROJT/.dvc
+#$CSH_DIR/30_checkout_project.csh $project
+#svn checkout --force $PROJT_URL $CURR_PROJT --depth immediates
+#svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc
 
-echo "<html>" > $idxhtml
-echo "<head>" >> $idxhtml
-echo "<title>Project Index Table : $DESIGN_PROJT </title>" >> $idxhtml
-echo '<link rel="stylesheet" type="text/css" href="css/index.css" > '>> $idxhtml 
-eval $cmd_get_css >> $idxhtml 
-echo "</head>" >> $idxhtml
+setenv DVC_PATH ""
 
-echo "<body>" >> $idxhtml
-echo "<table id=indextable>" >> $idxhtml
+cp $ETC_DIR/css/index.css $CURR_PROJT/.dvc/index.css
 
-(source $ETC_DIR/html/title_dvcpath.htm)  >> $idxhtml
-(source $ETC_DIR/html/title_project.htm)   >> $idxhtml
-(source $ETC_DIR/html/table_project.htm) >> $idxhtml
-(source $ETC_DIR/html/title_phase.htm)   >> $idxhtml
+set project_idx="$CURR_PROJT/.dvc/index.htm"
+echo "<html>" > $project_idx
+echo "<head>" >> $project_idx
+echo "<title>Project Index Table : $DESIGN_PROJT </title>" >> $project_idx
+echo '<link rel="stylesheet" type="text/css" href="index.css" > '>> $project_idx 
+eval $cmd_get_css >> $project_idx 
+echo "</head>" >> $project_idx
+echo "<body>" >> $project_idx
+(source $ETC_DIR/html/project_report.csh)   >> $project_idx
+(source $ETC_DIR/html/phase_begin.csh)   >> $project_idx
+#set phase_list=`$CSH_DIR/40_list_project.csh`
+set phase_list=`dir $CURR_PROJT`
 foreach dir ($phase_list)
-    set phase=$dir:h
-    echo "Phase : $phase"
-    (source $ETC_DIR/html/table_phase.htm) >> $idxhtml
+  if ($dir != ":") then
+     set phase=$dir:h
+#    $CSH_DIR/30_checkout_phase.csh $phase
+     if {(test -e $CURR_PROJT/$phase/.dvc)} then
+        echo "Phase : $phase"
+        if ($phase == $DESIGN_PHASE) then
+           set marker="*"
+        else 
+           set market=""
+        endif
+        (source $ETC_DIR/html/phase_data.csh) >> $project_idx
+     endif
+  endif 
 end
-echo "</table>" >> $idxhtml
-echo "<p>Report created by $USER @ `date`</p>" >> $idxhtml
-echo "</body>" >> $idxhtml
-echo "</html>" >> $idxhtml
+(source $ETC_DIR/html/phase_end.csh) >> $project_idx
+echo "<p>Report created by $USER @ `date`</p>" >> $project_idx
+echo "</body>" >> $project_idx
+echo "</html>" >> $project_idx
 
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
