@@ -11,6 +11,7 @@ echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
 endif
+setenv ETC_DIR $DVC_HOME/etc
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/03_set_project.csh
@@ -40,6 +41,7 @@ if ($status != 0) then
    exit 1
 endif
 
+cp $ETC_DIR/css/index.css $CURR_PROJT/.dvc/index.css
 set idxhtml="$CURR_PROJT/.dvc/index.htm"
 if {(test -e $idxhtml)} then
    set idx_exist=1
@@ -50,7 +52,7 @@ endif
 echo "<html>" > $idxhtml
 echo "<head>" >> $idxhtml
 echo "<title>Project Index Table : $DESIGN_PROJT </title>" >> $idxhtml
-echo '<link rel="stylesheet" type="text/css" href="css/index.css" > '>> $idxhtml 
+echo '<link rel="stylesheet" type="text/css" href="index.css" > '>> $idxhtml 
 eval $cmd_get_css >> $idxhtml 
 echo "</head>" >> $idxhtml
 

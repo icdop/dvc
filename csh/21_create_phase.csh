@@ -36,7 +36,6 @@ else
 echo "INFO: Create Project Design Phase : $DESIGN_PHASE"
 svn mkdir --quiet $PHASE_URL -m "Create Design Phase $DESIGN_PHASE ..." --parents
 svn mkdir --quiet $PHASE_URL/.dvc -m "Design Platform Config Directory" --parents
-svn import --quiet $ETC_DIR/css/    $PHASE_URL/.dvc/css -m 'HTML/CSS template'
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE" > $tmpfile

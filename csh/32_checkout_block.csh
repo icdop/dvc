@@ -34,10 +34,10 @@ mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 
 if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
    svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
+   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --set-depth infinity
 else
    svn checkout --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
-   svn checkout --force $BLOCK_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc
+   svn checkout --force $BLOCK_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --depth infinity
 endif
 
 rm -f $CURR_PROJT/$DESIGN_PHASE/:

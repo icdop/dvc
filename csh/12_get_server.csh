@@ -44,7 +44,7 @@ case "--depth")) then
    shift argv
    breaksw
 default:
-   set depth_mode = empty
+   set depth_mode = immediates
 endsw
 
 if ($1 == "--xml") then

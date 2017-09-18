@@ -44,10 +44,10 @@ endif
 mkdir -p $CURR_PROJT
 
 if {(test -e $CURR_PROJT/.dvc)} then
-#   svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
-   svn update --quiet --force $CURR_PROJT/.dvc
+   svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
+   svn update --quiet --force $CURR_PROJT/.dvc --set-depth infinity
 else
-#   svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
+   svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
    svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc --depth infinity
 endif
 

@@ -42,7 +42,6 @@ else
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
    svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
-   svn import --quiet  $ETC_DIR/css/   $PROJT_URL/.dvc/css -m 'HTML/CSS template' 
 
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile
