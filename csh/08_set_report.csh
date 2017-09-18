@@ -21,9 +21,6 @@ if ($1 == "-css") then
    if ($1 != "") then
      set css_file=$1
      shift argv
-     if (test -e $css_file)) then
-        set cmd_get_css = "cat $1"
-     endif
    endif
 endif
 

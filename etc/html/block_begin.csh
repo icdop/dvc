@@ -1,1 +1,6 @@
-echo "<tr class=title><td></td><td></td><td></td><td colspan=3>BLOCK</td><td>README</td><td>STATUS</td></tr>"
+echo "<table id=indextable>"
+echo "<tr class=title>"
+echo "<td>BLOCK</td>"
+echo "<td>README</td>"
+echo "<td>STATUS</td>"
+echo "</tr>"
