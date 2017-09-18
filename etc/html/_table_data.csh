@@ -15,6 +15,6 @@ echo "</td>"
 
 echo "<td class=col3>"
 echo "<pre>"
-ls -al $curr_path
+ls -l $curr_path
 echo "</pre>"
 echo "</td></tr>"

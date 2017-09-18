@@ -33,7 +33,7 @@ set report_name="$project"
 set report_path=""
 set project_idx="$CURR_PROJT/.dvc/index.htm"
 (source $ETC_DIR/html/_header.csh) > $project_idx
-(source $ETC_DIR/html/project_report.csh) >> $project_idx
+(source $ETC_DIR/html/_report_project.csh) >> $project_idx
 (source $ETC_DIR/html/_table_begin.csh)    >> $project_idx
 #set phase_list=`$CSH_DIR/40_list_project.csh`
 foreach phase (`dir $CURR_PROJT`)
