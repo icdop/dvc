@@ -45,11 +45,7 @@ bin: csh/*
 	ln -f -s $(CSH_PATH)/59_clean_container.csh		$(BIN_PATH)/dvc_clean_container
 	ln -f -s $(CSH_PATH)/64_checkin_version.csh		$(BIN_PATH)/dvc_checkin_version
 	ln -f -s $(CSH_PATH)/65_checkin_container.csh		$(BIN_PATH)/dvc_checkin_container
-	ln -f -s $(CSH_PATH)/90_init_project_index.csh		$(BIN_PATH)/dvc_init_project_index
-	ln -f -s $(CSH_PATH)/91_init_phase_index.csh		$(BIN_PATH)/dvc_init_phase_index
-	ln -f -s $(CSH_PATH)/92_init_block_index.csh		$(BIN_PATH)/dvc_init_block_index
-	ln -f -s $(CSH_PATH)/93_init_stage_index.csh		$(BIN_PATH)/dvc_init_stage_index
-	ln -f -s $(CSH_PATH)/94_init_version_index.csh		$(BIN_PATH)/dvc_init_version_index
+	ln -f -s $(CSH_PATH)/98_init_report.csh			$(BIN_PATH)/dvc_init_report
 	ln -f -s $(CSH_PATH)/99_init_server.csh			$(BIN_PATH)/dvc_init_server
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s $(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase
