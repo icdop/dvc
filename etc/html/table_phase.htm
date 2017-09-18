@@ -1,0 +1,9 @@
+echo "<tr class=data><td></td><td></td>"
+echo "<td class=col1 colspan=4> <a href=../$phase/.dvc/index.htm>$phase</a></td>"
+echo "<td class=col2><pre>"
+svn cat $DESIGN_URL/$phase/.dvc/README
+echo "</pre></td>"
+echo "<td class=col3><pre>"
+#echo "<object name=summary type=text/html data=../$phase/.dvc/DESIGN_FILES></object>"
+svn cat $PROJT_URL/$phase/.dvc/DESIGN_FILES
+echo "</pre></td></tr>"
