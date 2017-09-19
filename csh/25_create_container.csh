@@ -31,7 +31,7 @@ else
    if ($status != 0) then
       svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
       svn mkdir --quiet $CONTR_URL/.dvc -m "DVC Config Directory." --parents
-#      svn mkdir --quiet $CONTR_URL/.dqi -m "Create DQI Folder." --parents
+      svn mkdir --quiet $CONTR_URL/.dqi -m "Design Quality Indicator" --parents
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
       svn import --quiet $tmpfile $CONTR_URL/.dvc/CONTAINER -m 'Design Container Path'

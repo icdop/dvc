@@ -56,7 +56,7 @@ echo "INFO: Create Project Design Version : $DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version $DESIGN_VERSN ..." --parents
 svn mkdir --quiet $VERSN_URL/.dvc -m "DVC Config Directory" --parents
 svn copy  --quiet $STAGE_URL/.dvc/DESIGN_FILES  $VERSN_URL/.dvc/DESIGN_FILES -m 'Design Object Table' 
-svn mkdir --quiet $VERSN_URL/.dqi -m "Create Design Quality Indicator Folder" --parents
+svn mkdir --quiet $VERSN_URL/.dqi -m "Design Quality Indicator" --parents
 
 
 set tmpfile=`mktemp`

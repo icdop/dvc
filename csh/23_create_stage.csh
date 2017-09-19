@@ -40,6 +40,7 @@ svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parent
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
 svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
 svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
+svn mkdir --quiet $STAGE_URL/.dqi -m "Design Quality Indicator" --parents 
 
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile

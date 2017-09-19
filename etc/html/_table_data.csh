@@ -9,12 +9,12 @@ echo "</td>"
 
 echo "<td class=col2>"
 echo "<pre>"
-echo "<object name=readme type=text/html data=../$curr_name/.dvc/README></object>"
+dvc_get_dqi --root $curr_path --script --all
 echo "</pre>"
 echo "</td>"
 
 echo "<td class=col3>"
 echo "<pre>"
-ls -l $curr_path
+ls -1 $curr_path
 echo "</pre>"
 echo "</td></tr>"

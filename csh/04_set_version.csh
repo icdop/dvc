@@ -17,6 +17,10 @@ if ($1 != "") then
 endif
 
 if ($?dvc_path != 0) then
+   # check if dvc_path contain is tailing /
+   if ($dvc_path:t == "") then 
+      set dvc_path = $dvc_path:h
+   endif
    set version  = $dvc_path:t
    if ($dvc_path != $version) then
       set dvc_path = $dvc_path:h

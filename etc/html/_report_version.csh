@@ -18,13 +18,14 @@ echo "</td>"
 
 echo "<td class=col2>" 
 echo "<pre>"
-dvc_get_dqi --root $CURR_PROJT/$phase/$block/$stage/$version --script --all
+echo "<object name=readme type=text/html data=README></object>"
 echo "</pre>"
 echo "</td>"
  
 echo "<td class=col3>"
 echo "<pre>"
-echo "<object name=readme type=text/html data=DESIGN_FILES></object>"
+#dvc_get_dqi --root $CURR_PROJT/$phase/$block/$stage/$version --script --all
+dvc_get_dqi --root $CURR_PROJT/$report_path --script --all
 echo "</pre>"
 echo "</td>" 
 echo "</tr>" 

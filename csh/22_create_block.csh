@@ -37,6 +37,7 @@ else
 echo "INFO: Create Project Design Block : $DESIGN_BLOCK"
 svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
+svn mkdir --quiet $BLOCK_URL/.dqi -m "Design Quality Indicator" --parents
 svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
 set tmpfile=`mktemp`

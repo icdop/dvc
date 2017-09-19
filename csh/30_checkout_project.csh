@@ -43,12 +43,20 @@ endif
 
 mkdir -p $CURR_PROJT
 
+if ($?depth_mode) then
+   if {(test -e $CURR_PROJT/.dvc)} then
+      svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
+   else
+      svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
+   endif
+endif
+
 if {(test -e $CURR_PROJT/.dvc)} then
-   svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
    svn update --quiet --force $CURR_PROJT/.dvc --set-depth infinity
+   svn update --quiet --force $CURR_PROJT/.dqi --set-depth infinity
 else
-   svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
    svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc --depth infinity
+   svn checkout --force $PROJT_URL/.dqi $CURR_PROJT/.dqi --depth infinity
 endif
 
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
