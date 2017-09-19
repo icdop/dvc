@@ -1,0 +1,18 @@
+echo "<html>"
+echo "<head>"
+echo "<meta charset=utf-8>"
+echo "<style type=text/css>"
+echo "html {min-width: 776px; }"
+echo "body {background: #6D89DD; font-family: arial;}"
+echo "</style>"
+echo "</head>"
+echo "<title> Design Version Control : $project </title>"
+echo "<body>"
+echo "<a href=$CURR_PROJT/.dvc/index.htm>$project</a>"
+echo "<pre>"
+tree $CURR_PROJT
+echo "</pre>"
+echo "<p>Report created by $USER @ `date`</p>"
+echo "</body>"
+echo "</html>"
+

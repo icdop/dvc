@@ -1,4 +1,6 @@
+#echo "<!doctype html>"
 echo "<html>"
+echo "<meta charset=utf-8>"
 echo "<head>"
 echo "<title>DVC Index Table : $report_path </title>"
 echo "<link rel=stylesheet type=text/css href=index.css>"

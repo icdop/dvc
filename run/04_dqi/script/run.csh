@@ -30,7 +30,7 @@ foreach version ($version_list)
   dvc_set_dqi  --root :version WNS  -100
   dvc_set_dqi  --root :version NVP  1000
   dvc_set_dqi  --root :version DRC   500
-  dvc_checkin_version
+  dvc_checkin_container .
   set scenario_list = "001 002 003 004"
   foreach scenario ($scenario_list) 
     set wns=`date +%M`

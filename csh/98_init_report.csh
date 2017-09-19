@@ -21,6 +21,9 @@ set project=$DESIGN_PROJT
 #svn checkout --force $PROJT_URL $CURR_PROJT --depth immediates
 #svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc
 
+set main_idx="index.htm"
+(source $ETC_DIR/html/_index.csh) > $main_idx
+
 set project_css="$CURR_PROJT/.dvc/index.css"
 cp $ETC_DIR/css/index.css $project_css
 if ($?css_file) then
