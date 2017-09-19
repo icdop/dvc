@@ -44,13 +44,12 @@ endif
 rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 
-if {(test -h $CURR_STAGE)} then
-   rm -f $CURR_STAGE
-else if {(test -d $CURR_STAGE)} then
+rm -f $CURR_STAGE
+if {(test -e $CURR_STAGE)} then
    echo "ERROR: $CURR_STAGE is a folder, rename it!"
-   mv $CURR_STAGE stage.`date +%Y%m%d_%H%M%S`
+else
+   ln -s $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE $CURR_STAGE
 endif
-ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE $CURR_STAGE
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="

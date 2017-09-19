@@ -24,8 +24,6 @@ endif
 
 if {(test -e .dop/env/CURR_CONTR)} then
   setenv CURR_CONTR `cat .dop/env/CURR_CONTR`
-#else if {(test -e $HOME/.dop/env/CURR_VERSN)} then
-#  setenv CURR_CONTR `cat $HOME/.dop/env/CURR_CONTR`
 else if ($?CURR_CONTR == 0) then
   setenv CURR_CONTR :container
 endif

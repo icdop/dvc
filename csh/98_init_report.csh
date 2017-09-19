@@ -41,7 +41,7 @@ foreach phase (`dir $CURR_PROJT`)
   if {(test -d $CURR_PROJT/$phase/.dvc)} then
      echo "PHASE   : $phase"
      set curr_name=$phase
-     set curr_path=$CURR_PROJT/$phase/
+     set curr_path=$CURR_PROJT/$phase
      (source $ETC_DIR/html/_table_data.csh) >> $project_idx
      #### PHASE REPORT
      set report_name = $phase
@@ -57,7 +57,7 @@ foreach phase (`dir $CURR_PROJT`)
         if {(test -d $data_path/$block/.dvc)} then
            echo "BLOCK   : $block"
            set curr_name=$block
-           set curr_path=$data_path/$curr_name
+           set curr_path=$CURR_PROJT/$phase/$block
            (source $ETC_DIR/html/_table_data.csh) >> $phase_idx
            #### BLOCK REPORT
            set report_name = $block
@@ -73,44 +73,50 @@ foreach phase (`dir $CURR_PROJT`)
               if {(test -d $data_path/$stage/.dvc)} then
                  echo "STAGE   : $stage"
                  set curr_name=$stage
-                 set curr_path=$data_path/$curr_name
+                 set curr_path=$CURR_PROJT/$phase/$block/$stage
                  (source $ETC_DIR/html/_table_data.csh) >> $block_idx
                  #### STAGE REPORT
                  set report_name = $stage
                  set report_path = $phase/$block/$stage
                  set data_path   = $CURR_PROJT/$report_path
+                 set data_list   = `dir $data_path`
+                 echo "VERSN_LIST $data_list"
                  set stage_idx   = $data_path/.dvc/index.htm
                  cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
                 (source $ETC_DIR/html/_header.csh) > $stage_idx
                 (source $ETC_DIR/html/_report.csh) >> $stage_idx
-                (source $ETC_DIR/html/_table_begin.csh)    >> $stage_idx
+                (source $ETC_DIR/html/_table_version_begin.csh)    >> $stage_idx
                  foreach version (`dir $data_path`)
                     if ($version != ":") then
                     if {(test -d $data_path/$version/.dvc)} then
                        echo "VERSION : $version"
                        set curr_name=$version
-                       set curr_path=$data_path/$curr_name
-                       (source $ETC_DIR/html/_table_data.csh) >> $stage_idx
+                       set curr_path=$CURR_PROJT/$phase/$block/$stage/$version
+                       (source $ETC_DIR/html/_table_version_data.csh) >> $stage_idx
                        #### VERSION REPORT
                        set report_name = $version
                        set report_path = $phase/$block/$stage/$version
                        set data_path   = $CURR_PROJT/$report_path
+                       set data_list   = `dir $data_path`
+                       echo "CONTR_LIST: $data_list"
                        set version_idx   = $data_path/.dvc/index.htm
                        cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
                       (source $ETC_DIR/html/_header.csh) > $version_idx
-                      (source $ETC_DIR/html/_report.csh) >> $version_idx
-                      (source $ETC_DIR/html/_table_begin.csh)    >> $version_idx
-                       foreach container (`dir $data_path`)
+                      (source $ETC_DIR/html/_report_version.csh) >> $version_idx
+                      (source $ETC_DIR/html/_table_container_begin.csh)    >> $version_idx
+                       foreach container ($data_list)
                           if ($container != ":") then
                           if {(test -d $data_path/$container/.dvc)} then
                              echo "CONTAIN : $container"
                              set curr_name=$container
-                             set curr_path=$data_path/$curr_name
-                             (source $ETC_DIR/html/_table_data.csh) >> $version_idx
+                             set curr_path=$CURR_PROJT/$phase/$block/$stage/$version/$container
+                             (source $ETC_DIR/html/_table_container_data.csh) >> $version_idx
                              #### CONTAINER REPORT
                              set report_name = $container
                              set report_path = $phase/$block/$stage/$version/$container
                              set data_path   = $CURR_PROJT/$report_path
+                             set data_list   = `dir $data_path`
+                             echo "OBJECT_LIST: $data_list"
                              set container_idx   = $data_path/.dvc/index.htm
                              cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
                             (source $ETC_DIR/html/_header.csh) > $container_idx
@@ -121,7 +127,7 @@ foreach phase (`dir $CURR_PROJT`)
                                 if {(test -e $data_path/$object)} then
                                    echo "OBJECT  : $object"
                                    set curr_name=$object
-                                   set curr_path=$data_path/$curr_name
+                                   set curr_path=$CURR_PROJT/$phase/$block/$stage/$version/$container/$object
                                    (source $ETC_DIR/html/_table_data.csh) >> $container_idx
                                    #### OBJECT REPORT
                                    set report_name = $object

@@ -50,13 +50,12 @@ ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
 ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
 ln -s $DESIGN_VERSN $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
 
-if {(test -h $CURR_VERSN)} then
-   rm -f $CURR_VERSN
-else if {(test -d $CURR_VERSN)} then
+rm -f $CURR_VERSN
+if {(test -e $CURR_VERSN)} then
    echo "ERROR: $CURR_VERSN is a folder, rename it!"
-   mv $CURR_VERSN version.`date +%Y%m%d_%H%M%S`
+else
+   ln -s $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
 endif
-ln -fs $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
 
 $CSH_DIR/05_set_container.csh .
 

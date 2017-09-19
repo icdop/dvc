@@ -9,7 +9,7 @@ echo "</td>"
 
 echo "<td class=col2>"
 echo "<pre>"
-cat $curr_path/.dvc/README
+dvc_get_dqi --root $CURR_PROJT/$phase/$block/$stage/$version --script --all
 echo "</pre>"
 echo "</td>"
 

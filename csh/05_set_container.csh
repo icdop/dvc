@@ -29,13 +29,12 @@ else
    setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 endif
 
-if {(test -h $CURR_CONTR)} then
-   rm -f $CURR_CONTR
-else if {(test -d $CURR_CONTR)} then
+rm -f $CURR_CONTR
+if {(test -e $CURR_CONTR)} then
    echo "ERROR: $CURR_CONTR is a folder, rename it!"
-   mv $CURR_CONTR container.`date +%Y%m%d_%H%M%S`
+else 
+   ln -s $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 endif
-ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"
 

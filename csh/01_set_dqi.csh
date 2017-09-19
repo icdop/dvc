@@ -1,7 +1,7 @@
 #!/bin/csh -f
 #set verbose=1
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog [--dqi_pool <dir>] <dqi_name> <value>"
    exit -1
 endif
@@ -34,6 +34,7 @@ if ($1 == "--reset") then
 endif
 
 if ($1 == "--info") then
+   set info_mode=1
    shift argv
 endif
 
@@ -42,7 +43,7 @@ mkdir -p $dqi_root/.dqi/$dqi_group
 
 if ($1 == "") then
    if ($?info_mode) then
-      tree $dqi_root
+      tree $dqi_root/.dqi
    endif
 else
    set dqi_name  = $1

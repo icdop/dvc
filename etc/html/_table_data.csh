@@ -9,7 +9,7 @@ echo "</td>"
 
 echo "<td class=col2>"
 echo "<pre>"
-cat $curr_path/.dvc/README
+echo "<object name=readme type=text/html data=../$curr_name/.dvc/README></object>"
 echo "</pre>"
 echo "</td>"
 

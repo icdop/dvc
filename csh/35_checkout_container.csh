@@ -32,7 +32,8 @@ else
 endif
 
 if {(test -e $CURR_VERSN)} then
-  ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
+  rm -f $CURR_CONTR
+  ln -s $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 else
   echo "ERROR: checkout version first before assigning container!" 
   exit 1
