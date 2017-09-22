@@ -17,4 +17,3 @@ clean:
 	rm -fr :version
 	rm -fr .dop	
 	rm index.htm
-	

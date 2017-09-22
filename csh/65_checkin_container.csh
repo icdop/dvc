@@ -1,6 +1,6 @@
 #!/bin/csh -f
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_CONTR>"
    exit -1
 endif

@@ -2,7 +2,7 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [-d <dir>] [-c <container>]"
+   echo "Usage: $prog [--html <dir>]"
    exit -1
 endif
 
@@ -15,26 +15,19 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 
-set cmd_get_css = ""
-if ($1 == "-css") then
+if (($1 == "--html")||($1 == "-html_templ")) then
    shift argv
    if ($1 != "") then
-     set css_file=$1
+     set html_templ=$1
      shift argv
    endif
 endif
 
 if ($1 != "") then
   if (($1 != ":") && ($1 != ".")) then
-    setenv DESIGN_PROJT $1
+    set report_index $1
   endif
   shift argv
 endif
 
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-svn info $PROJT_URL >& /dev/null
-if ($status != 0) then
-   echo "ERROR: Can not find Project Design Respository : $DESIGN_PROJT"
-   exit 1
-endif

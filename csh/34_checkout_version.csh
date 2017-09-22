@@ -44,6 +44,7 @@ if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
    svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dvc --set-depth infinity
    svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dqi --set-depth infinity
 else
+   svn checkout --force $VERSN_URL/ $CURR_PROJT/$DVC_PATH/ --depth empty
    svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc --depth infinity
    svn checkout --force $VERSN_URL/.dqi $CURR_PROJT/$DVC_PATH/.dqi --depth infinity
 endif

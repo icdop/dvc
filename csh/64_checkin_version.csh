@@ -1,4 +1,5 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_VERSN>"
@@ -17,10 +18,9 @@ source $CSH_DIR/14_get_version.csh
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
-   svn update $CURR_PROJT/$DVC_PATH 
+   svn update $CURR_PROJT/$DVC_PATH --quiet --force
    (cd $CURR_PROJT/$DVC_PATH; svn add .  --force --depth infinity)
-#   svn add $CURR_PROJT/$DVC_PATH --force --depth infinity --quiet
-   svn commit $CURR_PROJT/$DVC_PATH -m 'Update version'
+   svn commit $CURR_PROJT/$DVC_PATH -m 'Update version' --quiet
 else
    echo "ERROR: Cannot find Version Directory '$DVC_PATH'"
    exit 1

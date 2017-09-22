@@ -15,172 +15,196 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/08_set_report.csh
 
-set project=$DESIGN_PROJT
-#rm -fr $CURR_PROJT/.dvc
-#$CSH_DIR/30_checkout_project.csh $project
-#svn checkout --force $PROJT_URL $CURR_PROJT --depth immediates
-#svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc
-
-set main_idx="index.htm"
-(source $ETC_DIR/html/_index.csh) > $main_idx
-
-set project_css="$CURR_PROJT/.dvc/index.css"
-cp $ETC_DIR/css/index.css $project_css
-if ($?css_file) then
-   if {(test -e $css_file)} then
-      cat $css_file >> $project_css 
-   endif
+if ($?report_index) then
+   set project=$report_index
+else
+   set project=$DESIGN_PROJT
 endif
 
-set report_name = $project
-set report_path = ""
-set data_path   = $CURR_PROJT
-set project_idx="$CURR_PROJT/.dvc/index.htm"
-cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-set phase_list   = `dir $data_path`
+if ($?html_templ) then
+   setenv HTM_DIR $htmp_temp
+else
+   setenv HTM_DIR $ETC_DIR/html
+endif
+
+set dvc_title  = "DVC Database Index"
+set main_htm   = "index.htm"
+set main_css   = ".index.css"
+(source $HTM_DIR/main/_index_begin.csh) >  $main_htm
+(source $HTM_DIR/main/_index_data.csh)  >> $main_htm
+(source $HTM_DIR/main/_index_end.csh) >> $main_htm
+
+#### PROJECT HTML REPORT
+set dvc_title   = "Project $project Design Data"
+set dvc_name    = $project
+set dvc_path    = ""
+set dvc_data    = $CURR_PROJT
+
+set project_htm = "$CURR_PROJT/index.htm"
+set project_css = "$CURR_PROJT/.index.css"
+cp $HTM_DIR/project/index.css $project_css
+(source $HTM_DIR/project/_index_begin.csh) >  $project_htm
+(source $HTM_DIR/project/_index_data.csh)  >> $project_htm
+(source $HTM_DIR/project/_table_begin.csh) >> $project_htm
+
+set phase_list   = `dir $dvc_data`
 #echo "PHASE_LIST $phase_list"
-(source $ETC_DIR/html/_header.csh) > $project_idx
-(source $ETC_DIR/html/_report_project.csh) >> $project_idx
-(source $ETC_DIR/html/_table_begin.csh)    >> $project_idx
-#set phase_list=`$CSH_DIR/40_list_project.csh`
 foreach phase ( $phase_list )
+  set item_name=$phase
+  set item_path=""
+  set item_data=$CURR_PROJT/$item_path/$item_name
   if ($phase != ":") then
-  if {(test -d $CURR_PROJT/$phase/.dvc)} then
-     #echo "PHASE   : $phase"
-     set curr_name=$phase
-     set curr_head=""
-     set curr_path=$CURR_PROJT/$phase
-     (source $ETC_DIR/html/_table_data.csh) >> $project_idx
-     #### PHASE REPORT
-     set report_name = $phase
-     set report_path = $phase
-     set data_path   = $CURR_PROJT/$report_path
-     set phase_idx   = $data_path/.dvc/index.htm
-     cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-     set block_list   = `dir $data_path`
+  if {(test -d $item_data)} then
+     echo "PHASE   : $phase"
+     (source $HTM_DIR/project/_table_data.csh) >> $project_htm
+
+     #### PHASE HTML REPORT
+     
+     set dvc_title = "Phase $phase summary report"
+     set dvc_name = $phase
+     set dvc_path = $dvc_name
+     set dvc_data = $CURR_PROJT/$dvc_path
+
+     set phase_htm  = $dvc_data/index.htm
+     set phase_css  = $dvc_data/.index.css
+     cp $HTM_DIR/phase/index.css $phase_css
+    (source $HTM_DIR/phase/_index_begin.csh) >  $phase_htm
+    (source $HTM_DIR/phase/_index_data.csh)  >> $phase_htm
+    (source $HTM_DIR/phase/_table_begin.csh) >> $phase_htm
+     set block_list   = `dir $dvc_data`
      #echo "BLOCK_LIST $block_list"
-    (source $ETC_DIR/html/_header.csh) > $phase_idx
-    (source $ETC_DIR/html/_report.csh) >> $phase_idx
-    (source $ETC_DIR/html/_table_begin.csh)    >> $phase_idx
      foreach block ( $block_list )
+        set item_name=$block
+        set item_path=$phase 
+        set item_data=$CURR_PROJT/$item_path/$item_name
         if ($block != ":") then
-        if {(test -d $CURR_PROJT/$phase/$block/.dvc)} then
-           #echo "BLOCK   : $block"
-           set curr_name=$block
-           set curr_head=$phase
-           set curr_path=$CURR_PROJT/$phase/$block
-           (source $ETC_DIR/html/_table_data.csh) >> $phase_idx
-           #### BLOCK REPORT
-           set report_name = $block
-           set report_path = $phase/$block
-           set data_path   = $CURR_PROJT/$report_path
-           set block_idx   = $data_path/.dvc/index.htm
-           cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-           set stage_list   = `dir $data_path`
+        if {(test -d $item_data)} then
+           echo "	BLOCK   : $block"
+           (source $HTM_DIR/block/_table_data.csh) >> $phase_htm
+
+           #### BLOCK HTML REPORT
+           set dvc_title = "Block $block summary reprot"
+           set dvc_name = $block
+           set dvc_path = $item_path/$dvc_name
+           set dvc_data = $CURR_PROJT/$dvc_path
+
+           set block_htm   = $dvc_data/index.htm
+           set block_css   = $dvc_data/.index.css
+           cp $HTM_DIR/block/index.css $block_css
+          (source $HTM_DIR/block/_index_begin.csh) > $block_htm
+          (source $HTM_DIR/block/_index_data.csh) >> $block_htm
+          (source $HTM_DIR/block/_table_begin.csh)    >> $block_htm
+           set stage_list   = `dir $dvc_data`
            #echo "STAGE_LIST $stage_list"
-          (source $ETC_DIR/html/_header.csh) > $block_idx
-          (source $ETC_DIR/html/_report.csh) >> $block_idx
-          (source $ETC_DIR/html/_table_begin.csh)    >> $block_idx
            foreach stage ( $stage_list )
+              set item_name=$stage
+              set item_path=$phase/$block
+              set item_data=$CURR_PROJT/$item_path/$item_name
               if ($stage != ":") then
-              if {(test -d $CURR_PROJT/$phase/$block/$stage/.dvc)} then
-                 #echo "STAGE   : $stage"
-                 set curr_name=$stage
-                 set curr_head=$phase/$block
-                 set curr_path=$CURR_PROJT/$phase/$block/$stage
-                 (source $ETC_DIR/html/_table_data.csh) >> $block_idx
-                 #### STAGE REPORT
-                 set report_name = $stage
-                 set report_path = $phase/$block/$stage
-                 set data_path   = $CURR_PROJT/$report_path
-                 set stage_idx   = $data_path/.dvc/index.htm
-                 cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-                 set version_list   = `dir $data_path`
+              if {(test -d $item_data)} then
+                 echo "		STAGE   : $stage"
+                 (source $HTM_DIR/block/_table_data.csh) >> $block_htm
+
+                 #### STAGE HTML REPORT
+                 set dvc_title = "Stage $stage"
+                 set dvc_name = $stage
+                 set dvc_path = $item_path/$dvc_name
+                 set dvc_data = $CURR_PROJT/$dvc_path
+                 set stage_htm   = $dvc_data/index.htm
+                 set stage_css   = $dvc_data/.index.css
+                 cp $HTM_DIR/stage/index.css $stage_css
+                (source $HTM_DIR/stage/_index_begin.csh) > $stage_htm
+                (source $HTM_DIR/stage/_index_data.csh) >> $stage_htm
+                (source $HTM_DIR/stage/_table_begin.csh)    >> $stage_htm
+                 set version_list   = `dir $dvc_data`
                  #echo "VERSN_LIST $version_list"
-                (source $ETC_DIR/html/_header.csh) > $stage_idx
-                (source $ETC_DIR/html/_report.csh) >> $stage_idx
-                (source $ETC_DIR/html/_table_begin.csh)    >> $stage_idx
                  foreach version ( $version_list )
+                    set item_name=$version
+                    set item_path=$phase/$block/$stage
+                    set item_data=$CURR_PROJT/$item_path/$item_name
                     if ($version != ":") then
-                    if {(test -d $CURR_PROJT/$phase/$block/$stage/$version/.dvc)} then
-                       #echo "VERSION : $version"
-                       set curr_name=$version
-                       set curr_head=$phase/$block/$stage
-                       set curr_path=$CURR_PROJT/$phase/$block/$stage/$version
-                       (source $ETC_DIR/html/_table_data.csh) >> $stage_idx
-                       #### VERSION REPORT
-                       set report_name = $version
-                       set report_path = $phase/$block/$stage/$version
-                       set data_path   = $CURR_PROJT/$report_path
-                       set version_idx   = $data_path/.dvc/index.htm
-                       cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-                       set container_list   = `dir $data_path`
+                    if {(test -d $item_data)} then
+                       echo "			VERSION : $version"
+                       (source $HTM_DIR/stage/_table_data.csh) >> $stage_htm
+                       
+                       #### VERSION HTML REPORT
+                       set dvc_title = "Version $version"
+                       set dvc_name = $version
+                       set dvc_path = $item_path/$dvc_name
+                       set dvc_data = $CURR_PROJT/$dvc_path
+                       set version_htm   = $dvc_data/index.htm
+                       set version_css   = $dvc_data/.index.css
+                       cp $HTM_DIR/version/index.css $version_css
+                       
+                      (source $HTM_DIR/version/_index_begin.csh) >  $version_htm
+                      (source $HTM_DIR/version/_index_data.csh)  >> $version_htm
+                      (source $HTM_DIR/version/_table_begin.csh) >> $version_htm
+                       set container_list   = `dir $dvc_data`
                        #echo "CONTAINER_LIST: $container_list"
-                      (source $ETC_DIR/html/_header.csh) > $version_idx
-                      (source $ETC_DIR/html/_report_version.csh) >> $version_idx
-                      (source $ETC_DIR/html/_table_container_begin.csh)    >> $version_idx
                        foreach container ( $container_list )
+                          set item_name=$container
+                          set item_path=$phase/$block/$stage/$version
+                          set item_data=$CURR_PROJT/$item_path/$item_name
                           if ($container != ":") then
-                          if {(test -d $CURR_PROJT/$phase/$block/$stage/$version/$container/.dvc)} then
-                             #echo "CONTAINER : $container"
-                             set curr_name=$container
-                             set curr_head=$phase/$block/$stage/$version
-                             set curr_path=$CURR_PROJT/$phase/$block/$stage/$version/$container
-                             (source $ETC_DIR/html/_table_container_data.csh) >> $version_idx
-                             #### CONTAINER REPORT
-                             set report_name = $container
-                             set report_path = $phase/$block/$stage/$version/$container
-                             set data_path   = $CURR_PROJT/$report_path
-                             set container_idx   = $data_path/.dvc/index.htm
-                             cp $ETC_DIR/css/index.css $data_path/.dvc/index.css
-                             set object_list   = `dir $data_path`
+                          if {(test -d $item_data)} then
+                             echo "				CONTAINER : $container"
+                             (source $HTM_DIR/version/_table_data.csh) >> $version_htm
+
+                             #### CONTAINER HTML REPORT
+                             set dvc_title = "Container $container"
+                             set dvc_name = $container
+                             set dvc_path = $item_path/$dvc_name
+                             set dvc_data = $CURR_PROJT/$dvc_path
+                             set container_htm   = $dvc_data/index.htm
+                             set container_css   = $dvc_data/.index.css
+                             cp $HTM_DIR/container/index.css $container_css
+                            (source $HTM_DIR/container/_index_begin.csh) >  $container_htm
+                            (source $HTM_DIR/container/_index_data.csh)  >> $container_htm
+                            (source $HTM_DIR/container/_table_begin.csh) >> $container_htm
+                             set object_list   = `dir $dvc_data`
                              #echo "OBJECT_LIST: $object_list"
-                            (source $ETC_DIR/html/_header.csh) > $container_idx
-                            (source $ETC_DIR/html/_report.csh) >> $container_idx
-                            (source $ETC_DIR/html/_table_object_begin.csh)    >> $container_idx
                              foreach object ( $object_list )
+                                set item_name=$object
+                                set item_path=$phase/$block/$stage/$version/$container
+                                set item_data=$CURR_PROJT/$item_path/$item_name
                                 if ($object != ":") then
-                                if {(test -e $CURR_PROJT/$phase/$block/$stage/$version/$container/$object)} then
-                                   #echo "OBJECT  : $object"
-                                   set curr_name=$object
-                                   set curr_head=$phase/$block/$stage/$version/$container
-                                   set curr_path=$CURR_PROJT/$phase/$block/$stage/$version/$container/$object
-                                   (source $ETC_DIR/html/_table_object_data.csh) >> $container_idx
-                                   #### OBJECT REPORT
-                                   set report_name = $object
-                                   set report_path = $phase/$block/$stage/$version/$container/$object
-                                   set data_path   = $CURR_PROJT/$report_path
-                                   set object_idx  = $CURR_PROJT/$report_path
+                                if {(test -e $item_data)} then
+                                   echo "					OBJECT  : $object"
+                                   (source $HTM_DIR/container/_table_data.csh) >> $container_htm
+                                   #### OBJECT HTML REPORT
+                                   set dvc_name = $object
+                                   set dvc_path = $item_path/$dvc_name
+                                   set dvc_data = $CURR_PROJT/$dvc_path
                                 endif
                                 endif
                              end
-                            (source $ETC_DIR/html/_table_end.csh) >> $container_idx
-                            (source $ETC_DIR/html/_footer.csh) >> $container_idx
+                            (source $HTM_DIR/container/_table_end.csh) >> $container_htm
+                            (source $HTM_DIR/container/_index_end.csh) >> $container_htm
                          endif
                          endif
                        end
-                      (source $ETC_DIR/html/_table_end.csh) >> $version_idx
-                      (source $ETC_DIR/html/_footer.csh) >> $version_idx
+                      (source $HTM_DIR/version/_table_end.csh) >> $version_htm
+                      (source $HTM_DIR/version/_index_end.csh) >> $version_htm
                     endif
                     endif
                  end
-                 (source $ETC_DIR/html/_table_end.csh) >> $stage_idx
-                 (source $ETC_DIR/html/_footer.csh) >> $stage_idx
+                 (source $HTM_DIR/stage/_table_end.csh) >> $stage_htm
+                 (source $HTM_DIR/stage/_index_end.csh) >> $stage_htm
               endif
               endif
            end
-           (source $ETC_DIR/html/_table_end.csh) >> $block_idx
-           (source $ETC_DIR/html/_footer.csh) >> $block_idx
+           (source $HTM_DIR/block/_table_end.csh) >> $block_htm
+           (source $HTM_DIR/block/_index_end.csh) >> $block_htm
         endif
         endif
      end
-     (source $ETC_DIR/html/_table_end.csh) >> $phase_idx
-     (source $ETC_DIR/html/_footer.csh) >> $phase_idx
+     (source $HTM_DIR/phase/_table_end.csh) >> $phase_htm
+     (source $HTM_DIR/phase/_index_end.csh) >> $phase_htm
    endif
   endif 
 end
-(source $ETC_DIR/html/_table_end.csh) >> $project_idx
-(source $ETC_DIR/html/_footer.csh) >> $project_idx
+(source $HTM_DIR/project/_table_end.csh) >> $project_htm
+(source $HTM_DIR/project/_index_end.csh) >> $project_htm
 
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

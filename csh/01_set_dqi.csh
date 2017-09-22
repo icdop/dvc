@@ -6,6 +6,11 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 
+if (($1 == "-q") || ($1 == "--quiet")) then
+   set quiet_mode=1
+   shift argv
+endif
+
 if ($1 == "--root") then
    shift argv
    set dqi_root=$1
@@ -33,16 +38,11 @@ if ($1 == "--reset") then
    shift argv
 endif
 
-if ($1 == "--info") then
-   set info_mode=1
-   shift argv
-endif
-
 
 mkdir -p $dqi_root/.dqi/$dqi_group
 
 if ($1 == "") then
-   if ($?info_mode) then
+   if ($?quiet_mode == 0) then
       tree $dqi_root/.dqi
    endif
 else
@@ -52,14 +52,14 @@ else
 
    if ($?reset_mode) then
       rm -fr $dqi_root/.dqi/$dqi_group/$dqi_name
-      if ($?info_mode) then
+      if ($?quite_mode == 0) then
          echo "INFO: remove dqi('$dqi_name')"
       endif
    else
       mkdir -p $dqi_file:h
       echo "$dqi_value"  >  $dqi_file
       if {(test -e $dqi_file)} then
-         if ($?info_mode) then
+         if ($?quite_mode == 0) then
             echo "DQI: $dqi_name = `cat $dqi_file`"
          else
             echo `cat $dqi_file`

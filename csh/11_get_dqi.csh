@@ -41,10 +41,12 @@ endif
 if {(test -d $dqi_root/.dqi/)} then
    if {(test -d $dqi_root/.dqi/$dqi_group)} then
    else
-      echo "ERROR: '$dqi_group' not found!"
+      echo "ERROR: DQI Group '$dqi_group' not found!"
+      exit -1
    endif
 else
-   echo "ERROR: '$dqi_root' is not a dqi root directory!"
+#   echo "ERROR: '$dqi_root' is not a dqi root directory!"
+   echo "NO DQI extracted."
    exit 1
 endif
 
