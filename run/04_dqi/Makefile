@@ -10,11 +10,11 @@ checkout:
 	script/checkout.csh
 	
 index:
-	dvc_init_report
+	dvc_refresh_index
 
 clean:
 	rm -fr : :*
 	rm -fr :version
 	rm -fr .dop	
-	rm index.htm
+	rm -f index.htm
 	

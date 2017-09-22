@@ -1,8 +1,6 @@
 echo "<table id=indextable>"
 echo "<tr class=title>"
-echo "<pre>"
 echo "<td>Sub Folder</td>"
 echo "<td>Quality Indicator</td>"
 echo "<td>Detail Content</td>"
-echo "</pre>"
 echo "</tr>"

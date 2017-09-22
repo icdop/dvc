@@ -1,19 +1,17 @@
 help:
-	@echo "Usage:	make run"
-	@echo "		make index"
-	@echo "		make clean"
+	@echo "Usage:   make run"
+	@echo "         make refresh"
+	@echo "         make clean"
 
 run: 
 	script/run.csh
 
-checkout:
-	script/checkout.csh
 	
-index:
-	dvc_init_report
+refresh:
+	dvc_refresh_version
 
 clean:
 	rm -fr : :*
 	rm -fr :version
 	rm -fr .dop	
-	rm index.htm
+	rm -f index.htm

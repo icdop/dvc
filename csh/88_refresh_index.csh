@@ -169,7 +169,7 @@ foreach phase ( $phase_list )
                                 set item_data=$CURR_PROJT/$item_path/$item_name
                                 if ($object != ":") then
                                 if {(test -e $item_data)} then
-                                   echo "					OBJECT  : $object"
+                                   #echo "					OBJECT  : $object"
                                    (source $HTM_DIR/container/_table_data.csh) >> $container_htm
                                    #### OBJECT HTML REPORT
                                    set dvc_name = $object

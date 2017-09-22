@@ -9,23 +9,19 @@ echo "</tr>"
 
 echo "<tr class=data>"
 echo "<td class=col1>"
-echo "<pre>"
 echo "<a href=../index.htm>"
 echo "$dvc_name"
 echo "</a>"
-echo "</pre>"
 echo "</td>" 
 
 echo "<td class=col2>" 
-echo "<pre>"
 echo "<img width=200 height=200 src=chip.jpg alt=Chip></img>"
-echo "</pre>"
 echo "</td>"
  
 echo "<td class=col3>"
-echo "<pre>"
+echo "<pre>" 
 dvc_get_dqi --root $dvc_data --script --all
-echo "</pre>"
+echo "</pre>" 
 echo "</td>" 
 echo "</tr>" 
 

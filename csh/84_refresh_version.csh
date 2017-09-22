@@ -32,7 +32,7 @@ if ($?report_index) then
    set version = $report_index
 endif
                        
-echo "			VERSION : $version"
+echo "VERSION : $version"
 
 set dvc_title = "Version $version"
 set dvc_name = $version
@@ -53,7 +53,7 @@ cp $HTM_DIR/version/index.css $version_css
     set item_data=$CURR_PROJT/$item_path/$item_name
     if ($container != ":") then
     if {(test -d $item_data)} then
-       echo "				CONTAINER : $container"
+       echo "	CONTAINER : $container"
        (source $HTM_DIR/version/_table_data.csh) >> $version_htm
 
        #### CONTAINER HTML REPORT
@@ -75,7 +75,7 @@ cp $HTM_DIR/version/index.css $version_css
           set item_data=$CURR_PROJT/$item_path/$item_name
           if ($object != ":") then
           if {(test -e $item_data)} then
-             echo "					OBJECT  : $object"
+             echo "		OBJECT  : $object"
              (source $HTM_DIR/container/_table_data.csh) >> $container_htm
              #### OBJECT HTML REPORT
              set dvc_name = $object

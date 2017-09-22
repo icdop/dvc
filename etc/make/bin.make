@@ -45,7 +45,8 @@ bin: csh/*
 	ln -f -s $(CSH_PATH)/59_clean_container.csh		$(BIN_PATH)/dvc_clean_container
 	ln -f -s $(CSH_PATH)/64_checkin_version.csh		$(BIN_PATH)/dvc_checkin_version
 	ln -f -s $(CSH_PATH)/65_checkin_container.csh		$(BIN_PATH)/dvc_checkin_container
-	ln -f -s $(CSH_PATH)/98_init_report.csh			$(BIN_PATH)/dvc_init_report
+	ln -f -s $(CSH_PATH)/84_refresh_version.csh		$(BIN_PATH)/dvc_refresh_version
+	ln -f -s $(CSH_PATH)/88_refresh_index.csh		$(BIN_PATH)/dvc_refresh_index
 	ln -f -s $(CSH_PATH)/99_init_server.csh			$(BIN_PATH)/dvc_init_server
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s $(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase

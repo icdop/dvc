@@ -22,7 +22,7 @@ dvc_checkout_stage   400-APR
 dvc_checkout_version  P1-trial/chip/400-APR/2017_0910-xxx
   cp data/design.v   :version/design.v
   cp data/design.sdc :version/design.sdc
-  cp report/floorplan.png :version/floorplan.png
+  cp report/chip.jpg :version/chip.jpg
   
   dvc_set_dqi  --root :version Width 100  
   dvc_set_dqi  --root :version Height 150  
