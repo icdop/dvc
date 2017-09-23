@@ -74,8 +74,4 @@ dvc_checkin_version
   end
 
 
-dvc_list_project --recursive
-
-tree -d :
-
 

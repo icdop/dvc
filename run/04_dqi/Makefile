@@ -9,6 +9,9 @@ run:
 checkout:
 	script/checkout.csh
 	
+list:
+	dvc_list_design
+
 index:
 	dvc_refresh_index
 

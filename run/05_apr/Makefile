@@ -6,6 +6,8 @@ help:
 run: 
 	script/run.csh
 
+list:
+	dvc_list_design
 	
 refresh:
 	dvc_refresh_version

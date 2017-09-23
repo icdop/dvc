@@ -1,7 +1,7 @@
 BIN_PATH := bin
 CSH_PATH := ../csh
 
-bin: csh/*
+bin: csh/* csh/
 	mkdir -p $(BIN_PATH)
 	rm -f $(BIN_PATH)/dvc_*
 	ln -f -s $(CSH_PATH)/00_set_env.csh			$(BIN_PATH)/dvc_set_env
@@ -33,7 +33,7 @@ bin: csh/*
 	ln -f -s $(CSH_PATH)/43_list_stage.csh			$(BIN_PATH)/dvc_list_stage
 	ln -f -s $(CSH_PATH)/44_list_version.csh		$(BIN_PATH)/dvc_list_version
 	ln -f -s $(CSH_PATH)/45_list_container.csh		$(BIN_PATH)/dvc_list_container
-	ln -f -s $(CSH_PATH)/48_list_tree.csh			$(BIN_PATH)/dvc_list_tree
+	ln -f -s $(CSH_PATH)/46_list_design.csh			$(BIN_PATH)/dvc_list_design
 	ln -f -s $(CSH_PATH)/49_list_dir.csh			$(BIN_PATH)/dvc_list_dir
 	ln -f -s $(CSH_PATH)/51_add_object.csh			$(BIN_PATH)/dvc_add_object
 	ln -f -s $(CSH_PATH)/52_copy_object.csh			$(BIN_PATH)/dvc_copy_object

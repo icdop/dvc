@@ -22,7 +22,7 @@ dvc_checkout_stage   400-APR
 dvc_checkout_version  P1-trial/chip/400-APR/2017_0910-xxx
   cp data/design.v   :version/design.v
   cp data/design.sdc :version/design.sdc
-  cp report/chip.jpg :version/chip.jpg
+  cp data/chip.jpg   :version/chip.jpg
   
   dvc_set_dqi  --root :version Width 100  
   dvc_set_dqi  --root :version Height 150  
@@ -38,32 +38,35 @@ dvc_create_version P1-trial/chip/520-sta/2017_0910-xxx
 dvc_create_version P1-trial/chip/520-sta/2017_0911-xxx
 dvc_create_version P1-trial/chip/520-sta/2017_0912-xxx
 
-
+dvc_checkout_phase   P1-trial
+dvc_checkout_block   chip
 dvc_checkout_stage   520-sta
 set version_list = `dvc_list_stage 520-sta`
 foreach version ($version_list)
+
   dvc_checkout_version $version
   cp data/design.v   :version/design.v
   cp data/design.sdc :version/design.sdc
+  cp data/chip.jpg   :version/chip.jpg
   dvc_set_dqi  --root :version WNS  -100
   dvc_set_dqi  --root :version NVP  1000
   dvc_set_dqi  --root :version DRC   500
-  dvc_checkin_container .
+  dvc_checkin_version
+
   set scenario_list = "001 002 003 004"
   foreach scenario ($scenario_list) 
     dvc_create_container  $scenario
-    dvc_checkout_container
+
+    dvc_checkout_container $scenario
     dvc_copy_object report/sta.rpt  sta.rpt
-    dvc_copy_object report/sta.log  sta.log
-    dvc_copy_object report/chip.jpg chip.jpg
-    dvc_set_dqi  --root :container WNS  `date +%M`
-    dvc_set_dqi  --root :container NVP  `date +%S`
+    dvc_link_object report/sta.log  sta.log
+    dvc_set_dqi  WNS  `date +%M`
+    dvc_set_dqi  NVP  `date +%S`
     dvc_checkin_container
+
   end
 end
 
-dvc_list_project --recursive
 
-tree -d :
 
 
