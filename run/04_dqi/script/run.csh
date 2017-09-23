@@ -51,8 +51,6 @@ foreach version ($version_list)
   dvc_checkin_container .
   set scenario_list = "001 002 003 004"
   foreach scenario ($scenario_list) 
-    set wns=`date +%M`
-    set nvp=`date +%S`
     dvc_create_container  $scenario
     dvc_checkout_container
     dvc_copy_object report/sta.rpt  sta.rpt
@@ -66,6 +64,6 @@ end
 
 dvc_list_project --recursive
 
-tree :
+tree -d :
 
 

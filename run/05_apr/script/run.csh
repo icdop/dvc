@@ -76,6 +76,6 @@ dvc_checkin_version
 
 dvc_list_project --recursive
 
-tree :
+tree -d :
 
 
