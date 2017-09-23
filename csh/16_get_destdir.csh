@@ -47,16 +47,16 @@ endif
 
 if {(test -e $CURR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
    setenv CONTAINER_DIR $CURR_VERSN/$DESIGN_CONTR
-else if {(test -e $CURR_PROJT/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_PROJT/$DESIGN_CONTR
-else if {(test -e $CURR_PROJT/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_PROJT/:/$DESIGN_CONTR
-else if {(test -e $CURR_PROJT/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_PROJT/:/:/$DESIGN_CONTR
-else if {(test -e $CURR_PROJT/:/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_PROJT/:/:/:/$DESIGN_CONTR
-else if {(test -e $CURR_PROJT/:/:/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_PROJT/:/:/:/:/$DESIGN_CONTR
+else if {(test -e $PROJT_ROOT/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PROJT_ROOT/$DESIGN_CONTR
+else if {(test -e $PROJT_ROOT/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PROJT_ROOT/:/$DESIGN_CONTR
+else if {(test -e $PROJT_ROOT/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PROJT_ROOT/:/:/$DESIGN_CONTR
+else if {(test -e $PROJT_ROOT/:/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PROJT_ROOT/:/:/:/$DESIGN_CONTR
+else if {(test -e $PROJT_ROOT/:/:/:/:/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PROJT_ROOT/:/:/:/:/$DESIGN_CONTR
 else
    setenv CONTAINER_DIR $CURR_VERSN
 endif

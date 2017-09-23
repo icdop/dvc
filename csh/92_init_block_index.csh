@@ -48,8 +48,8 @@ if ($status != 0) then
    exit 1
 endif
 
-cp $ETC_DIR/css/index.css $CURR_PROJT/$DVC_PATH/.dvc/index.css
-set idxhtml="$CURR_PROJT/$DVC_PATH/.dvc/index.htm"
+cp $ETC_DIR/css/index.css $PROJT_ROOT/$DVC_PATH/.dvc/index.css
+set idxhtml="$PROJT_ROOT/$DVC_PATH/.dvc/index.htm"
 if {(test -e $idxhtml)} then
    set idx_exist=1
 else
@@ -102,13 +102,13 @@ else
    endif
    svn import --quiet --force $idxhtml  $DESIGN_URL/.dvc/index.htm -m 'Directory Index' 
    if ($status == 0) then
-      if {(test -d $CURR_PROJT/$DVC_PATH/.dvc/)} then
-         svn update --quiet $CURR_PROJT/$DVC_PATH/.dvc/
+      if {(test -d $PROJT_ROOT/$DVC_PATH/.dvc/)} then
+         svn update --quiet $PROJT_ROOT/$DVC_PATH/.dvc/
       endif
       rm -f $idxhtml
    else
-      mkdir -p $CURR_PROJT/$DVC_PATH/.dvc/
-      mv $idxhtml $CURR_PROJT/$DVC_PATH/.dvc/index.htm
+      mkdir -p $PROJT_ROOT/$DVC_PATH/.dvc/
+      mv $idxhtml $PROJT_ROOT/$DVC_PATH/.dvc/index.htm
    endif
 endif
 

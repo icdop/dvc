@@ -57,7 +57,7 @@ init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
-	dvc_set_env CURR_PROJT $(CURR_PROJT)
+	dvc_set_env PROJT_ROOT $(PROJT_ROOT)
 	dvc_set_env CURR_PHASE $(CURR_PHASE)
 	dvc_set_env CURR_BLOCK $(CURR_BLOCK)
 	dvc_set_env CURR_STAGE $(CURR_STAGE)
@@ -99,7 +99,7 @@ checkout: checkout_project checkout_version
 
 checkout_project:
 	@echo "#---------------------------------------------------"
-	@echo "# 3 Checkout project to '$(CURR_PROJT)' dir"
+	@echo "# 3 Checkout project to '$(PROJT_ROOT)' dir"
 	@echo "#---------------------------------------------------"
 	dvc_checkout_project	$(DESIGN_PROJT)
 
@@ -253,7 +253,7 @@ checkin_container:
 
 
 tree:
-	dvc_list_tree $(CURR_PROJT)
+	dvc_list_tree $(PROJT_ROOT)
 
 list: 
 	dvc_list_project --recursive
@@ -353,7 +353,7 @@ remove_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-6. Clean up enviroment setup directory"
 	@echo "#---------------------------------------------------"
-	rm -fr .dop $(CURR_PROJT)
+	rm -fr .dop $(PROJT_ROOT)
 
 
 index:

@@ -31,38 +31,38 @@ endif
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-mkdir -p $CURR_PROJT/$DVC_PATH
+mkdir -p $PROJT_ROOT/$DVC_PATH
 
 if ($?depth_mode) then
-   if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
-      svn update --quiet --force $CURR_PROJT/$DVC_PATH --set-depth $depth_mode
+   if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
+      svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth $depth_mode
    else
-      svn checkout --force $VERSN_URL $CURR_PROJT/$DVC_PATH --depth $depth_mode
+      svn checkout --force $VERSN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
    endif
 endif
-if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
-   svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dvc --set-depth infinity
-   svn update --quiet --force $CURR_PROJT/$DVC_PATH/.dqi --set-depth infinity
+if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
+   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
+   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
 else
-   svn checkout --force $VERSN_URL/ $CURR_PROJT/$DVC_PATH/ --depth empty
-   svn checkout --force $VERSN_URL/.dvc $CURR_PROJT/$DVC_PATH/.dvc --depth infinity
-   svn checkout --force $VERSN_URL/.dqi $CURR_PROJT/$DVC_PATH/.dqi --depth infinity
+   svn checkout --force $VERSN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
+   svn checkout --force $VERSN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
+   svn checkout --force $VERSN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
 endif
 
-rm -f $CURR_PROJT/:
-rm -f $CURR_PROJT/$DESIGN_PHASE/:
-rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-rm -f $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
-ln -s $DESIGN_PHASE $CURR_PROJT/:
-ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
-ln -s $DESIGN_STAGE $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_VERSN $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+rm -f $PROJT_ROOT/:
+rm -f $PROJT_ROOT/$DESIGN_PHASE/:
+rm -f $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+rm -f $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
+ln -s $DESIGN_PHASE $PROJT_ROOT/:
+ln -s $DESIGN_BLOCK $PROJT_ROOT/$DESIGN_PHASE/:
+ln -s $DESIGN_STAGE $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
+ln -s $DESIGN_VERSN $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
 
 rm -f $CURR_VERSN
 if {(test -e $CURR_VERSN)} then
    echo "ERROR: $CURR_VERSN is a folder, rename it!"
 else
-   ln -s $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
+   ln -s $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
 endif
 
 $CSH_DIR/05_set_container.csh .

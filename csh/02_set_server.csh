@@ -16,7 +16,7 @@ mkdir -p $HOME/.dop/server
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set envname = $1
    if (($?reset)||($2 == "--reset")) then
-      echo "INFO: remove env('$envname')"
+      echo "INFO: remove server('$envname')"
       rm -f $HOME/.dop/server/$envname
    else if ($2 != "") then
       set envval = $2
@@ -25,7 +25,7 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    else if {(test -e $HOME/.dop/server/$envname)} then
       echo "$envname =  `cat $HOME/.dop/server/$envname`"
    else 
-      echo "ERROR: env '$envname' is not defined!"
+      echo "ERROR: server('$envname') variable is not defined!"
    endif
 else
    echo `ls $HOME/.dop/server/`

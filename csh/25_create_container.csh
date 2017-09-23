@@ -37,7 +37,7 @@ else
       svn import --quiet $tmpfile $CONTR_URL/.dvc/CONTAINER -m 'Design Container Path'
       rm -fr $tmpfile
    endif
-   svn checkout --quiet $CONTR_URL $CURR_PROJT/$DVC_PATH --depth infinity
+   svn checkout --quiet $CONTR_URL $PROJT_ROOT/$DVC_PATH --depth infinity
 endif
     
 $CSH_DIR/00_set_env.csh DESIGN_CONTR $DESIGN_CONTR

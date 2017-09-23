@@ -31,32 +31,32 @@ endif
 
 echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 
-mkdir -p $CURR_PROJT/$DESIGN_PHASE
+mkdir -p $PROJT_ROOT/$DESIGN_PHASE
 
 if ($?depth_mode) then
-   if {(test -e $CURR_PROJT/$DESIGN_PHASE/.dvc)} then
-      svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE --set-depth $depth_mode
+   if {(test -e $PROJT_ROOT/$DESIGN_PHASE/.dvc)} then
+      svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE --set-depth $depth_mode
    else
-      svn checkout --force $PHASE_URL $CURR_PROJT/$DESIGN_PHASE --depth $depth_mode
+      svn checkout --force $PHASE_URL $PROJT_ROOT/$DESIGN_PHASE --depth $depth_mode
    endif
 endif
 
-if {(test -e $CURR_PROJT/$DESIGN_PHASE/.dvc)} then
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/.dvc --set-depth infinity
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/.dqi --set-depth infinity
+if {(test -e $PROJT_ROOT/$DESIGN_PHASE/.dvc)} then
+   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/.dvc --set-depth infinity
+   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/.dqi --set-depth infinity
 else
-   svn checkout --force $PHASE_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/.dvc --depth infinity
-   svn checkout --force $PHASE_URL/.dqi $CURR_PROJT/$DESIGN_PHASE/.dqi --depth infinity
+   svn checkout --force $PHASE_URL/.dvc $PROJT_ROOT/$DESIGN_PHASE/.dvc --depth infinity
+   svn checkout --force $PHASE_URL/.dqi $PROJT_ROOT/$DESIGN_PHASE/.dqi --depth infinity
 endif
 
-rm -f $CURR_PROJT/:
-ln -s $DESIGN_PHASE $CURR_PROJT/:
+rm -f $PROJT_ROOT/:
+ln -s $DESIGN_PHASE $PROJT_ROOT/:
 
 rm -f $CURR_PHASE
 if {(test -e $CURR_PHASE)} then
    echo "ERROR: $CURR_PHASE is a folder, rename it!"
 else
-   ln -s $CURR_PROJT/$DESIGN_PHASE $CURR_PHASE
+   ln -s $PROJT_ROOT/$DESIGN_PHASE $CURR_PHASE
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

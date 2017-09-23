@@ -30,32 +30,32 @@ if ($status != 0) then
 endif
 
 echo "INFO: Checkout Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
-mkdir -p $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
+mkdir -p $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK
 
 if ($?depth_mode) then
-   if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
-      svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
+   if {(test -e $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
+      svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK --set-depth $depth_mode
    else
-      svn checkout --force $BLOCK_URL $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
+      svn checkout --force $BLOCK_URL $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK --depth $depth_mode
    endif
 endif
 
-if {(test -e $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --set-depth infinity
-   svn update --quiet --force $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dqi --set-depth infinity
+if {(test -e $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc)} then
+   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --set-depth infinity
+   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dqi --set-depth infinity
 else
-   svn checkout --force $BLOCK_URL/.dvc $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --depth infinity
-   svn checkout --force $BLOCK_URL/.dqi $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/.dqi --depth infinity
+   svn checkout --force $BLOCK_URL/.dvc $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dvc --depth infinity
+   svn checkout --force $BLOCK_URL/.dqi $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/.dqi --depth infinity
 endif
 
-rm -f $CURR_PROJT/$DESIGN_PHASE/:
-ln -s $DESIGN_BLOCK $CURR_PROJT/$DESIGN_PHASE/:
+rm -f $PROJT_ROOT/$DESIGN_PHASE/:
+ln -s $DESIGN_BLOCK $PROJT_ROOT/$DESIGN_PHASE/:
 
 rm -f $CURR_BLOCK
 if {(test -e $CURR_BLOCK)} then
    echo "ERROR: $CURR_BLOCK is a folder, rename it!"
 else
-   ln -s $CURR_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK $CURR_BLOCK
+   ln -s $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK $CURR_BLOCK
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

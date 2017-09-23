@@ -37,7 +37,7 @@ echo "VERSION : $version"
 set dvc_title = "Version $version"
 set dvc_name = $version
 set dvc_path = $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$dvc_name
-set dvc_data = $CURR_PROJT/$dvc_path
+set dvc_data = $PROJT_ROOT/$dvc_path
 set version_htm   = $dvc_data/index.htm
 set version_css   = $dvc_data/.index.css
 cp $HTM_DIR/version/index.css $version_css
@@ -50,7 +50,7 @@ cp $HTM_DIR/version/index.css $version_css
  foreach container ( $container_list )
     set item_name=$container
     set item_path=$phase/$block/$stage/$version
-    set item_data=$CURR_PROJT/$item_path/$item_name
+    set item_data=$PROJT_ROOT/$item_path/$item_name
     if ($container != ":") then
     if {(test -d $item_data)} then
        echo "	CONTAINER : $container"
@@ -60,7 +60,7 @@ cp $HTM_DIR/version/index.css $version_css
        set dvc_title = "Container $container"
        set dvc_name = $container
        set dvc_path = $item_path/$dvc_name
-       set dvc_data = $CURR_PROJT/$dvc_path
+       set dvc_data = $PROJT_ROOT/$dvc_path
        set container_htm   = $dvc_data/index.htm
        set container_css   = $dvc_data/.index.css
        cp $HTM_DIR/container/index.css $container_css
@@ -72,7 +72,7 @@ cp $HTM_DIR/version/index.css $version_css
        foreach object ( $object_list )
           set item_name=$object
           set item_path=$phase/$block/$stage/$version/$container
-          set item_data=$CURR_PROJT/$item_path/$item_name
+          set item_data=$PROJT_ROOT/$item_path/$item_name
           if ($object != ":") then
           if {(test -e $item_data)} then
              echo "		OBJECT  : $object"
@@ -80,7 +80,7 @@ cp $HTM_DIR/version/index.css $version_css
              #### OBJECT HTML REPORT
              set dvc_name = $object
              set dvc_path = $item_path/$dvc_name
-             set dvc_data = $CURR_PROJT/$dvc_path
+             set dvc_data = $PROJT_ROOT/$dvc_path
           endif
           endif
        end

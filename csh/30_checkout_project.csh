@@ -26,12 +26,12 @@ endif
 echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password db
 
-if {(test -e $CURR_PROJT/.dvc/PROJECT)} then
-   set orig_project=`cat $CURR_PROJT/.dvc/PROJECT`
+if {(test -e $PROJT_ROOT/.dvc/PROJECT)} then
+   set orig_project=`cat $PROJT_ROOT/.dvc/PROJECT`
    if (($orig_project != "") && ($orig_project != $DESIGN_PROJT)) then
       if ($?force_mode) then
          echo "WARNING: removing previous project checkout data - $orig_project"
-         rm -fr $CURR_PROJT
+         rm -fr $PROJT_ROOT
       else
          echo "ERROR: there is existing project checkout data - $orig_project"
          echo "       use --force option to replace it."
@@ -41,22 +41,22 @@ if {(test -e $CURR_PROJT/.dvc/PROJECT)} then
    endif 
 endif
 
-mkdir -p $CURR_PROJT
+mkdir -p $PROJT_ROOT
 
 if ($?depth_mode) then
-   if {(test -e $CURR_PROJT/.dvc)} then
-      svn update --quiet --force $CURR_PROJT --set-depth $depth_mode
+   if {(test -e $PROJT_ROOT/.dvc)} then
+      svn update --quiet --force $PROJT_ROOT --set-depth $depth_mode
    else
-      svn checkout --force $PROJT_URL $CURR_PROJT --depth $depth_mode
+      svn checkout --force $PROJT_URL $PROJT_ROOT --depth $depth_mode
    endif
 endif
 
-if {(test -e $CURR_PROJT/.dvc)} then
-   svn update --quiet --force $CURR_PROJT/.dvc --set-depth infinity
-   svn update --quiet --force $CURR_PROJT/.dqi --set-depth infinity
+if {(test -e $PROJT_ROOT/.dvc)} then
+   svn update --quiet --force $PROJT_ROOT/.dvc --set-depth infinity
+   svn update --quiet --force $PROJT_ROOT/.dqi --set-depth infinity
 else
-   svn checkout --force $PROJT_URL/.dvc $CURR_PROJT/.dvc --depth infinity
-   svn checkout --force $PROJT_URL/.dqi $CURR_PROJT/.dqi --depth infinity
+   svn checkout --force $PROJT_URL/.dvc $PROJT_ROOT/.dvc --depth infinity
+   svn checkout --force $PROJT_URL/.dqi $PROJT_ROOT/.dqi --depth infinity
 endif
 
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT

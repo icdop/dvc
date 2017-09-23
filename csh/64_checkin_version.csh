@@ -17,10 +17,10 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_version.csh
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-if {(test -e $CURR_PROJT/$DVC_PATH/.dvc)} then
-   svn update $CURR_PROJT/$DVC_PATH --quiet --force
-   (cd $CURR_PROJT/$DVC_PATH; svn add .  --force --depth infinity)
-   svn commit $CURR_PROJT/$DVC_PATH -m 'Update version' --quiet
+if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
+   svn update $PROJT_ROOT/$DVC_PATH --quiet --force
+   (cd $PROJT_ROOT/$DVC_PATH; svn add .  --force --depth infinity)
+   svn commit $PROJT_ROOT/$DVC_PATH -m 'Update version' --quiet
 else
    echo "ERROR: Cannot find Version Directory '$DVC_PATH'"
    exit 1

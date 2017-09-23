@@ -25,10 +25,10 @@ if ($status != 0) then
    exit 1
 endif
 
-if {(test -e $CURR_PROJT/$DVC_PATH)} then
-   svn update --quiet --force $CURR_PROJT/$DVC_PATH --set-depth infinity
+if {(test -e $PROJT_ROOT/$DVC_PATH)} then
+   svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth infinity
 else
-   svn checkout --force $CONTR_URL $CURR_PROJT/$DVC_PATH --depth infinity
+   svn checkout --force $CONTR_URL $PROJT_ROOT/$DVC_PATH --depth infinity
 endif
 
 if {(test -e $CURR_VERSN)} then

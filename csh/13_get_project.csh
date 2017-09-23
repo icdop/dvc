@@ -25,9 +25,9 @@ if ($?info_mode) then
   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
-if {(test -e .dop/env/CURR_PROJT)} then
-  setenv CURR_PROJT      `cat .dop/env/CURR_PROJT`
-else if ($?CURR_PROJT == 0) then
-  setenv CURR_PROJT      ":"
+if {(test -e .dop/env/PROJT_ROOT)} then
+  setenv PROJT_ROOT      `cat .dop/server/PROJT_ROOT`
+else if ($?PROJT_ROOT == 0) then
+  setenv PROJT_ROOT      ":"
 endif
 
