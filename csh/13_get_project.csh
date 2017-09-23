@@ -26,7 +26,7 @@ if ($?info_mode) then
 endif
 
 if {(test -e .dop/env/PROJT_ROOT)} then
-  setenv PROJT_ROOT      `cat .dop/server/PROJT_ROOT`
+  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
 else if ($?PROJT_ROOT == 0) then
   setenv PROJT_ROOT      ":"
 endif

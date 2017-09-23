@@ -14,7 +14,16 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/04_set_version.csh
+source $CSH_DIR/14_get_design.csh
+
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
+      setenv DESIGN_VERSN $1
+      $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
+   endif 
+   shift argv
+endif
+
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
@@ -29,41 +38,10 @@ if ($status != 0) then
 endif
 
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
-
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-mkdir -p $PROJT_ROOT/$DVC_PATH
+setenv CURR_PTR $CURR_VERSN
 
-if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
-      svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth $depth_mode
-   else
-      svn checkout --force $VERSN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
-   endif
-endif
-if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
-else
-   svn checkout --force $VERSN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
-   svn checkout --force $VERSN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
-   svn checkout --force $VERSN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
-endif
-
-rm -f $PROJT_ROOT/:
-rm -f $PROJT_ROOT/$DESIGN_PHASE/:
-rm -f $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-rm -f $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
-ln -s $DESIGN_PHASE $PROJT_ROOT/:
-ln -s $DESIGN_BLOCK $PROJT_ROOT/$DESIGN_PHASE/:
-ln -s $DESIGN_STAGE $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_VERSN $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/:
-
-rm -f $CURR_VERSN
-if {(test -e $CURR_VERSN)} then
-   echo "ERROR: $CURR_VERSN is a folder, rename it!"
-else
-   ln -s $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN $CURR_VERSN
-endif
+source $CSH_DIR/39_checkout_dvc_path.csh
 
 $CSH_DIR/05_set_container.csh .
 

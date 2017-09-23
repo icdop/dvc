@@ -9,7 +9,7 @@ if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/
 endif
 setenv CSH_DIR $DVC_HOME/csh 
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then 
    set dvc_path = $1
@@ -32,23 +32,25 @@ if ($?dvc_path != 0) then
             set dvc_path = $dvc_path:h
             set phase    = $dvc_path:t
          else
-            set phase = ""
+            set phase = ":"
          endif
       else
-         set block = ""
-         set phase = ""
+         set block = ":"
+         set phase = ":"
       endif
    else
-      set stage = ""
-      set block = ""
-      set phase = ""
+      set stage = ":"
+      set block = ":"
+      set phase = ":"
    endif
 else
-   set version = ""
-   set stage = ""
-   set block = ""
-   set phase = ""
+   set version = ":"
+   set stage = ":"
+   set block = ":"
+   set phase = ":"
 endif
+
+exit 0
 
 if (($phase != "") && ($phase != ":") && ($phase != ".")) then
     setenv DESIGN_PHASE $phase

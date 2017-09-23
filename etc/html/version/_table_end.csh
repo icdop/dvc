@@ -1,1 +1,2 @@
 echo "</table>"
+echo "</details>"

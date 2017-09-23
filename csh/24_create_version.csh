@@ -8,9 +8,6 @@ endif
 echo "======================================================="
 echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 
-# do not set current link in creation mode
-set no_curr_link=1
-
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
 endif
@@ -18,7 +15,14 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/04_set_version.csh
+source $CSH_DIR/14_get_design.csh
+
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
+   setenv DESIGN_VERSN $1
+   endif 
+   shift argv
+endif
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
@@ -27,21 +31,6 @@ setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
-
-svn info $PHASE_URL >& /dev/null
-if ($status != 0) then
-   $CSH_DIR/21_create_phase.csh $DESIGN_PHASE
-endif
-
-svn info $BLOCK_URL >& /dev/null
-if ($status != 0) then
-   $CSH_DIR/22_create_block.csh $DESIGN_BLOCK
-endif
-
-svn info $STAGE_URL >& /dev/null
-if ($status != 0) then
-   $CSH_DIR/23_create_stage.csh $DESIGN_STAGE
-endif
 
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then

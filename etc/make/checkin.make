@@ -239,11 +239,17 @@ clean_container:
 
 checkin: checkin_version
 
+checkin_design:
+	@echo "#---------------------------------------------------"
+	@echo "# 6-4 Checkin all files of design version"
+	@echo "#---------------------------------------------------"
+	dvc_checkin_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
+
 checkin_version:
 	@echo "#---------------------------------------------------"
-	@echo "# 6-4 Checkin all files inside container"
+	@echo "# 6-4 Checkin all files of design version"
 	@echo "#---------------------------------------------------"
-	dvc_checkin_container	$(DESIGN_VERSN)
+	dvc_checkin_version	$(DESIGN_VERSN)
 
 checkin_container:
 	@echo "#---------------------------------------------------"
@@ -253,7 +259,7 @@ checkin_container:
 
 
 tree:
-	dvc_list_tree $(PROJT_ROOT)
+	dvc_list_design $(PROJT_ROOT)
 
 list: 
 	dvc_list_project --recursive

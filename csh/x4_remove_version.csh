@@ -12,7 +12,16 @@ if ($?DVC_HOME == 0) then
 endif
 source $DVC_HOME/csh/12_get_server.csh
 source $DVC_HOME/csh/13_get_project.csh
-source $DVC_HOME/csh/04_set_version.csh
+source $DVC_HOME/csh/14_get_design.csh
+
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
+   setenv DESIGN_VERSN $1
+   endif 
+   shift argv
+endif
+
+setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE

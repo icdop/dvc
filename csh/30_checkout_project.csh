@@ -1,7 +1,7 @@
 #!/bin/csh -f
 #set verbose=1
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_PROJT>"
    exit -1
 endif

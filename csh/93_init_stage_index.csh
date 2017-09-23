@@ -15,7 +15,7 @@ setenv ETC_DIR $DVC_HOME/etc
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
    setenv DESIGN_STAGE $1

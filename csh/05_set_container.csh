@@ -11,7 +11,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 source $CSH_DIR/15_get_container.csh
 
 if ($1 != "") then
@@ -30,10 +30,10 @@ else
 endif
 
 rm -f $CURR_CONTR
-if {(test -e $CURR_CONTR)} then
+if {(test -d $CURR_CONTR)} then
    echo "ERROR: $CURR_CONTR is a folder, rename it!"
 else 
-   ln -s $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
+   ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
 endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"

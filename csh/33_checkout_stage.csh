@@ -1,6 +1,7 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
-if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
+if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog <DESIGN_STAGE>"
    exit -1
 endif
@@ -13,11 +14,14 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
-if (($1 != "") && ($1 != ":") && ($1 != ".")) then
-   setenv DESIGN_STAGE $1
-   $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
+      setenv DESIGN_STAGE $1
+      $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
+   endif
+   shift argv
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
@@ -31,34 +35,10 @@ if ($status != 0) then
 endif
 
 echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
-mkdir -p $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv CURR_PTR $CURR_STAGE
 
-if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
-      svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE --set-depth $depth_mode
-   else
-      svn checkout --force $STAGE_URL $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE --depth $depth_mode
-   endif
-endif
-
-if {(test -e $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc)} then
-   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc --set-depth infinity
-   svn update --quiet --force $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dqi --set-depth infinity
-else
-   svn checkout --force $STAGE_URL/.dvc $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dvc --depth infinity
-   svn checkout --force $STAGE_URL/.dqi $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/.dqi --depth infinity
-endif
-
-
-rm -f $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-ln -s $DESIGN_STAGE $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/:
-
-rm -f $CURR_STAGE
-if {(test -e $CURR_STAGE)} then
-   echo "ERROR: $CURR_STAGE is a folder, rename it!"
-else
-   ln -s $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE $CURR_STAGE
-endif
+source $CSH_DIR/39_checkout_dvc_path.csh
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="

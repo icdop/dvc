@@ -11,7 +11,7 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
    if (($1 != ":") && ($1 != ".")) then
@@ -20,8 +20,8 @@ if ($1 != "") then
    shift argv
 endif
 
-# Use "source list_dir.csh" and specify DESIGN_URL 
-# is to preserve option modes and pass them to list_dir.csh
+# Use "source list_dvc_path.csh" and specify DESIGN_URL 
+# is to preserve option modes and pass them to list_dvc_path.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
@@ -29,6 +29,6 @@ setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 
 setenv DESIGN_URL $VERSN_URL
-source $CSH_DIR/49_list_dir.csh
+source $CSH_DIR/49_list_dvc_path.csh
 
 exit 0

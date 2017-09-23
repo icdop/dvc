@@ -2,7 +2,7 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [-d <dir>] [-c <container>]"
+   echo "Usage: $prog [-root <dir>] [--container <container>]"
    exit -1
 endif
 
@@ -11,14 +11,14 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
 if (($1 == "-v") || ($1 == "--verbose")) then
    set verbose_mode = 1
    shift argv
 endif
 
-if (($1 == "-d") || ($1 == "--dir")) then
+if ($1 == "--root") then
    shift argv
    set dir=$1
    shift argv
@@ -35,7 +35,7 @@ if (($1 == "-d") || ($1 == "--dir")) then
 endif
 
 
-if (($1 == "-c") || ($1 == "--container")) then
+if ($1 == "--container") then
    shift argv
    setenv DESIGN_CONTR $1
    shift argv

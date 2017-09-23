@@ -13,7 +13,7 @@ if ($?DVC_HOME == 0) then
 endif
 source $DVC_HOME/csh/12_get_server.csh
 source $DVC_HOME/csh/13_get_project.csh
-source $DVC_HOME/csh/14_get_version.csh
+source $DVC_HOME/csh/14_get_design.csh
 source $DVC_HOME/csh/05_set_container.csh
 
 if {((test -d $CONTAINER_DIR)&&(test -d $PROJT_ROOT/$DVC_PATH))} then

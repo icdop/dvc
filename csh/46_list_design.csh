@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PATH>"
+   echo "Usage: $prog <DVC_PATH>"
    exit -1
 endif
 
@@ -12,7 +12,7 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
+source $CSH_DIR/14_get_design.csh
 
 tree -d $PROJT_ROOT
 

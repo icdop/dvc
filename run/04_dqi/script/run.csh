@@ -13,13 +13,9 @@ dvc_create_project testcase
 
 ### 3. Create design version folder and checkin design data - Design Manager
 
-dvc_create_version P1-trial/chip/400-APR/2017_0910-xxx
-dvc_checkout_project testcase
-dvc_checkout_phase   P1-trial
-dvc_checkout_block   chip
-dvc_checkout_stage   400-APR
+dvc_create_design    P1-trial/chip/400-APR/2017_0910-xxx
 
-dvc_checkout_version  P1-trial/chip/400-APR/2017_0910-xxx
+dvc_checkout_design  P1-trial/chip/400-APR/2017_0910-xxx
   cp data/design.v   :version/design.v
   cp data/design.sdc :version/design.sdc
   cp data/chip.jpg   :version/chip.jpg
@@ -31,12 +27,12 @@ dvc_checkout_version  P1-trial/chip/400-APR/2017_0910-xxx
   dvc_set_dqi  --root :version WNS  -100
   dvc_set_dqi  --root :version NVP  1000
   dvc_set_dqi  --root :version DRC   500
-  dvc_checkin_version
+  dvc_checkin_design
 
 
-dvc_create_version P1-trial/chip/520-sta/2017_0910-xxx
-dvc_create_version P1-trial/chip/520-sta/2017_0911-xxx
-dvc_create_version P1-trial/chip/520-sta/2017_0912-xxx
+dvc_create_design P1-trial/chip/520-sta/2017_0910-xxx
+dvc_create_design P1-trial/chip/520-sta/2017_0911-xxx
+dvc_create_design P1-trial/chip/520-sta/2017_0912-xxx
 
 dvc_checkout_phase   P1-trial
 dvc_checkout_block   chip

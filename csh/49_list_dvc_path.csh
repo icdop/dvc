@@ -17,14 +17,14 @@ source $CSH_DIR/13_get_project.csh
 # it may be called form other dvc_list_* command
 # this is used to preserved all option modes of parent commands 
 
-if (($1 != "") && ($1 != ":")) then
+if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    if {(test -e $1/.dvc/CONTAINER)} then
       setenv DESIGN_URL "$PROJT_URL/`cat $1/.dvc/CONTAINER`"
    else
       setenv DESIGN_URL $PROJT_URL/$1
    endif
 else if ($?DESIGN_URL == 0) then
-   source $CSH_DIR/14_get_version.csh
+   source $CSH_DIR/14_get_design.csh
    setenv DESIGN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 endif
 

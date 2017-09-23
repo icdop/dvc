@@ -12,8 +12,8 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_version.csh
-source $CSH_DIR/16_get_destdir.csh
+source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/16_get_object.csh
 
 if ($status < 0) then 
    exit $status 
