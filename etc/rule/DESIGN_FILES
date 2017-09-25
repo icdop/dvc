@@ -1,9 +1,9 @@
-;NAME		FORMAT	DEFAULT		TITLE
-=====   	=======	==========	==========================
-V_FILE		VERILOG design.v	"Verilog Netlist File"
-SDC_FILE	SDC	design.sdc	"Timing Constraint File"
-DEF_FILE	DEF	design.def	"Physical Design File"
-SPEF_FILE	SPEF	design.spef	"RC Extraction File"
-SDF_FILE	SDF	design.sdf	"Standard Delay File"
-STA_RPT		RPT	sta.rpt		"Timing Report"
+;NAME		DEFAULT	    FORMAT  	TITLE
+=====   	==========  ======= 	==========================
+V_FILE		design.v    VERILOG 	"Verilog Netlist File"
+SDC_FILE	design.sdc  SDC	   	"Timing Constraint File"
+DEF_FILE	design.def  DEF	   	"Physical Design File"
+SPEF_FILE	design.spef SPEF   	"RC Extraction File"
+SDF_FILE	design.sdf  SDF	   	"Standard Delay File"
+STA_RPT		sta.rpt	    RPT	   	"Timing Report"
 
