@@ -1,0 +1,10 @@
+Prepare the following file:
+
+sta.log
+vio.rpt
+
+Edit the INPUT_FILES as below
+;var		dest_name	source_file_location
+STA_LOG		sta.log
+VIO_RPT		vio.rpt
+

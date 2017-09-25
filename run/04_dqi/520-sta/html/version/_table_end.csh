@@ -1,0 +1,3 @@
+echo "</table>"
+echo "</details>"
+
