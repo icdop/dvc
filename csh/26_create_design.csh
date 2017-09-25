@@ -23,40 +23,40 @@ echo "INFO: DVC_PATH = $DVC_PATH"
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if (($phase != "") && ($phase != ":") && ($phase != ".")) then
-setenv PHASE_URL $PROJT_URL/$phase
-svn info $PHASE_URL >& /dev/null
-if ($status != 0) then
+#setenv PHASE_URL $PROJT_URL/$phase
+#svn info $PHASE_URL >& /dev/null
+#if ($status != 0) then
    $CSH_DIR/21_create_phase.csh $phase
-endif
+#endif
 endif
 
 if (($block != "") && ($block != ":") && ($block != ".")) then
-setenv BLOCK_URL $PROJT_URL/$DESIGN_PHASE/$block
-svn info $BLOCK_URL >& /dev/null
-if ($status != 0) then
+#setenv BLOCK_URL $PROJT_URL/$DESIGN_PHASE/$block
+#svn info $BLOCK_URL >& /dev/null
+#if ($status != 0) then
    $CSH_DIR/22_create_block.csh $block
-endif
+#endif
 endif
 
 if (($stage != "") && ($stage != ":") && ($stage != ".")) then
-setenv STAGE_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$stage
-svn info $STAGE_URL >& /dev/null
-if ($status != 0) then
+#setenv STAGE_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$stage
+#svn info $STAGE_URL >& /dev/null
+#if ($status != 0) then
    $CSH_DIR/23_create_stage.csh $stage
-endif
+#endif
 endif
 
 if (($version != "") && ($version != ":") && ($version != ".")) then
-setenv VERSN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$version
-svn info $VERSN_URL >& /dev/null
-if ($status != 0) then
+#setenv VERSN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$version
+#svn info $VERSN_URL >& /dev/null
+#if ($status != 0) then
    $CSH_DIR/24_create_version.csh $version
-else
-   echo "INFO: Exist Project Design Version : $version"
-   if ($?info_mode) then
-      svn info $VERSN_URL
-   endif
-endif
+#else
+#   echo "INFO: Exist Project Design Version : $version"
+#   if ($?info_mode) then
+#      svn info $VERSN_URL
+#   endif
+#endif
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

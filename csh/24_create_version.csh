@@ -20,6 +20,7 @@ source $CSH_DIR/14_get_design.csh
 if ($1 != "") then
    if (($1 != ":") && ($1 != ".")) then
    setenv DESIGN_VERSN $1
+   $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
    endif 
    shift argv
 endif

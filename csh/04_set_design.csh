@@ -44,39 +44,21 @@ if ($?dvc_path != 0) then
       set phase = ":"
    endif
 else
-   set version = ":"
-   set stage = ":"
-   set block = ":"
-   set phase = ":"
-endif
-
-exit 0
-
-if (($phase != "") && ($phase != ":") && ($phase != ".")) then
-    setenv DESIGN_PHASE $phase
-    $CSH_DIR/00_set_env.csh DESIGN_PHASE $DESIGN_PHASE
-endif
-
-if (($block != "") && ($block != ":") && ($block != ".")) then
-    setenv DESIGN_BLOCK $block
-    $CSH_DIR/00_set_env.csh DESIGN_BLOCK $DESIGN_BLOCK
-endif
-
-if (($stage != "") && ($stage != ":") && ($stage != ".")) then
-    setenv DESIGN_STAGE $stage
-    $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
-endif
-
-if (($version != "") && ($version != ":") && ($version != ".")) then
-    setenv DESIGN_VERSN $version
-    $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
+   set phase   = $DESIGN_PHASE
+   set block   = $DESIGN_BLOCK
+   set stage   = $DESIGN_STAGE
+   set version = $DESIGN_VERSN
 endif
 
 if ($?verbose_mode) then
 echo "==============================="
-echo "DESIGN_PHASE = $DESIGN_PHASE"
-echo "DESIGN_BLOCK = $DESIGN_BLOCK"
-echo "DESIGN_STAGE = $DESIGN_STAGE"
-echo "DESIGN_VERSN = $DESIGN_VERSN"
+echo "DESIGN_PHASE = $phase"
+echo "DESIGN_BLOCK = $block"
+echo "DESIGN_STAGE = $stage"
+echo "DESIGN_VERSN = $version"
 echo "==============================="
 endif
+
+exit 0
+
+

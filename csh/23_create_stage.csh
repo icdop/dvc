@@ -17,9 +17,11 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
    setenv DESIGN_STAGE $1
-   shift argv
    $CSH_DIR/00_set_env.csh DESIGN_STAGE $DESIGN_STAGE
+   endif
+   shift argv
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
