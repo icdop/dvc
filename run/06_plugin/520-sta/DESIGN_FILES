@@ -1,2 +1,2 @@
-STA_LOG		sta.log		file_location
-VIO_RPT		vio.rpt
+STA_LOG		sta.log		-
+VIO_RPT		vio.rpt		-
