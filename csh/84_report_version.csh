@@ -16,7 +16,7 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/08_set_report.csh
 
 if ($?html_templ) then
-   setenv HTM_DIR $htmp_temp
+   setenv HTM_DIR $html_templ
 else
    setenv HTM_DIR $ETC_DIR/html
 endif
@@ -44,6 +44,13 @@ cp $HTM_DIR/version/index.css $version_css
  
 (source $HTM_DIR/version/_index_begin.csh) >  $version_htm
 (source $HTM_DIR/version/_index_data.csh)  >> $version_htm
+set detail_list = `glob $HTM_DIR/version/_index_detail_*.csh`
+foreach detail_report ( $detail_list )
+  echo "<details>" >> $version_htm
+  (source $detail_report)  >> $version_htm
+  echo "</details>" >> $version_htm
+end
+echo "<details>" >> $version_htm
 (source $HTM_DIR/version/_table_begin.csh) >> $version_htm
  set container_list   = `dir $dvc_data`
  #echo "CONTAINER_LIST: $container_list"
@@ -55,7 +62,8 @@ cp $HTM_DIR/version/index.css $version_css
     if {(test -d $item_data)} then
        echo "	CONTAINER : $container"
        (source $HTM_DIR/version/_table_data.csh) >> $version_htm
-
+       
+       if {(test -d $HTM_DIR/container/)} then
        #### CONTAINER HTML REPORT
        set dvc_title = "Container $container"
        set dvc_name = $container
@@ -86,10 +94,12 @@ cp $HTM_DIR/version/index.css $version_css
        end
       (source $HTM_DIR/container/_table_end.csh) >> $container_htm
       (source $HTM_DIR/container/_index_end.csh) >> $container_htm
+       endif
    endif
    endif
  end
 (source $HTM_DIR/version/_table_end.csh) >> $version_htm
+echo "</details>" >> $version_htm
 (source $HTM_DIR/version/_index_end.csh) >> $version_htm
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

@@ -15,17 +15,17 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
-if (($1 == "--html")||($1 == "-html_templ")) then
+if (($1 == "--html")||($1 == "--html_templ")) then
    shift argv
    if ($1 != "") then
-     set html_templ=$1
+     set html_templ = $1
      shift argv
    endif
 endif
 
 if ($1 != "") then
   if (($1 != ":") && ($1 != ".")) then
-    set report_index $1
+    set report_index = $1
   endif
   shift argv
 endif
