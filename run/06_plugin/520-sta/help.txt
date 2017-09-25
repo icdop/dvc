@@ -1,0 +1,10 @@
+Prepare the following files and copy them to :container/
+
+sta.log
+vio.rpt
+
+or Edit the INPUT_FILES as below
+;var		dest_name	source_file_location
+STA_LOG		sta.log         /home/user/rundir/pt_sta.log
+VIO_RPT		vio.rpt         /home/user/rundir/sta_vio.rpt
+
