@@ -12,12 +12,13 @@ checkout:
 list:
 	dvc_list_design
 
+html:
+	dvc_report_version --html plugin/html
+	
 index:
 	dvc_refresh_index
 
 clean:
 	rm -fr : :*
-	rm -fr :version
-	rm -fr .dop	
 	rm -f index.htm
 	
