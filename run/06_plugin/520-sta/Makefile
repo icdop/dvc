@@ -4,7 +4,7 @@ DQI_LIST     := DQI.rpt
 
 help:
 	@echo "=========================================================="
-	@echo "Usage: make design   -- create and check design version"
+	@echo "Usage: make design   -- create design version folder"
 	@echo "Usage: make import   -- copy report files into DVC"
 	@echo "Usage: make check    -- check if all required files exit"
 	@echo "Usage: make run      -- run extraction script"
@@ -47,7 +47,7 @@ check:
 run: 
 	plugin/script/run.csh
 
-save:
+save: $(DQI_LIST)
 	plugin/script/saveDQI.awk $(DQI_LIST)
 
 html:

@@ -1,0 +1,34 @@
+* COMMANDs:
+
+    dvc_set_env  HTML_TEMPL  "$DVC_HOME/etc/html/"
+
+    dvc_report_project [--html <template_dir] <project>
+    dvc_report_phase   [--html <template_dir]  <phase>
+    dvc_report_block   [--html <template_dir]  <block>
+    dvc_report_stage   [--html <template_dir]  <stage>
+    dvc_report_version [--html <template_dir]  <version>
+
+    dvc_report_design -- create report for all levels
+
+
+* HTML template directory has the following sub-folder:
+
+    project/
+    phase/
+    block/
+    stage/
+    version/
+    container/
+
+- each folder contains the following files:
+
+    _index_begin.csh
+    _index_body.csh
+    _index_detail_*.csh
+    _index_end.csh
+
+    _table_begin.csh
+    _table_data.csh
+    _table_end.csh
+
+

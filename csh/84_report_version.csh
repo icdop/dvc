@@ -13,14 +13,10 @@ if ($?DVC_HOME == 0) then
 endif
 setenv ETC_DIR $DVC_HOME/etc
 setenv CSH_DIR $DVC_HOME/csh
-source $CSH_DIR/08_set_report.csh
-
-if ($?html_templ) then
-   setenv HTM_DIR $html_templ
-else
-   setenv HTM_DIR $ETC_DIR/html
-endif
-
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/18_get_report.csh
 
 set project = $DESIGN_PROJT
 set phase   = $DESIGN_PHASE
@@ -28,30 +24,41 @@ set block   = $DESIGN_BLOCK
 set stage   = $DESIGN_STAGE
 set version = $DESIGN_VERSN
 
-if ($?report_index) then
-   set version = $report_index
+if ($1 != "") then
+   if (($1 != ":") && ($1 != ".")) then
+      set version = $1
+    endif
+    shift argv
 endif
                        
 echo "VERSION : $version"
 
 set dvc_title = "Version $version"
 set dvc_name = $version
-set dvc_path = $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$dvc_name
+set dvc_path = $phase/$block/$stage/$version
 set dvc_data = $PROJT_ROOT/$dvc_path
+
+if {(test -d $dvc_data)} then
+else
+  echo "ERROR: version data folder '$dvc_data' does not exist"
+  exit 1
+endif
 set version_htm   = $dvc_data/index.htm
 set version_css   = $dvc_data/.index.css
-cp $HTM_DIR/version/index.css $version_css
+cp $html_templ/version/index.css $version_css
  
-(source $HTM_DIR/version/_index_begin.csh) >  $version_htm
-(source $HTM_DIR/version/_index_data.csh)  >> $version_htm
-set detail_list = `glob $HTM_DIR/version/_index_detail_*.csh`
+(source $html_templ/version/_index_begin.csh) >  $version_htm
+(source $html_templ/version/_index_data.csh)  >> $version_htm
+set detail_list = `glob $html_templ/version/_index_detail_*.csh`
 foreach detail_report ( $detail_list )
-  echo "<details>" >> $version_htm
+  set id = $detail_report:t:r
+  echo "<details id=$id>" >> $version_htm
   (source $detail_report)  >> $version_htm
   echo "</details>" >> $version_htm
 end
-echo "<details>" >> $version_htm
-(source $HTM_DIR/version/_table_begin.csh) >> $version_htm
+echo "<details id=container_list open=true>" >> $version_htm
+echo "<summary> Container List </summary>" >> $version_htm
+(source $html_templ/version/_table_begin.csh) >> $version_htm
  set container_list   = `dir $dvc_data`
  #echo "CONTAINER_LIST: $container_list"
  foreach container ( $container_list )
@@ -61,9 +68,9 @@ echo "<details>" >> $version_htm
     if ($container != ":") then
     if {(test -d $item_data)} then
        echo "	CONTAINER : $container"
-       (source $HTM_DIR/version/_table_data.csh) >> $version_htm
+       (source $html_templ/version/_table_data.csh) >> $version_htm
        
-       if {(test -d $HTM_DIR/container/)} then
+       if {(test -d $html_templ/container/)} then
        #### CONTAINER HTML REPORT
        set dvc_title = "Container $container"
        set dvc_name = $container
@@ -71,10 +78,10 @@ echo "<details>" >> $version_htm
        set dvc_data = $PROJT_ROOT/$dvc_path
        set container_htm   = $dvc_data/index.htm
        set container_css   = $dvc_data/.index.css
-       cp $HTM_DIR/container/index.css $container_css
-      (source $HTM_DIR/container/_index_begin.csh) >  $container_htm
-      (source $HTM_DIR/container/_index_data.csh)  >> $container_htm
-      (source $HTM_DIR/container/_table_begin.csh) >> $container_htm
+       cp $html_templ/container/index.css $container_css
+      (source $html_templ/container/_index_begin.csh) >  $container_htm
+      (source $html_templ/container/_index_data.csh)  >> $container_htm
+      (source $html_templ/container/_table_begin.csh) >> $container_htm
        set object_list   = `dir $dvc_data`
        #echo "OBJECT_LIST: $object_list"
        foreach object ( $object_list )
@@ -84,7 +91,7 @@ echo "<details>" >> $version_htm
           if ($object != ":") then
           if {(test -e $item_data)} then
              echo "		OBJECT  : $object"
-             (source $HTM_DIR/container/_table_data.csh) >> $container_htm
+             (source $html_templ/container/_table_data.csh) >> $container_htm
              #### OBJECT HTML REPORT
              set dvc_name = $object
              set dvc_path = $item_path/$dvc_name
@@ -92,15 +99,15 @@ echo "<details>" >> $version_htm
           endif
           endif
        end
-      (source $HTM_DIR/container/_table_end.csh) >> $container_htm
-      (source $HTM_DIR/container/_index_end.csh) >> $container_htm
+      (source $html_templ/container/_table_end.csh) >> $container_htm
+      (source $html_templ/container/_index_end.csh) >> $container_htm
        endif
    endif
    endif
  end
-(source $HTM_DIR/version/_table_end.csh) >> $version_htm
+(source $html_templ/version/_table_end.csh) >> $version_htm
 echo "</details>" >> $version_htm
-(source $HTM_DIR/version/_index_end.csh) >> $version_htm
+(source $html_templ/version/_index_end.csh) >> $version_htm
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="
