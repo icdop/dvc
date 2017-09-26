@@ -26,6 +26,7 @@ setenv PHASE_URL $PROJT_URL/$phase
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/31_checkout_phase.csh $phase
+   setenv DESIGN_PHASE $phase
 else
    echo "ERROR: Cannot find Project Design Phase : $phase"
    exit 1
@@ -37,6 +38,7 @@ setenv BLOCK_URL $PROJT_URL/$DESIGN_PHASE/$block
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/32_checkout_block.csh $block
+   setenv DESIGN_BLOCK $block
 else
    echo "ERROR: Cannot find Project Design Block : $block"
    exit 1
@@ -48,6 +50,7 @@ setenv STAGE_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$stage
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/33_checkout_stage.csh $stage
+   setenv DESIGN_STAGE $stage
 else
    echo "ERROR: Cannot find Project Design Stage : $stage"
    exit 1
@@ -59,6 +62,7 @@ setenv VERSN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$version
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/34_checkout_version.csh $version
+   setenv DESIGN_VERSN $version
 else
    echo "ERROR: Cannot find Project Design Version : $version"
    exit 1

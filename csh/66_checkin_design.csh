@@ -18,18 +18,22 @@ source $CSH_DIR/04_set_design.csh
 
 if (($phase != "") && ($phase != ":") && ($phase != ".")) then
    $CSH_DIR/61_checkin_phase.csh $phase
+   setenv DESIGN_PHASE $phase
 endif
 
 if (($block != "") && ($block != ":") && ($block != ".")) then
    $CSH_DIR/62_checkin_block.csh $block
+   setenv DESIGN_BLOCK $block
 endif
 
 if (($stage != "") && ($stage != ":") && ($stage != ".")) then
    $CSH_DIR/63_checkin_stage.csh $stage
+   setenv DESIGN_STAGE $stage
 endif
 
 if (($version != "") && ($version != ":") && ($version != ".")) then
    $CSH_DIR/64_checkin_version.csh $version
+   setenv DESIGN_VERSN $version
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

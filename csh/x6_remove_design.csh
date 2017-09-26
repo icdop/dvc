@@ -18,6 +18,18 @@ if ($phase == "") || ($phase == ":" || ($phase == ".") then
    set phase $DESIGN_PHASE
 endif
 
+if ($block == "") || ($block == ":" || ($block == ".") then
+   set block $DESIGN_BLOCK
+endif
+
+if ($stage == "") || ($stage == ":" || ($stage == ".") then
+   set stage $DESIGN_STAGE
+endif
+
+if ($version == "") || ($version == ":" || ($version == ".") then
+   set version $DESIGN_VERSN
+endif
+
 setenv DVC_PATH $phase/$block/$stage/$version
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
