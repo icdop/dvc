@@ -9,8 +9,11 @@ run:
 list:
 	dvc_list_design
 	
-refresh:
-	dvc_refresh_version
+html:
+	dvc_report_version
+
+index:
+	dvc_report_index
 
 clean:
 	rm -fr : :*

@@ -60,7 +60,7 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/83_report_stage.csh		$(BIN_PATH)/dvc_report_stage
 	ln -f -s $(CSH_PATH)/84_report_version.csh		$(BIN_PATH)/dvc_report_version
 	ln -f -s $(CSH_PATH)/85_report_container.csh		$(BIN_PATH)/dvc_report_container
-	ln -f -s $(CSH_PATH)/86_report_design.csh		$(BIN_PATH)/dvc_report_design
+	ln -f -s $(CSH_PATH)/89_report_index.csh		$(BIN_PATH)/dvc_report_index
 	ln -f -s $(CSH_PATH)/99_init_server.csh			$(BIN_PATH)/dvc_init_server
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s $(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase

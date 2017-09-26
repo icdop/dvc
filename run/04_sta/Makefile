@@ -16,7 +16,7 @@ html:
 	dvc_report_version 
 	
 index:
-	dvc_refresh_index
+	dvc_report_index
 
 clean:
 	rm -fr : :* .dop
