@@ -72,6 +72,9 @@ init_server:
 	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
 	dvc_set_server SVN_ROOT $(SVN_ROOT)
+	dvc_set_server SVN_MODE $(SVN_MODE)
+	dvc_set_server SVN_HOST $(SVN_HOST)
+	dvc_set_server SVN_PORT $(SVN_PORT)
 	dvc_init_server $(SVN_MODE)
 
 stop_server:
