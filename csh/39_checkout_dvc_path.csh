@@ -34,7 +34,7 @@ if ($?depth_mode) then
    if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
       svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth $depth_mode
    else
-      svn checkout --force $DESIGN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
+      svn checkout --quiet --force $DESIGN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
    endif
 endif
 
@@ -42,9 +42,9 @@ if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
 else
-   svn checkout --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
-   svn checkout --force $DESIGN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
-   svn checkout --force $DESIGN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
+   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
+   svn checkout --quiet --force $DESIGN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
+   svn checkout --quiet --force $DESIGN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
 endif
 
 set dvc_name = $DVC_PATH:t

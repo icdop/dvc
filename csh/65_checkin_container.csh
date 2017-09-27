@@ -17,8 +17,9 @@ source $CSH_DIR/14_get_design.csh
 source $CSH_DIR/05_set_container.csh
 
 if {(test -d $CONTAINER_DIR)} then
-   (cd $CONTAINER_DIR; svn add  . --force --depth infinity)
-   svn commit $CONTAINER_DIR -m 'Update container' 
+   (cd $CONTAINER_DIR; \
+   svn add  . --force --depth infinity ; \
+   svn commit . -m 'Update container' ;)
 else
    echo "ERROR: Cannot find Container Directory '$CONTAINER_DIR'"
    exit 1

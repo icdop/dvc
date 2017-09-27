@@ -47,7 +47,7 @@ if ($?depth_mode) then
    if {(test -e $PROJT_ROOT/.dvc)} then
       svn update --quiet --force $PROJT_ROOT --set-depth $depth_mode
    else
-      svn checkout --force $PROJT_URL $PROJT_ROOT --depth $depth_mode
+      svn checkout --quiet --force $PROJT_URL $PROJT_ROOT --depth $depth_mode
    endif
 endif
 

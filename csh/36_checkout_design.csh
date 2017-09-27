@@ -63,6 +63,8 @@ svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/34_checkout_version.csh $version
    setenv DESIGN_VERSN $version
+   $CSH_DIR/35_checkout_container.csh .
+   setenv DESIGN_CONTR .
 else
    echo "ERROR: Cannot find Project Design Version : $version"
    exit 1

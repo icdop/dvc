@@ -34,6 +34,9 @@ endif
 if (($version != "") && ($version != ":") && ($version != ".")) then
    $CSH_DIR/64_checkin_version.csh $version
    setenv DESIGN_VERSN $version
+   $CSH_DIR/65_checkin_container.csh .
+   setenv DESIGN_CONTR .
+   
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

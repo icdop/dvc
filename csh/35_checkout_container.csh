@@ -17,18 +17,22 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 source $CSH_DIR/05_set_container.csh
 
-setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
-setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_PATH
+setenv CONTR_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$CONTR_PATH
 svn info $CONTR_URL >& /dev/null
 if ($status != 0) then
-   echo "ERROR: Cannot find container : $DVC_PATH"
+   echo "ERROR: Cannot find container : $CONTR_PATH"
    exit 1
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth infinity
+if {(test -e $PROJT_ROOT/$CONTR_PATH/.svn)} then
+   if ($DESIGN_CONTR == ".") then
+      rm -fr $(PROJT_ROOT/CONTR_PATH/.dvc
+      rm -fr $(PROJT_ROOT/CONTR_PATH/.dqi
+   endif
+   svn update --quiet --force $PROJT_ROOT/$CONTR_PATH --set-depth infinity
 else
-   svn checkout --force $CONTR_URL $PROJT_ROOT/$DVC_PATH --depth infinity
+   svn checkout --force $CONTR_URL $PROJT_ROOT/$CONTR_PATH --depth infinity
 endif
 
 if {(test -e $CURR_VERSN)} then
