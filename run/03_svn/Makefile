@@ -2,7 +2,7 @@ PATH         :=	../../bin:$(PATH)
 ##################################
 SVN_ROOT     := $(HOME)/proj_svn
 SVN_MODE     := svn
-SVN_HOST     := `hostname`
+#SVN_HOST     := `hostname`
 #SVN_PORT     := 3690
 #SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 
