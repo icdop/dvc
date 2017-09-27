@@ -31,24 +31,28 @@ Directory:
 	2017_0610-xxxx, 2017_0702-xxxx, ...
 
 
-- The version control mechanism is SVN server
+- The SVN server is the underneath version control engine
 
-  * SVN_ROOT : svn repository root path
-
-  * SVN_URL  : svn access mode
+  * SVN_ROOT : svn repository root path, need to be set first
+  
+  * SVN_MODE : svn | file -- server db access mode
+  * SVN_HOST : server host name -- only been used in svn server mode
+  * SVN_PORT : server port name -- only been used in svn server mode
+  
+  * SVN_URL  : svn access URL string, based on different access mode, it has different format
 
      * svn  server - svn://server:port/
 
      * file access - file:://$SVN_ROOT/
 
      
-- Each project has it own repository under:
+- When a project is createed, there will be one repository under:
 
-  * $SVN_ROOT/$DESIGN_PROJT/
+  * $SVN_ROOT/<project_name>
 
 - Initial server config files are copied from dvc/etc/conf
 
-  * $SVN_ROOT/$DESIGN_PROJT/conf/
+  * $SVN_ROOT/<project_name>/conf/
       
 
 ***
@@ -60,7 +64,12 @@ Example:
 
 	; set server configuration variable
 	% dvc_set_server SVN_ROOT /home/owner/proj_svn
+	
 	% dvc_set_server SVN_MODE file
+	or
+	% dvc_set_server SVN_MODE svn
+	% dvc_set_server SVN_HOST localhost
+	% dvc_set_server SVN_PORT 3690
 
 	; start server
 	% dvc_init_server start	
@@ -72,16 +81,16 @@ Example:
 	% dvc_create_project testcase
 
 
-### 3. Create design version folder and checkin design data - Design Manager
+### 3. Create design version folder and checkin design data - Designer
 
 Example:
 
-	% dvc_create_version P1-trial/chip/000-DATA/2017_0910-xxx
+	% dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
 
-	% dvc_checkout_version P1-trial/chip/000-DATA/2017_0910-xxx
+	% dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-xxx
 
-	% dvc_copy_object :version /ftp_path/design.v design.v
+	% dvc_copy_object /some_source_path/design.v design.v
 
-	% dvc_checkin_version 
+	% dvc_checkin_design 
 
 
