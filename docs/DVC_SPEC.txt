@@ -28,11 +28,17 @@
 * DVC Server Variable
 * ----------------------------
 
-  * Variable are stored in the config directory(.dop/server/)
+  * SVN respository root (SVN_ROOT) :
 
-  * SVN respository root
+	- defined with setenv 
+	- look for (.dop/env/SVN_ROOT)
+	- default value : $HOME/proj_svn
 
-     SVN_ROOT = /home/owner/proj_svn
+  * Server variable are stored in the directory ($SVN_ROOT/.dop/env) :
+
+	- SVN_MODE	file | svn
+	- SVN_HOST	`hostname`
+	- SVN_PORT	2690
 
   * SVN server mode URL (file, http, svn)
 
@@ -41,10 +47,10 @@
      SVN_URL = http://localhost:port/$SVN_ROOT (not supported yet)
 
 * ============================
-* Global Variable Access
+* Env Variable Access
 * ============================
 
-  * Global Variables are stored in the config directory(.dop/env/)
+  * Global Variables are stored in the directory(.dop/env/) :
 
     Example: Search path sequency is as below:
 
@@ -54,7 +60,7 @@
     2. Global : "$HOME/.dop/env/*VARNAME*"
        % dvc_set_env --global  
 
-  * Global DESIGN Variables
+  * DESIGN Variables:
 
 	  DESIGN_PROJT = testcase
 	  DESIGN_PHASE = P1-trial
@@ -62,6 +68,7 @@
 	  DESIGN_STAGE = 000-INIT_DATA
 	  DESIGN_VERSN = 2017_0610-XXXX
 	  DESIGN_CONTR = netlist
+
 
 ********************************************************
 # Project Design Directory Structure
@@ -171,12 +178,12 @@
 
   Example: (etc/rule/DESIGN_FILES)
 
-	;VAR_NAME	FORMAT	DEFAULT		DESCRIPTION
-	;==============	======	=======		===========================
-	V_FILE		VERILOG	design.vg	"Verilog Netlist File"
-	DEF_FILE	DEF	design.def	"Physical Design Data"
-	SPEF_FILE	SPEF	design.spef	"RC Extraction Data"
-	PT_STA_LOG	LOG	pt_sta.log	"STA Run Logfile"
+	;VAR_NAME	DEFAULT	    FORMAT  	DESCRIPTION
+	;==============	=======	    ======  	===========================
+	V_FILE		design.vg   VERILOG 	"Verilog Netlist File"
+	DEF_FILE	design.def  DEF	    	"Physical Design Data"
+	SPEF_FILE	design.spef SPEF    	"RC Extraction Data"
+	PT_STA_LOG	pt_sta.log  LOG	    	"STA Run Logfile"
 
 ## 4. Sub folder naming rule
 
