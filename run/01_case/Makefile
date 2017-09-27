@@ -3,7 +3,7 @@ run: clean
 
 clean:
 	rm -fr :
-	rm -fr :version
+	rm -fr :*
 	rm -fr .dop	
 
 index:
