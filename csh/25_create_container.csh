@@ -17,8 +17,8 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 source $CSH_DIR/05_set_container.csh
 
-setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
-setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$DVC_PATH
+setenv CONTAINER_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH
 
 svn info $CONTR_URL/.dvc/CONTAINER >& /dev/null
 if ($status == 0) then
@@ -33,11 +33,11 @@ else
       svn mkdir --quiet $CONTR_URL/.dvc -m "DVC Config Directory." --parents
       svn mkdir --quiet $CONTR_URL/.dqi -m "Design Quality Indicator" --parents
       set tmpfile=`mktemp`
-      echo -n $DVC_PATH > $tmpfile
+      echo -n $CONTAINER_PATH > $tmpfile
       svn import --quiet $tmpfile $CONTR_URL/.dvc/CONTAINER -m 'Design Container Path'
       rm -fr $tmpfile
    endif
-   svn checkout --quiet $CONTR_URL $PROJT_ROOT/$DVC_PATH --depth infinity
+   svn checkout --quiet $CONTR_URL $PROJT_ROOT/$CONTAINER_PATH --depth infinity
 endif
     
 $CSH_DIR/00_set_env.csh DESIGN_CONTR $DESIGN_CONTR

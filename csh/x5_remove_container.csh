@@ -16,10 +16,10 @@ source $DVC_HOME/csh/13_get_project.csh
 source $DVC_HOME/csh/14_get_design.csh
 source $DVC_HOME/csh/05_set_container.csh
 
-if {((test -d $CONTAINER_DIR)&&(test -d $PROJT_ROOT/$DVC_PATH))} then
-   echo "INFO: Remove Project Design Container '$DVC_PATH'."
-   rm -fr $PROJT_ROOT/$DVC_PATH
-   svn remove $SVN_URL/$DESIGN_PROJT/$DVC_PATH -m "Remove Design Container"
+if {((test -d $CONTAINER_DIR)&&(test -d $PROJT_ROOT/$CONTAINER_PATH))} then
+   echo "INFO: Remove Project Design Container '$CONTAINER_PATH'."
+   rm -fr $PROJT_ROOT/$CONTAINER_PATH
+   svn remove $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH -m "Remove Design Container"
 #   rm -fr $CURR_CONTR
 else
    echo "ERROR: Can not remove Design Container '$CONTAINER_DIR'!"

@@ -2,7 +2,7 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [-root <dir>] [--container <container>]"
+   echo "Usage: $prog [-dir <container_dir>] [--container <container>]"
    exit -1
 endif
 
@@ -18,15 +18,15 @@ if (($1 == "-v") || ($1 == "--verbose")) then
    shift argv
 endif
 
-if ($1 == "--root") then
+if ($1 == "--dir") then
    shift argv
    set dir=$1
    shift argv
    if {(test -e $dir/.dvc/CONTAINER)} then
       # parameter is a container
       setenv CONTAINER_DIR $dir
-      setenv DVC_PATH `cat $dir/.dvc/CONTAINER`
-      setenv DESIGN_CONTR $DVC_PATH:t
+      setenv CONTAINER_PATH `cat $dir/.dvc/CONTAINER`
+      setenv DESIGN_CONTR $CONTAINER_PATH:t
       exit 0
    else
       echo "ERROR: Not a valid container dir : '$dir'"
@@ -64,9 +64,9 @@ endif
 #echo "CONTAINER_DIR = $CONTAINER_DIR"
 
 if {(test -e $CONTAINER_DIR/.dvc/CONTAINER)} then
-   setenv DVC_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
+   setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
 else
-   setenv DVC_PATH :/:/:/:/$DESIGN_CONTR
+   setenv CONTAINER_PATH :/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container dir : '$CONTAINER_DIR'"
    exit 1
 endif
