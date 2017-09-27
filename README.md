@@ -85,6 +85,8 @@ Example:
 
 Example:
 
+	% dvc_checkout_project testcsse
+	
 	% dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
 
 	% dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-xxx
