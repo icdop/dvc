@@ -64,7 +64,12 @@ Example:
 
 	; set server configuration variable
 	% dvc_set_server SVN_ROOT /home/owner/proj_svn
+	
 	% dvc_set_server SVN_MODE file
+	or
+	% dvc_set_server SVN_MODE svn
+	% dvc_set_server SVN_HOST localhost
+	% dvc_set_server SVN_PORT 3690
 
 	; start server
 	% dvc_init_server start	
