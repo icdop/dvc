@@ -1,0 +1,16 @@
+make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/03_svn'
+dvc_tree_design :
+:
+└── P1-trial
+    ├── : -> chip
+    └── chip
+        ├── : -> 420-place
+        └── 420-place
+            ├── : -> 2017_0615-xxx
+            └── 2017_0615-xxx
+                └── place_opt
+                    ├── cache
+                    └── report
+
+10 directories
+make[1]: Leaving directory '/home/hungchun/GITHOME/dvc/run/03_svn'

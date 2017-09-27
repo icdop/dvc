@@ -1,0 +1,16 @@
+make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/02_file'
+dvc_tree_design :
+:
+└── P1-trial
+    ├── : -> chip
+    └── chip
+        ├── : -> 520-sta
+        └── 520-sta
+            ├── : -> 2017_0620-xxx
+            └── 2017_0620-xxx
+                └── ttt_0p80V_25C_rctyp
+                    ├── cache
+                    └── report
+
+10 directories
+make[1]: Leaving directory '/home/hungchun/GITHOME/dvc/run/02_file'

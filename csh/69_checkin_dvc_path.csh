@@ -27,18 +27,20 @@ else if ($?DVC_PATH == 0) then
 endif
 
 if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
-   svn update $PROJT_ROOT/$DVC_PATH/.dvc --quiet --force
-   (cd $PROJT_ROOT/$DVC_PATH/.dvc; svn add .  --force --depth infinity)
-   svn commit $PROJT_ROOT/$DVC_PATH/.dvc -m 'Update version' --quiet
+   (cd $PROJT_ROOT/$DVC_PATH/.dvc; \
+   svn update . --quiet --force ;  \
+   svn add .  --force --depth infinity ; \
+   svn commit . -m 'Update version' --quiet )
 else
    echo "ERROR: Cannot find Design Directory '$DVC_PATH'"
    exit 1
 endif
 
 if {(test -e $PROJT_ROOT/$DVC_PATH/.dqi)} then
-   svn update $PROJT_ROOT/$DVC_PATH/.dqi --quiet --force
-   (cd $PROJT_ROOT/$DVC_PATH/.dqi; svn add .  --force --depth infinity)
-   svn commit $PROJT_ROOT/$DVC_PATH/.dqi -m 'Update version' --quiet
+   (cd $PROJT_ROOT/$DVC_PATH/.dqi; \
+   svn update . --quiet --force ;  \
+   svn add .  --force --depth infinity ; \
+   svn commit . -m 'Update version' --quiet )
 endif
 
 

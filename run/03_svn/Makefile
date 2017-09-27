@@ -2,7 +2,7 @@ PATH         :=	../../bin:$(PATH)
 ##################################
 SVN_ROOT     := $(HOME)/proj_svn
 SVN_MODE     := svn
-#SVN_HOST     := `hostname`
+#SVN_HOST     := $(shell hostname)
 #SVN_PORT     := 3690
 #SVN_URL      := svn://$(SVN_HOST):$(SVN_PORT)
 
@@ -18,10 +18,12 @@ CURR_CONTR   := :container
 
 ##################################
 DESIGN_PROJT := testcase
+#---------------------------------
 DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip
 DESIGN_STAGE := 420-place
 DESIGN_VERSN := 2017_0615-xxx
+#---------------------------------
 DESIGN_CONTR := place_opt
 
 # The following object will be checkin to container

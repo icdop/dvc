@@ -12,8 +12,8 @@ dvc_init_server start
 dvc_create_project testcase
 
 ### 3. Create design version folder and checkin design data - Design Manager
+dvc_checkout_project testcase
 
-#dvc_remove_design P1-trial/chip/000-DATA/2017_0910-xxx
 dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
 
 dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-xxx
@@ -25,5 +25,6 @@ dvc_checkin_design
 
 dvc_list_project --recursive
 
-tree :
+dvc_list_design
+
 

@@ -16,6 +16,6 @@ foreach version ($version_list)
   end
 end
 
-dvc_list_design
+dvc_tree_design
 
 

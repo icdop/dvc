@@ -6,8 +6,8 @@ help:
 run: 
 	script/run.csh
 
-list:
-	dvc_list_design
+tree:
+	dvc_tree_design
 	
 html:
 	dvc_report_version

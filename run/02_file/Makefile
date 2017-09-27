@@ -16,10 +16,12 @@ CURR_CONTR   := :container
 
 ####################################################################
 DESIGN_PROJT := testcase
+#----------------------------------
 DESIGN_PHASE := P1-trial
 DESIGN_BLOCK := chip
 DESIGN_STAGE := 520-sta
 DESIGN_VERSN := 2017_0620-xxx
+#-----------------------------------
 DESIGN_CONTR := ttt_0p80V_25C_rctyp
 
 # The following object will be checkin to container

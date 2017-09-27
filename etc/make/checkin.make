@@ -8,7 +8,7 @@ SVN_ROOT     := $(HOME)/proj_svn
 endif
 
 ifndef SVN_HOST
-SVN_HOST     := `hostname`
+SVN_HOST     := $(shell hostname)
 endif
 
 ifndef SVN_PORT
@@ -29,28 +29,50 @@ help:
 	@echo ""
 	@echo "        make init      (reset_resository)"
 	@echo "        make project   (create_project; checkout_project)"
-	@echo "        make version   (create_version; checkout_version)"
+	@echo "        make design    (create_design; checkout_design)"
 	@echo "        make container (create_container; checkout_container)"
 	@echo "        make object    (checkin_object)"
-	@echo "        make commit    (commit_container)"
+	@echo "        make checkin   (checkin_design)"
 	@echo ""
-	@echo "Usage:  make tree      (tree .project)"
-	@echo "Usage:  make list      (dvc_list_phases --recursive)"
+	@echo "Usage:  make tree      (dvc_tree_design)"
+	@echo "Usage:  make list      (dvc_list_project --recursive)"
 	@echo "Usage:  make remove    (remove specific objects)"
-	@echo "Usage:  make _clean    (clean all data on server)"
+	@echo "Usage:  make clean    (clean all data on server)"
 	@echo ""
 
 
 run:
 	make init
 	make project
+	make design
+	make container
+	make object
+	make checkin
+	make tree | tee tree.rpt
+	make list | tee list.rpt
+
+test:
+	mkdir log
+	make init
+	make project
+	make design
+	make container
+	make object
+	make checkin
+	make tree > log/tree1.rpt
+	make list > log/list1.rpt
+	make remove_data
+	make checkout
+	make tree > log/tree0.rpt
+	make clean
+	make project
 	make version
 	make container
 	make object
 	make commit
-	make list
-	make tree
-
+	make tree > log/tree2.rpt
+	make list > log/list2.rpt
+	diff -r log golden | tee diff.log
 	
 init: init_setup init_server
 init_setup:
@@ -88,6 +110,13 @@ create_project:
 	@echo "#---------------------------------------------------"
 	dvc_create_project	$(DESIGN_PROJT)
 
+design: create_design checkout_design
+create_design:
+	@echo "#---------------------------------------------------"
+	@echo "# 2. Create version directory in SVN server"
+	@echo "#---------------------------------------------------"
+	dvc_create_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
+
 version: create_version checkout_version
 create_version:
 	@echo "#---------------------------------------------------"
@@ -98,13 +127,19 @@ create_version:
 	dvc_create_stage	$(DESIGN_STAGE)
 	dvc_create_version	$(DESIGN_VERSN)
 
-checkout: checkout_project checkout_version
+checkout: checkout_project checkout_design
 
 checkout_project:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout project to '$(PROJT_ROOT)' dir"
 	@echo "#---------------------------------------------------"
 	dvc_checkout_project	$(DESIGN_PROJT)
+
+checkout_design:
+	@echo "#---------------------------------------------------"
+	@echo "# 3 Checkout design"
+	@echo "#---------------------------------------------------"
+	dvc_checkout_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
 
 checkout_version:
 	@echo "#---------------------------------------------------"
@@ -240,11 +275,11 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
-checkin: checkin_version
+checkin: checkin_design
 
 checkin_design:
 	@echo "#---------------------------------------------------"
-	@echo "# 6-4 Checkin all files of design version"
+	@echo "# 6-4 Checkin design folders"
 	@echo "#---------------------------------------------------"
 	dvc_checkin_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
 
@@ -252,6 +287,9 @@ checkin_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-4 Checkin all files of design version"
 	@echo "#---------------------------------------------------"
+	dvc_checkin_phase	$(DESIGN_PHASE)
+	dvc_checkin_block	$(DESIGN_BLOCK)
+	dvc_checkin_stage	$(DESIGN_STAGE)
 	dvc_checkin_version	$(DESIGN_VERSN)
 
 checkin_container:
@@ -262,7 +300,7 @@ checkin_container:
 
 
 tree:
-	dvc_list_design $(PROJT_ROOT)
+	dvc_tree_design $(PROJT_ROOT)
 
 list: 
 	dvc_list_project --recursive
@@ -282,40 +320,46 @@ list_dir:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-2 List all objects in container"
 	@echo "#---------------------------------------------------"
-	dvc_list_dir -v 
+	dvc_list_dvc_path -v 
 
 list_env:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-3 List all variables"
 	@echo "#---------------------------------------------------"
-	dvc_set_env --local
-	dvc_get_env --local --all
+	dvc_set_env
+	dvc_get_env --info --all
 
-remove:
-	@echo "Usage:"
-	@echo "        make remove_container  ; remove current container"
-	@echo "        make remove_version    ; remove current version"
-	@echo "        make remove_block      ; remove current block"
-	@echo "        make remove_links      ; remove links"
-	@echo ""
 
 clean:
 	@echo
 	@echo "************** WARNING *************************"
 	@echo
-	@echo " This will remove all project data on the server"
-	@echo " 'make clean' is changed to 'make _clean'"
+	@echo " This will remove data link on working dir"
+	@echo " Use 'make remove_all' to clean up database on server"
 	@echo
 	@echo "************** WARNING *************************"
-	@echo
+	make .dop remove_links remove_files
 
-_clean:
-	make remove_container
-	make remove_project
+remove:
+	@echo "Usage:"
+	@echo "        make remove_design     ; remove current design"
+	@echo "        make remove_container  ; remove current container"
+	@echo "        make remove_version    ; remove current version"
+	@echo "        make remove_stage      ; remove current stage"
+	@echo "        make remove_block      ; remove current block"
+	@echo "        make remove_phase      ; remove current phase"
+	@echo "        make remove_links      ; remove links"
+	@echo "        make remove_files      ; remove unnecessary files"
+	@echo "        make remove_data       ; remove checkout project data"
+	@echo ""
+
+remove_all:
+	make remvoe_tests
 	make remove_links
 	make remove_files
-	make remove_setup
-	make stop_server
+	make remove_data
+	make remove_container
+	make remove_project
 
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -350,7 +394,7 @@ remove_links:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-4. Clean up related links in working directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(CURR_CONTR) $(CURR_VERSN) :phase :block :stage
+	rm -fr $(CURR_PHASE) $(CURR_BLOCK) $(CURR_STAGE) $(CURR_VERSN) $(CURR_CONTR)
 
 remove_files:
 	@echo "#---------------------------------------------------"
@@ -358,12 +402,12 @@ remove_files:
 	@echo "#---------------------------------------------------"
 	rm -fr $(OBJECT_FILES) $(OBJECT_DIRS) $(OBJECT_LINKS)
 
-remove_setup:
-	@echo "#---------------------------------------------------"
-	@echo "# 7-6. Clean up enviroment setup directory"
-	@echo "#---------------------------------------------------"
-	rm -fr .dop $(PROJT_ROOT)
+remove_tests:
+	rm -fr log/ tree.rpt list.rpt diff.log
 
+remove_data:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-6. Clean up data checkout directory"
+	@echo "#---------------------------------------------------"
+	rm -fr $(PROJT_ROOT) 
 
-index:
-	dvc_init_report

@@ -53,10 +53,14 @@ endif
 
 if {(test -e $PROJT_ROOT/.dvc)} then
    svn update --quiet --force $PROJT_ROOT/.dvc --set-depth infinity
+else
+   svn checkout --quiet --force $PROJT_URL/.dvc $PROJT_ROOT/.dvc --depth infinity
+endif
+
+if {(test -e $PROJT_ROOT/.dqi)} then
    svn update --quiet --force $PROJT_ROOT/.dqi --set-depth infinity
 else
-   svn checkout --force $PROJT_URL/.dvc $PROJT_ROOT/.dvc --depth infinity
-   svn checkout --force $PROJT_URL/.dqi $PROJT_ROOT/.dqi --depth infinity
+   svn checkout --quiet --force $PROJT_URL/.dqi $PROJT_ROOT/.dqi --depth infinity
 endif
 
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT

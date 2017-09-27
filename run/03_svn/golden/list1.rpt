@@ -1,0 +1,16 @@
+make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/03_svn'
+dvc_list_project --recursive
+P1-trial/
+P1-trial/chip/
+P1-trial/chip/420-place/
+P1-trial/chip/420-place/2017_0615-xxx/
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/cache/
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/cache/HISTORY.txt
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.def
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.spef
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.v
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/HISTORY.txt
+P1-trial/chip/420-place/2017_0615-xxx/place_opt/run_apr.log
+make[1]: Leaving directory '/home/hungchun/GITHOME/dvc/run/03_svn'
