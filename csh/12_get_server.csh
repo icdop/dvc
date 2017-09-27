@@ -50,48 +50,52 @@ if ($1 == "--xml") then
    shift argv
 endif
 
-
-if {(test -e .dop/server/SVN_ROOT)} then
-  setenv SVN_ROOT  `cat .dop/server/SVN_ROOT`
-else if {(test -e $HOME/.dop/server/SVN_ROOT)} then
-  setenv SVN_ROOT  `cat $HOME/.dop/server/SVN_ROOT`
-else if ($?SVN_ROOT == 0) then
-  setenv SVN_ROOT  $HOME/SVN_ROOT
+if ($?SVN_ROOT == 0) then
+   if {(test -e .dop/env/SVN_ROOT)} then
+      setenv SVN_ROOT  `cat .dop/env/SVN_ROOT`
+   else
+      setenv SVN_ROOT  $HOME/SVN_ROOT
+   endif
 endif
 
-if {(test -e .dop/server/SVN_MODE)} then
-  setenv SVN_MODE      `cat .dop/server/SVN_MODE`
-else if {(test -e $HOME/.dop/server/SVN_MODE)} then
-  setenv SVN_MODE      `cat $HOME/.dop/server/SVN_MODE`
-else if ($?SVN_MODE == 0) then
-  setenv SVN_MODE      file
+if ($?SVN_MODE == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/SVN_MODE)} then
+     setenv SVN_MODE      `cat $SVN_ROOT/.dop/env/SVN_MODE`
+   else
+     setenv SVN_MODE      file
+   endif
 endif
 
-if {(test -e .dop/server/SVN_HOST)} then
-  setenv SVN_HOST      `cat .dop/server/SVN_HOST`
-else if {(test -e $HOME/.dop/server/SVN_HOST)} then
-  setenv SVN_HOST      `cat $HOME/.dop/server/SVN_HOST`
-else if ($?SVN_HOST == 0) then
-  setenv SVN_HOST      `hostname`
+if ($?SVN_HOST == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/SVN_HOST)} then
+     setenv SVN_HOST      `cat $SVN_ROOT/.dop/env/SVN_HOST`
+   else
+     setenv SVN_HOST      `hostname`
+   endif
 endif
 
-if {(test -e .dop/server/SVN_PORT)} then
-  setenv SVN_PORT      `cat .dop/server/SVN_PORT`
-else if {(test -e $HOME/.dop/server/SVN_PORT)} then
-  setenv SVN_PORT      `cat $HOME/.dop/server/SVN_PORT`
-else if ($?SVN_PORT == 0) then
-  setenv SVN_PORT      3690
+if ($?SVN_PORT == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/SVN_PORT)} then
+     setenv SVN_PORT      `cat $SVN_ROOT/.dop/env/SVN_PORT`
+   else
+     setenv SVN_PORT      3690
+   endif
 endif
 
-if {(test -e .dop/server/SVN_URL)} then
-  setenv SVN_URL      `cat .dop/server/SVN_URL`
-else if {(test -e $HOME/.dop/server/SVN_URL)} then
-  setenv SVN_URL      `cat $HOME/.dop/server/SVN_URL`
-else if ($?SVN_URL == 0) then
-  if ($SVN_MODE == "svn") then
-     setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
-  else
-     setenv SVN_URL "file://$SVN_ROOT"
-  endif
+if ($?SVN_URL == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/SVN_URL)} then
+     setenv SVN_URL      `cat $SVN_ROOT/.dop/env/SVN_URL`
+   else if ($SVN_MODE == "svn") then
+      setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
+   else
+      setenv SVN_URL "file://$SVN_ROOT"
+   endif
 endif
 
+if ($?info_mode) then
+  echo "INFO: SVN_ROOT = $SVN_ROOT"
+  echo "INFO: SVN_MODE = $SVN_MODE"
+  echo "INFO: SVN_HOST = $SVN_HOST"
+  echo "INFO: SVN_PORT = $SVN_PORT"
+  echo "INFO: SVN_URL  = $SVN_URL"
+endif

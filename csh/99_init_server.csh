@@ -20,10 +20,10 @@ if ($2 != "") then
    $CSH_DIR/02_set_server SVN_ROOT $SVN_ROOT
 endif
 
-mkdir -p $SVN_ROOT/.dvc
+mkdir -p $SVN_ROOT/.dop/env
 
-if {(test -e $SVN_ROOT/.dvc/svnserve.pid)} then
-  setenv SVN_PID      `cat $SVN_ROOT/.dvc/svnserve.pid`
+if {(test -e $SVN_ROOT/.dop/svnserve.pid)} then
+  setenv SVN_PID      `cat $SVN_ROOT/.dop/svnserve.pid`
 endif
 
 
@@ -43,8 +43,8 @@ case "start":
   endif
 case "svn":
   if ($?SVN_PID) then
-     set curr_host = `cat $SVN_ROOT/.dvc/svnserve.host`
-     set curr_port = `cat $SVN_ROOT/.dvc/svnserve.port`
+     set curr_host = `cat $SVN_ROOT/.dop/svnserve.host`
+     set curr_port = `cat $SVN_ROOT/.dop/svnserve.port`
      if ($SVN_HOST != $curr_host) then
         echo "EORROR: other SVN server is already runining on another host - $curr_host $curr_port"
         exit 1
@@ -53,7 +53,7 @@ case "svn":
         echo "Stoping SVN server : $SVN_PID"
         ps -f -p $SVN_PID
         echo `kill -9 $SVN_PID`
-        rm -f $SVN_ROOT/.dvc/svnserve.*
+        rm -f $SVN_ROOT/.dop/svnserve.*
      else
         echo "INFO: SVN server is already runining - $curr_host $curr_port "
         ps -f -p $SVN_PID
@@ -69,13 +69,13 @@ case "svn":
      echo "Starting SVN server - svn://$SVN_HOST"":$SVN_PORT/" 
      svnserve -d -r $SVN_ROOT \
                 --listen-host=$SVN_HOST --listen-port=$SVN_PORT \
-                --pid-file=$SVN_ROOT/.dvc/svnserve.pid --log-file=$SVN_ROOT/.dvc/svnserve.log
-     if {(test -e $SVN_ROOT/.dvc/svnserve.pid)} then
-        setenv SVN_PID      `cat $SVN_ROOT/.dvc/svnserve.pid`
+                --pid-file=$SVN_ROOT/.dop/svnserve.pid --log-file=$SVN_ROOT/.dop/svnserve.log
+     if {(test -e $SVN_ROOT/.dop/svnserve.pid)} then
+        setenv SVN_PID      `cat $SVN_ROOT/.dop/svnserve.pid`
         ps -f -p $SVN_PID
      endif
-     echo $SVN_HOST > $SVN_ROOT/.dvc/svnserve.host
-     echo $SVN_PORT > $SVN_ROOT/.dvc/svnserve.port
+     echo $SVN_HOST > $SVN_ROOT/.dop/svnserve.host
+     echo $SVN_PORT > $SVN_ROOT/.dop/svnserve.port
      $CSH_DIR/02_set_server.csh SVN_MODE "svn"
      $CSH_DIR/02_set_server.csh SVN_HOST $SVN_HOST
      $CSH_DIR/02_set_server.csh SVN_PORT $SVN_PORT
@@ -86,7 +86,7 @@ case "stop":
      echo "Stoping SVN server : $SVN_PID"
      ps -f -p $SVN_PID
      echo `kill -9 $SVN_PID`
-     rm -f $SVN_ROOT/.dvc/svnserve.*
+     rm -f $SVN_ROOT/.dop/svnserve.*
   else
      echo "WARNING: No PID file is found."
   endif

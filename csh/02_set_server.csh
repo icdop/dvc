@@ -10,24 +10,39 @@ if ($1 == "--reset") then
    shift argv
 endif
 
-mkdir -p $HOME/.dop/server
+if ($1 == "SVN_ROOT") then
+   shift argv
+   if ($1 != "") then
+      setenv SVN_ROOT $2
+      shift argv
+      mkdir -p .dop/env
+      echo $SVN_ROOT > .dop/env/SVN_ROOT
+   endif
+endif
+
+if ($?SVN_ROOT == 0) then
+   echo "ERROR: env variable (SVN_ROOT) is not set yet."
+   exit 1
+endif
+
+mkdir -p $SVN_ROOT/.dop/env
 
 
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    set envname = $1
    if (($?reset)||($2 == "--reset")) then
-      echo "INFO: remove server('$envname')"
-      rm -f $HOME/.dop/server/$envname
+      echo "INFO: remove server env($envname)"
+      rm -f $SVN_ROOT/.dop/env/$envname
    else if ($2 != "") then
       set envval = $2
       echo "SETP: $1 = $2"
-      echo $envval  > $HOME/.dop/server/$envname
-   else if {(test -e $HOME/.dop/server/$envname)} then
-      echo "$envname =  `cat $HOME/.dop/server/$envname`"
+      echo $envval  > $SVN_ROOT/.dop/env/$envname
+   else if {(test -e $SVN_ROOT/.dop/env/$envname)} then
+      echo "$envname =  `cat $SVN_ROOT/.dop/env/$envname`"
    else 
-      echo "ERROR: server('$envname') variable is not defined!"
+      echo "ERROR: server env($envname) variable is not defined!"
    endif
 else
-   echo `ls $HOME/.dop/server/`
+   echo `ls $SVN_ROOT/.dop/env/`
 endif
 
