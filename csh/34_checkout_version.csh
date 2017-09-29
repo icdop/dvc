@@ -39,7 +39,7 @@ endif
 
 echo "INFO: Checkout Project Design Version : $DESIGN_VERSN"
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-setenv CURR_PTR $CURR_VERSN
+setenv CURR_PTR $PTR_VERSN
 
 source $CSH_DIR/39_checkout_dvc_path.csh
 

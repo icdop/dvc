@@ -22,10 +22,10 @@ else if ($?DESIGN_CONTR == 0) then
    setenv DESIGN_CONTR .
 endif
 
-if {(test -e .dop/env/CURR_CONTR)} then
-  setenv CURR_CONTR `cat .dop/env/CURR_CONTR`
-else if ($?CURR_CONTR == 0) then
-  setenv CURR_CONTR .container
+if {(test -e .dop/env/PTR_CONTR)} then
+  setenv PTR_CONTR `cat .dop/env/PTR_CONTR`
+else if ($?PTR_CONTR == 0) then
+  setenv PTR_CONTR :container
 endif
    
 

@@ -34,7 +34,7 @@ endif
 
 echo "INFO: Checkout Project Design Block : $DESIGN_PHASE/$DESIGN_BLOCK"
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK
-setenv CURR_PTR $CURR_BLOCK
+setenv CURR_PTR $PTR_BLOCK
 
 source $CSH_DIR/39_checkout_dvc_path.csh
 

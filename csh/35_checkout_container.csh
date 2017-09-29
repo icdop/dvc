@@ -35,9 +35,9 @@ else
    svn checkout --force $CONTR_URL $PROJT_ROOT/$CONTR_PATH --depth infinity
 endif
 
-if {(test -e $CURR_VERSN)} then
-  rm -f $CURR_CONTR
-  ln -s $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
+if {(test -e $PTR_VERSN)} then
+  rm -f $PTR_CONTR
+  ln -s $PTR_VERSN/$DESIGN_CONTR $PTR_CONTR
 else
   echo "ERROR: checkout version first before assigning container!" 
   exit 1

@@ -17,23 +17,24 @@ source $CSH_DIR/15_get_container.csh
 if ($1 != "") then
    if ($1 != "_") then
       setenv DESIGN_CONTR $1
+      dvc_set_container $DESIGN_CONTR
    endif 
    shift argv
 endif
 
-if {(test -e $CURR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_VERSN/$DESIGN_CONTR
+if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PTR_VERSN/$DESIGN_CONTR
    setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
 else
    setenv CONTAINER_DIR $PROJT_ROOT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
    setenv CONTAINER_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
 endif
 
-rm -f $CURR_CONTR
-if {(test -d $CURR_CONTR)} then
-   echo "ERROR: $CURR_CONTR is a folder, rename it!"
+rm -f $PTR_CONTR
+if {(test -d $PTR_CONTR)} then
+   echo "ERROR: $PTR_CONTR is a folder, rename it!"
 else 
-   ln -fs $CURR_VERSN/$DESIGN_CONTR $CURR_CONTR
+   ln -fs $PTR_VERSN/$DESIGN_CONTR $PTR_CONTR
 endif
 
 echo "SETP: DESIGN_CONTR = $DESIGN_CONTR"

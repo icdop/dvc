@@ -99,3 +99,34 @@ if ($?info_mode) then
   echo "INFO: SVN_PORT = $SVN_PORT"
   echo "INFO: SVN_URL  = $SVN_URL"
 endif
+
+
+if {(test -e $SVN_ROOT/.dop/env/PTR_PHASE)} then
+  setenv PTR_PHASE `cat $SVN_ROOT/.dop/env/PTR_PHASE`
+else if ($?PTR_PHASE == 0) then
+  setenv PTR_PHASE :phase
+endif
+
+if {(test -e $SVN_ROOT/.dop/env/PTR_BLOCK)} then
+  setenv PTR_BLOCK `cat $SVN_ROOT/.dop/env/PTR_BLOCK`
+else if ($?PTR_BLOCK == 0) then
+  setenv PTR_BLOCK :block
+endif
+
+if {(test -e $SVN_ROOT/.dop/env/PTR_STAGE)} then
+  setenv PTR_STAGE `cat $SVN_ROOT/.dop/env/PTR_STAGE`
+else if ($?PTR_STAGE == 0) then
+  setenv PTR_STAGE :stage
+endif
+
+if {(test -e $SVN_ROOT/.dop/env/PTR_VERSN)} then
+  setenv PTR_VERSN `cat $SVN_ROOT/.dop/env/PTR_VERSN`
+else if ($?PTR_VERSN == 0) then
+  setenv PTR_VERSN :version
+endif
+
+if {(test -e $SVN_ROOT/.dop/env/PTR_VERSN)} then
+  setenv PTR_CONTR `cat $SVN_ROOT/.dop/env/PTR_CONTR`
+else if ($?PTR_CONTR == 0) then
+  setenv PTR_CONTR :container
+endif

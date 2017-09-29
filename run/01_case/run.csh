@@ -18,8 +18,8 @@ dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
 
 dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-xxx
 
-cp design_x.v .version/design.v
-cp design_x.sdc .version/design.sdc
+cp design_x.v :version/design.v
+cp design_x.sdc :version/design.sdc
 
 dvc_checkin_design
 

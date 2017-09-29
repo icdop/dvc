@@ -45,8 +45,8 @@ else
    setenv DESIGN_CONTR .
 endif
 
-if {(test -e $CURR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
-   setenv CONTAINER_DIR $CURR_VERSN/$DESIGN_CONTR
+if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
+   setenv CONTAINER_DIR $PTR_VERSN/$DESIGN_CONTR
 else if {(test -e $PROJT_ROOT/$DESIGN_CONTR/.dvc/CONTAINER)} then
    setenv CONTAINER_DIR $PROJT_ROOT/$DESIGN_CONTR
 else if {(test -e $PROJT_ROOT/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
@@ -58,7 +58,7 @@ else if {(test -e $PROJT_ROOT/_/_/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
 else if {(test -e $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
    setenv CONTAINER_DIR $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR
 else
-   setenv CONTAINER_DIR $CURR_VERSN
+   setenv CONTAINER_DIR $PTR_VERSN
 endif
 
 #echo "CONTAINER_DIR = $CONTAINER_DIR"

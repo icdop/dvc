@@ -24,7 +24,7 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
 else if ($?DVC_PATH == 0) then
    source $CSH_DIR/14_get_design.csh
    setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-   setenv CURR_PTR $CURR_VERSN
+   setenv CURR_PTR $PTR_VERSN
 endif
 
 setenv DESIGN_URL $PROJT_URL/$DVC_PATH
@@ -52,11 +52,7 @@ set dvc_root = $DVC_PATH:h
 rm -fr $PROJT_ROOT/$dvc_root/_
 ln -s $dvc_name $PROJT_ROOT/$dvc_root/_
 
-rm -f $CURR_PTR
-if {(test -d $CURR_PTR)} then
-   echo "ERROR: $CURR_PTR is a folder, rename it!"
-else
-   ln -fs $PROJT_ROOT/$DVC_PATH $CURR_PTR
-endif
+rm -fr $CURR_PTR
+ln -fs $PROJT_ROOT/$DVC_PATH $CURR_PTR
 
 exit 0
