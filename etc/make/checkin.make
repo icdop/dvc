@@ -73,11 +73,6 @@ init_setup:
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
 	dvc_set_env PROJT_ROOT $(PROJT_ROOT)
-	dvc_set_env CURR_PHASE $(CURR_PHASE)
-	dvc_set_env CURR_BLOCK $(CURR_BLOCK)
-	dvc_set_env CURR_STAGE $(CURR_STAGE)
-	dvc_set_env CURR_VERSN $(CURR_VERSN)
-	dvc_set_env CURR_CONTR $(CURR_CONTR)
 
 SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
 SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
@@ -91,6 +86,12 @@ init_server:
 	dvc_set_server SVN_HOST $(SVN_HOST)
 	dvc_set_server SVN_PORT $(SVN_PORT)
 	dvc_init_server $(SVN_MODE)
+	dvc_set_server PTR_PHASE $(PTR_PHASE)
+	dvc_set_server PTR_BLOCK $(PTR_BLOCK)
+	dvc_set_server PTR_STAGE $(PTR_STAGE)
+	dvc_set_server PTR_VERSN $(PTR_VERSN)
+	dvc_set_server PTR_CONTR $(PTR_CONTR)
+
 
 stop_server:
 	dvc_init_server stop
@@ -171,12 +172,12 @@ add_object:
 	@echo "# 5-1 Add existing object to container repo"
 	@echo "#---------------------------------------------------"
 	@for object in $(ADD_OBJECTS) ;  do (\
-		if (test -e $(CURR_CONTR)/$$object) then \
+		if (test -e $(PTR_CONTR)/$$object) then \
 			echo "dvc_add_object	$$object" ; \
 			dvc_add_object	$$object ; \
 		else \
 			echo "WARNING: object '$$object' is not found, create a dummy file."; \
-			echo "`date +%D_$T`" > $(CURR_CONTR)/$$object; \
+			echo "`date +%D_$T`" > $(PTR_CONTR)/$$object; \
 			echo "dvc_add_object	$$object" ; \
 			dvc_add_object	$$object ; \
 		fi ;\
@@ -400,7 +401,7 @@ remove_links:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-4. Clean up data links in working directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(CURR_PHASE) $(CURR_BLOCK) $(CURR_STAGE) $(CURR_VERSN) $(CURR_CONTR)
+	rm -fr $(PTR_PHASE) $(PTR_BLOCK) $(PTR_STAGE) $(PTR_VERSN) $(PTR_CONTR)
 
 remove_files:
 	@echo "#---------------------------------------------------"
