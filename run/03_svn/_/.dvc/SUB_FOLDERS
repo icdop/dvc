@@ -1,7 +1,0 @@
-;NAME           TITLE
-;============	========================== 
-P1-trial	"Design Initial Trial Run Phase "
-P2-stable	"Design Stable Run Phase "
-P3-final	"Design Final Run Phase "
-P4-validation	"Silicon Valiation Phase "
-P5-production	"Production Phase "
