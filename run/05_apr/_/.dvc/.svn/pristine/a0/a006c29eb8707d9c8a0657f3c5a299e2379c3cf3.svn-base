@@ -1,0 +1,12 @@
+;FORMAT TYPE	EXT	ACTION
+;======= =====   ======  ================================ 
+VERILOG	FILE	{*.vg *.v}	{view "vi $$"}
+DEF	FILE	*.def	{view "vi $$"}
+SDC	FILE	*.sdc	{view "vi $$"}
+SPEF	FILE	*.spef	{view "vi $$"}
+SDF	FILE	*.sdf	{view "vi $$"}
+RPT	FILE	*.rpt	{view "vi $$"}
+DIR	DIR	*/	{view "ls -al $$"}
+TAR	TAR	*.tar	{view "tar tvf $$"}
+TGZ	TGZ	*.tgz	{view "unizp -c $$ | tar tvf -"}
+

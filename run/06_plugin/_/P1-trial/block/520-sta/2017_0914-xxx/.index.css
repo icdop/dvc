@@ -1,0 +1,24 @@
+
+html {min-width: 776px; }
+body {background: #6D89DD; font-family: arial;}
+
+#report {border:10px;width:100%;text-align:left;background-color:#0080FF;}
+#report tr.header{vertical-align:center;background-color:#FFE880;}
+#report tr.title{vertical-align:center;background-color:#20C080;}
+#report td.col1{width:10%;vertical-align:center;background-color:#20E880;}
+#report td.col2{width:20%;vertical-align:top;background-color:#20E880;}
+#report td.col3{width:70%;vertical-align:center;background-color:#20E880;}
+
+#subfolder {border:10px;width:100%;text-align:left;background-color:#0080FF;}
+#subfolder tr.header{vertical-align:center;background-color:#20A0FF;}
+#subfolder tr.title{vertical-align:center;background-color:#20A0FF;}
+#subfolder td.col1{width:10%;vertical-align:center;background-color:#20E8FF;}
+#subfolder td.col2{width:20%;vertical-align:top;background-color:#20E8FF;}
+#subfolder td.col3{width:70%;vertical-align:center;background-color:#20E8FF;}
+
+#indextable {border:10px;width:100%;text-align:left;background-color:#0080FF;}
+#indextable tr.header{vertical-align:center;background-color:#20A0FF;}
+#indextable tr.title{vertical-align:center;background-color:#20A0FF;}
+#indextable td.col1{width:10%;vertical-align:center;background-color:#20E8FF;}
+#indextable td.col2{width:20%;vertical-align:top;background-color:#20E8FF;}
+#indextable td.col3{width:70%;vertical-align:center;background-color:#20E8FF;}

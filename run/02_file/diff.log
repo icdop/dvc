@@ -1,0 +1,54 @@
+diff -r log/list2.rpt golden/list2.rpt
+4a5,11
+> P1-trial/chip/000-DATA/
+> P1-trial/chip/000-DATA/2017_0910-xxx/
+> P1-trial/chip/000-DATA/2017_0910-xxx/design.sdc
+> P1-trial/chip/000-DATA/2017_0910-xxx/design.v
+> P1-trial/chip/420-place/
+> P1-trial/chip/420-place/2017_0615-xxx/
+> P1-trial/chip/420-place/2017_0615-xxx/place_opt/
+diff -r log/tree0.rpt golden/tree0.rpt
+2,3c2,3
+< dvc_tree_design _
+< _
+---
+> dvc_tree_design :
+> :
+5c5
+<     ├── _ -> chip
+---
+>     ├── : -> chip
+7c7
+<         ├── _ -> 520-sta
+---
+>         ├── : -> 520-sta
+9c9
+<             ├── _ -> 2017_0620-xxx
+---
+>             ├── : -> 2017_0620-xxx
+11a12,13
+>                     ├── cache
+>                     └── report
+13c15
+< 8 directories
+---
+> 10 directories
+diff -r log/tree2.rpt golden/tree2.rpt
+2,3c2,3
+< dvc_tree_design _
+< _
+---
+> dvc_tree_design :
+> :
+5c5
+<     ├── _ -> chip
+---
+>     ├── : -> chip
+7c7
+<         ├── _ -> 520-sta
+---
+>         ├── : -> 520-sta
+9c9
+<             ├── _ -> 2017_0620-xxx
+---
+>             ├── : -> 2017_0620-xxx
