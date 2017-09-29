@@ -14,19 +14,19 @@ source $DVC_HOME/csh/12_get_server.csh
 source $DVC_HOME/csh/13_get_project.csh
 source $DVC_HOME/csh/04_set_design.csh
 
-if ($phase == "") || ($phase == ":" || ($phase == ".") then
+if ($phase == "") || ($phase == "_" || ($phase == ".") then
    set phase $DESIGN_PHASE
 endif
 
-if ($block == "") || ($block == ":" || ($block == ".") then
+if ($block == "") || ($block == "_" || ($block == ".") then
    set block $DESIGN_BLOCK
 endif
 
-if ($stage == "") || ($stage == ":" || ($stage == ".") then
+if ($stage == "") || ($stage == "_" || ($stage == ".") then
    set stage $DESIGN_STAGE
 endif
 
-if ($version == "") || ($version == ":" || ($version == ".") then
+if ($version == "") || ($version == "_" || ($version == ".") then
    set version $DESIGN_VERSN
 endif
 

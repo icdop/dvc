@@ -19,6 +19,11 @@
 *       prepare for release
 * V1.0  2017/09/14 By Albert Li
 *       release for road test
+* V1.1  2017/09/27 By Albert Li
+*       release for beta test
+*       2017/09/28 By Albert Li
+*       change PROJT_ROOT default to '_' due to compatibility in Windows IE
+*
 
 ********************************************************
 # Global Variables
@@ -84,55 +89,51 @@
 
   * checkuot_project :
 
-	:/      (project checkout root, $CURR_PROJT)
-		.dvc/README.txt
+	$PROJT_ROOT/      (project checkout root, default is '_')
+		.dvc/README
 
 
 ## Design Directory
   
-  * create_version :
+  * create_design :
 	
-	:/$DESIGN_PHASE/.dvc
-       		/$DESIGN_BLOCK/.dvc
-			/$DESIGN_STAGE/.dvc
-				/$DESIGN_VERSN/.dvc
-					       .dqi
+	$DESIGN_PROJT/
+		$DESIGN_PHASE/.dvc
+			$DESIGN_BLOCK/.dvc
+				$DESIGN_STAGE/.dvc
+					$DESIGN_VERSN/.dvc
 
-  * checkout_version 
+  * checkout_design
 
-	:/	(project checkout root, $CURR_PROJT)
-		: -> $current_phase
-		.dvc/
+	$PROJT_ROOT/	(project checkout root)
+		_ -> $current_phase
 		$DESIGN_PHASE/
-			: -> $current_block
-			.dvc/
+			_ -> $current_block
        			$DESIGN_BLOCK/
-				: -> $current_stage
-				.dvc/
+				_ -> $current_stage
 				$DESIGN_STAGE/
-					: -> $current_version
-					.dvc/
+					_ -> $current_version
 					$DESIGN_VERSN/
 						.dvc/
 						.dqi/
 
-	:phase -> :/$phase
-	:block -> :/$phase/$block
-	:stage -> :/$phase/$block/$stage
-	:version -> :/$phase/$block/$stage/$version
+	.phase -> _/$phase
+	.block -> _/$phase/$block
+	.stage -> _/$phase/$block/$stage
+	.version -> _/$phase/$block/$stage/$version
 
 * Design Object Container Folder (check if .dvc/CONTAINER exist)
 
   * create_container 
 
-	:/$phase/$block	/$stage	/$versn	/$DESIGN_CONTR/
+	_/$phase/$block	/$stage	/$versn	/$DESIGN_CONTR/
 						.dvc/CONTAINER
 
   * checkout_container 
 
-	:version/$DESIGN_CONTR/.dvc/CONTAINER
+	.version/$DESIGN_CONTR/.dvc/CONTAINER
 
-	:container -> :version/$DESIGN_CONTR
+	.container -> .version/$DESIGN_CONTR
 
 
 * ========================================================

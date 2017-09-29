@@ -122,10 +122,10 @@ dvc_create_project:
 	copy the default config files (dvc/etc/conf/*) to conf/ folder
 
 dvc_checkout_project:   
-	Usage: $prog [--depth <files|infinity>] <DESIGN_PROJT>
+	Usage: $prog [--depth <files|infinity>] <DESIGN_PROJT> [<PROJT_ROOT>]
 	Description:
 	  create a .project folder in current directory
-	checkout project folder to .project/
+	checkout project folder to $PROJT_ROOT/
 	--depth infinity
 		checkout all data and subfolder under version folder 
 

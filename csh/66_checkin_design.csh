@@ -16,22 +16,22 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_design.csh
 
-if (($phase != "") && ($phase != ":") && ($phase != ".")) then
+if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
    $CSH_DIR/61_checkin_phase.csh $phase
    setenv DESIGN_PHASE $phase
 endif
 
-if (($block != "") && ($block != ":") && ($block != ".")) then
+if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
    $CSH_DIR/62_checkin_block.csh $block
    setenv DESIGN_BLOCK $block
 endif
 
-if (($stage != "") && ($stage != ":") && ($stage != ".")) then
+if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then
    $CSH_DIR/63_checkin_stage.csh $stage
    setenv DESIGN_STAGE $stage
 endif
 
-if (($version != "") && ($version != ":") && ($version != ".")) then
+if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
    $CSH_DIR/64_checkin_version.csh $version
    setenv DESIGN_VERSN $version
    $CSH_DIR/65_checkin_container.csh .

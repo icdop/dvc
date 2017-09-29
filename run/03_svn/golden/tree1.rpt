@@ -1,12 +1,12 @@
 make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/03_svn'
-dvc_tree_design :
-:
+dvc_tree_design _
+_
 └── P1-trial
-    ├── : -> chip
+    ├── _ -> chip
     └── chip
-        ├── : -> 420-place
+        ├── _ -> 420-place
         └── 420-place
-            ├── : -> 2017_0615-xxx
+            ├── _ -> 2017_0615-xxx
             └── 2017_0615-xxx
                 └── place_opt
                     ├── cache

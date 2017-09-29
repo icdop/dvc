@@ -15,19 +15,20 @@ if ($1 == "--info") then
    shift argv
 endif
 
+if {(test -e .dop/env/PROJT_ROOT)} then
+  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
+else if ($?PROJT_ROOT == 0) then
+  setenv PROJT_ROOT      "_"
+endif
+
 if {(test -e .dop/env/DESIGN_PROJT)} then
   setenv DESIGN_PROJT `cat .dop/env/DESIGN_PROJT`
 else if ($?DESIGN_PROJT == 0) then
-  setenv DESIGN_PROJT :
+  setenv DESIGN_PROJT $PROJT_ROOT
 endif
 
 if ($?info_mode) then
   echo "PARM: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
-if {(test -e .dop/env/PROJT_ROOT)} then
-  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
-else if ($?PROJT_ROOT == 0) then
-  setenv PROJT_ROOT      ":"
-endif
 

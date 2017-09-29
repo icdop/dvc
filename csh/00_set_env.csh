@@ -34,7 +34,7 @@ endif
 
 mkdir -p $env_home/.dop/env
 
-if (($1 != "") && ($1 != ":") && ($1 != ".")) then
+if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
    set envname = $1
    if (($reset == 1) || ($2 == "--reset")) then
       unsetenv $envname

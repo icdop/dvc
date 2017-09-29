@@ -1,7 +1,5 @@
 #!/bin/csh -f
 
-dvc_set_server SVN_ROOT $HOME/proj_svn
-
 dvc_checkout_project testcase
 dvc_checkout_phase   P1-trial
 dvc_checkout_block   chip

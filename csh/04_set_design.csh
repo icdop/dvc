@@ -32,16 +32,16 @@ if ($?dvc_path != 0) then
             set dvc_path = $dvc_path:h
             set phase    = $dvc_path:t
          else
-            set phase = ":"
+            set phase = "_"
          endif
       else
-         set block = ":"
-         set phase = ":"
+         set block = "_"
+         set phase = "_"
       endif
    else
-      set stage = ":"
-      set block = ":"
-      set phase = ":"
+      set stage = "_"
+      set block = "_"
+      set phase = "_"
    endif
 else
    set phase   = $DESIGN_PHASE

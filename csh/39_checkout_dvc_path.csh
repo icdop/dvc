@@ -49,8 +49,8 @@ endif
 
 set dvc_name = $DVC_PATH:t
 set dvc_root = $DVC_PATH:h
-rm -fr $PROJT_ROOT/$dvc_root/:
-ln -s $dvc_name $PROJT_ROOT/$dvc_root/:
+rm -fr $PROJT_ROOT/$dvc_root/_
+ln -s $dvc_name $PROJT_ROOT/$dvc_root/_
 
 rm -f $CURR_PTR
 if {(test -d $CURR_PTR)} then

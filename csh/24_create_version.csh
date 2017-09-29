@@ -18,7 +18,7 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
    setenv DESIGN_VERSN $1
    $CSH_DIR/00_set_env.csh DESIGN_VERSN $DESIGN_VERSN
    endif 
@@ -45,7 +45,6 @@ else
 echo "INFO: Create Project Design Version : $DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version $DESIGN_VERSN ..." --parents
 svn mkdir --quiet $VERSN_URL/.dvc -m "DVC Config Directory" --parents
-svn copy  --quiet $STAGE_URL/.dvc/DESIGN_FILES  $VERSN_URL/.dvc/DESIGN_FILES -m 'Design Object Table' 
 svn mkdir --quiet $VERSN_URL/.dqi -m "Design Quality Indicator" --parents
 
 

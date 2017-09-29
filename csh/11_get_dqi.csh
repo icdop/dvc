@@ -2,7 +2,7 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "") || ($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [-root <dir>] [--all] <variable>"
+   echo "Usage: $prog [--root <dir>] [--all] <variable>"
    exit -1
 endif
 
@@ -14,12 +14,12 @@ else if {(test -e .dop/env/DQI_ROOT)} then
    set dqi_root=`cat .dop/env/DQI_ROOT`
 else if {(test -e .dop/env/DQI_ROOT)} then
    set dqi_root=`cat .dop/env/DQI_ROOT`
-else if {(test -d :container)} then
-   set dqi_root=:container
-else if {(test -d :version)} then
-   set dqi_root=:version
-else if {(test -d :)} then
-   set dqi_root=:
+else if {(test -d .container)} then
+   set dqi_root=.container
+else if {(test -d .version)} then
+   set dqi_root=.version
+else if {(test -d -)} then
+   set dqi_root=-
 else
    echo "ERROR: Current directory (`pwd`) is not a valid working directory!"
    exit 1

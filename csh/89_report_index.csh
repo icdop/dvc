@@ -46,7 +46,7 @@ foreach phase ( $phase_list )
   set item_name=$phase
   set item_path=""
   set item_data=$PROJT_ROOT/$item_path/$item_name
-  if ($phase != ":") then
+  if ($phase != "_") then
   if {(test -d $item_data)} then
      echo "PHASE   : $phase"
      (source $html_templ/project/_table_data.csh) >> $project_htm
@@ -70,7 +70,7 @@ foreach phase ( $phase_list )
         set item_name=$block
         set item_path=$phase 
         set item_data=$PROJT_ROOT/$item_path/$item_name
-        if ($block != ":") then
+        if ($block != "_") then
         if {(test -d $item_data)} then
            echo "	BLOCK   : $block"
            (source $html_templ/block/_table_data.csh) >> $phase_htm
@@ -93,7 +93,7 @@ foreach phase ( $phase_list )
               set item_name=$stage
               set item_path=$phase/$block
               set item_data=$PROJT_ROOT/$item_path/$item_name
-              if ($stage != ":") then
+              if ($stage != "_") then
               if {(test -d $item_data)} then
                  echo "		STAGE   : $stage"
                  (source $html_templ/block/_table_data.csh) >> $block_htm
@@ -115,7 +115,7 @@ foreach phase ( $phase_list )
                     set item_name=$version
                     set item_path=$phase/$block/$stage
                     set item_data=$PROJT_ROOT/$item_path/$item_name
-                    if ($version != ":") then
+                    if ($version != "_") then
                     if {(test -d $item_data)} then
                        echo "			VERSION : $version"
                        (source $html_templ/stage/_table_data.csh) >> $stage_htm
@@ -138,7 +138,7 @@ foreach phase ( $phase_list )
                           set item_name=$container
                           set item_path=$phase/$block/$stage/$version
                           set item_data=$PROJT_ROOT/$item_path/$item_name
-                          if ($container != ":") then
+                          if ($container != "_") then
                           if {(test -d $item_data)} then
                              echo "				CONTAINER : $container"
                              (source $html_templ/version/_table_data.csh) >> $version_htm
@@ -160,7 +160,6 @@ foreach phase ( $phase_list )
                                 set item_name=$object
                                 set item_path=$phase/$block/$stage/$version/$container
                                 set item_data=$PROJT_ROOT/$item_path/$item_name
-                                if ($object != ":") then
                                 if {(test -e $item_data)} then
                                    #echo "					OBJECT  : $object"
                                    (source $html_templ/container/_table_data.csh) >> $container_htm
@@ -168,7 +167,6 @@ foreach phase ( $phase_list )
                                    set dvc_name = $object
                                    set dvc_path = $item_path/$dvc_name
                                    set dvc_data = $PROJT_ROOT/$dvc_path
-                                endif
                                 endif
                              end
                             (source $html_templ/container/_table_end.csh) >> $container_htm

@@ -7,7 +7,7 @@ set file_list=`awk '{ print $1 }' $required_file`
 
 set error=0
 foreach file ($file_list)
-  if {(test -f :version/$file)} then
+  if {(test -f .version/$file)} then
      echo "INFO: '$file' exist."
   else
      echo "INFO: '$file' is required, but does not exist in :version/"

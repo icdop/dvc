@@ -7,7 +7,7 @@ import check run save html view:
 	make -f plugin/Makefile $@
 
 design:
-	dvc_create_project testcase
+	dvc_create_project plugin
 	dvc_create_design P1-trial/block/520-sta/2017_0914-xxx
 	dvc_checkout_design
 
@@ -15,5 +15,7 @@ checkin:
 	dvc_checkin_design
 
 clean:
-	rm -fr : :* .dop DQI.rpt DESIGN_FILES
+	rm -fr _ .dop
+	rm -f .phase .block .stage .version .container 
+	rm -f DQI.rpt DESIGN_FILES
 

@@ -28,7 +28,7 @@ endif
 mkdir -p $SVN_ROOT/.dop/env
 
 
-if (($1 != "") && ($1 != ":") && ($1 != ".")) then
+if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
    set envname = $1
    if (($?reset)||($2 == "--reset")) then
       echo "INFO: remove server env($envname)"

@@ -15,7 +15,7 @@ source $CSH_DIR/14_get_design.csh
 source $CSH_DIR/15_get_container.csh
 
 if ($1 != "") then
-   if ($1 != ":") then
+   if ($1 != "_") then
       setenv DESIGN_CONTR $1
    endif 
    shift argv

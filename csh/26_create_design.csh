@@ -22,22 +22,22 @@ echo "INFO: DVC_PATH = $DVC_PATH"
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
-if (($phase != "") && ($phase != ":") && ($phase != ".")) then
+if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
    $CSH_DIR/21_create_phase.csh $phase
    setenv DESIGN_PHASE $phase
 endif
 
-if (($block != "") && ($block != ":") && ($block != ".")) then
+if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
    $CSH_DIR/22_create_block.csh $block
    setenv DESIGN_BLOCK $block
 endif
 
-if (($stage != "") && ($stage != ":") && ($stage != ".")) then
+if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then
    $CSH_DIR/23_create_stage.csh $stage
    setenv DESIGN_STAGE $stage
 endif
 
-if (($version != "") && ($version != ":") && ($version != ".")) then
+if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
    $CSH_DIR/24_create_version.csh $version
    setenv DESIGN_VERSN $version
 endif

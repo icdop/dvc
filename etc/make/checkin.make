@@ -42,32 +42,25 @@ help:
 
 
 run:
+	mkdir -p log
 	make init
 	make project
 	make design
 	make container
 	make object
 	make checkin
-	make tree | tee tree.rpt
-	make list | tee list.rpt
+	make list | tee log/list1.rpt
+	make tree | tee log/tree1.rpt
 
 test:
-	mkdir log
-	make init
 	make project
-	make design
-	make container
-	make object
-	make checkin
-	make tree > log/tree1.rpt
-	make list > log/list1.rpt
 	make remove_data
 	make checkout
 	make tree > log/tree0.rpt
-	make clean
-	make project
+	make remove_design
 	make version
 	make container
+	make update
 	make object
 	make commit
 	make tree > log/tree2.rpt
@@ -342,31 +335,30 @@ clean:
 
 remove:
 	@echo "Usage:"
-	@echo "        make remove_design     ; remove current design"
-	@echo "        make remove_container  ; remove current container"
-	@echo "        make remove_version    ; remove current version"
-	@echo "        make remove_stage      ; remove current stage"
-	@echo "        make remove_block      ; remove current block"
-	@echo "        make remove_phase      ; remove current phase"
-	@echo "        make remove_links      ; remove links"
+	@echo "        make remove_tests      ; remove test report files"
 	@echo "        make remove_files      ; remove unnecessary files"
 	@echo "        make remove_data       ; remove checkout project data"
+	@echo "        make remove_design     ; remove current design"
 	@echo ""
 
 remove_all:
 	make remvoe_tests
-	make remove_links
 	make remove_files
 	make remove_data
-	make remove_container
-	make remove_project
+	make remove_design
 
+remove_design: remove_files remove_links
+	make remove_container
+	make remove_version
+	make remove_stage
+	make remove_block
+	make remove_phase
+	
 remove_container:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-1. Clean up container data"
 	@echo "#---------------------------------------------------"
 	dvc_remove_container	$(DESIGN_CONTR)
-	rm -f $(CURR_CONTR)
 
 remove_version: 
 	@echo "#---------------------------------------------------"
@@ -374,40 +366,49 @@ remove_version:
 	@echo "#---------------------------------------------------"
 	dvc_remove_version	$(DESIGN_VERSN)
 
+remove_stage: 
+	@echo "#---------------------------------------------------"
+	@echo "# 7-2. Clean up design stage"
+	@echo "#---------------------------------------------------"
+	dvc_remove_stage	$(DESIGN_STAGE)
+
 remove_block: 
 	@echo "#---------------------------------------------------"
-	@echo "# 7-2. Clean up design block data"
+	@echo "# 7-2. Clean up design block"
 	@echo "#---------------------------------------------------"
 	dvc_remove_block	$(DESIGN_BLOCK)
+
+remove_phase: 
+	@echo "#---------------------------------------------------"
+	@echo "# 7-2. Clean up design phase"
+	@echo "#---------------------------------------------------"
+	dvc_remove_phase	$(DESIGN_PHASE)
 
 remove_project:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-3. Remove proejct repository (For TEST ONLY)"
 	@echo "#---------------------------------------------------"
-	dvc_remove_version	$(DESIGN_VERSN)
-	dvc_remove_stage	$(DESIGN_STAGE)
-	dvc_remove_block	$(DESIGN_BLOCK)
-	dvc_remove_phase	$(DESIGN_PHASE)
 	dvc_remove_project	$(DESIGN_PROJT)
+
+remove_data: remove_links
+	@echo "#---------------------------------------------------"
+	@echo "# 7-6. Clean up data checkout directory"
+	@echo "#---------------------------------------------------"
+	rm -fr $(PROJT_ROOT) 
 
 remove_links:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-4. Clean up related links in working directory"
+	@echo "# 7-4. Clean up data links in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(CURR_PHASE) $(CURR_BLOCK) $(CURR_STAGE) $(CURR_VERSN) $(CURR_CONTR)
 
 remove_files:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-5. Clean up related files in working directory"
+	@echo "# 7-5. Clean up dummy files in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(OBJECT_FILES) $(OBJECT_DIRS) $(OBJECT_LINKS)
 
 remove_tests:
 	rm -fr log/ tree.rpt list.rpt diff.log
 
-remove_data:
-	@echo "#---------------------------------------------------"
-	@echo "# 7-6. Clean up data checkout directory"
-	@echo "#---------------------------------------------------"
-	rm -fr $(PROJT_ROOT) 
 

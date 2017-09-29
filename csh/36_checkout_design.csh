@@ -21,7 +21,7 @@ echo "INFO: DVC_PATH = $DVC_PATH"
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
-if (($phase != "") && ($phase != ":") && ($phase != ".")) then
+if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
 setenv PHASE_URL $PROJT_URL/$phase
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
@@ -33,7 +33,7 @@ else
 endif
 endif
 
-if (($block != "") && ($block != ":") && ($block != ".")) then
+if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
 setenv BLOCK_URL $PROJT_URL/$DESIGN_PHASE/$block
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
@@ -45,7 +45,7 @@ else
 endif
 endif
 
-if (($stage != "") && ($stage != ":") && ($stage != ".")) then
+if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then
 setenv STAGE_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$stage
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
@@ -57,7 +57,7 @@ else
 endif
 endif
 
-if (($version != "") && ($version != ":") && ($version != ".")) then
+if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
 setenv VERSN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$version
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then

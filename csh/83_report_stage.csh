@@ -25,7 +25,7 @@ set stage   = $DESIGN_STAGE
 set version = $DESIGN_VERSN
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
       set stage = $1
     endif
     shift argv
@@ -63,7 +63,7 @@ echo "<summary> Version List </summary>" >> $stage_htm
     set item_name=$version
     set item_path=$phase/$block/$stage
     set item_data=$PROJT_ROOT/$item_path/$item_name
-    if ($item_name != ":") then
+    if ($item_name != "_") then
     if {(test -d $item_data)} then
        echo "	VERSION : $version"
        (source $html_templ/stage/_table_data.csh) >> $stage_htm

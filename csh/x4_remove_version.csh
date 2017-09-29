@@ -15,7 +15,7 @@ source $DVC_HOME/csh/13_get_project.csh
 source $DVC_HOME/csh/14_get_design.csh
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
    setenv DESIGN_VERSN $1
    endif 
    shift argv

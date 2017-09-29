@@ -25,7 +25,7 @@ set stage   = $DESIGN_STAGE
 set version = $DESIGN_VERSN
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
       set version = $1
     endif
     shift argv
@@ -65,7 +65,7 @@ echo "<summary> Container List </summary>" >> $version_htm
     set item_name=$container
     set item_path=$phase/$block/$stage/$version
     set item_data=$PROJT_ROOT/$item_path/$item_name
-    if ($container != ":") then
+    if ($container != "_") then
     if {(test -d $item_data)} then
        echo "	CONTAINER : $container"
        (source $html_templ/version/_table_data.csh) >> $version_htm
@@ -88,7 +88,6 @@ echo "<summary> Container List </summary>" >> $version_htm
           set item_name=$object
           set item_path=$phase/$block/$stage/$version/$container
           set item_data=$PROJT_ROOT/$item_path/$item_name
-          if ($object != ":") then
           if {(test -e $item_data)} then
              echo "		OBJECT  : $object"
              (source $html_templ/container/_table_data.csh) >> $container_htm
@@ -96,7 +95,6 @@ echo "<summary> Container List </summary>" >> $version_htm
              set dvc_name = $object
              set dvc_path = $item_path/$dvc_name
              set dvc_data = $PROJT_ROOT/$dvc_path
-          endif
           endif
        end
       (source $html_templ/container/_table_end.csh) >> $container_htm

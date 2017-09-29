@@ -15,17 +15,17 @@ dvc_create_project testcase
 
 dvc_create_design    P1-trial/chip/400-APR/2017_0910-xxx
 dvc_checkout_design  
-  cp data/design.v   :version/design.v
-  cp data/design.sdc :version/design.sdc
-  cp data/chip.jpg   :version/chip.jpg
+  cp data/design.v   .version/design.v
+  cp data/design.sdc .version/design.sdc
+  cp data/chip.jpg   .version/chip.jpg
   
-  dvc_set_dqi  --root :version Width 100  
-  dvc_set_dqi  --root :version Height 150  
-  dvc_set_dqi  --root :version Area  15  
-  dvc_set_dqi  --root :version Congestion  0.01%
-  dvc_set_dqi  --root :version WNS  -100
-  dvc_set_dqi  --root :version NVP  1000
-  dvc_set_dqi  --root :version DRC   500
+  dvc_set_dqi  --root .version Width 100  
+  dvc_set_dqi  --root .version Height 150  
+  dvc_set_dqi  --root .version Area  15  
+  dvc_set_dqi  --root .version Congestion  0.01%
+  dvc_set_dqi  --root .version WNS  -100
+  dvc_set_dqi  --root .version NVP  1000
+  dvc_set_dqi  --root .version DRC   500
 dvc_checkin_design
 
 dvc_checkout_phase   P1-trial
@@ -35,12 +35,12 @@ set version_list = "2017_0910-xxx 2017_0912-yyy 2017_0914-zzz"
 foreach version ($version_list)
   dvc_create_version $version
   dvc_checkout_version $version
-    cp data/design.v   :version/design.v
-    cp data/design.sdc :version/design.sdc
-    cp data/chip.jpg   :version/chip.jpg
-    dvc_set_dqi  --root :version WNS  -100
-    dvc_set_dqi  --root :version NVP  1000
-    dvc_set_dqi  --root :version DRC   500
+    cp data/design.v   .version/design.v
+    cp data/design.sdc .version/design.sdc
+    cp data/chip.jpg   .version/chip.jpg
+    dvc_set_dqi  --root .version WNS  -100
+    dvc_set_dqi  --root .version NVP  1000
+    dvc_set_dqi  --root .version DRC   500
   dvc_checkin_version
 
   set scenario_list = "001 002 003 004"

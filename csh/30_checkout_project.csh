@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PROJT>"
+   echo "Usage: $prog <DESIGN_PROJT> [<PROJT_ROOT>]"
    exit -1
 endif
 echo "======================================================="
@@ -15,6 +15,7 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/03_set_project.csh
 
+
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
@@ -25,6 +26,13 @@ endif
 
 echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password db
+if ($1 != "") then
+  if (($1 != ":") && ($1 != ".")) then
+    setenv PROJT_ROOT $1
+  endif
+  shift argv
+endif
+
 
 if {(test -e $PROJT_ROOT/.dvc/PROJECT)} then
    set orig_project=`cat $PROJT_ROOT/.dvc/PROJECT`
@@ -44,7 +52,7 @@ endif
 mkdir -p $PROJT_ROOT
 
 if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/.dvc)} then
+   if {(test -e $PROJT_ROOT/.svn)} then
       svn update --quiet --force $PROJT_ROOT --set-depth $depth_mode
    else
       svn checkout --quiet --force $PROJT_URL $PROJT_ROOT --depth $depth_mode
@@ -64,6 +72,7 @@ else
 endif
 
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
+$CSH_DIR/00_set_env.csh PROJT_ROOT   $PROJT_ROOT
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="

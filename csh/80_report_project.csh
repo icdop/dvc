@@ -25,7 +25,7 @@ set stage   = $DESIGN_STAGE
 set version = $DESIGN_VERSN
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
       set project = $1
     endif
     shift argv
@@ -63,7 +63,7 @@ echo "<summary> Phase List </summary>" >> $project_htm
     set item_name = $phase
     set item_path = .
     set item_data = $PROJT_ROOT/$item_path/$item_name
-    if ($item_name != ":") then
+    if ($item_name != "_") then
     if {(test -d $item_data)} then
        echo "	PHASE : $phase"
        (source $html_templ/project/_table_data.csh) >> $project_htm

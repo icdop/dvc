@@ -16,7 +16,7 @@ source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
-   if (($1 != ":") && ($1 != ".")) then
+   if (($1 != "_") && ($1 != ".")) then
       setenv DESIGN_BLOCK $1
       $CSH_DIR/00_set_env.csh DESIGN_BLOCK $DESIGN_BLOCK
    endif
