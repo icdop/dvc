@@ -17,7 +17,7 @@ source $CSH_DIR/15_get_container.csh
 if ($1 != "") then
    if ($1 != "_") then
       setenv DESIGN_CONTR $1
-      dvc_set_container $DESIGN_CONTR
+      echo $DESIGN_CONTR > .dop/env/DESIGN_CONTR
    endif 
    shift argv
 endif

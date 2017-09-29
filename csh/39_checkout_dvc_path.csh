@@ -42,7 +42,7 @@ if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
 else
-   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
+#   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
    svn checkout --quiet --force $DESIGN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
    svn checkout --quiet --force $DESIGN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
 endif
