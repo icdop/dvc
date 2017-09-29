@@ -30,8 +30,12 @@ endif
 setenv DESIGN_URL $PROJT_URL/$DVC_PATH
 mkdir -p $PROJT_ROOT/$DVC_PATH
 
+if ($?force_mode) then
+   rm -f $PROJT_ROOT/$DVC_PATH
+endif
+
 if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
+   if {(test -e $PROJT_ROOT/$DVC_PATH/.svn)} then
       svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth $depth_mode
    else
       svn checkout --quiet --force $DESIGN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
@@ -42,7 +46,7 @@ if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
    svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
 else
-#   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
+   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
    svn checkout --quiet --force $DESIGN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
    svn checkout --quiet --force $DESIGN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
 endif
