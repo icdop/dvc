@@ -16,7 +16,6 @@ index:
 	dvc_report_index
 
 clean:
-	rm -fr : :*
-	rm -fr :version
-	rm -fr .dop	
+	rm -fr _ .dop
+	rm -f :phase :block :stage :version :container
 	rm -f index.htm

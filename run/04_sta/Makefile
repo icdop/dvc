@@ -20,6 +20,6 @@ index:
 
 clean:
 	rm -fr _ .dop
-	rm -f .phase .block .stage .version .container
+	rm -f :phase :block :stage :version :container
 	rm -f index.htm
 	

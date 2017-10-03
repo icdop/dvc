@@ -5,7 +5,6 @@ index:
 	dvc_report_index
 	
 clean:
-	rm -fr _
-	rm -fr .phase .block .stage .version .container
-	rm -fr .dop	
+	rm -fr _ .dop	
+	rm -f :phase :block :stage :version :container
 

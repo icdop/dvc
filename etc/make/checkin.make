@@ -343,10 +343,10 @@ remove:
 	@echo ""
 
 remove_all:
+	make remove_design
 	make remove_tests
 	make remove_files
 	make remove_data
-	make remove_design
 
 remove_design: remove_files remove_links
 	make remove_container
@@ -354,6 +354,7 @@ remove_design: remove_files remove_links
 	make remove_stage
 	make remove_block
 	make remove_phase
+	rm -fr .dop
 	
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -395,7 +396,7 @@ remove_data: remove_links
 	@echo "#---------------------------------------------------"
 	@echo "# 7-6. Clean up data checkout directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(PROJT_ROOT) .dop
+	rm -fr $(PROJT_ROOT) 
 
 remove_links:
 	@echo "#---------------------------------------------------"

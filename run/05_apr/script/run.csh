@@ -14,9 +14,9 @@ dvc_create_design P1-trial/chip/400-APR/2017_0912-xxx
 
 dvc_checkout_project 05_apr
 dvc_checkout_design  P1-trial/chip/400-APR/2017_0912-xxx
-cp data/design.v   .version/design.v
-cp data/design.sdc .version/design.sdc
-cp report/chip.jpg .version/chip.jpg
+cp data/design.v   :version/design.v
+cp data/design.sdc :version/design.sdc
+cp report/chip.jpg :version/chip.jpg
 
 dvc_set_dqi  Width     100  
 dvc_set_dqi  Height    150  

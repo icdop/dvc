@@ -16,6 +16,6 @@ checkin:
 
 clean:
 	rm -fr _ .dop
-	rm -f .phase .block .stage .version .container 
+	rm -f :phase :block :stage :version :container 
 	rm -f DQI.rpt DESIGN_FILES
 
