@@ -17,7 +17,7 @@ source $CSH_DIR/12_get_server.csh
 
 if ($2 != "") then
    setenv SVN_ROOT $2
-   $CSH_DIR/02_set_server SVN_ROOT $SVN_ROOT
+   $CSH_DIR/02_set_server.csh SVN_ROOT $SVN_ROOT
 endif
 
 mkdir -p $SVN_ROOT/.dop/env
