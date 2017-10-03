@@ -10,8 +10,8 @@ dvc_init_server:
 	  start -  start server using SVN_MODE mode
 	  stop  -  stop svn server
 
+	  job   -  show current server job with ps command
 	  pid   -  return current server pid
-	  pid   -  show current server job with ps command
 
  
 #
@@ -31,7 +31,7 @@ dvc_set_server:
 dvc_get_server:
 	Usage: $prog
 	Description:
-	  fetch the SVN server setting from ~/.dop/server/
+	  fetch the SVN server setting from $SVN_ROOT/.dop/env/
 
 
 dvc_set_env:   
@@ -83,7 +83,7 @@ dvc_set_project:
 	Description:
 	  Set the default project name and store the value to .dop/env/
 
-dvc_set_version:   
+dvc_set_design:   
 	Usage: $prog /<phase>/<block>/<stage>/<version> 
 	Description:
 	  Assign default version path and store the value to .dop/env/
@@ -99,7 +99,7 @@ dvc_get_project:
 	Description:
 	  fetch the DESIGN_PROJT value from .dop/env/
 
-dvc_get_version:   
+dvc_get_design:   
 	Usage: $prog 
 	Description:
 	  fetch working design folder name from .dop/env/
@@ -132,6 +132,8 @@ dvc_checkout_project:
 #
 # Create Design Version Folder at Server side
 #
+dvc_create_design:
+	Usage: $prog <phase>/<block>/<stage>/<version>
 dvc_create_phase:   
 	Usage: $prog <DESIGN_PHASE>
 dvc_create_block:   
@@ -139,7 +141,7 @@ dvc_create_block:
 dvc_create_stage:   
 	Usage: $prog <DESIGN_STAGE>
 dvc_create_version:   
-	Usage: $prog <DESIGN_VERSN> | <FULL_VERSION_PATH>
+	Usage: $prog <DESIGN_VERSN> 
 
 #
 # Checkout Design Version Folder to Working Directory
@@ -175,10 +177,11 @@ dvc_checkout_version:
 	checkout version folder to local working directory .project/
 	dy default, only .dvc/ is checkout
 	create the following link
-		.design_block -> .project/testcase/phase/chip
-		.design_stage -> .project/testcase/phase/chip/stage
-		.design_versn -> .project/testcase/phase/chip/stage/version
-	create ":" link in all four levels, pointing it to current version
+		:phase -> _/phase
+		:block -> _/phase/chip
+		:stage -> _/phase/chip/stage
+		:version -> _/phase/chip/stage/version
+	create "_:" link in all four levels, pointing it to current version
 	--depth infinity
 		checkout all data and subfolder under version folder 
 
@@ -194,16 +197,16 @@ dvc_checkout_container:
 	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  1) checkout container folder to local working directory
-	     .project/<project>/<phase>/<block>/<stage>/<version>/$container
-	  2) create a .container link to .project/:/:/:/:/:/$container
-	.container ->	.design_versn/$container
+	     _/<phase>/<block>/<stage>/<version>/$container
+	  2) create a :container link to :version/$container
+	:container ->	:version/$container
 
 dvc_checkin_container:   
 	Usage: $prog <CONTAINER>
 	Description:
 	  add all objects in container folder and then commit to SVN server
 
-dvc_clean_container:   
+dvc_empty_container:   
 	Usage: $prog [<CONTAINER>]
 	Description:
 	  clean up design object in container (on server side)
@@ -288,13 +291,13 @@ dvc_list_container:
 	Description:
 	  list all objects under container directory
 
-dvc_list_tree:   
+dvc_tree_design:   
 	Usage: $prog <dir>
 	Description:
 	  call unix tree command to print out tree structure
 
-dvc_list_dir:   
-	Usage: $prog <project/phase/block/stage/version/container>
+dvc_list_dvc_path:   
+	Usage: $prog <phase/block/stage/version/container>
 	Description:
 	  list all sub-folders under design path directory
 	default is to list objects in current container
@@ -303,15 +306,15 @@ dvc_list_dir:
 # Remove design folder
 #
 dvc_remove_project:   
-	Usage: $0:t <DESIGN_PROJT>
+	Usage: $prog <DESIGN_PROJT>
 dvc_remove_phase:   
-	Usage: $0:t <DESIGN_PHASE>
+	Usage: $prog <DESIGN_PHASE>
 dvc_remove_block:   
-	Usage: $0:t <DESIGN_BLOCK>
+	Usage: $prog <DESIGN_BLOCK>
 dvc_remove_stage:   
-	Usage: $0:t <DESIGN_STAGE>
+	Usage: $prog <DESIGN_STAGE>
 dvc_remove_version:   
-	Usage: $0:t <DESIGN_VERSN>
+	Usage: $prog <DESIGN_VERSN>
 dvc_remove_container:   
-	Usage: $0:t <DESIGN_CONTR>
+	Usage: $prog <DESIGN_CONTR>
 
