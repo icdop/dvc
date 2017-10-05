@@ -3,5 +3,5 @@ set root $env(SVN_ROOT)
 
 set path [lindex $argv 0]
 
-puts [exec tcsh -fc "svn list -v file://$root/plugin/$path"]
+puts [exec tcsh -fc "svn list -v file://$root/$env(DVC_PROJ)/$path"]
 
