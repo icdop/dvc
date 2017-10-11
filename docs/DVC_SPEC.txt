@@ -117,23 +117,23 @@
 						.dvc/
 						.dqi/
 
-	.phase -> _/$phase
-	.block -> _/$phase/$block
-	.stage -> _/$phase/$block/$stage
-	.version -> _/$phase/$block/$stage/$version
+	:phase -> _/$phase
+	:block -> _/$phase/$block
+	:stage -> _/$phase/$block/$stage
+	:version -> _/$phase/$block/$stage/$version
 
-* Design Object Container Folder (check if .dvc/CONTAINER exist)
+* Design Object Container Folder (check if .dvc/DESIGN_CONTR exist)
 
   * create_container 
 
-	_/$phase/$block	/$stage	/$versn	/$DESIGN_CONTR/
-						.dvc/CONTAINER
+	_/$phase/$block/$stage/$version/$DESIGN_CONTR/
+						.dvc/DESIGN_CONTR
 
   * checkout_container 
 
-	.version/$DESIGN_CONTR/.dvc/CONTAINER
+	:version/$DESIGN_CONTR/.dvc/DESIGN_CONTR
 
-	.container -> .version/$DESIGN_CONTR
+	:container -> :version/$DESIGN_CONTR
 
 
 * ========================================================
