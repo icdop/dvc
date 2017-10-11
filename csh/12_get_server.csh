@@ -26,7 +26,7 @@ case "--infinity":
    set depth_mode = infinity
    shift argv
    breaksw
-cace "--empty":
+case "--empty":
    set depth_mode = empty
    shift argv
    breaksw
@@ -38,7 +38,7 @@ case "--immediates":
    set depth_mode = immediates
    shift argv
    breaksw
-case "--depth")) then
+case "--depth":
    shift argv
    set depth_mode = $1
    shift argv

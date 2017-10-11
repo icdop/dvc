@@ -13,11 +13,13 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+
 # If DESIGN_URL is defined and no args is specified
 # it may be called form other dvc_list_* command
 # this is used to preserved all option modes of parent commands 
 
-if (($1 != "") && ($1 != "_") && ($1 != ".")) then
+if (($1 != "") && ($1 != "_")) then
    if {(test -e $1/.dvc/CONTAINER)} then
       setenv DESIGN_URL "$PROJT_URL/`cat $1/.dvc/CONTAINER`"
    else
