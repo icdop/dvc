@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PATH>"
+   echo "Usage: $prog <DVC_PATH>"
    exit -1
 endif
 
@@ -13,15 +13,20 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 
+setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
+ 
 # If DESIGN_URL is defined and no args is specified
 # it may be called form other dvc_list_* command
 # this is used to preserved all option modes of parent commands 
 
-if (($1 != "") && ($1 != "_") && ($1 != ".")) then
-   if {(test -e $1/.dvc/CONTAINER)} then
-      setenv DESIGN_URL "$PROJT_URL/`cat $1/.dvc/CONTAINER`"
+if ($1 != "") then
+   set dir $1
+   if {(test -e $dir/.dvc/DESIGN_CONTR)} then
+      setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
+   else if {(test -e $dir/.dvc/DESIGN_PATH)} then
+      setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`
    else
-      setenv DESIGN_URL $PROJT_URL/$1
+      setenv DESIGN_URL $PROJT_URL/$dir
    endif
 else if ($?DESIGN_URL == 0) then
    source $CSH_DIR/14_get_design.csh

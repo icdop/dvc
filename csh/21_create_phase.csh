@@ -42,7 +42,7 @@ svn mkdir --quiet $PHASE_URL/.dqi -m "Design Quality Indicator" --parents
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet $tmpfile $PHASE_URL/.dvc/PHASE -m 'Project Phase Name'
+svn import --quiet $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`

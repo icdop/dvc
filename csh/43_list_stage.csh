@@ -20,14 +20,14 @@ if ($1 != "") then
    endif
 endif
 
-# Use "source list_dvc_path.csh" and specify DESIGN_URL 
-# is to preserve option modes and pass them to list_dvc_path.csh
+# Use "source list_design_path.csh" and specify DESIGN_URL 
+# is to preserve option modes and pass them to list_design_path.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
 setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 
 setenv DESIGN_URL $STAGE_URL
-source $CSH_DIR/49_list_dvc_path.csh
+source $CSH_DIR/49_list_design_path.csh
 
 exit 0

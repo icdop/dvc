@@ -22,11 +22,11 @@ if ($1 == "--dir") then
    shift argv
    set dir=$1
    shift argv
-   if {(test -e $dir/.dvc/CONTAINER)} then
+   if {(test -e $dir/.dvc/DESIGN_CONTR)} then
       # parameter is a container
       setenv CONTAINER_DIR $dir
-      setenv CONTAINER_PATH `cat $dir/.dvc/CONTAINER`
-      setenv DESIGN_CONTR $CONTAINER_PATH:t
+      setenv CONTAINER_PATH `cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
+      setenv DESIGN_CONTR `cat $dir/.dvc/DESIGN_CONTR`
       exit 0
    else
       echo "ERROR: Not a valid container dir : '$dir'"
@@ -45,17 +45,17 @@ else
    setenv DESIGN_CONTR .
 endif
 
-if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/CONTAINER)} then
+if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PTR_VERSN/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/$DESIGN_CONTR/.dvc/CONTAINER)} then
+else if {(test -e $PROJT_ROOT/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PROJT_ROOT/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
+else if {(test -e $PROJT_ROOT/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PROJT_ROOT/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
+else if {(test -e $PROJT_ROOT/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PROJT_ROOT/_/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
+else if {(test -e $PROJT_ROOT/_/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PROJT_ROOT/_/_/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR/.dvc/CONTAINER)} then
+else if {(test -e $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR
 else
    setenv CONTAINER_DIR $PTR_VERSN
@@ -63,7 +63,10 @@ endif
 
 #echo "CONTAINER_DIR = $CONTAINER_DIR"
 
-if {(test -e $CONTAINER_DIR/.dvc/CONTAINER)} then
+if {(test -e $CONTAINER_DIR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/DESIGN_PATH`/`cat $CONTAINER_DIR/.dvc/DESIGN_CONTR`
+else if {(test -e $CONTAINER_DIR/.dvc/CONTAINER)} then
+   # For backward compatibility
    setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
 else
    setenv CONTAINER_PATH _/_/_/_/$DESIGN_CONTR
