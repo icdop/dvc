@@ -86,11 +86,11 @@ init_server:
 	dvc_set_server SVN_HOST $(SVN_HOST)
 	dvc_set_server SVN_PORT $(SVN_PORT)
 	dvc_init_server $(SVN_MODE)
-	dvc_set_server PTR_PHASE $(PTR_PHASE)
-	dvc_set_server PTR_BLOCK $(PTR_BLOCK)
-	dvc_set_server PTR_STAGE $(PTR_STAGE)
-	dvc_set_server PTR_VERSN $(PTR_VERSN)
-	dvc_set_server PTR_CONTR $(PTR_CONTR)
+	dvc_set_env PTR_PHASE $(PTR_PHASE)
+	dvc_set_env PTR_BLOCK $(PTR_BLOCK)
+	dvc_set_env PTR_STAGE $(PTR_STAGE)
+	dvc_set_env PTR_VERSN $(PTR_VERSN)
+	dvc_set_env PTR_CONTR $(PTR_CONTR)
 
 
 stop_server:
