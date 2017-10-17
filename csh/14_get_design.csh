@@ -46,3 +46,33 @@ if ($?info_mode) then
   echo "INFO: DESIGN_STAGE = $DESIGN_STAGE"
   echo "INFO: DESIGN_VERSN = $DESIGN_VERSN"
 endif
+
+if {(test -e .dop/.dop/env/PTR_PHASE)} then
+  setenv PTR_PHASE `cat .dop/.dop/env/PTR_PHASE`
+else if ($?PTR_PHASE == 0) then
+  setenv PTR_PHASE :phase
+endif
+
+if {(test -e .dop/.dop/env/PTR_BLOCK)} then
+  setenv PTR_BLOCK `cat .dop/.dop/env/PTR_BLOCK`
+else if ($?PTR_BLOCK == 0) then
+  setenv PTR_BLOCK :block
+endif
+
+if {(test -e .dop/.dop/env/PTR_STAGE)} then
+  setenv PTR_STAGE `cat .dop/.dop/env/PTR_STAGE`
+else if ($?PTR_STAGE == 0) then
+  setenv PTR_STAGE :stage
+endif
+
+if {(test -e .dop/.dop/env/PTR_VERSN)} then
+  setenv PTR_VERSN `cat .dop/.dop/env/PTR_VERSN`
+else if ($?PTR_VERSN == 0) then
+  setenv PTR_VERSN :version
+endif
+
+if {(test -e .dop/.dop/env/PTR_VERSN)} then
+  setenv PTR_CONTR `cat .dop/.dop/env/PTR_CONTR`
+else if ($?PTR_CONTR == 0) then
+  setenv PTR_CONTR :container
+endif
