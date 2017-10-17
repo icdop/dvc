@@ -51,11 +51,11 @@ if ($?verbose_mode) then
    echo "------------------------------------------------------------"
 else if ($?recursive_mode) then
 #   svn list $DESIGN_URL --recursive --depth immediates
-   svn list $DESIGN_URL --recursive | grep -v -e \.dvc\/ -e \.dqi\/
+   svn list $DESIGN_URL --recursive | grep -v -e \.dvc\/ -e \.dqi\/ -e \.htm\/
 else if ($?xml_mode) then
    svn list $DESIGN_URL --xml
 else
-   svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/
+   svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/ -e \.htm\/ | grep "/" | sed s%\/%%
 endif
 
 exit 0
