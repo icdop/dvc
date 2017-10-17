@@ -43,9 +43,9 @@ if ($?depth_mode) then
 endif
 
 if {(test -e $PROJT_ROOT/$DVC_PATH/)} then
-#
+   svn update --quiet --force $DESIGN_URL/ --set-depth files
 else
-   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth empty
+   svn checkout --quiet --force $DESIGN_URL/ $PROJT_ROOT/$DVC_PATH/ --depth files
 endif
 
 if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then

@@ -9,7 +9,7 @@ echo "</tr>"
 
 echo "<tr class=data>"
 echo "<td class=col1>"
-echo "<a href=../../.htm/index.htm>"
+echo "<a href=../index.htm>"
 echo "$dvc_name"
 echo "</a>"
 echo "</td>" 

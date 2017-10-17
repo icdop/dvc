@@ -39,7 +39,7 @@ set dvc_path = $phase
 set dvc_data = $PROJT_ROOT/$dvc_path
 
 if {(test -d $dvc_data)} then
-  set phase_htm   = $dvc_data/.htm/index.htm
+  set phase_htm   = $dvc_data/index.htm
   set phase_css   = $dvc_data/.htm/index.css
   cp $html_templ/phase/index.css $phase_css
 else

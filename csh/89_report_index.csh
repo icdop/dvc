@@ -33,7 +33,7 @@ set dvc_name    = $DESIGN_PROJT
 set dvc_path    = ""
 set dvc_data    = $PROJT_ROOT
 
-set project_htm = "$PROJT_ROOT/.htm/index.htm"
+set project_htm = "$PROJT_ROOT/index.htm"
 set project_css = "$PROJT_ROOT/.htm/index.css"
 cp $html_templ/project/index.css $project_css
 (source $html_templ/project/_index_begin.csh) >  $project_htm
@@ -58,7 +58,7 @@ foreach phase ( $phase_list )
      set dvc_path = $dvc_name
      set dvc_data = $PROJT_ROOT/$dvc_path
 
-     set phase_htm  = $dvc_data/.htm/index.htm
+     set phase_htm  = $dvc_data/index.htm
      set phase_css  = $dvc_data/.htm/index.css
      cp $html_templ/phase/index.css $phase_css
     (source $html_templ/phase/_index_begin.csh) >  $phase_htm
@@ -81,7 +81,7 @@ foreach phase ( $phase_list )
            set dvc_path = $item_path/$dvc_name
            set dvc_data = $PROJT_ROOT/$dvc_path
 
-           set block_htm   = $dvc_data/.htm/index.htm
+           set block_htm   = $dvc_data/index.htm
            set block_css   = $dvc_data/.htm/index.css
            cp $html_templ/block/index.css $block_css
           (source $html_templ/block/_index_begin.csh) > $block_htm
@@ -103,7 +103,7 @@ foreach phase ( $phase_list )
                  set dvc_name = $stage
                  set dvc_path = $item_path/$dvc_name
                  set dvc_data = $PROJT_ROOT/$dvc_path
-                 set stage_htm   = $dvc_data/.htm/index.htm
+                 set stage_htm   = $dvc_data/index.htm
                  set stage_css   = $dvc_data/.htm/index.css
                  cp $html_templ/stage/index.css $stage_css
                 (source $html_templ/stage/_index_begin.csh) > $stage_htm
@@ -125,7 +125,7 @@ foreach phase ( $phase_list )
                        set dvc_name = $version
                        set dvc_path = $item_path/$dvc_name
                        set dvc_data = $PROJT_ROOT/$dvc_path
-                       set version_htm   = $dvc_data/.htm/index.htm
+                       set version_htm   = $dvc_data/index.htm
                        set version_css   = $dvc_data/.htm/index.css
                        cp $html_templ/version/index.css $version_css
                        
@@ -148,7 +148,7 @@ foreach phase ( $phase_list )
                              set dvc_name = $container
                              set dvc_path = $item_path/$dvc_name
                              set dvc_data = $PROJT_ROOT/$dvc_path
-                             set container_htm   = $dvc_data/.htm/index.htm
+                             set container_htm   = $dvc_data/index.htm
                              set container_css   = $dvc_data/.htm/index.css
                              cp $html_templ/container/index.css $container_css
                             (source $html_templ/container/_index_begin.csh) >  $container_htm
