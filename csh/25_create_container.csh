@@ -33,6 +33,7 @@ else
       svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
       svn mkdir --quiet $CONTR_URL/.dvc -m "DVC Config Directory." --parents
       svn mkdir --quiet $CONTR_URL/.dqi -m "Design Quality Indicator" --parents
+      svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
       svn import --quiet $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'

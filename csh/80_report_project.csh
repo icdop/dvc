@@ -39,8 +39,8 @@ set dvc_path = ..
 set dvc_data = $PROJT_ROOT
 
 if {(test -d $dvc_data)} then
-  set project_htm   = $dvc_data/index.htm
-  set project_css   = $dvc_data/.index.css
+  set project_htm   = $dvc_data/.htm/index.htm
+  set project_css   = $dvc_data/.htm/index.css
   cp $html_templ/project/index.css $project_css
 else
   echo "ERROR: project data folder '$dvc_data' does not exist"
