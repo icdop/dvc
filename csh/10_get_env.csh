@@ -39,11 +39,22 @@ else if ($1 == "--tcl") then
    shift argv
 endif
 
-if ($1 != "") then
-   if {(test -d $env_home/.dop/env/)} then
-      set env_name=$1
+if ($1 == "--all") then
+   shift argv
+   set env_list = `(cd $env_home/.dop/env/; ls -a . )`
+   set script_mode=1
+else
+   set env_list=""
+   while ($1 != "")
+      set env_list =($env_list $1)
+      shift argv
+   endif
+endif
+
+if {(test -d $env_home/.dop/env/)} then
+   foreach env_name ( $env_list )
       set fname=$env_home/.dop/env/$env_name
-      if {(test -e $fname)} then
+      if {(test -f $fname)} then
          if ($?script_mode) then
             echo "$env_name = `cat $fname`"
          else if ($?csv_mode) then
@@ -53,18 +64,11 @@ if ($1 != "") then
          else
             echo `cat $fname`
          endif
-      else
-         if ($?tcl_mode) then
-            echo "#ERROR: env $env_name does not exist."
-         else
-            echo ""
-         endif
       endif
-
-   else
-      echo "ERROR: '$env_home' is not a valid working directory!"
-      exit 1
-   endif
+   end
+else
+   echo "ERROR: '$env_home' is not a valid working directory!"
+   exit 1
 endif
 
 exit 0
