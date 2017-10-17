@@ -21,8 +21,8 @@ source $CSH_DIR/18_get_report.csh
 set project = $DESIGN_PROJT
 
 set dvc_title  = "DVC Database Index"
-set main_htm   = ".htm/index.htm"
-set main_css   = ".htm/index.css"
+set main_htm   = "index.htm"
+set main_css   = "index.css"
 (source $html_templ/main/_index_begin.csh) >  $main_htm
 (source $html_templ/main/_index_data.csh)  >> $main_htm
 (source $html_templ/main/_index_end.csh) >> $main_htm
