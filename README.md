@@ -1,4 +1,4 @@
-# Design Version Control V2017.1012
+# Design Version Control V2017.1018
 
 - Utility to manage chip design data in a pre-defined directory structure
 
