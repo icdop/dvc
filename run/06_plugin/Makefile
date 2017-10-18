@@ -7,7 +7,7 @@ import check run save html view:
 	make -f plugin/Makefile $@
 
 design:
-	dvc_create_project plugin
+	dvc_create_project 06-plugin
 	dvc_create_design P1-trial/block/520-sta/2017_0914-xxx
 	dvc_checkout_design
 

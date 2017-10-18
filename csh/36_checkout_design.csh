@@ -19,6 +19,22 @@ source $CSH_DIR/04_set_design.csh
 setenv DVC_PATH $phase/$block/$stage/$version
 echo "INFO: DVC_PATH = $DVC_PATH"
 
+if ($?SVN_ROOT == 0) then
+   echo "ERROR: SVN_ROOT is not set yet!"
+   exit 1
+endif
+
+if ($?DESIGN_PROJT == 0) then
+   echo "ERROR: DESIGN_PROJT is not set yet!"
+   exit 1
+endif
+
+if {(test -e $PROJT_ROOT/.dvc/DESIGN_PROJT)} then
+   setenv DESIGN_PROJT `cat $PROJT_ROOT/.dvc/DESIGN_PROJT`
+else
+   $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT
+endif
+
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then

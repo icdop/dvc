@@ -18,4 +18,4 @@ index:
 clean:
 	rm -fr _ .dop
 	rm -f :phase :block :stage :version :container
-	rm -f index.htm
+	rm -f index.htm index.ccs run.log
