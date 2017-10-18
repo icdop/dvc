@@ -41,6 +41,7 @@ set dvc_data = $PROJT_ROOT/$dvc_path
 if {(test -d $dvc_data)} then
   set phase_htm   = $dvc_data/index.htm
   set phase_css   = $dvc_data/.htm/index.css
+  mkdir -p $dvc_data/.htm
   cp $html_templ/phase/index.css $phase_css
 else
   echo "ERROR: phase data folder '$dvc_data' does not exist"

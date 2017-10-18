@@ -45,6 +45,8 @@ else
 endif
 set version_htm   = $dvc_data/index.htm
 set version_css   = $dvc_data/.htm/index.css
+mkdir -p $dvc_data/.htm
+
 cp $html_templ/version/index.css $version_css
  
 (source $html_templ/version/_index_begin.csh) >  $version_htm

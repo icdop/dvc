@@ -1,6 +1,6 @@
 help:
 	@echo "Usage:   make run"
-	@echo "         make refresh"
+	@echo "         make html"
 	@echo "         make clean"
 
 run: 

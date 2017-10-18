@@ -41,6 +41,7 @@ set dvc_data = $PROJT_ROOT/$dvc_path
 if {(test -d $dvc_data)} then
   set block_htm   = $dvc_data/index.htm
   set block_css   = $dvc_data/.htm/index.css
+  mkdir -p $dvc_data/.htm
   cp $html_templ/block/index.css $block_css
 else
   echo "ERROR: block data folder '$dvc_data' does not exist"

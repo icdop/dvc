@@ -57,5 +57,13 @@ if {(test -e $PROJT_ROOT/$DVC_PATH/index.htm)} then
    svn commit index.htm -m 'Update index.htm' --quiet )
 endif
 
+#if {(test -d $PROJT_ROOT/$DVC_PATH)} then
+#   (cd $PROJT_ROOT/$DVC_PATH; \
+#   svn update . --quiet --force --depth files ;  \
+#   svn add .  --force --depth files ; \
+#   svn commit . -m 'Update design folder' --quiet )
+#endif
+
+
 
 exit 0
