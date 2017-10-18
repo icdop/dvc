@@ -332,7 +332,7 @@ clean:
 	@echo " Use 'make remove_all' to clean up database on server"
 	@echo
 	@echo "************** WARNING *************************"
-	make .dop remove_links remove_files
+	make remove_links remove_files
 
 remove:
 	@echo "Usage:"
