@@ -1,6 +1,6 @@
 echo "<tr class=data>"
 echo "<td class=col1>"
-echo "<a href=$item_name>"
+echo "<a href=$item_name/index.htm>"
 echo "$item_name"
 echo "</a>"
 echo "</td>"

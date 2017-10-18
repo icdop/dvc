@@ -44,7 +44,7 @@ else
   exit 1
 endif
 set version_htm   = $dvc_data/index.htm
-set version_css   = $dvc_data/.index.css
+set version_css   = $dvc_data/.htm/index.css
 cp $html_templ/version/index.css $version_css
  
 (source $html_templ/version/_index_begin.csh) >  $version_htm
@@ -77,7 +77,7 @@ echo "<summary> Container List </summary>" >> $version_htm
        set dvc_path = $item_path/$dvc_name
        set dvc_data = $PROJT_ROOT/$dvc_path
        set container_htm   = $dvc_data/index.htm
-       set container_css   = $dvc_data/.index.css
+       set container_css   = $dvc_data/.htm/index.css
        cp $html_templ/container/index.css $container_css
       (source $html_templ/container/_index_begin.csh) >  $container_htm
       (source $html_templ/container/_index_data.csh)  >> $container_htm

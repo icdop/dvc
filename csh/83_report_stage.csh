@@ -40,7 +40,7 @@ set dvc_data = $PROJT_ROOT/$dvc_path
 
 if {(test -d $dvc_data)} then
   set stage_htm   = $dvc_data/index.htm
-  set stage_css   = $dvc_data/.index.css
+  set stage_css   = $dvc_data/.htm/index.css
   cp $html_templ/stage/index.css $stage_css
 else
   echo "ERROR: stage data folder '$dvc_data' does not exist"

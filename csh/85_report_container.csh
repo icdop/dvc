@@ -42,7 +42,7 @@ set dvc_data = $PROJT_ROOT/$dvc_path
 
 if {(test -d $dvc_data)} then
   set container_htm   = $dvc_data/index.htm
-  set container_css   = $dvc_data/.index.css
+  set container_css   = $dvc_data/.htm/index.css
   cp $html_templ/container/index.css $container_css
 else
   echo "ERROR: container data folder '$dvc_data' does not exist"

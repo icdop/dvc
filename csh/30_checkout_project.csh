@@ -71,6 +71,12 @@ else
    svn checkout --quiet --force $PROJT_URL/.dqi $PROJT_ROOT/.dqi --depth infinity
 endif
 
+if {(test -e $PROJT_ROOT/.htm)} then
+   svn update --quiet --force $PROJT_ROOT/.htm --set-depth infinity
+else
+   svn checkout --quiet --force $PROJT_URL/.htm $PROJT_ROOT/.htm --depth infinity
+endif
+
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 $CSH_DIR/00_set_env.csh PROJT_ROOT   $PROJT_ROOT
 

@@ -29,6 +29,7 @@ if {(test -e $PROJT_ROOT/$CONTR_PATH/.svn)} then
    if ($DESIGN_CONTR == ".") then
       rm -fr $PROJT_ROOT/$CONTR_PATH/.dvc
       rm -fr $PROJT_ROOT/$CONTR_PATH/.dqi
+      rm -fr $PROJT_ROOT/$CONTR_PATH/.htm
    endif
    svn update --quiet --force $PROJT_ROOT/$CONTR_PATH --set-depth infinity
 else

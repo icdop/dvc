@@ -34,6 +34,9 @@ endif
 if ($1 == "--script") then
    set script_mode=1
    shift argv
+else if ($1 == "--csv") then
+   set csv_mode=1
+   shift argv
 else if ($1 == "--tcl") then
    set tcl_mode=1
    shift argv
@@ -75,15 +78,15 @@ foreach dqi_name ( $dqi_list )
          else if { (test -e $dqi_file) } then
             if ($?script_mode) then
                echo "$dqi_group/$dqi_name = `cat $dqi_file`"
+            else if ($?csv_mode) then
+               echo "$dqi_group/$dqi_name `cat $dqi_file`"
             else if ($?tcl_mode) then
                echo "set dqi($dqi_group/$dqi_name) {`cat $dqi_file`}"
             else
                echo `cat $dqi_file`
             endif
          else
-            if ($?script_mode) then
-               echo "#ERROR: dqi($dqi_group,$dqi_name) does not exist."
-            else if ($?tcl_mode) then
+            if ($?tcl_mode) then
                echo "#ERROR: dqi($dqi_group,$dqi_name) does not exist."
             else
              #  echo ""
