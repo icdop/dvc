@@ -23,6 +23,10 @@
 *       release for beta test
 *       2017/09/28 By Albert Li
 *       change PROJT_ROOT default to '_' due to compatibility in Windows IE
+* V1.2  2017/10/03 By Albert Li
+*       first release for DVS bundle
+* V1.3  2017/10/18 By Albert Li
+*       second release for DVS bundle
 *
 
 ********************************************************
@@ -60,10 +64,16 @@
     Example: Search path sequency is as below:
 
     1. Local : "$PWD/.dop/env/*VARNAME*"
-       % dvc_set_env --local  
 
-    2. Global : "$HOME/.dop/env/*VARNAME*"
-       % dvc_set_env --global  
+       % dvc_set_env  
+
+       % dvc_get_env --script
+
+    2. Server : "$SVN_ROOT/.dop/env/*VARNAME*"
+
+       % dvc_set_server  
+
+       % dvc_get_server --info
 
   * DESIGN Variables:
 
@@ -90,7 +100,7 @@
   * checkuot_project :
 
 	$PROJT_ROOT/      (project checkout root, default is '_')
-		.dvc/README
+		.dvc/DESIGN_PROJT
 
 
 ## Design Directory
@@ -116,6 +126,7 @@
 					$DESIGN_VERSN/
 						.dvc/
 						.dqi/
+						.htm/
 
 	:phase -> _/$phase
 	:block -> _/$phase/$block

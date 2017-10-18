@@ -35,23 +35,25 @@ dvc_get_server:
 
 
 dvc_set_env:   
-	Usage: $prog [--global|--local] [--reset] <env_name> <value>
+	Usage: $prog [--server|--local] [--reset] <env_name> <value>
 	Description:
 	  set variable value and store it in .dop/env  $env(env_name)
 	if <env_name> is not specified, list all existing variables
 
 dvc_get_env:
-	Usage: $prog [--global] [--all] <env_name>
+	Usage: $prog [--server] [--all] <env_name>
 	Description:
 	  get the value of env_name from .dop/env/
 	--local (default)
 		search the env_name in $(PWD)/.dop/env
-	--global
-		search the env_name in $(HOME)/.dop/env
+	--server
+		search the env_name in $(SVN_ROOT)/.dop/env
 	--script
-		print the value in shell script mode
+		print the value in shell script format
 	--tcl
-		print the value in tcl script mode
+		print the value in tcl script format
+	--csv
+		print the value in csv format
 	--all
 		list all varaibles value 
 
@@ -134,6 +136,9 @@ dvc_checkout_project:
 #
 dvc_create_design:
 	Usage: $prog <phase>/<block>/<stage>/<version>
+	Description:
+	  create_design will call the following commans sequentially.
+
 dvc_create_phase:   
 	Usage: $prog <DESIGN_PHASE>
 dvc_create_block:   
@@ -146,6 +151,11 @@ dvc_create_version:
 #
 # Checkout Design Version Folder to Working Directory
 #
+dvc_checkout_design:
+	Usage: $prog <phase>/<block>/<stage>/<version>
+	Description:
+	  checkout_design will call the following commans sequentially.
+
 dvc_checkout_phase:   
 	Usage: $prog [--depth <mode>] <DESIGN_PHASE>
 	Description:
@@ -184,6 +194,14 @@ dvc_checkout_version:
 	create "_:" link in all four levels, pointing it to current version
 	--depth infinity
 		checkout all data and subfolder under version folder 
+
+#
+# Checkin Design Working Directory to SVN Respository
+#
+dvc_checkin_design:
+	Usage: $prog <phase>/<block>/<stage>/<version>
+	Description:
+	  checkin_design commt all files under version/container
 
 #
 # Container
