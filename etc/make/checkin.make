@@ -333,7 +333,7 @@ clean:
 	@echo
 	@echo "************** WARNING *************************"
 	make remove_links remove_files
-	rm -fr _ .dop
+	rm -fr $(PROJT_ROOT)
 
 remove:
 	@echo "Usage:"
@@ -355,6 +355,7 @@ remove_design: remove_files remove_links
 	make remove_stage
 	make remove_block
 	make remove_phase
+	rm -fr .dop
 	
 remove_container:
 	@echo "#---------------------------------------------------"

@@ -6,7 +6,6 @@ SVN_MODE     := file
 ####################################################################
 # The follwing parameter are checkout pointer configuration.
 # Do not change it unless you need to
-#PROJT_ROOT   := _
 #PTR_PHASE   := :phase
 #PTR_BLOCK   := :block
 #PTR_STAGE   := :stage
@@ -14,6 +13,7 @@ SVN_MODE     := file
 #PTR_CONTR   := :container
 
 ####################################################################
+PROJT_ROOT   := _
 DESIGN_PROJT := 02_file
 #----------------------------------
 DESIGN_PHASE := P1-trial
