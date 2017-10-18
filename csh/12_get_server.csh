@@ -54,7 +54,8 @@ if ($?SVN_ROOT == 0) then
    if {(test -e .dop/env/SVN_ROOT)} then
       setenv SVN_ROOT  `cat .dop/env/SVN_ROOT`
    else
-      setenv SVN_ROOT  $HOME/SVN_ROOT
+      echo "ERROR: env variable (SVN_ROOT) is not set yet."
+      exit 1
    endif
 endif
 
