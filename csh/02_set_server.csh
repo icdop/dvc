@@ -13,7 +13,7 @@ endif
 if ($1 == "SVN_ROOT") then
    shift argv
    if ($1 != "") then
-      setenv SVN_ROOT $2
+      setenv SVN_ROOT $1
       shift argv
       mkdir -p .dop/env
       echo $SVN_ROOT > .dop/env/SVN_ROOT
@@ -43,6 +43,6 @@ if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
       echo "ERROR: server env($envname) variable is not defined!"
    endif
 else
-   echo `ls $SVN_ROOT/.dop/env/`
+   echo "SETP: SVN_ROOT = $SVN_ROOT"
 endif
 
