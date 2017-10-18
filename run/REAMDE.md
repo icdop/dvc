@@ -8,7 +8,7 @@
 
    % . source.sh
 
-2. There are 3 testcases in the directory
+2. There are testcases in the directory
 
    01_case : simple case descriped in READEM.md
 
