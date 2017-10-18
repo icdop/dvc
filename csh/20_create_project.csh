@@ -48,7 +48,7 @@ else
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile
    echo $DESIGN_PROJT > $tmpfile
-   svn import --quiet $tmpfile $PROJT_URL/.dvc/PROJECT -m 'Project Name'
+   svn import --quiet $tmpfile $PROJT_URL/.dqi/DESIGN_PROJT -m 'Project Name'
    rm -f $tmpfile
 
    set readme=`mktemp`

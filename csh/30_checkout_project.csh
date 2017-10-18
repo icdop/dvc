@@ -27,15 +27,15 @@ endif
 echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password db
 if ($1 != "") then
-  if (($1 != ":") && ($1 != ".")) then
+  if (($1 != "..") && ($1 != ".")) then
     setenv PROJT_ROOT $1
   endif
   shift argv
 endif
 
 
-if {(test -e $PROJT_ROOT/.dvc/PROJECT)} then
-   set orig_project=`cat $PROJT_ROOT/.dvc/PROJECT`
+if {(test -e $PROJT_ROOT/.dqi/DESIGN_PROJT)} then
+   set orig_project=`cat $PROJT_ROOT/.dqi/DESIGN_PROJT`
    if (($orig_project != "") && ($orig_project != $DESIGN_PROJT)) then
       if ($?force_mode) then
          echo "WARNING: removing previous project checkout data - $orig_project"
@@ -78,7 +78,6 @@ else
 endif
 
 $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
-$CSH_DIR/00_set_env.csh PROJT_ROOT   $PROJT_ROOT
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="
