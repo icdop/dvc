@@ -20,8 +20,6 @@ if ($1 == "--xml") then
    shift argv
 endif
 
-endif
-
 switch($1)
 case "--recursive":
    set recursive_mode = 1

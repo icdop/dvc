@@ -4,7 +4,7 @@
 #
 ########################################################################
 ifndef SVN_ROOT
-SVN_ROOT     := $(HOME)/proj_svn
+SVN_ROOT     := $(DVC_HOME)/svn_root
 endif
 
 ifndef SVN_HOST
@@ -264,7 +264,7 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
-checkin: checkin_design checkin_container
+checkin: checkin_design
 
 checkin_design:
 	@echo "#---------------------------------------------------"
