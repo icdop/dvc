@@ -15,14 +15,21 @@ if ($1 == "--info") then
    shift argv
 endif
 
-if ($1 == "--recursive") then
-   set recursive_mode = 1
-   set depth_mode = infinity
+if ($1 == "--xml") then
+   set xml_mode = 1
    shift argv
 endif
 
+endif
+
 switch($1)
+case "--recursive":
+   set recursive_mode = 1
+   set depth_mode = infinity
+   shift argv
+   breaksw
 case "--infinity":
+   set recursive_mode = 1
    set depth_mode = infinity
    shift argv
    breaksw
@@ -38,17 +45,12 @@ case "--immediates":
    set depth_mode = immediates
    shift argv
    breaksw
-case "--depth")) then
+case "--depth":
    shift argv
    set depth_mode = $1
    shift argv
    breaksw
 endsw
-
-if ($1 == "--xml") then
-   set xml_mode = 1
-   shift argv
-endif
 
 if ($?SVN_ROOT == 0) then
    if {(test -e .dop/env/SVN_ROOT)} then
