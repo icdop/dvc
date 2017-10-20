@@ -2,7 +2,7 @@
 
 ### 1. Setup svn file server 
 
-setenv SVN_ROOT $HOME/proj_svn
+dvc_init_server file
 
 ### 2. Create project respository - Project Manager
 

@@ -2,10 +2,7 @@
 
 ### 1. Setup svn file server and project account - CAD/IT
 
-dvc_set_server SVN_ROOT $HOME/proj_svn
-dvc_set_server SVN_MODE file
-
-dvc_init_server start
+dvc_init_server file
 
 ### 2. Create project respository - Project Manager
 

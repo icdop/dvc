@@ -72,6 +72,7 @@ init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
+	dvc_set_env SVN_ROOT $(SVN_ROOT)
 	dvc_set_env PROJT_ROOT $(PROJT_ROOT)
 
 SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
@@ -81,16 +82,10 @@ init_server:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_set_server SVN_ROOT $(SVN_ROOT)
 	dvc_set_server SVN_MODE $(SVN_MODE)
 	dvc_set_server SVN_HOST $(SVN_HOST)
 	dvc_set_server SVN_PORT $(SVN_PORT)
-	dvc_init_server $(SVN_MODE)
-	dvc_set_env PTR_PHASE $(PTR_PHASE)
-	dvc_set_env PTR_BLOCK $(PTR_BLOCK)
-	dvc_set_env PTR_STAGE $(PTR_STAGE)
-	dvc_set_env PTR_VERSN $(PTR_VERSN)
-	dvc_set_env PTR_CONTR $(PTR_CONTR)
+	dvc_init_server start
 
 
 stop_server:
@@ -269,7 +264,7 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
-checkin: checkin_design
+checkin: checkin_design checkin_container
 
 checkin_design:
 	@echo "#---------------------------------------------------"

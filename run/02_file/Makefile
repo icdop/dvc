@@ -1,16 +1,16 @@
 PATH         :=	../../bin:$(PATH)
 ####################################################################
-SVN_ROOT     := $(HOME)/proj_svn
+SVN_ROOT     := ../svn_root
 SVN_MODE     := file
 
 ####################################################################
 # The follwing parameter are checkout pointer configuration.
 # Do not change it unless you need to
-#PTR_PHASE   := :phase
-#PTR_BLOCK   := :block
-#PTR_STAGE   := :stage
-#PTR_VERSN   := :version
-#PTR_CONTR   := :container
+PTR_PHASE   := :phase
+PTR_BLOCK   := :block
+PTR_STAGE   := :stage
+PTR_VERSN   := :version
+PTR_CONTR   := :container
 
 ####################################################################
 PROJT_ROOT   := _
