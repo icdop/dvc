@@ -1,4 +1,4 @@
-CASE	:= 01_case 02_file 03_svn 04_sta 05_apr 06_plugin
+CASE	:= 01_case 02_file 03_svn 04_sta 05_apr
 
 run clean:
 	@for dir in $(CASE) ; do \

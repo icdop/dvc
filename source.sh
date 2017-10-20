@@ -1,8 +1,8 @@
 #!/bin/sh 
 DVC_HOME=`pwd`
 export DVC_HOME
-echo "DVP_HOME = $DVP_HOME"
-PATH=$DOP_HOME/dvc/bin:$PATH; export PATH
+echo "DVC_HOME = $DVC_HOME"
+PATH=$DVC_HOME/bin:$PATH; export PATH
 
-SVN_ROOT=$HOME/proj_svn; export SVN_ROOT
+SVN_ROOT=$DVC_HOME/svn_root; export SVN_ROOT
  
