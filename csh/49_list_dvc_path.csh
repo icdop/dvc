@@ -21,10 +21,12 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if ($1 != "") then
    set dir $1
-   if {(test -e $dir/.dvc/DESIGN_CONTR)} then
-      setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
-   else if {(test -e $dir/.dvc/DESIGN_PATH)} then
-      setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`
+   if {(test -e $dir/.dvc/DESIGN_PATH)} then
+      if {(test -e $dir/.dvc/DESIGN_CONTR)} then
+         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
+      else
+         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`
+      endif
    else
       setenv DESIGN_URL $PROJT_URL/$dir
    endif
@@ -54,6 +56,8 @@ else if ($?recursive_mode) then
    svn list $DESIGN_URL --recursive | grep -v -e \.dvc\/ -e \.dqi\/ -e \.htm\/
 else if ($?xml_mode) then
    svn list $DESIGN_URL --xml
+else if ($?depth_mode) then
+   svn list $DESIGN_URL --depth_mode $depth_mode | grep -v -e \.dvc\/ -e \.dqi\/ -e \.htm\/
 else
    svn list $DESIGN_URL | grep -v -e \.dvc\/ -e \.dqi\/ -e \.htm\/ | grep "/" | sed s%\/%%
 endif
