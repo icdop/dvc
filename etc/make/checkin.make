@@ -4,7 +4,7 @@
 #
 ########################################################################
 ifndef SVN_ROOT
-SVN_ROOT     := $(HOME)/proj_svn
+SVN_ROOT     := $(DVC_HOME)/svn_root
 endif
 
 ifndef SVN_HOST

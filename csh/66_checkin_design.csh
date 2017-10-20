@@ -32,9 +32,8 @@ if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) the
 endif
 
 if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
-   $CSH_DIR/64_checkin_version.csh $version
+   $CSH_DIR/64_checkin_version.csh --files $version
    setenv DESIGN_VERSN $version
-   $CSH_DIR/65_checkin_container.csh .
    setenv DESIGN_CONTR .
    
 endif
