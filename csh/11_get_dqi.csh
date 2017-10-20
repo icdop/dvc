@@ -66,7 +66,7 @@ else
    while ($1 != "")
       set dqi_list =($dqi_list $1)
       shift argv
-   endif
+   end
 endif
 
 foreach dqi_name ( $dqi_list )
