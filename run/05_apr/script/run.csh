@@ -2,7 +2,7 @@
 
 ### 1. Setup svn file server 
 
-dvc_init_server start
+dvc_init_server file
 
 ### 2. Create project respository - Project Manager
 

@@ -27,6 +27,7 @@ case "--recursive":
    shift argv
    breaksw
 case "--infinity":
+   set recursive_mode = 1
    set depth_mode = infinity
    shift argv
    breaksw
