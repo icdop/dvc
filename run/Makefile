@@ -6,6 +6,7 @@ run index:
 	done	
 
 clean:
+	dvc_init_server stop
 	@for dir in $(CASE) ; do \
 	  (echo ""; cd $$dir ; make $@); \
 	done	
