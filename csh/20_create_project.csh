@@ -25,7 +25,7 @@ if ($status == 0) then
       svn info $PROJT_URL
    endif
 else
-
+   $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
    echo "INFO: Create Project Design Respository : $DESIGN_PROJT"
    if {(test -d $SVN_ROOT)} then
    else
@@ -64,7 +64,6 @@ else
    
 endif
 
-$CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="
