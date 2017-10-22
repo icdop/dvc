@@ -34,7 +34,7 @@ help:
 	@echo "        make object    (checkin_object)"
 	@echo "        make checkin   (checkin_design)"
 	@echo ""
-	@echo "Usage:  make tree      (dvc_tree_design)"
+	@echo "Usage:  make tree      (dvc_list_design)"
 	@echo "Usage:  make list      (dvc_list_project --recursive)"
 	@echo "Usage:  make remove    (remove specific objects)"
 	@echo "Usage:  make clean    (clean all data on server)"
@@ -289,7 +289,7 @@ checkin_container:
 
 
 tree:
-	dvc_tree_design $(PROJT_ROOT)
+	dvc_list_design
 
 list: 
 	dvc_list_project --recursive

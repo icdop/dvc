@@ -234,19 +234,14 @@ dvc_empty_container:
 #
 # Handle Design Objects Individually and Commit the change
 #
-dvc_add_object:   
-	Usage: $prog <DESIGN_OBJECT>
-	Description:
-	  add exiting file <CONTAINER>/<DESIGN_OBJECT> to SVN repository
-
 dvc_copy_object:   
-	Usage: $prog <SRC_FILE> [<DESIGN_OBJECT>]
+	Usage: $prog <SRC_FILE> <DESIGN_OBJECT>
 	Description:
 	  copy the <SRC_FILE> to container, change name to <DESIGN_OBJECT>
 	checkin the file into local repository
 
 dvc_link_object:   
-	Usage: $prog <SRC_FILE> [<OBJECT_LINK>]
+	Usage: $prog <SRC_FILE> <OBJECT_LINK>
 	Description:
 	  create a link to the source file <SRC_FILE>
 	checkin the link into local repository

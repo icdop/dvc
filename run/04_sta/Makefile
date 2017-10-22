@@ -9,9 +9,6 @@ run:
 checkout:
 	script/checkout.csh
 	
-tree:
-	dvc_tree_design
-
 html:
 	dvc_report_version 
 	
