@@ -17,6 +17,19 @@ dvc_init_server:
 #
 # Environment Variable Access
 #
+dvc_set_path:
+	Usage: $prog [--dop] [<value>]
+	Description:
+	  set the environment path variable DVC_HOME
+	if <value> is not specified, auto detect the path from the bin/
+	When --dop is specified, also set DOP_HOME as the root path
+
+dvc_get_path:
+	Usage: $prog [--dop]
+	Description:
+	  return the DVC_HOME value.
+	When --dop is specified, return DOP_HOME value instead
+	
 dvc_set_server:   
 	Usage: $prog <var> <value>
 	Description:

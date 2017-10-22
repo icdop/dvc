@@ -10,11 +10,13 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/03_set_project.csh			$(BIN_PATH)/dvc_set_project
 	ln -f -s $(CSH_PATH)/04_set_design.csh			$(BIN_PATH)/dvc_set_design
 	ln -f -s $(CSH_PATH)/05_set_container.csh		$(BIN_PATH)/dvc_set_container
+	ln -f -s $(CSH_PATH)/09_set_path.csh			$(BIN_PATH)/dvc_set_path
 	ln -f -s $(CSH_PATH)/10_get_env.csh			$(BIN_PATH)/dvc_get_env
 	ln -f -s $(CSH_PATH)/11_get_dqi.csh			$(BIN_PATH)/dvc_get_dqi
 	ln -f -s $(CSH_PATH)/12_get_server.csh			$(BIN_PATH)/dvc_get_server
 	ln -f -s $(CSH_PATH)/13_get_project.csh			$(BIN_PATH)/dvc_get_project
 	ln -f -s $(CSH_PATH)/14_get_design.csh			$(BIN_PATH)/dvc_get_design
+	ln -f -s $(CSH_PATH)/19_get_path.csh			$(BIN_PATH)/dvc_get_path
 	ln -f -s $(CSH_PATH)/20_create_project.csh		$(BIN_PATH)/dvc_create_project
 	ln -f -s $(CSH_PATH)/21_create_phase.csh		$(BIN_PATH)/dvc_create_phase
 	ln -f -s $(CSH_PATH)/22_create_block.csh		$(BIN_PATH)/dvc_create_block
