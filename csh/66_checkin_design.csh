@@ -32,7 +32,7 @@ if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) the
 endif
 
 if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
-   $CSH_DIR/64_checkin_version.csh --files $version
+   $CSH_DIR/64_checkin_version.csh --recursive $version
    setenv DESIGN_VERSN $version
    setenv DESIGN_CONTR .
    
