@@ -1,8 +1,0 @@
-echo "<details>"
-echo "<summary> Container List </summary>"
-echo "<table id=indextable>"
-echo "<tr class=title>"
-echo "<td>CONTAINER</td>"
-echo "<td>DQI</td>"
-echo "<td>REPORTS</td>"
-echo "</tr>"

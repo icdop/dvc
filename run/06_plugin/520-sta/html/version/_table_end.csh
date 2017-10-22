@@ -1,3 +1,0 @@
-echo "</table>"
-echo "</details>"
-
