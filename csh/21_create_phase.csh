@@ -43,7 +43,7 @@ svn mkdir --quiet $PHASE_URL/.htm -m "HTML Report" --parents
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
+svn import --quiet --force $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
@@ -54,7 +54,7 @@ echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
 echo "====================================" >> $readme
 
-svn import --quiet $readme $PHASE_URL/.dvc/README -m 'Initial Design Phase Directory'
+svn import --quiet --force $readme $PHASE_URL/.dvc/README -m 'Initial Design Phase Directory'
 rm -fr $readme
 #=========================================================
 

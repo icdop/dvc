@@ -19,7 +19,7 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
-if (($status == 0) && (?$force_mode == 0)) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Respository : $DESIGN_PROJT"
    if ($?info_mode) then
       svn info $PROJT_URL
@@ -42,8 +42,8 @@ else
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn mkdir --quiet $PROJT_URL/.dqi -m "Design Quality Indicator" --parents
    svn mkdir --quiet $PROJT_URL/.htm -m "HTML Report" --parents
-   svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
-   svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
+   svn import --quiet --force $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
+   svn import --quiet --force $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile

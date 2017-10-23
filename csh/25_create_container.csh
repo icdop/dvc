@@ -36,9 +36,9 @@ else
       svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
-      svn import --quiet $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
       echo -n $DESIGN_CONTR > $tmpfile
-      svn import --quiet $tmpfile $CONTR_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
       rm -fr $tmpfile
    endif
    svn checkout --quiet $CONTR_URL $PROJT_ROOT/$CONTAINER_PATH --depth infinity

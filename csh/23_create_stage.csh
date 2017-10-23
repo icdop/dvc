@@ -42,13 +42,13 @@ svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parent
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
 svn mkdir --quiet $STAGE_URL/.dqi -m "Design Quality Indicator" --parents 
 svn mkdir --quiet $STAGE_URL/.htm -m "HTML Report" --parents 
-svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
-svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
+svn import --quiet --force $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
+svn import --quiet --force $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile
-svn import --quiet $tmpfile $STAGE_URL/.dvc/DESIGN_PATH -m 'Stage Name'
+svn import --quiet --force $tmpfile $STAGE_URL/.dvc/DESIGN_PATH -m 'Stage Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
@@ -61,7 +61,7 @@ echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
 echo "====================================" >> $readme
 
-svn import --quiet $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
+svn import --quiet --force $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
 rm -fr $readme
 #=========================================================
 

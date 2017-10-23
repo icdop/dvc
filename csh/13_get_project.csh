@@ -15,6 +15,11 @@ if ($1 == "--info") then
    shift argv
 endif
 
+if ($1 == "--force") then
+   set force_mode = 1
+   shift argv
+endif
+
 if {(test -e .dop/env/DESIGN_PROJT)} then
    setenv DESIGN_PROJT `cat .dop/env/DESIGN_PROJT`
 else if ($?DESIGN_PROJT == 0) then
