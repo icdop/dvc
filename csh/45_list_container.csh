@@ -18,7 +18,7 @@ source $CSH_DIR/05_set_container.csh
 # Use "source list_dvc_path.csh" and specify DESIGN_URL 
 # is to preserve option modes and pass them to list_dvc_path.csh
 if {(test -d $CONTAINER_DIR)} then
-   setenv DESIGN_URL $SVN_URL/$DESIGN_PROJT/$DVC_PATH
+   setenv DESIGN_URL $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH
    source $CSH_DIR/49_list_dvc_path.csh
 else
    echo "ERROR: Can not find Container Directory: $CONTAINER_DIR"
