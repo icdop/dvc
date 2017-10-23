@@ -19,7 +19,7 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && (?$force_mode == 0)) then
    echo "INFO: Exist Project Design Respository : $DESIGN_PROJT"
    if ($?info_mode) then
       svn info $PROJT_URL
