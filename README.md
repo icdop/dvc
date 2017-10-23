@@ -1,4 +1,4 @@
-# Design Version Control V2017.1018a
+# Design Version Control V2017.1018b
 
 - Utility to manage chip design data using SVN server
 

@@ -1,33 +1,6 @@
 *********************************************************
-# DVC (Design Version Control) Specification
+# DVC (Design Version Control) Specification (2017/10)
 *********************************************************
-* V0.01 2017/06/08 By Albert Li
-*       initial spec define 4+1 level directory
-* V0.1  2017/06/09 By Albert Li
-*       revere back to 4 level directory, remove parition level
-* V0.2  2017/06/13 By Albert Li
-*       use svn to implement a sampel code
-* V0.3  2017/06/14 By Albert Li
-*       add regressiion test
-* V0.4  2017/06/28 By Albert Li
-*       create dvc (design version control) sub-module 
-* V0.5  2017/08/12 By Albert Li
-*       add container level under design version
-* V0.6  2017/09/09 By Albert Li
-*       re-defined the .dvc/ configuration file
-* V0.9  2017/09/10 By Albert Li
-*       prepare for release
-* V1.0  2017/09/14 By Albert Li
-*       release for road test
-* V1.1  2017/09/27 By Albert Li
-*       release for beta test
-*       2017/09/28 By Albert Li
-*       change PROJT_ROOT default to '_' due to compatibility in Windows IE
-* V1.2  2017/10/03 By Albert Li
-*       first release for DVS bundle
-* V1.3  2017/10/18 By Albert Li
-*       second release for DVS bundle
-*
 
 ********************************************************
 # Global Variables
@@ -67,7 +40,7 @@
 
        % dvc_set_env  
 
-       % dvc_get_env --script
+       % dvc_get_env --csv
 
     2. Server : "$SVN_ROOT/.dop/env/*VARNAME*"
 
