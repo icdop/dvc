@@ -1,9 +1,9 @@
 
 echo "<table id=report>"
-echo "<tr class=header><td colspan=3><h2>dvc://$project/$dvc_path/</h2></td></tr>"
+echo "<tr class=header><td colspan=3><h2>[$project]/$dvc_path/</h2></td></tr>"
 
 echo "<tr class=title>"
-echo "<td>CURRENT</td>"
+echo "<td>Stage</td>"
 echo "<td>README</td>"
 echo "<td>STATUS</td>"
 echo "</tr>"
@@ -21,7 +21,7 @@ echo "</td>"
  
 echo "<td class=col3>"
 echo "<pre>"
-dvc_get_dqi --root $dvc_data --script --all
+#dvc_get_dqi --root $dvc_data --html --all
 echo "</pre>"
 echo "</td>" 
 echo "</tr>" 

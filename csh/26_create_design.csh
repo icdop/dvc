@@ -23,22 +23,38 @@ echo "INFO: DVC_PATH = $DVC_PATH"
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
-   $CSH_DIR/21_create_phase.csh $phase
+   if ($?force_mode) then
+      $CSH_DIR/21_create_phase.csh --force $phase
+   else
+      $CSH_DIR/21_create_phase.csh $phase
+   endif
    setenv DESIGN_PHASE $phase
 endif
 
 if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
-   $CSH_DIR/22_create_block.csh $block
+   if ($?force_mode) then
+      $CSH_DIR/22_create_block.csh --force $block
+   else
+      $CSH_DIR/22_create_block.csh $block
+   endif
    setenv DESIGN_BLOCK $block
 endif
 
 if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then
-   $CSH_DIR/23_create_stage.csh $stage
+   if ($?force_mode) then
+      $CSH_DIR/23_create_stage.csh --force $stage
+   else
+      $CSH_DIR/23_create_stage.csh $stage
+   endif
    setenv DESIGN_STAGE $stage
 endif
 
 if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
-   $CSH_DIR/24_create_version.csh $version
+   if ($?force_mode) then
+      $CSH_DIR/24_create_version.csh --force $version
+   else
+      $CSH_DIR/24_create_version.csh $version
+   endif
    setenv DESIGN_VERSN $version
 endif
 

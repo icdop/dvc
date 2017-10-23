@@ -24,11 +24,9 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
-setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
+setenv BLOCK_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 svn info $BLOCK_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Block : $DESIGN_BLOCK"
    if ($?info_mode) then
       svn info $BLOCK_URL
@@ -41,11 +39,11 @@ svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
 svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
 svn mkdir --quiet $BLOCK_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $BLOCK_URL/.htm -m "HTML Report" --parents
-svn import --quiet $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
+svn import --quiet --force $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
-svn import --quiet $tmpfile $BLOCK_URL/.dvc/DESIGN_PATH -m 'Block Name'
+svn import --quiet --force $tmpfile $BLOCK_URL/.dvc/DESIGN_PATH -m 'Block Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
@@ -57,7 +55,7 @@ echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
 echo "====================================" >> $readme
 
-svn import --quiet $readme $BLOCK_URL/.dvc/README -m 'Initial Design Block Directory'
+svn import --quiet --force $readme $BLOCK_URL/.dvc/README -m 'Initial Design Block Directory'
 rm -fr $readme
 #=========================================================
 

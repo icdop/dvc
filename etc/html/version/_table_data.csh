@@ -5,18 +5,15 @@ echo "$item_name"
 echo "</a>"
 echo "</td>"
 
-echo "<td class=col2>"
-echo "<pre>" 
-dvc_get_dqi --root $item_data --script --all
-echo "</pre>" 
+echo "<td class=col3>"
+cat "$item_name/.dvc/README"
+#echo "<object name=readme type=text/html data=$item_name/.dvc/README width=300></object>"
 echo "</td>"
 
-echo "<td class=col3>"
-foreach object (`ls -1 $item_data`)
-  if {(test -d $object)} then
-     echo "<a href=$item_name/$object>$object </a><br>"
-  else
-     echo "<a href=$item_name/$object>$object </a><br>"
-  endif
+foreach dqi ($container_dqi)
+  echo "<td class=col2 width=10>"
+  dvc_get_dqi --root $item_data $dqi
+  echo "</td>"
 end
-echo "</td></tr>"
+
+echo "</tr>"

@@ -14,6 +14,6 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
-tree -d $PROJT_ROOT
+tree -d $PROJT_PATH
 
 exit 0

@@ -11,6 +11,11 @@ endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/14_get_design.csh
 
+if ($1 == "--force") then
+   set force_mode = 1
+   shift argv
+endif
+
 if ($1 != "") then 
    set dvc_path = $1
    shift argv
@@ -32,16 +37,16 @@ if ($?dvc_path != 0) then
             set dvc_path = $dvc_path:h
             set phase    = $dvc_path:t
          else
-            set phase = "_"
+            set phase = ":"
          endif
       else
-         set block = "_"
-         set phase = "_"
+         set phase = ":"
+         set block = ":"
       endif
    else
-      set stage = "_"
-      set block = "_"
-      set phase = "_"
+      set phase = ":"
+      set block = ":"
+      set stage = ":"
    endif
 else
    set phase   = $DESIGN_PHASE

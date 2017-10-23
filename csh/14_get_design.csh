@@ -16,28 +16,33 @@ if ($1 == "--info") then
    shift argv
 endif
 
+if ($1 == "--force") then
+   set force_mode = 1
+   shift argv
+endif
+
 if {(test -e .dop/env/DESIGN_PHASE)} then
   setenv DESIGN_PHASE `cat .dop/env/DESIGN_PHASE`
 else if ($?DESIGN_PHASE == 0) then
-  setenv DESIGN_PHASE "_"
+  setenv DESIGN_PHASE ":"
 endif
 
 if {(test -e .dop/env/DESIGN_BLOCK)} then
   setenv DESIGN_BLOCK `cat .dop/env/DESIGN_BLOCK`
 else if ($?DESIGN_BLOCK == 0) then
-  setenv DESIGN_BLOCK "_"
+  setenv DESIGN_BLOCK ":"
 endif
 
 if {(test -e .dop/env/DESIGN_STAGE)} then
   setenv DESIGN_STAGE `cat .dop/env/DESIGN_STAGE`
 else if ($?DESIGN_STAGE == 0) then
-  setenv DESIGN_STAGE "_"
+  setenv DESIGN_STAGE ":"
 endif
 
 if {(test -e .dop/env/DESIGN_VERSN)} then
   setenv DESIGN_VERSN `cat .dop/env/DESIGN_VERSN`
 else if ($?DESIGN_VERSN == 0) then
-  setenv DESIGN_VERSN "_"
+  setenv DESIGN_VERSN ":"
 endif
 
 if ($?info_mode) then

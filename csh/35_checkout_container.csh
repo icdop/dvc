@@ -25,15 +25,15 @@ if ($status != 0) then
    exit 1
 endif
 
-if {(test -e $PROJT_ROOT/$CONTR_PATH/.svn)} then
+if {(test -e $PROJT_PATH/$CONTR_PATH/.svn)} then
    if ($DESIGN_CONTR == ".") then
-      rm -fr $PROJT_ROOT/$CONTR_PATH/.dvc
-      rm -fr $PROJT_ROOT/$CONTR_PATH/.dqi
-      rm -fr $PROJT_ROOT/$CONTR_PATH/.htm
+      rm -fr $PROJT_PATH/$CONTR_PATH/.dvc
+      rm -fr $PROJT_PATH/$CONTR_PATH/.dqi
+      rm -fr $PROJT_PATH/$CONTR_PATH/.htm
    endif
-   svn update --quiet --force $PROJT_ROOT/$CONTR_PATH --set-depth infinity
+   svn update --quiet --force $PROJT_PATH/$CONTR_PATH --set-depth infinity
 else
-   svn checkout --force $CONTR_URL $PROJT_ROOT/$CONTR_PATH --depth infinity
+   svn checkout --force $CONTR_URL $PROJT_PATH/$CONTR_PATH --depth infinity
 endif
 
 if {(test -e $PTR_VERSN)} then

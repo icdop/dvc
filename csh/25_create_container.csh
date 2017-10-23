@@ -22,7 +22,7 @@ setenv CONTAINER_PATH $DVC_PATH/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH
 
 svn info $CONTR_URL/.dvc/DESIGN_CONTR >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Design Container : $DESIGN_CONTR"
    if ($?info_mode) then
       svn info $CONTR_URL
@@ -36,12 +36,12 @@ else
       svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
-      svn import --quiet $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
       echo -n $DESIGN_CONTR > $tmpfile
-      svn import --quiet $tmpfile $CONTR_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
       rm -fr $tmpfile
    endif
-   svn checkout --quiet $CONTR_URL $PROJT_ROOT/$CONTAINER_PATH --depth infinity
+   svn checkout --quiet $CONTR_URL $PROJT_PATH/$CONTAINER_PATH --depth infinity
 endif
     
 $CSH_DIR/00_set_env.csh DESIGN_CONTR $DESIGN_CONTR

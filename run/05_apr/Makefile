@@ -6,16 +6,13 @@ help:
 run: 
 	script/run.csh
 
-tree:
-	dvc_tree_design
+list:
+	dvc_list_design
 	
-html:
-	dvc_report_version
-
 index:
-	dvc_report_index
+	dvc_init_report
 
 clean:
-	rm -fr _ .dop
+	rm -fr .dop _
 	rm -f :phase :block :stage :version :container
 	rm -f index.htm index.ccs run.log

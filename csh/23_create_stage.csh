@@ -24,12 +24,9 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
-setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
-setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
+setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Stage : $DESIGN_STAGE"
    if ($?info_mode) then
       svn info $STAGE_URL
@@ -42,13 +39,13 @@ svn mkdir --quiet $STAGE_URL -m "Create Design Stage $DESIGN_STAGE ..." --parent
 svn mkdir --quiet $STAGE_URL/.dvc -m "Design Platform Config Directory" --parents 
 svn mkdir --quiet $STAGE_URL/.dqi -m "Design Quality Indicator" --parents 
 svn mkdir --quiet $STAGE_URL/.htm -m "HTML Report" --parents 
-svn import --quiet $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
-svn import --quiet $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
+svn import --quiet --force $ETC_DIR/rule/DEFINE_VERSN  $STAGE_URL/.dvc/SUB_FOLDERS -m 'Version Naming Rule'
+svn import --quiet --force $ETC_DIR/rule/DESIGN_FILES $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
 set tmpfile=`mktemp`
 echo -n "" > $tmpfile
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile
-svn import --quiet $tmpfile $STAGE_URL/.dvc/DESIGN_PATH -m 'Stage Name'
+svn import --quiet --force $tmpfile $STAGE_URL/.dvc/DESIGN_PATH -m 'Stage Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
@@ -61,7 +58,7 @@ echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
 echo "====================================" >> $readme
 
-svn import --quiet $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
+svn import --quiet --force $readme $STAGE_URL/.dvc/README -m 'Initial Design Stage Directory'
 rm -fr $readme
 #=========================================================
 

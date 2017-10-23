@@ -40,6 +40,9 @@ else if ($1 == "--csv") then
 else if ($1 == "--tcl") then
    set tcl_mode=1
    shift argv
+else if (($1 == "--html") ||($1 == "--htm")) then
+   set html_mode=1
+   shift argv
 else if ($1 == "--info") then
    set info_mode=1
    shift argv
@@ -69,6 +72,15 @@ else
    end
 endif
 
+if ($?html_mode) then
+   echo "<table id=dqitable>"
+   echo "<tr><td colspan=3 class=header>$dqi_group</td></tr>"
+   echo "<tr class=title>"
+   echo "<td class=col1><b>DQI</d></td>"
+   echo "<td class=col2><b>Value</d></td>"
+   echo "<td class=col3><b>Description</d></td>"
+   echo "</tr>"
+endif
 foreach dqi_name ( $dqi_list )
    if (($dqi_name != ".") && ($dqi_name != "..")) then
       if {(test -e $dqi_root/.dqi/$dqi_group/$dqi_name)} then
@@ -76,14 +88,21 @@ foreach dqi_name ( $dqi_list )
          if { (test -d $dqi_file) } then
             #
          else if { (test -e $dqi_file) } then
+            set dqi_value=`cat $dqi_file`
             if ($?script_mode) then
-               echo "$dqi_group/$dqi_name = `cat $dqi_file`"
+               echo "$dqi_group/$dqi_name = $dqi_value"
             else if ($?csv_mode) then
-               echo "$dqi_group/$dqi_name `cat $dqi_file`"
+               echo "$dqi_group/$dqi_name $dqi_value"
             else if ($?tcl_mode) then
-               echo "set dqi($dqi_group/$dqi_name) {`cat $dqi_file`}"
+               echo "set dqi($dqi_group/$dqi_name) {$dqi_value}"
+            else if ($?html_mode) then
+               echo "<tr>"
+               echo "<td class=col1>$dqi_name</td>"
+               echo "<td class=col2>$dqi_value</td>"
+               echo "<td class=col3></td>"
+               echo "</tr>"
             else
-               echo `cat $dqi_file`
+               echo $dqi_value
             endif
          else
             if ($?tcl_mode) then
@@ -95,5 +114,8 @@ foreach dqi_name ( $dqi_list )
       endif
    endif
 end
+if ($?html_mode) then
+   echo "</table>"
+endif
 
 exit 0

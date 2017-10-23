@@ -23,9 +23,7 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
-setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
+setenv BLOCK_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK
 svn info $BLOCK_URL >& /dev/null
 if ($status != 0) then
    echo "ERROR: Cannot find Project Design Block : $DESIGN_BLOCK"

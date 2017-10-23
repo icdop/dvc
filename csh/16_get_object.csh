@@ -47,16 +47,16 @@ endif
 
 if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
    setenv CONTAINER_DIR $PTR_VERSN/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
-   setenv CONTAINER_DIR $PROJT_ROOT/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
-   setenv CONTAINER_DIR $PROJT_ROOT/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
-   setenv CONTAINER_DIR $PROJT_ROOT/_/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
-   setenv CONTAINER_DIR $PROJT_ROOT/_/_/_/$DESIGN_CONTR
-else if {(test -e $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
-   setenv CONTAINER_DIR $PROJT_ROOT/_/_/_/_/$DESIGN_CONTR
+else if {(test -e $PROJT_PATH/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_DIR $PROJT_PATH/$DESIGN_CONTR
+else if {(test -e $PROJT_PATH/:/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_DIR $PROJT_PATH/:/$DESIGN_CONTR
+else if {(test -e $PROJT_PATH/:/:/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_DIR $PROJT_PATH/:/:/$DESIGN_CONTR
+else if {(test -e $PROJT_PATH/:/:/:/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_DIR $PROJT_PATH/:/:/:/$DESIGN_CONTR
+else if {(test -e $PROJT_PATH/:/:/:/:/$DESIGN_CONTR/.dvc/DESIGN_CONTR)} then
+   setenv CONTAINER_DIR $PROJT_PATH/:/:/:/:/$DESIGN_CONTR
 else
    setenv CONTAINER_DIR $PTR_VERSN
 endif
@@ -69,7 +69,7 @@ else if {(test -e $CONTAINER_DIR/.dvc/CONTAINER)} then
    # For backward compatibility
    setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/CONTAINER`
 else
-   setenv CONTAINER_PATH _/_/_/_/$DESIGN_CONTR
+   setenv CONTAINER_PATH :/:/:/:/$DESIGN_CONTR
    echo "ERROR: Not a valid container dir : '$CONTAINER_DIR'"
    exit 1
 endif

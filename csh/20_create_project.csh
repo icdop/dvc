@@ -19,13 +19,12 @@ source $CSH_DIR/03_set_project.csh
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 svn info $PROJT_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Respository : $DESIGN_PROJT"
    if ($?info_mode) then
       svn info $PROJT_URL
    endif
 else
-
    $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
    echo "INFO: Create Project Design Respository : $DESIGN_PROJT"
    if {(test -d $SVN_ROOT)} then
@@ -43,13 +42,13 @@ else
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn mkdir --quiet $PROJT_URL/.dqi -m "Design Quality Indicator" --parents
    svn mkdir --quiet $PROJT_URL/.htm -m "HTML Report" --parents
-   svn import --quiet  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
-   svn import --quiet  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
+   svn import --quiet --force  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
+   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile
    echo $DESIGN_PROJT > $tmpfile
-   svn import --quiet $tmpfile $PROJT_URL/.dqi/DESIGN_PROJT -m 'Project Name'
+   svn import --quiet --force $tmpfile $PROJT_URL/.dqi/DESIGN_PROJT -m 'Project Name'
    rm -f $tmpfile
 
    set readme=`mktemp`
@@ -60,7 +59,7 @@ else
    echo "* Author  : $USER" >> $readme
    echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
    echo "====================================" >> $readme
-   svn import --quiet $readme $PROJT_URL/.dvc/README -m 'Initial Design Version Directory'
+   svn import --quiet --force $readme $PROJT_URL/.dvc/README -m 'Initial Design Version Directory'
    rm -fr $readme
    
 endif

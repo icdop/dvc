@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [--dqi_pool <dir>] <dqi_name> <value>"
+   echo "Usage: $prog [--root <dir>] <dqi_name> <value>"
    exit -1
 endif
 
@@ -21,7 +21,7 @@ else if {(test -d :container)} then
    set dqi_root=:container
 else if {(test -d :version)} then
    set dqi_root=:version
-else if {(test -d _)} then
+else if {(test -d "_")} then
    set dqi_root=_
 else
    echo "ERROR: Current directory (`pwd`) is not a valid working directory!"

@@ -27,51 +27,52 @@ else if ($?DVC_PATH == 0) then
    setenv CURR_PTR $PTR_VERSN
 endif
 
-setenv DESIGN_URL $PROJT_URL/$DVC_PATH
-mkdir -p $PROJT_ROOT/$DVC_PATH
+setenv DESIGN_URL  $SVN_URL/$DESIGN_PROJT/$DVC_PATH
+setenv DESIGN_PATH $PROJT_PATH/$DVC_PATH
+mkdir -p $DESIGN_PATH
 
 if ($?force_mode) then
-   rm -f $PROJT_ROOT/$DVC_PATH
+   rm -f $DESIGN_PATH
 endif
 
 if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/$DVC_PATH/.svn)} then
-      svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth $depth_mode
+   if {(test -e $DESIGN_PATH/.svn)} then
+      svn update --quiet --force $DESIGN_PATH --set-depth $depth_mode
    else
-      svn checkout --quiet --force $DESIGN_URL $PROJT_ROOT/$DVC_PATH --depth $depth_mode
+      svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth $depth_mode
    endif
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.svn)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH --set-depth files
+if {(test -e $DESIGN_PATH/.svn)} then
+   svn update --quiet --force $DESIGN_PATH --set-depth files
 else
-   svn checkout --quiet --force $DESIGN_URL $PROJT_ROOT/$DVC_PATH --depth files
+   svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth files
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dvc --set-depth infinity
+if {(test -e $DESIGN_PATH/.dvc)} then
+   svn update --quiet --force $DESIGN_PATH/.dvc --set-depth infinity
 else
-   svn checkout --quiet --force $DESIGN_URL/.dvc $PROJT_ROOT/$DVC_PATH/.dvc --depth infinity
+   svn checkout --quiet --force $DESIGN_URL/.dvc $DESIGN_PATH/.dvc --depth infinity
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.dqi)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.dqi --set-depth infinity
+if {(test -e $DESIGN_PATH/.dqi)} then
+   svn update --quiet --force $DESIGN_PATH/.dqi --set-depth infinity
 else
-   svn checkout --quiet --force $DESIGN_URL/.dqi $PROJT_ROOT/$DVC_PATH/.dqi --depth infinity
+   svn checkout --quiet --force $DESIGN_URL/.dqi $DESIGN_PATH/.dqi --depth infinity
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.htm)} then
-   svn update --quiet --force $PROJT_ROOT/$DVC_PATH/.htm --set-depth infinity
+if {(test -e $DESIGN_PATH/.htm)} then
+   svn update --quiet --force $DESIGN_PATH/.htm --set-depth infinity
 else
-   svn checkout --quiet --force $DESIGN_URL/.htm $PROJT_ROOT/$DVC_PATH/.htm --depth infinity
+   svn checkout --quiet --force $DESIGN_URL/.htm $DESIGN_PATH/.htm --depth infinity
 endif
 
-set dvc_name = $DVC_PATH:t
-set dvc_root = $DVC_PATH:h
-rm -fr $PROJT_ROOT/$dvc_root/_
-ln -s $dvc_name $PROJT_ROOT/$dvc_root/_
+set dvc_name = $DESIGN_PATH:t
+set dvc_root = $DESIGN_PATH:h
+rm -fr $dvc_root/:
+ln -s $dvc_name $dvc_root/:
 
 rm -fr $CURR_PTR
-ln -fs $PROJT_ROOT/$DVC_PATH $CURR_PTR
+ln -fs $DESIGN_PATH $CURR_PTR
 
 exit 0

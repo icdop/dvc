@@ -1,8 +1,11 @@
 run: clean
 	./run.csh
 
-index:
-	dvc_report_index
+list:
+	dvc_list_design
+	
+report:
+	dvc_init_report
 	
 clean:
 	rm -fr _ .dop	

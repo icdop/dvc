@@ -1,6 +1,6 @@
 help:
 	@echo "Usage:	make run"
-	@echo "		make index"
+	@echo "		make report"
 	@echo "		make clean"
 
 run: 
@@ -8,15 +8,18 @@ run:
 
 checkout:
 	script/checkout.csh
-	
-html:
-	dvc_report_version 
+
+list:
+	dvc_list_design
 	
 index:
-	dvc_report_index
-
+	dvc_init_report
+	
+view:
+	firefox	index.htm &
+		
 clean:
-	rm -fr _ .dop
+	rm -fr .dop _
 	rm -f :phase :block :stage :version :container
-	rm -f index.htm
+	rm -f index.htm index.ccs run.log
 	

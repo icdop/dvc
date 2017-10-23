@@ -7,7 +7,7 @@ echo "</td>"
 
 echo "<td class=col2>"
 echo "<pre>"
-dvc_get_dqi --root $item_data --script --all
+dvc_get_dqi --root $item_data --html --all
 echo "</pre>"
 echo "</td>"
 

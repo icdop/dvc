@@ -1,5 +1,5 @@
 echo "<table id=report>"
-echo "<tr class=header><td colspan=3><h2>dvc://$dvc_path/</h2></td></tr>"
+echo "<tr class=header><td colspan=3><h2>[$project]/$dvc_path/</h2></td></tr>"
 echo "<tr class=title>"
 echo "<td>PROJECT</td>"
 echo "<td>README</td>"
@@ -11,7 +11,9 @@ echo "</td>"
 echo "<td class=col2>" 
 echo "<object name=readme type=text/html data=.dvc/README width=300></object>"
 echo "</td>" 
-echo "<td class=col3> </td>" 
+echo "<td class=col3>"
+dvc_get_dqi --root $dvc_data --html --all
+echo "</td>" 
 echo "</tr>" 
 echo "</table>"
 

@@ -24,10 +24,9 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv PHASE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Phase : $DESIGN_PHASE"
    if ($?verbose_mode) then
       svn info $PHASE_URL
@@ -43,7 +42,7 @@ svn mkdir --quiet $PHASE_URL/.htm -m "HTML Report" --parents
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
+svn import --quiet --force $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
@@ -54,7 +53,7 @@ echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme
 echo "====================================" >> $readme
 
-svn import --quiet $readme $PHASE_URL/.dvc/README -m 'Initial Design Phase Directory'
+svn import --quiet --force $readme $PHASE_URL/.dvc/README -m 'Initial Design Phase Directory'
 rm -fr $readme
 #=========================================================
 

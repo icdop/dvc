@@ -24,7 +24,7 @@ else if ($?HTML_TEMPL == 0) then
   setenv HTML_TEMPL $0:h/../etc/html
 endif
 
-if (($1 == "--html")||($1 == "--html_templ")) then
+if (($1 == "--html")||($1 == "--template")) then
    shift argv
    if ($1 != "") then
      set html_templ = $1

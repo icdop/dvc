@@ -4,15 +4,12 @@ echo "<a href=$item_name/index.htm>"
 echo "$item_name"
 echo "</a>"
 echo "</td>"
-
-echo "<td class=col2>"
-echo "<pre>"
-dvc_get_dqi --root $item_data --script --all
-echo "</pre>"
-echo "</td>"
-
+foreach dqi ($block_dqi)
+  echo "<td class=col2 width=10>"
+  dvc_get_dqi --root $item_data $dqi
+  echo "</td>"
+end
 echo "<td class=col3>"
-echo "<pre>"
-ls -1 $item_data
-echo "</pre>"
-echo "</td></tr>"
+echo `cat $item_data/:/:/.dvc/DESIGN_PATH`
+echo "</td>"
+echo "</tr>"

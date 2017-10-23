@@ -2,7 +2,7 @@
 #set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog <DESIGN_PROJT> [<PROJT_ROOT>]"
+   echo "Usage: $prog <DESIGN_PROJT> [<PROJT_PATH>]"
    exit -1
 endif
 echo "======================================================="
@@ -28,18 +28,22 @@ echo "INFO: Checkout Project Design Respository : $DESIGN_PROJT"
 #svn auth  $PROJT_URL --username db --password db
 if ($1 != "") then
   if (($1 != "..") && ($1 != ".")) then
-    setenv PROJT_ROOT $1
+    setenv PROJT_PATH $1
+  else
+    setenv PROJT_PATH "_"
   endif
   shift argv
+else
+  setenv PROJT_PATH $PROJT_ROOT/$DESIGN_PROJT
 endif
 
 
-if {(test -e $PROJT_ROOT/.dqi/DESIGN_PROJT)} then
-   set orig_project=`cat $PROJT_ROOT/.dqi/DESIGN_PROJT`
+if {(test -e $PROJT_PATH/.dqi/DESIGN_PROJT)} then
+   set orig_project=`cat $PROJT_PATH/.dqi/DESIGN_PROJT`
    if (($orig_project != "") && ($orig_project != $DESIGN_PROJT)) then
       if ($?force_mode) then
          echo "WARNING: removing previous project checkout data - $orig_project"
-         rm -fr $PROJT_ROOT
+         rm -fr $PROJT_PATH
       else
          echo "ERROR: there is existing project checkout data - $orig_project"
          echo "       use --force option to replace it."
@@ -49,35 +53,37 @@ if {(test -e $PROJT_ROOT/.dqi/DESIGN_PROJT)} then
    endif 
 endif
 
-mkdir -p $PROJT_ROOT
+$CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
+$CSH_DIR/00_set_env.csh PROJT_PATH   $PROJT_PATH
+
+mkdir -p $PROJT_PATH
 
 if ($?depth_mode) then
-   if {(test -e $PROJT_ROOT/.svn)} then
-      svn update --quiet --force $PROJT_ROOT --set-depth $depth_mode
+   if {(test -e $PROJT_PATH/.svn)} then
+      svn update --quiet --force $PROJT_PATH --set-depth $depth_mode
    else
-      svn checkout --quiet --force $PROJT_URL $PROJT_ROOT --depth $depth_mode
+      svn checkout --quiet --force $PROJT_URL $PROJT_PATH --depth $depth_mode
    endif
 endif
 
-if {(test -e $PROJT_ROOT/.dvc)} then
-   svn update --quiet --force $PROJT_ROOT/.dvc --set-depth infinity
+if {(test -e $PROJT_PATH/.dvc)} then
+   svn update --quiet --force $PROJT_PATH/.dvc --set-depth infinity
 else
-   svn checkout --quiet --force $PROJT_URL/.dvc $PROJT_ROOT/.dvc --depth infinity
+   svn checkout --quiet --force $PROJT_URL/.dvc $PROJT_PATH/.dvc --depth infinity
 endif
 
-if {(test -e $PROJT_ROOT/.dqi)} then
-   svn update --quiet --force $PROJT_ROOT/.dqi --set-depth infinity
+if {(test -e $PROJT_PATH/.dqi)} then
+   svn update --quiet --force $PROJT_PATH/.dqi --set-depth infinity
 else
-   svn checkout --quiet --force $PROJT_URL/.dqi $PROJT_ROOT/.dqi --depth infinity
+   svn checkout --quiet --force $PROJT_URL/.dqi $PROJT_PATH/.dqi --depth infinity
 endif
 
-if {(test -e $PROJT_ROOT/.htm)} then
-   svn update --quiet --force $PROJT_ROOT/.htm --set-depth infinity
+if {(test -e $PROJT_PATH/.htm)} then
+   svn update --quiet --force $PROJT_PATH/.htm --set-depth infinity
 else
-   svn checkout --quiet --force $PROJT_URL/.htm $PROJT_ROOT/.htm --depth infinity
+   svn checkout --quiet --force $PROJT_URL/.htm $PROJT_PATH/.htm --depth infinity
 endif
 
-$CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"
 echo "======================================================="

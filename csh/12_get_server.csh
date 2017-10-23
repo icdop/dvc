@@ -102,3 +102,22 @@ if ($?info_mode) then
 endif
 
 
+if ($?PROJT_ROOT == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/PROJT_ROOT)} then
+     setenv PROJT_ROOT      `cat $SVN_ROOT/.dop/env/PROJT_ROOT`
+   else
+     setenv PROJT_ROOT      "."
+   endif
+endif
+
+if ($?PROJT_MARK == 0) then
+   if {(test -f $SVN_ROOT/.dop/env/PROJT_MARK)} then
+     setenv PROJT_MARK      `cat $SVN_ROOT/.dop/env/PROJT_MARK`
+   else
+     setenv PROJT_MARK      ":"
+   endif
+endif
+if ($?info_mode) then
+  echo "INFO: PROJT_ROOT = $PROJT_ROOT"
+  echo "INFO: PROJT_MARK = $PROJT_MARK"
+endif

@@ -26,47 +26,41 @@ else if ($?DVC_PATH == 0) then
    setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 endif
 
-if ($?depth_mode == 1) then
-  if {(test -d $PROJT_ROOT/$DVC_PATH)} then
-   (cd $PROJT_ROOT/$DVC_PATH; \
-   svn add .  --force --depth $depth_mode ; \
-   svn update . --quiet --force ;  \
-   svn commit . -m 'Update design folder' --quiet )
-  endif
+setenv DESIGN_PATH $PROJT_PATH/$DVC_PATH
+
+if ($?depth_mode == 0) then
+   set depth_mode=files
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/index.htm)} then
-   (cd $PROJT_ROOT/$DVC_PATH/; \
-   svn add index.htm  --force ; \
-   svn update index.htm --quiet --force ;  \
-   svn commit index.htm -m 'Update index.htm' --quiet )
+if {(test -d $DESIGN_PATH)} then
+ (cd $DESIGN_PATH; \
+ svn add .  --force --depth $depth_mode ; \
+ svn update . --quiet --force ;  \
+ svn commit . -m 'Update design folder' --quiet )
+else
+ echo "ERROR: Cannot find Design Directory '$DESIGN_PATH'"
+ exit 1
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.dvc)} then
-   (cd $PROJT_ROOT/$DVC_PATH/.dvc; \
+if {(test -e $DESIGN_PATH/.dvc)} then
+   (cd $DESIGN_PATH/.dvc; \
    svn add .  --force --depth infinity ; \
    svn update . --quiet --force ;  \
    svn commit . -m 'Update dvc' --quiet )
-else
-   echo "ERROR: Cannot find Design Directory '$DVC_PATH'"
-   exit 1
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.dqi)} then
-   (cd $PROJT_ROOT/$DVC_PATH/.dqi; \
+if {(test -e $DESIGN_PATH/.dqi)} then
+   (cd $DESIGN_PATH/.dqi; \
    svn add .  --force --depth infinity ; \
    svn update . --quiet --force ;  \
    svn commit . -m 'Update dqi' --quiet )
 endif
 
-if {(test -e $PROJT_ROOT/$DVC_PATH/.htm)} then
-   (cd $PROJT_ROOT/$DVC_PATH/.htm; \
+if {(test -e $DESIGN_PATH/.htm)} then
+   (cd $DESIGN_PATH/.htm; \
    svn update . --quiet --force ;  \
    svn add .  --force --depth infinity ; \
-   svn commit . -m 'Update report' --quiet )
+   svn commit . -m 'Update html report' --quiet )
 endif
-
-
-
 
 exit 0

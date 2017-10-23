@@ -27,14 +27,9 @@ endif
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
-setenv BLOCK_URL $PHASE_URL/$DESIGN_BLOCK
-setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
-setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
-
+setenv VERSN_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 svn info $VERSN_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Version : $DESIGN_VERSN"
    if ($?info_mode) then
       svn info $VERSN_URL
@@ -60,13 +55,13 @@ echo "* Author  : $USER" >> $tmpfile
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $tmpfile
 echo "====================================" >> $tmpfile
 
-svn import --quiet $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
 
-echo -n "/$DVC_PATH" > $tmpfile
-svn import --quiet $tmpfile $VERSN_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
+echo -n "$DVC_PATH" > $tmpfile
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
 
 echo -n "." > $tmpfile
-svn import --quiet $tmpfile $VERSN_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
 
 rm -fr $tmpfile
 #=========================================================

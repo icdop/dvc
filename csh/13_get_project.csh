@@ -21,10 +21,10 @@ else if ($?DESIGN_PROJT == 0) then
    echo "INFO: DESIGN_PROJT is not set yet."
 endif
 
-if {(test -e .dop/env/PROJT_ROOT)} then
-  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
-else if ($?PROJT_ROOT == 0) then
-  setenv PROJT_ROOT   "_"
+if {(test -e .dop/env/PROJT_PATH)} then
+  setenv PROJT_PATH      `cat .dop/env/PROJT_PATH`
+else if ($?PROJT_PATH == 0) then
+  setenv PROJT_PATH   "_"
 endif
 
 if ($?info_mode) then

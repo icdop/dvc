@@ -73,7 +73,6 @@ init_setup:
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
 	dvc_set_env SVN_ROOT $(SVN_ROOT)
-	dvc_set_env PROJT_ROOT $(PROJT_ROOT)
 
 SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
 SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
@@ -120,9 +119,9 @@ checkout: checkout_project checkout_design
 
 checkout_project:
 	@echo "#---------------------------------------------------"
-	@echo "# 3 Checkout project to '$(PROJT_ROOT)' dir"
+	@echo "# 3 Checkout project to '$(PROJT_BASE)' dir"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_project	$(DESIGN_PROJT)
+	dvc_checkout_project	$(DESIGN_PROJT) $(PROJT_BASE)
 
 checkout_design:
 	@echo "#---------------------------------------------------"
@@ -169,12 +168,10 @@ add_object:
 	@for object in $(ADD_OBJECTS) ;  do (\
 		if (test -e $(PTR_CONTR)/$$object) then \
 			echo "dvc_add_object	$$object" ; \
-			dvc_add_object	$$object ; \
 		else \
 			echo "WARNING: object '$$object' is not found, create a dummy file."; \
 			echo "`date +%D_$T`" > $(PTR_CONTR)/$$object; \
 			echo "dvc_add_object	$$object" ; \
-			dvc_add_object	$$object ; \
 		fi ;\
 	); done
 
@@ -328,7 +325,7 @@ clean:
 	@echo
 	@echo "************** WARNING *************************"
 	make remove_links remove_files
-	rm -fr $(PROJT_ROOT)
+	rm -fr $(PROJT_BASE)
 
 remove:
 	@echo "Usage:"
@@ -392,7 +389,7 @@ remove_data: remove_links
 	@echo "#---------------------------------------------------"
 	@echo "# 7-6. Clean up data checkout directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(PROJT_ROOT) 
+	rm -fr $(PROJT_BASE) 
 
 remove_links:
 	@echo "#---------------------------------------------------"

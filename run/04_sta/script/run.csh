@@ -8,7 +8,7 @@ dvc_init_server file
 
 dvc_create_project 04_sta
 
-dvc_checkout_project --force 04_sta
+dvc_checkout_project --force 04_sta _
 
 ### 3. Create design version folder and checkin design data - Design Manager
 
@@ -29,16 +29,14 @@ dvc_checkin_design
 
 dvc_create_stage     520-sta
 dvc_checkout_stage   520-sta
-set version_list = "2017_0910-xxx 2017_0912-yyy 2017_0914-zzz"
+set version_list = "2017_0910-ww38 2017_0910-ww39 2017_0910-ww40"
 foreach version ($version_list)
   dvc_create_version $version
   dvc_checkout_version $version
     cp data/design.v   :version/design.v
     cp data/design.sdc :version/design.sdc
     cp data/chip.jpg   :version/chip.jpg
-    dvc_set_dqi  WNS  -100
-    dvc_set_dqi  NVP  1000
-    dvc_set_dqi  DRC   500
+    dvc_set_dqi  DRC   `date +%s`
   dvc_checkin_version
 
   set scenario_list = "001 002 003 004"

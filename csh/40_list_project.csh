@@ -23,8 +23,7 @@ endif
 
 # Use "source list_dvc_path.csh" and specify DESIGN_URL 
 # is to preserve option modes and pass them to list_dvc_path.csh
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv DESIGN_URL $PROJT_URL
+setenv DESIGN_URL $SVN_URL/$DESIGN_PROJT
 source $CSH_DIR/49_list_dvc_path.csh
 
 exit 0

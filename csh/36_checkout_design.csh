@@ -16,7 +16,7 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_design.csh
 
-setenv DVC_PATH $phase/$block/$stage/$version
+setenv DVC_PATH /$phase/$block/$stage/$version
 echo "INFO: DVC_PATH = $DVC_PATH"
 
 if ($?SVN_ROOT == 0) then
@@ -24,15 +24,23 @@ if ($?SVN_ROOT == 0) then
    exit 1
 endif
 
-if ($?DESIGN_PROJT == 0) then
-   echo "ERROR: DESIGN_PROJT is not set yet!"
-   exit 1
-endif
-
-if {(test -e $PROJT_ROOT/.dvc/DESIGN_PROJT)} then
-   setenv DESIGN_PROJT `cat $PROJT_ROOT/.dvc/DESIGN_PROJT`
+if ($?PROJT_PATH == 0) then
+   if ($?DESIGN_PROJT == 0) then
+      echo "ERROR: DESIGN_PROJT is not set yet!"
+      exit 1
+   else
+      $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT $PROJT_ROOT/$DESIGN_PROJT
+   endif
+else if {(test -e $PROJT_PATH/.dqi/DESIGN_PROJT)} then
+   setenv DESIGN_PROJT `cat $PROJT_PATH/.dqi/DESIGN_PROJT`
+   $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 else
-   $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT
+   if ($?DESIGN_PROJT == 0) then
+      echo "ERROR: DESIGN_PROJT is not set yet!"
+      exit 1
+   else
+      $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT $PROJT_PATH
+   endif
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT

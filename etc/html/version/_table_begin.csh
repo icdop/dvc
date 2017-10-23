@@ -1,6 +1,8 @@
 echo "<table id=indextable>"
 echo "<tr class=title>"
-echo "<td>CONTAINER</td>"
-echo "<td>DQI</td>"
-echo "<td>REPORTS</td>"
+echo "<td>Step</td>"
+echo "<td>Comment</td>"
+foreach dqi ($container_dqi)
+  echo "<td>$dqi</td>"
+end
 echo "</tr>"

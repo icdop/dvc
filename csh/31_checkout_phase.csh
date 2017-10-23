@@ -24,8 +24,7 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv PHASE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
 if ($status != 0) then
    echo "ERROR: Cannot find Project Design Phase : $DESIGN_PHASE"
