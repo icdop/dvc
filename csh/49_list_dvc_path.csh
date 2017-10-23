@@ -57,7 +57,7 @@ else if ($?recursive_mode) then
 else if ($?xml_mode) then
    svn list $DESIGN_URL --xml
 else if ($?depth_mode) then
-   svn list $DESIGN_URL --depth_mode $depth_mode | grep -v -e \: -e \.dvc\/ -e \.dqi\/ -e \.htm\/
+   svn list $DESIGN_URL --depth $depth_mode | grep -v -e \: -e \.dvc\/ -e \.dqi\/ -e \.htm\/
 else
    svn list $DESIGN_URL | grep -v -e \: -e \.dvc\/ -e \.dqi\/ -e \.htm\/ | grep "/" | sed s%\/%%
 endif
