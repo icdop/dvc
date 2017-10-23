@@ -7,12 +7,10 @@ echo "</td>"
 
 echo "<td class=col2>"
 echo "<pre>"
-dvc_get_dqi --root $item_data --html --all
+tree -L 1 $item_data
 echo "</pre>"
 echo "</td>"
 
 echo "<td class=col3>"
-echo "<pre>"
-ls -1 $item_data
-echo "</pre>"
+dvc_get_dqi --root $item_data --html --all
 echo "</td></tr>"

@@ -1,5 +1,5 @@
 echo "<table id=indextable>"
-echo "<tr class=title>"
+echo "<tr class=header>"
 echo "<td>Phase</td>"
 echo "<td>Quality Indicator</td>"
 echo "<td>Detail Content</td>"

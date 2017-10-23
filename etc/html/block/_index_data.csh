@@ -11,7 +11,7 @@ echo "</b></tr>"
 echo "<tr class=data>"
 echo "<td class=col1>"
 echo "<a href=../index.htm>"
-echo "<b>$dvc_name</b>"
+echo "<h3>$dvc_name</h3>"
 echo "</a>"
 echo "</td>" 
 

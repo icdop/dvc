@@ -36,7 +36,16 @@ foreach version ($version_list)
     cp data/design.v   :version/design.v
     cp data/design.sdc :version/design.sdc
     cp data/chip.jpg   :version/chip.jpg
-    dvc_set_dqi  DRC   `date +%s`
+    dvc_set_dqi --root :version F01-LEC      0
+    dvc_set_dqi --root :version P01-Func_max 0
+    dvc_set_dqi --root :version P02-Func_min 0
+    dvc_set_dqi --root :version P03-Scan_min 0
+    dvc_set_dqi --root :version P04-Power    0
+    dvc_set_dqi --root :version P05-Noise    0
+    dvc_set_dqi --root :version R01-EM       0
+    dvc_set_dqi --root :version R02-IR       0
+    dvc_set_dqi  WNS  `date +%M`
+    dvc_set_dqi  NVP  `date +%S`
   dvc_checkin_version
 
   set scenario_list = "001 002 003 004"

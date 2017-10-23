@@ -75,7 +75,7 @@ endif
 if ($?html_mode) then
    echo "<table id=dqitable>"
    echo "<tr><td colspan=3 class=header>$dqi_group</td></tr>"
-   echo "<tr class=title>"
+   echo "<tr class=header>"
    echo "<td class=col1><b>DQI</d></td>"
    echo "<td class=col2><b>Value</d></td>"
    echo "<td class=col3><b>Description</d></td>"
@@ -96,7 +96,7 @@ foreach dqi_name ( $dqi_list )
             else if ($?tcl_mode) then
                echo "set dqi($dqi_group/$dqi_name) {$dqi_value}"
             else if ($?html_mode) then
-               echo "<tr>"
+               echo "<tr class=data>"
                echo "<td class=col1>$dqi_name</td>"
                echo "<td class=col2>$dqi_value</td>"
                echo "<td class=col3></td>"
@@ -115,7 +115,7 @@ foreach dqi_name ( $dqi_list )
    endif
 end
 if ($?html_mode) then
-   echo "</table>"
+   echo -n "</table>"
 endif
 
 exit 0

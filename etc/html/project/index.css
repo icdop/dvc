@@ -3,29 +3,24 @@ html {min-width: 776px; }
 body {background: #6D89DD; font-family: arial;}
 
 #report {border:10px;width:100%;text-align:left;background-color:#0080FF;}
-#report tr.header{vertical-align:center;background-color:#FFE880;}
-#report tr.title{vertical-align:center;background-color:#20C080;}
-#report td.col1{width:10%;vertical-align:center;background-color:#20E880;}
-#report td.col2{width:20%;vertical-align:top;background-color:#20E880;}
-#report td.col3{width:70%;vertical-align:center;background-color:#20E880;}
-
-#dqitable {border:10px;width:100%;text-align:left;background-color:#0080FF;}
-#dqitable tr.header{vertical-align:center;background-color:#80A08F;}
-#dqitable tr.title{vertical-align:center;background-color:#80A08F;}
-#dqitable td.col1{width:5%;vertical-align:center;background-color:#80E88F;}
-#dqitable td.col2{width:5%;vertical-align:center;text-align:right;background-color:#80E88F;}
-#dqitable td.col3{width:90%;vertical-align:center;background-color:#80E88F;}
-
-#subfolder {border:10px;width:100%;text-align:left;background-color:#0080FF;}
-#subfolder tr.header{vertical-align:center;background-color:#20A0FF;}
-#subfolder tr.title{vertical-align:center;background-color:#20A0FF;}
-#subfolder td.col1{width:10%;vertical-align:center;background-color:#20E8FF;}
-#subfolder td.col2{width:20%;vertical-align:center;background-color:#20E8FF;}
-#subfolder td.col3{width:70%;vertical-align:center;background-color:#20E8FF;}
+#report tr.title{vertical-align:center;background-color:#FFE880;}
+#report tr.header{vertical-align:center;background-color:#20C080;}
+#report tr.data{vertical-align:center;background-color:#20E880;}
+#report td.col1{width:10%;}
+#report td.col2{width:20%;vertical-align:top;}
+#report td.col3{width:70%;}
 
 #indextable {border:10px;width:100%;text-align:left;background-color:#0080FF;}
 #indextable tr.header{vertical-align:center;background-color:#20A0FF;}
-#indextable tr.title{vertical-align:center;background-color:#20A0FF;}
-#indextable td.col1{width:10%;vertical-align:center;background-color:#20E8FF;}
-#indextable td.col2{width:50%;vertical-align:center;text-align:right;background-color:#20E8FF;}
-#indextable td.col3{vertical-align:center;background-color:#20E8FF;}
+#indextable tr.data{vertical-align:center;background-color:#20E8FF;}
+#indextable td.col1{width:10%}
+#indextable td.col2{width:20%;vertical-align:top;}
+#indextable td.col3{widtg:70%}
+
+#dqitable {border:10px;width:100%;text-align:left;background-color:#0080FF;}
+#dqitable tr.group{vertical-align:center;background-color:#80A08F;}
+#dqitable tr.header{vertical-align:center;background-color:#80A08F;}
+#dqitable tr.data{vertical-align:center;background-color:#80E88F;}
+#dqitable td.col1{width:5%;}
+#dqitable td.col2{width:5%;text-align:right;}
+#dqitable td.col3{width:90%;}

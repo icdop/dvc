@@ -13,6 +13,6 @@ echo "</td>"
 
 echo "<td class=col3>"
 echo "<pre>"
-svn info $SVN_URL/$project/$item_path
+svn info $SVN_URL/$project/$item_path | grep "Changed"
 echo "</pre>"
 echo "</td></tr>"

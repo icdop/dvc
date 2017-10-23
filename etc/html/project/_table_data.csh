@@ -5,14 +5,12 @@ echo "$item_name"
 echo "</a>"
 echo "</td>"
 
-echo "<td class=col2>"
-echo "<pre>"
-dvc_get_dqi --root $item_data --html --all
-echo "</pre>"
-echo "</td>"
+echo "<td class=col2>" 
+echo "<object name=readme type=text/html data=$item_name/.dvc/README width=300></object>"
+echo "</td>" 
 
 echo "<td class=col3>"
-echo "<pre>"
-ls -1 $item_data
-echo "</pre>"
-echo "</td></tr>"
+dvc_get_dqi --root $item_data --html --all
+echo "</td>"
+
+echo "</tr>"

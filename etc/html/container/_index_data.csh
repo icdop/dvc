@@ -1,6 +1,6 @@
 
 echo "<table id=report>"
-echo "<tr class=header><td colspan=3><h2>dvc://$project/$dvc_path/</h2></td></tr>"
+echo "<tr class=header><td colspan=3><h2>[$project]/$dvc_path/</h2></td></tr>"
 
 echo "<tr class=title>"
 echo "<td>CURRENT</td>"
