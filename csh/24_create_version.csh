@@ -34,7 +34,7 @@ setenv STAGE_URL $BLOCK_URL/$DESIGN_STAGE
 setenv VERSN_URL $STAGE_URL/$DESIGN_VERSN
 
 svn info $VERSN_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Version : $DESIGN_VERSN"
    if ($?info_mode) then
       svn info $VERSN_URL

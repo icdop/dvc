@@ -24,7 +24,7 @@ if ($1 != "") then
 endif
 
 echo "INFO: Checkin Project Design Phase : $DESIGN_PHASE"
-setenv DVC_PATH $DESIGN_PHASE
+setenv DVC_PATH /$DESIGN_PHASE
 
 source $CSH_DIR/69_checkin_dvc_path.csh
 

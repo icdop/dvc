@@ -11,6 +11,11 @@ endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/14_get_design.csh
 
+if ($1 == "--force") then
+   set force_mode=1
+   shift argv
+endif
+
 if ($1 != "") then 
    set dvc_path = $1
    shift argv

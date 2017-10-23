@@ -33,7 +33,7 @@ if ($status != 0) then
 endif
 
 echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
-setenv DVC_PATH $DESIGN_PHASE
+setenv DVC_PATH /$DESIGN_PHASE
 setenv CURR_PTR $PTR_PHASE
 source $CSH_DIR/39_checkout_dvc_path.csh
 

@@ -27,7 +27,7 @@ endif
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
-if ($status == 0) then
+if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Phase : $DESIGN_PHASE"
    if ($?verbose_mode) then
       svn info $PHASE_URL
