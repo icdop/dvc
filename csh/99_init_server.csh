@@ -45,7 +45,7 @@ if ($1 != "") then
    set command=$1
    shift argv
 else
-   set command="status"
+   set command="start"
 endif
 
 switch($command)
