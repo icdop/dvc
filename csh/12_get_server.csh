@@ -69,6 +69,21 @@ else
   unsetenv SVN_PID
 endif
 
+if {(test -f $SVN_ROOT/.dop/env/SVN_HOST)} then
+  setenv SVN_HOST      `cat $SVN_ROOT/.dop/env/SVN_HOST`
+else if ($?SVN_HOST == 0) then
+  setenv SVN_HOST      `hostname`
+endif
+
+if {(test -f $SVN_ROOT/.dop/env/SVN_PORT)} then
+  setenv SVN_PORT      `cat $SVN_ROOT/.dop/env/SVN_PORT`
+else if ($?SVN_PORT == 0) then
+  setenv SVN_PORT      3690
+endif
+
+#
+# User can overwrite SVN_MODE through environment varaible
+#
 if ($?SVN_MODE == 0) then
    if {(test -f $SVN_ROOT/.dop/env/SVN_MODE)} then
      setenv SVN_MODE      `cat $SVN_ROOT/.dop/env/SVN_MODE`
@@ -77,25 +92,9 @@ if ($?SVN_MODE == 0) then
    endif
 endif
 
-if ($?SVN_HOST == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/SVN_HOST)} then
-     setenv SVN_HOST      `cat $SVN_ROOT/.dop/env/SVN_HOST`
-   else
-     setenv SVN_HOST      `hostname`
-   endif
-endif
-
-if ($?SVN_PORT == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/SVN_PORT)} then
-     setenv SVN_PORT      `cat $SVN_ROOT/.dop/env/SVN_PORT`
-   else
-     setenv SVN_PORT      3690
-   endif
-endif
-
 if ($?SVN_URL == 0) then
    if ($SVN_MODE == "svn") then
-      setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
+      setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT"
    else
       setenv SVN_URL "file://`realpath $SVN_ROOT`"
    endif
