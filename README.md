@@ -60,12 +60,14 @@ Example:
 	; start server with file access mode
 	% dvc_init_server \
 		--root /home/owner/proj_svn \
-		--mode file
+		--mode file \
+		start
 
 	; start server with svn server mode
 	% dvc_init_server \
 		--root /home/owner/proj_svn \
-		--mode svn --host <localhost> -port 3690
+		--mode svn --host <localhost> -port 3690 \
+		start
 
 	; check server status
 	% dvc_init_server status
