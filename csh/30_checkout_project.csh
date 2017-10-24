@@ -64,7 +64,7 @@ endif
 if {(test -e $PROJT_PATH/.svn)} then
    svn update --quiet --force $PROJT_PATH --set-depth $depth_mode
 else
-   svn checkout --quiet --force $PROJT_URL $PROJT_PATH --depth $depth_mode
+   svn checkout --force $PROJT_URL $PROJT_PATH --depth $depth_mode
 endif
 
 if {(test -e $PROJT_PATH/.dvc)} then

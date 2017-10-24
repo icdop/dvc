@@ -42,7 +42,7 @@ endif
 if {(test -e $DESIGN_PATH/.svn)} then
    svn update --quiet --force $DESIGN_PATH --set-depth $depth_mode
 else
-   svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth $depth_mode
+   svn checkout --force $DESIGN_URL $DESIGN_PATH --depth $depth_mode
 endif
 
 if {(test -e $DESIGN_PATH/.dvc)} then

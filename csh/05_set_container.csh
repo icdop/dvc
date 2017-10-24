@@ -32,7 +32,7 @@ if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/DESIGN_PATH)} then
    setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/DESIGN_PATH`/$DESIGN_CONTR
 else if {(test -e $CONTAINER_DIR)} then
 else 
-   echo "ERROR: can not find container '$DESIGN_CONTR'."
+   echo "ERROR: can not find container : '$DESIGN_CONTR'."
    exit 1
 endif
 

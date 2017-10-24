@@ -34,9 +34,9 @@ else if ($?PROJT_PATH == 0) then
 endif
 
 if ($?info_mode) then
-  echo "INFO: DESIGN_PROJT = $DESIGN_PROJT"
   echo "INFO: PROJT_ROOT   = $PROJT_ROOT"
   echo "INFO: PROJT_PATH   = $PROJT_PATH"
+  echo "INFO: DESIGN_PROJT = $DESIGN_PROJT"
 endif
 
 if {(test -e .dop/env/PTR_CURR)} then
