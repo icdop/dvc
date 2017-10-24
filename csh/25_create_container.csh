@@ -15,7 +15,12 @@ setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
-source $CSH_DIR/05_set_container.csh
+source $CSH_DIR/15_get_container.csh
+
+if ($1 != "") then
+   setenv DESIGN_CONTR $1
+   shift argv
+endif
 
 setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 setenv CONTAINER_PATH $DVC_PATH/$DESIGN_CONTR
