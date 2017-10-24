@@ -2,11 +2,11 @@
 
    ; if you are using csh/tcsh
 
-   % source source.csh   
+   % source setup.cshrc
 
    ; if you are using sh/bash
 
-   % . source.sh
+   % . setup.shrc
 
 2. There are testcases in the directory
 
@@ -20,4 +20,3 @@
 
    05_apr  : APR case with multiple steps using container model
 
-   06_plugin : DQI plugin testcase 
