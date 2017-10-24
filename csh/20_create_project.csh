@@ -25,7 +25,6 @@ if (($status == 0) && ($?force_mode == 0)) then
       svn info $PROJT_URL
    endif
 else
-   $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
    echo "INFO: Create Project Design Respository : $DESIGN_PROJT"
    if {(test -d $SVN_ROOT)} then
    else

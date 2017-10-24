@@ -20,6 +20,7 @@ endif
 if ($1 != "") then
   if (($1 != "_") && ($1 != ".")) then
     setenv DESIGN_PROJT $1
+    $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
   endif
   shift argv
 endif
