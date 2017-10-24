@@ -35,18 +35,14 @@ if ($?force_mode) then
    rm -f $DESIGN_PATH
 endif
 
-if ($?depth_mode) then
-   if {(test -e $DESIGN_PATH/.svn)} then
-      svn update --quiet --force $DESIGN_PATH --set-depth $depth_mode
-   else
-      svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth $depth_mode
-   endif
+if ($?depth_mode == 0) then
+   set depth_mode=files
 endif
 
 if {(test -e $DESIGN_PATH/.svn)} then
-   svn update --quiet --force $DESIGN_PATH --set-depth files
+   svn update --quiet --force $DESIGN_PATH --set-depth $depth_mode
 else
-   svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth files
+   svn checkout --quiet --force $DESIGN_URL $DESIGN_PATH --depth $depth_mode
 endif
 
 if {(test -e $DESIGN_PATH/.dvc)} then

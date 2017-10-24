@@ -57,12 +57,14 @@ endif
 
 mkdir -p $PROJT_PATH
 
-if ($?depth_mode) then
-   if {(test -e $PROJT_PATH/.svn)} then
-      svn update --quiet --force $PROJT_PATH --set-depth $depth_mode
-   else
-      svn checkout --quiet --force $PROJT_URL $PROJT_PATH --depth $depth_mode
-   endif
+if ($?depth_mode == 0) then
+   set depth_mode=files
+endif
+
+if {(test -e $PROJT_PATH/.svn)} then
+   svn update --quiet --force $PROJT_PATH --set-depth $depth_mode
+else
+   svn checkout --quiet --force $PROJT_URL $PROJT_PATH --depth $depth_mode
 endif
 
 if {(test -e $PROJT_PATH/.dvc)} then
