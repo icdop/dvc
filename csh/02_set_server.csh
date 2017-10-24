@@ -13,7 +13,7 @@ endif
 if ($1 == "SVN_ROOT") then
    shift argv
    if ($1 != "") then
-      setenv SVN_ROOT `realpath $1`
+      setenv SVN_ROOT $1
       shift argv
       $CSH_DIR/00_set_env.csh SVN_ROOT $SVN_ROOT
    endif

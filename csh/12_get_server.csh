@@ -52,7 +52,7 @@ endsw
 
 if ($1 == "--root") then
    shift argv
-   setenv SVN_ROOT `realpath $1`
+   setenv SVN_ROOT $1
    shift argv
 endif
 
@@ -97,7 +97,7 @@ if ($?SVN_URL == 0) then
    if ($SVN_MODE == "svn") then
       setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
    else
-      setenv SVN_URL "file://$SVN_ROOT"
+      setenv SVN_URL "file://`realpath $SVN_ROOT`"
    endif
 endif
 
