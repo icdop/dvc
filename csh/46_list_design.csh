@@ -14,6 +14,12 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
 
-tree -L 4 -I : -d $PROJT_PATH
+if ($?recursive_mode) then
+  tree -I $PTR_CURR $PROJT_PATH
+else if ($?info_mode) then
+  tree -d $PROJT_PATH
+else
+  tree -L 4 -I $PTR_CURR -d $PROJT_PATH
+endif
 
 exit 0
