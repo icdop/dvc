@@ -2,17 +2,18 @@
 # DVC COMMAND USAGE
 ##############################################################################
 dvc_init_server:
-	Usage: $prog [svn|file|start|stop]
+	Usage: $prog [options] [start|stop|restart|status]
 	Description:
-	  svn   -  start with svn server mode 
-	  file  -  start with file access mode
+	  --root <SVN_ROOT>	- SVN server root path
+	  --mode svn		- start with svn server mode 
+	         file		- start with file access mode
+	  --host <hostname>
+	  --port <port>
 
-	  start -  start server using SVN_MODE mode
-	  stop  -  stop svn server
-
-	  job   -  show current server job with ps command
-	  pid   -  return current server pid
-
+	  start   -  start server using SVN_MODE mode
+	  stop    -  stop svn server
+	  restart -  stop svn server and restart
+	  status  -  disply server status
  
 #
 # Environment Variable Access
@@ -107,7 +108,7 @@ dvc_set_container:
 	Usage: $prog <container>
 	Description:
 	  Assign default working container, 
-	  set the value of DESIGN_CONTR, CONTAINER_DIR and DVC_PATH
+	  set the value of DESIGN_CONTR, CONTAINER_DIR and CONTAINER_PATH
 
 dvc_get_project:   
 	Usage: $prog
@@ -119,13 +120,11 @@ dvc_get_design:
 	Description:
 	  fetch working design folder name from .dop/env/
 	DESIGN_PHASE, DESIGN_BLOCK, DESIGN_STAGE, DESIGN_VERSN
-	CURR_PHASE, CURR_BLOCK, CURR_STAGE, CURR_VERSN
 
 dvc_get_container:   
 	Usage: $prog 
 	Description:
-	  fectch working container name from .dop/env/
-	DESIGN_CONTR, CURR_CONTR
+	  fectch working container name from .dop/env/DESIGN_CONTR
 
 #
 # Handle Design Project
@@ -214,7 +213,7 @@ dvc_checkout_version:
 dvc_checkin_design:
 	Usage: $prog <phase>/<block>/<stage>/<version>
 	Description:
-	  checkin_design commt all files under version/container
+	  checkin_design commit files under each level
 
 #
 # Container
@@ -317,8 +316,8 @@ dvc_list_container:
 	Description:
 	  list all objects under container directory
 
-dvc_tree_design:   
-	Usage: $prog <dir>
+dvc_list_design:   
+	Usage: $prog [--info|--recursive] <dir>
 	Description:
 	  call unix tree command to print out tree structure
 

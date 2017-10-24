@@ -1,6 +1,23 @@
-# Design Version Control V2017
+# Design Version Control V2017_1025
 
-- Utility to manage chip design data using SVN server
+## Version Control Engine -- Subversion
+
+- The SVN server is initialized withthe following parameters:
+
+  * SVN_ROOT : svn repository root path, need to be set first
+  
+  * SVN_MODE : svn | file -- server db access mode
+  * SVN_HOST : server host name -- only been used in svn server mode
+  * SVN_PORT : server port name -- only been used in svn server mode
+  
+- When a project is createed, there will be one repository under:
+
+  * $SVN_ROOT/<project_name>/
+
+- Project config files are copied from $DVC_HOME/etc/conf/:
+
+  * $SVN_ROOT/<project_name>/conf/
+      
 
 ## Design Database Directory Structure
 
@@ -16,39 +33,27 @@ Directory:
 					$DESIGN_VERSN/
 
 
-* Phase:
+Phase:
 
-	P1-trial , P2-stable, P3-final, P4-tapeout
+	P1-trial , P2-stable, P3-final, P4-tapeout, ...
 
-* Block:
+Block:
 
 	chip, cpu, gpu, ddr, sub1, ...
 
-* Stage:
+Stage:
 
-	000-DATA, 100-CIRCUIT, 200-LOGIC, 300-DFT, 400-APR, 500-SIGNOFF
+	000-DATA,	100-CIRCUIT,	200-LOGIC,	300-DFT,
+	400-APR,	500-SIGNOFF,	600-TAPEOUT,	700-TESTING,
+	800-PACKAGE,	900-SYSTEM
 
-* Version:
+Version:
 
-	2017_0610-xxxx, 2017_0702-xxxx, ...
-
-
-- The SVN server is the underneath version control engine:
-
-  * SVN_ROOT : svn repository root path, need to be set first
-  
-  * SVN_MODE : svn | file -- server db access mode
-  * SVN_HOST : server host name -- only been used in svn server mode
-  * SVN_PORT : server port name -- only been used in svn server mode
-  
-- When a project is createed, there will be one repository under:
-
-  * $SVN_ROOT/<project_name>/
-
-- Initial server config files are copied from dvc/etc/conf:
-
-  * $SVN_ROOT/<project_name>/conf/
-      
+	<DBSRC_DATE>-<DBDST_WEEK>-<REMARK>
+	170910-ww38-ftp
+	170910-ww39-scan
+	170910-ww40-apr
+	170910-ww42-eco
 
 ***
 ## Design Version Management Flow:
@@ -83,10 +88,12 @@ Example:
 
 	% dvc_checkout_project <proj_name>
 	
-	; dvc_create_design   <phase>/<block>/<stage>/<version>
-	% dvc_create_design   P1-trial/chip/000-DATA/2017_0910-ww38
+	#
+	# dvc_create_design   <phase>/<block>/<stage>/<version>
+	#
+	% dvc_create_design   P1-trial/chip/000-DATA/170910-ww38-ftp
 
-	% dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-ww38
+	% dvc_checkout_design P1-trial/chip/000-DATA/170910-ww38-ftp
 
 	% dvc_copy_object /some_rundir_path/design.v       design.v
 	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz
@@ -94,39 +101,3 @@ Example:
 	% dvc_checkin_design 
 
 
-***
-Recommended Phase Name:
-
-	;NAME           DESCRIPTION
-	;============   ========================== 
-	P1-trial        "Design Initial Trial Run Phase "
-	P2-stable       "Design Stable Run Phase "
-	P3-final        "Design Final Run Phase "
-	P4-validation   "Silicon Valiation Phase "
-	P5-production   "Silicon Production Phase "
-
-
-Recommended Stage Name:
-
-	;NAME           DESCRIPTION
-	;============   ========================== 
-	000-DATA        "Initial Design Data"
-	100-CIRCUIT     "Circuit Design Stage"
-	200-LOGIC       "Logic Verfication Stage"
-	300-DFT         "Design For Test"
-	400-APR         "Auto Place & Route"
-	500-SIGNOFF     "Signoff Stage"
-	600-TAPEOUT     "Tapeout Stage"
-	700-TESTING     "Wafer Testing Stage"
-	800-PACKAGE     "Package Stage"
-	900-SYSTEM      "System Validation Stage"
-
-Recommended Verson Name:
-
-	<DB_SOURCE_DATE>-<DB_CHECKIN_WEEK>-<REMARK>
-	170910-ww38-jay
-	170910-ww39-scan
-	170910-ww40-place
-	170910-ww41-route
-	170910-ww42-eco1
-	170910-ww42-eco2
