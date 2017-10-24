@@ -8,6 +8,7 @@ report:
 	dvc_init_report
 	
 clean:
-	rm -fr _ .dop	
 	rm -f :phase :block :stage :version :container
+	rm -fr _ .dop	
+	rm -fr svn_root testcase
 

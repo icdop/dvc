@@ -13,10 +13,9 @@ endif
 if ($1 == "SVN_ROOT") then
    shift argv
    if ($1 != "") then
-      setenv SVN_ROOT $1
+      setenv SVN_ROOT `realpath $1`
       shift argv
-      mkdir -p .dop/env
-      echo $SVN_ROOT > .dop/env/SVN_ROOT
+      $CSH_DIR/00_set_env.csh SVN_ROOT $SVN_ROOT
    endif
 endif
 
@@ -43,6 +42,6 @@ if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
       echo "ERROR: server env($envname) variable is not defined!"
    endif
 else
-   echo "SETP: SVN_ROOT = $SVN_ROOT"
+#   echo "SETP: SVN_ROOT = $SVN_ROOT"
 endif
 

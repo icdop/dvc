@@ -57,37 +57,76 @@ Directory:
 
 Example:
 
-	; set server configuration variable
-	% dvc_set_server SVN_ROOT /home/owner/proj_svn
-	
-	% dvc_set_server SVN_MODE file
-	or
-	% dvc_set_server SVN_MODE svn
-	% dvc_set_server SVN_HOST localhost
-	% dvc_set_server SVN_PORT 3690
+	; start server with file access mode
+	% dvc_init_server \
+		--root /home/owner/proj_svn \
+		--mode file
 
-	; start server
-	% dvc_init_server start	
+	; start server with svn server mode
+	% dvc_init_server \
+		--root /home/owner/proj_svn \
+		--mode svn --host <localhost> -port 3690
+
+	; check server status
+	% dvc_init_server status
 
 ### 2. Create project respository - Project Manager
 
 Example:
 
-	% dvc_create_project testcase
+	% dvc_create_project <proj_name>
 
 
-### 3. Create design version folder and checkin design data - Designer
+### 3. Create design folder and checkin design data - Designer
 
 Example:
 
-	% dvc_checkout_project testcsse
+	% dvc_checkout_project <proj_name>
 	
-	% dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
+	; dvc_create_design   <phase>/<block>/<stage>/<version>
+	% dvc_create_design   P1-trial/chip/000-DATA/2017_0910-ww38
 
-	% dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-xxx
+	% dvc_checkout_design P1-trial/chip/000-DATA/2017_0910-ww38
 
-	% dvc_copy_object /some_source_path/design.v design.v
+	% dvc_copy_object /some_rundir_path/design.v       design.v
+	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz
 
 	% dvc_checkin_design 
 
 
+***
+Recommended Phase Name:
+
+	;NAME           DESCRIPTION
+	;============   ========================== 
+	P1-trial        "Design Initial Trial Run Phase "
+	P2-stable       "Design Stable Run Phase "
+	P3-final        "Design Final Run Phase "
+	P4-validation   "Silicon Valiation Phase "
+	P5-production   "Silicon Production Phase "
+
+
+Recommended Stage Name:
+
+	;NAME           DESCRIPTION
+	;============   ========================== 
+	000-DATA        "Initial Design Data"
+	100-CIRCUIT     "Circuit Design Stage"
+	200-LOGIC       "Logic Verfication Stage"
+	300-DFT         "Design For Test"
+	400-APR         "Auto Place & Route"
+	500-SIGNOFF     "Signoff Stage"
+	600-TAPEOUT     "Tapeout Stage"
+	700-TESTING     "Wafer Testing Stage"
+	800-PACKAGE     "Package Stage"
+	900-SYSTEM      "System Validation Stage"
+
+Recommended Verson Name:
+
+	<DB_SOURCE_DATE>-<DB_CHECKIN_WEEK>-<REMARK>
+	170910-ww38-jay
+	170910-ww39-scan
+	170910-ww40-place
+	170910-ww41-route
+	170910-ww42-eco1
+	170910-ww42-eco2

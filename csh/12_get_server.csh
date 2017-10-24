@@ -15,8 +15,8 @@ if ($1 == "--info") then
    shift argv
 endif
 
-if ($1 == "--xml") then
-   set xml_mode = 1
+if ($1 == "--force") then
+   set force_mode=1
    shift argv
 endif
 
@@ -50,13 +50,23 @@ case "--depth":
    breaksw
 endsw
 
-if ($?SVN_ROOT == 0) then
-   if {(test -e .dop/env/SVN_ROOT)} then
-      setenv SVN_ROOT  `cat .dop/env/SVN_ROOT`
-   else
-      echo "ERROR: env variable (SVN_ROOT) is not set yet."
-      exit 1
-   endif
+if ($1 == "--root") then
+   shift argv
+   setenv SVN_ROOT `realpath $1`
+   shift argv
+endif
+
+if {(test -e .dop/env/SVN_ROOT)} then
+   setenv SVN_ROOT  `cat .dop/env/SVN_ROOT`
+else if ($?SVN_ROOT == 0) then
+   echo "ERROR: env variable (SVN_ROOT) is not set yet."
+   exit 1
+endif
+
+if {(test -e $SVN_ROOT/.dop/svnserve.pid)} then
+  setenv SVN_PID      `cat $SVN_ROOT/.dop/svnserve.pid`
+else
+  unsetenv SVN_PID
 endif
 
 if ($?SVN_MODE == 0) then
@@ -84,9 +94,7 @@ if ($?SVN_PORT == 0) then
 endif
 
 if ($?SVN_URL == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/SVN_URL)} then
-     setenv SVN_URL      `cat $SVN_ROOT/.dop/env/SVN_URL`
-   else if ($SVN_MODE == "svn") then
+   if ($SVN_MODE == "svn") then
       setenv SVN_URL "svn://$SVN_HOST"":$SVN_PORT/"
    else
       setenv SVN_URL "file://$SVN_ROOT"
@@ -102,22 +110,3 @@ if ($?info_mode) then
 endif
 
 
-if ($?PROJT_ROOT == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/PROJT_ROOT)} then
-     setenv PROJT_ROOT      `cat $SVN_ROOT/.dop/env/PROJT_ROOT`
-   else
-     setenv PROJT_ROOT      "."
-   endif
-endif
-
-if ($?PROJT_MARK == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/PROJT_MARK)} then
-     setenv PROJT_MARK      `cat $SVN_ROOT/.dop/env/PROJT_MARK`
-   else
-     setenv PROJT_MARK      ":"
-   endif
-endif
-if ($?info_mode) then
-  echo "INFO: PROJT_ROOT = $PROJT_ROOT"
-  echo "INFO: PROJT_MARK = $PROJT_MARK"
-endif

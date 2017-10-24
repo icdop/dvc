@@ -27,3 +27,6 @@
 *       second release for DVS bundle
 * 2017/10/23 By Albert Li
 *	fix dvc_list_container bug
+* 2017/10/23 By ALbert Li
+*       enhance dvc_init_server function , now support --options and restart
+
