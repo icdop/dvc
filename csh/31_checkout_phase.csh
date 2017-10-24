@@ -33,7 +33,7 @@ endif
 
 echo "INFO: Checkout Project Design Phase : $DESIGN_PHASE"
 setenv DVC_PATH $DESIGN_PHASE
-setenv CURR_PTR $PTR_PHASE
+setenv DESIGN_PTR $PTR_PHASE
 source $CSH_DIR/39_checkout_dvc_path.csh
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

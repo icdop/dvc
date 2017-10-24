@@ -24,7 +24,7 @@ if (($1 != "") && ($1 != ":") && ($1 != ".")) then
 else if ($?DVC_PATH == 0) then
    source $CSH_DIR/14_get_design.csh
    setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
-   setenv CURR_PTR $PTR_VERSN
+   setenv DESIGN_PTR $PTR_VERSN
 endif
 
 setenv DESIGN_URL  $SVN_URL/$DESIGN_PROJT/$DVC_PATH
@@ -69,10 +69,16 @@ endif
 
 set dvc_name = $DESIGN_PATH:t
 set dvc_root = $DESIGN_PATH:h
-rm -fr $dvc_root/:
-ln -s $dvc_name $dvc_root/:
+if ($?PTR_CURR) then
+   rm -f $dvc_root/$PTR_CURR
+   ln -s $dvc_name $dvc_root/$PTR_CURR
+   svn propset svn:ignore $PTR_CURR $dvc_root
+#   svn propset svn:global-ignores $PTR_CURR $dvc_root
+endif
 
-rm -fr $CURR_PTR
-ln -fs $DESIGN_PATH $CURR_PTR
+if ($?DESIGN_PTR) then
+   rm -f $DESIGN_PTR
+   ln -s $DESIGN_PATH $DESIGN_PTR
+endif
 
 exit 0
