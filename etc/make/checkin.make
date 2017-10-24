@@ -4,7 +4,7 @@
 #
 ########################################################################
 ifndef SVN_ROOT
-SVN_ROOT     := $(DVC_HOME)/svn_root
+SVN_ROOT     := svn_root
 endif
 
 ifndef SVN_HOST
@@ -43,28 +43,31 @@ help:
 
 run:
 	mkdir -p log
-	make init
-	make project
-	make design
-	make container
-	make object
-	make checkin
-	make list | tee log/list1.rpt
-	make tree | tee log/tree1.rpt
+	make init	| tee log/run.log
+	make project	| tee -a log/run.log
+	make design	| tee -a log/run.log
+	make container	| tee -a log/run.log
+	make object	| tee -a log/run.log
+	make checkin	| tee -a log/run.log
+	make list 	| tee log/list1.rpt
+	make tree 	| tee log/tree1.rpt
 
 test:
-	make project
-	make remove_data
-	make checkout
-	make tree > log/tree0.rpt
-	make remove_design
-	make version
-	make container
-	make update
-	make object
-	make commit
-	make tree > log/tree2.rpt
-	make list > log/list2.rpt
+	make init	| tee log/test.log
+	make project	| tee -a log/test.log
+	make remove_data| tee -a log/test.log
+	make checkout	| tee -a log/test.log
+	make tree 	| tee log/checkout.rpt
+	make remove_design| tee -a log/test.log
+	make version	| tee -a log/test.log
+	make container	| tee -a log/test.log
+	make update	| tee -a log/test.log
+	make object	| tee -a log/test.log
+	make commit	| tee -a log/test.log
+	make list	| tee log/list2.rpt
+	make tree	| tee log/tree2.rpt
+
+diff:
 	diff -r log golden | tee diff.log
 	
 init: init_setup init_server
@@ -208,7 +211,7 @@ copy_folder: $(OBJECT_DIRS)
 $(OBJECT_DIRS):
 	@echo "WARNING: dir '$@' does not exist, create a dummy folder."
 	@mkdir -p $@
-	@echo "`date +%D_$T`" > $@/HISTORY.txt
+	@echo "`date +%D_$T`" > $@/dummy_file
 
 
 link_object: $(OBJECT_LINKS)
@@ -261,7 +264,7 @@ clean_container:
 	@echo "#---------------------------------------------------"
 	dvc_clean_container 	$(DESIGN_CONTR)
 
-checkin: checkin_design
+checkin: checkin_design checkin_container
 
 checkin_design:
 	@echo "#---------------------------------------------------"
@@ -286,7 +289,7 @@ checkin_container:
 
 
 tree:
-	dvc_list_design
+	dvc_list_design --recursive
 
 list: 
 	dvc_list_project --recursive
@@ -324,7 +327,7 @@ clean:
 	@echo " Use 'make remove_all' to clean up database on server"
 	@echo
 	@echo "************** WARNING *************************"
-	make remove_links remove_files
+	make remove_files
 	rm -fr $(PROJT_BASE)
 
 remove:
@@ -335,19 +338,19 @@ remove:
 	@echo "        make remove_design     ; remove current design"
 	@echo ""
 
-remove_all:
-	make remove_design
+remove_all: remove_files
 	make remove_tests
-	make remove_files
+	make remove_design
+	make remove_project
+	make remove_server
 	make remove_data
 
-remove_design: remove_files remove_links
+remove_design: remove_files
 	make remove_container
 	make remove_version
 	make remove_stage
 	make remove_block
 	make remove_phase
-	rm -fr .dop
 	
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -385,16 +388,18 @@ remove_project:
 	@echo "#---------------------------------------------------"
 	dvc_remove_project	$(DESIGN_PROJT)
 
-remove_data: remove_links
+remove_server:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-6. Clean up data checkout directory"
+	@echo "# 7-3. Remove SVN repository (For TEST ONLY)"
+	@echo "#---------------------------------------------------"
+	dvc_init_server	stop
+	rm -fr $(SVN_ROOT)
+
+remove_data:
+	@echo "#---------------------------------------------------"
+	@echo "# 7-4. Clean up data checkout directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(PROJT_BASE) 
-
-remove_links:
-	@echo "#---------------------------------------------------"
-	@echo "# 7-4. Clean up data links in working directory"
-	@echo "#---------------------------------------------------"
 	rm -fr $(PTR_PHASE) $(PTR_BLOCK) $(PTR_STAGE) $(PTR_VERSN) $(PTR_CONTR)
 
 remove_files:

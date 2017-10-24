@@ -1,16 +1,19 @@
-make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/03_svn'
-dvc_tree_design _
+make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/03_svn'
+dvc_list_design --recursive
 _
 └── P1-trial
-    ├── _ -> chip
     └── chip
-        ├── _ -> 420-place
         └── 420-place
-            ├── _ -> 2017_0615-xxx
             └── 2017_0615-xxx
                 └── place_opt
                     ├── cache
-                    └── report
+                    │   └── dummy_file
+                    ├── design.def
+                    ├── design.spef -> /home/albertli/GITHOME/dvc/run/03_svn/design.spef
+                    ├── design.v
+                    ├── report
+                    │   └── dummy_file
+                    └── run_apr.log
 
-10 directories
-make[1]: Leaving directory '/home/hungchun/GITHOME/dvc/run/03_svn'
+7 directories, 6 files
+make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/03_svn'

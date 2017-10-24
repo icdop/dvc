@@ -1,6 +1,6 @@
 PATH         :=	../../bin:$(PATH)
 ##################################
-SVN_ROOT     := $(DVC_HOME)/run/svn_root
+SVN_ROOT     := svn_root
 SVN_MODE     := svn
 SVN_HOST     := $(shell hostname)
 SVN_PORT     := 3693

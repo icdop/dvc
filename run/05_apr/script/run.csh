@@ -4,7 +4,7 @@ set block_list="chip block1 block2 block3 block4 block5"
 
 ### 1. Setup svn file server 
 
-dvc_init_server file
+dvc_init_server --root $HOME/svn_root --mode file
 
 ### 2. Create project respository - Project Manager
 

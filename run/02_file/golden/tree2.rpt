@@ -1,16 +1,19 @@
-make[1]: Entering directory '/home/hungchun/GITHOME/dvc/run/02_file'
-dvc_tree_design _
+make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/02_file'
+dvc_list_design --recursive
 _
 └── P1-trial
-    ├── _ -> chip
     └── chip
-        ├── _ -> 520-sta
         └── 520-sta
-            ├── _ -> 2017_0620-xxx
             └── 2017_0620-xxx
                 └── ttt_0p80V_25C_rctyp
                     ├── cache
-                    └── report
+                    │   └── dummy_file
+                    ├── design.sdf
+                    ├── design.spef -> /home/albertli/GITHOME/dvc/run/02_file/design.spef
+                    ├── design.v
+                    ├── report
+                    │   └── dummy_file
+                    └── run_sta.log
 
-10 directories
-make[1]: Leaving directory '/home/hungchun/GITHOME/dvc/run/02_file'
+7 directories, 6 files
+make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/02_file'
