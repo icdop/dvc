@@ -26,7 +26,7 @@ setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 setenv CONTAINER_PATH $DVC_PATH/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH
 
-svn info $CONTR_URL/.dvc/DESIGN_CONTR >& /dev/null
+svn info $CONTR_URL/.dvc/env/DESIGN_CONTR >& /dev/null
 if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Design Container : $DESIGN_CONTR"
    if ($?info_mode) then
@@ -36,14 +36,14 @@ else
    svn info $CONTR_URL >& /dev/null
    if ($status != 0) then
       svn mkdir --quiet $CONTR_URL -m "Create Design Container '$DESIGN_CONTR'." --parents
-      svn mkdir --quiet $CONTR_URL/.dvc -m "DVC Config Directory." --parents
+      svn mkdir --quiet $CONTR_URL/.dvc/env -m "DVC Config Directory." --parents
       svn mkdir --quiet $CONTR_URL/.dqi -m "Design Quality Indicator" --parents
       svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
-      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'
       echo -n $DESIGN_CONTR > $tmpfile
-      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
+      svn import --quiet --force $tmpfile $CONTR_URL/.dvc/env/DESIGN_CONTR -m 'Design Container Path'
       rm -fr $tmpfile
    endif
    svn checkout --quiet $CONTR_URL $PROJT_PATH/$CONTAINER_PATH --depth infinity

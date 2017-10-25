@@ -32,7 +32,7 @@ else
 endif
 
 
-mkdir -p $env_root/env
+mkdir -p $env_root/.dop/env
 
 if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
    set envname = $1

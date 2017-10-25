@@ -36,14 +36,14 @@ else
 #=========================================================
 echo "INFO: Create Project Design Block : $DESIGN_BLOCK"
 svn mkdir --quiet $BLOCK_URL -m "Create Design Block $DESIGN_BLOCK." --parents
-svn mkdir --quiet $BLOCK_URL/.dvc -m "Design Platform Config File" --parents
+svn mkdir --quiet $BLOCK_URL/.dvc/env -m "Design Platform Config File" --parents
 svn mkdir --quiet $BLOCK_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $BLOCK_URL/.htm -m "HTML Report" --parents
 svn import --quiet --force $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
-svn import --quiet --force $tmpfile $BLOCK_URL/.dvc/DESIGN_PATH -m 'Block Name'
+svn import --quiet --force $tmpfile $BLOCK_URL/.dvc/env/DESIGN_PATH -m 'Block Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
