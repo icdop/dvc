@@ -29,10 +29,10 @@ if ($?PROJT_PATH == 0) then
       echo "ERROR: DESIGN_PROJT is not set yet!"
       exit 1
    else
-      $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT $PROJT_ROOT/$DESIGN_PROJT
+      $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT
    endif
-else if {(test -e $PROJT_PATH/.dqi/DESIGN_PROJT)} then
-   setenv DESIGN_PROJT `cat $PROJT_PATH/.dqi/DESIGN_PROJT`
+else if {(test -e $PROJT_PATH/.dvc/env/DESIGN_PROJT)} then
+   setenv DESIGN_PROJT `cat $PROJT_PATH/.dvc/env/DESIGN_PROJT`
    $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 else
    if ($?DESIGN_PROJT == 0) then

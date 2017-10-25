@@ -33,7 +33,7 @@ if ($1 != "") then
     setenv PROJT_PATH "_"
   endif
   shift argv
-else if ($PROJT_ROOT == "") then
+else if (($PROJT_ROOT == "")||($PROJT_ROOT == "_")||($PROJT_ROOT == $DESIGN_PROJT)) then
   setenv PROJT_PATH $DESIGN_PROJT
 else
   setenv PROJT_PATH $PROJT_ROOT/$DESIGN_PROJT

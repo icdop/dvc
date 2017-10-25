@@ -16,16 +16,16 @@ endif
 
 if ($1 == "--root") then
    shift argv
-   set env_home=$1
+   set env_root=$1
    shift argv
 else if ($1 == "--server") then
    shift argv
-   set env_home=$SVN_ROOT
+   set env_root=$SVN_ROOT/.dop
 else if ($1 == "--local") then
    shift argv
-   set env_home=$PWD
+   set env_root=$PWD/.dop
 else
-   set env_home=.
+   set env_root=.dop
 endif
 
 if ($1 == "--script") then
@@ -41,7 +41,7 @@ endif
 
 if ($1 == "--all") then
    shift argv
-   set env_list = `(cd $env_home/.dop/env/; ls -a . )`
+   set env_list = `(cd $env_root/env/; ls -a . )`
    set script_mode=1
 else
    set env_list=""
@@ -51,9 +51,9 @@ else
    endif
 endif
 
-if {(test -d $env_home/.dop/env/)} then
+if {(test -d $env_root/env/)} then
    foreach env_name ( $env_list )
-      set fname=$env_home/.dop/env/$env_name
+      set fname=$env_root/env/$env_name
       if {(test -f $fname)} then
          if ($?script_mode) then
             echo "$env_name = `cat $fname`"
@@ -67,7 +67,7 @@ if {(test -d $env_home/.dop/env/)} then
       endif
    end
 else
-   echo "ERROR: '$env_home' is not a valid working directory!"
+   echo "ERROR: '$env_root' is not a valid env directory!"
    exit 1
 endif
 
