@@ -31,8 +31,8 @@ if ($?PROJT_PATH == 0) then
    else
       $CSH_DIR/30_checkout_project.csh $DESIGN_PROJT
    endif
-else if {(test -e $PROJT_PATH/.dvc/env/DESIGN_PROJT)} then
-   setenv DESIGN_PROJT `cat $PROJT_PATH/.dvc/env/DESIGN_PROJT`
+else if {(test -e $PROJT_PATH/.dvc/DESIGN_PROJT)} then
+   setenv DESIGN_PROJT `cat $PROJT_PATH/.dvc/DESIGN_PROJT`
    $CSH_DIR/00_set_env.csh DESIGN_PROJT $DESIGN_PROJT
 else
    if ($?DESIGN_PROJT == 0) then
