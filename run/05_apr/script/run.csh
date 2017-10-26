@@ -61,12 +61,14 @@ dvc_set_dqi  MACRO2REG/NVP  1000
 dvc_set_dqi  ICG_GEN/WNS  -100
 dvc_set_dqi  ICG_GEN/TNS  -1000
 dvc_set_dqi  ICG_GEN/NVP  1000
-dvc_checkin_version
+
+dvc_checkin_design
 
   set step_list = "preplace place cts route postroute"
   foreach step ($step_list) 
     dvc_create_container  $step
     dvc_checkout_container
+    
     dvc_copy_object report/sta.rpt  sta.rpt
     dvc_copy_object report/apr.log  apr.log
     
@@ -90,8 +92,7 @@ dvc_checkin_version
     dvc_set_dqi  ICG_GEN/WNS  -100
     dvc_set_dqi  ICG_GEN/TNS  -1000
     dvc_set_dqi  ICG_GEN/NVP  1000
+
     dvc_checkin_container
   end
-
-
 

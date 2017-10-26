@@ -21,11 +21,12 @@ else if ($?DESIGN_PROJT == 0) then
    setenv DESIGN_PROJT ":"
 endif
 
-if {(test -e .dop/env/PROJT_ROOT)} then
-  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
-else if ($?PROJT_ROOT == 0) then
-  setenv PROJT_ROOT      ""
-endif
+## obsolete PROJT_ROOT variable, replace it with PROJT_PATH
+#if {(test -e .dop/env/PROJT_ROOT)} then
+#  setenv PROJT_ROOT      `cat .dop/env/PROJT_ROOT`
+#else if ($?PROJT_ROOT == 0) then
+#  setenv PROJT_ROOT      ""
+#endif
 
 if {(test -e .dop/env/PROJT_PATH)} then
   setenv PROJT_PATH      `cat .dop/env/PROJT_PATH`
@@ -34,7 +35,6 @@ else if ($?PROJT_PATH == 0) then
 endif
 
 if ($?info_mode) then
-  echo "INFO: PROJT_ROOT   = $PROJT_ROOT"
   echo "INFO: PROJT_PATH   = $PROJT_PATH"
   echo "INFO: DESIGN_PROJT = $DESIGN_PROJT"
 endif

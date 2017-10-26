@@ -41,7 +41,7 @@ endif
 
 if ($1 == "--all") then
    shift argv
-   set env_list = `(cd $env_root/env/; ls -a . )`
+   set env_list = `(cd $env_root/env/; ls -a -1 . -I . -I ..)`
    set script_mode=1
 else
    set env_list=""
@@ -66,7 +66,7 @@ if {(test -d $env_root/env/)} then
          endif
       endif
    end
-else
+else if ($?info_mode) then
    echo "ERROR: '$env_root' is not a valid env directory!"
    exit 1
 endif

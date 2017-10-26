@@ -69,13 +69,17 @@ test:
 
 diff:
 	diff -r log golden | tee diff.log
+	grep -i err log/*
 	
-init: init_setup init_server
+init: init_server
 init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
-	dvc_set_env SVN_ROOT $(SVN_ROOT)
+	dvc_set_server SVN_ROOT $(SVN_ROOT)
+	dvc_set_server SVN_MODE $(SVN_MODE)
+	dvc_set_server SVN_HOST $(SVN_HOST)
+	dvc_set_server SVN_PORT $(SVN_PORT)
 
 SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
 SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
@@ -84,10 +88,7 @@ init_server:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_set_server SVN_MODE $(SVN_MODE)
-	dvc_set_server SVN_HOST $(SVN_HOST)
-	dvc_set_server SVN_PORT $(SVN_PORT)
-	dvc_init_server start
+	dvc_init_server --root $(SVN_ROOT) --mode $(SVN_MODE) --host $(SVN_HOST) --port $(SVN_PORT) restart
 
 
 stop_server:
@@ -122,9 +123,9 @@ checkout: checkout_project checkout_design
 
 checkout_project:
 	@echo "#---------------------------------------------------"
-	@echo "# 3 Checkout project to '$(PROJT_BASE)' dir"
+	@echo "# 3 Checkout project to '$(PROJT_PATH)' dir"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_project	$(DESIGN_PROJT) $(PROJT_BASE)
+	dvc_checkout_project	$(DESIGN_PROJT) $(PROJT_PATH)
 
 checkout_design:
 	@echo "#---------------------------------------------------"
@@ -327,25 +328,25 @@ clean:
 	@echo " Use 'make remove_all' to clean up database on server"
 	@echo
 	@echo "************** WARNING *************************"
-	make remove_files
-	rm -fr $(PROJT_BASE)
+	make remove_all
 
 remove:
 	@echo "Usage:"
 	@echo "        make remove_tests      ; remove test report files"
-	@echo "        make remove_files      ; remove unnecessary files"
 	@echo "        make remove_data       ; remove checkout project data"
 	@echo "        make remove_design     ; remove current design"
+	@echo "        make remove_files      ; remove unnecessary files"
 	@echo ""
 
-remove_all: remove_files
+remove_all:
 	make remove_tests
 	make remove_design
 	make remove_project
 	make remove_server
 	make remove_data
+	make remove_files
 
-remove_design: remove_files
+remove_design:
 	make remove_container
 	make remove_version
 	make remove_stage
@@ -399,7 +400,7 @@ remove_data:
 	@echo "#---------------------------------------------------"
 	@echo "# 7-4. Clean up data checkout directory"
 	@echo "#---------------------------------------------------"
-	rm -fr $(PROJT_BASE) 
+	rm -fr $(PROJT_PATH) 
 	rm -fr $(PTR_PHASE) $(PTR_BLOCK) $(PTR_STAGE) $(PTR_VERSN) $(PTR_CONTR)
 
 remove_files:
@@ -407,6 +408,7 @@ remove_files:
 	@echo "# 7-5. Clean up dummy files in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(OBJECT_FILES) $(OBJECT_DIRS) $(OBJECT_LINKS)
+	rm -fr .dop
 
 remove_tests:
 	rm -fr log/ tree.rpt list.rpt diff.log
