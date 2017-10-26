@@ -3,24 +3,30 @@ SETP: SVN_MODE = file
 SETP: SVN_ROOT = svn_root
 =======================================================
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 SETP: DESIGN_PROJT = testcsae
 INFO: Create Project Design Respository : testcsae
 =======================================================
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 INFO: DVC_PATH = P1-trial/chip/000-DATA/2017_0910-xxx
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 SETP: DESIGN_PHASE = P1-trial
 INFO: Create Project Design Phase : P1-trial
 =======================================================
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 SETP: DESIGN_BLOCK = chip
 INFO: Create Project Design Block : chip
 =======================================================
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 SETP: DESIGN_STAGE = 000-DATA
 INFO: Create Project Design Stage : 000-DATA
 =======================================================
 =======================================================
+INFO: DOP_VERSON = 2017_1025a
 SETP: DESIGN_VERSN = 2017_0910-xxx
 INFO: Create Project Design Version : 2017_0910-xxx
 =======================================================
@@ -31,33 +37,35 @@ INFO: DVC_PATH = /P1-trial/chip/000-DATA/2017_0910-xxx
 SETP: DESIGN_PROJT = testcsae
 INFO: Checkout Project Design Respository : testcsae
 SETP: PROJT_PATH = _
-Checked out revision 35.
+Checked out revision 41.
 =======================================================
 =======================================================
 SETP: DESIGN_PHASE = P1-trial
 INFO: Checkout Project Design Phase : P1-trial
-Checked out revision 35.
+Checked out revision 41.
 property 'svn:ignore' set on '_'
 =======================================================
 =======================================================
 SETP: DESIGN_BLOCK = chip
 INFO: Checkout Project Design Block : P1-trial/chip
-Checked out revision 35.
+Checked out revision 41.
 property 'svn:ignore' set on '_/P1-trial'
 =======================================================
 =======================================================
 SETP: DESIGN_STAGE = 000-DATA
 INFO: Checkout Project Design Stage : 000-DATA
-Checked out revision 35.
+Checked out revision 41.
 property 'svn:ignore' set on '_/P1-trial/chip'
 =======================================================
 =======================================================
 SETP: DESIGN_VERSN = 2017_0910-xxx
 INFO: Checkout Project Design Version : 2017_0910-xxx
-Checked out revision 35.
+Checked out revision 41.
 property 'svn:ignore' set on '_/P1-trial/chip/000-DATA'
+INFO: Container Path - ':version/.'
 =======================================================
 =======================================================
+INFO: Container Path - ':version/.'
 =======================================================
 =======================================================
 =======================================================
@@ -74,6 +82,9 @@ INFO: Checkin Project Design Stage : 000-DATA
 INFO: Checkin Project Design Version : 2017_0910-xxx
 A         design.v
 A         design.sdc
+=======================================================
+=======================================================
+INFO: Container Path - ':version/.'
 =======================================================
 =======================================================
 P1-trial/

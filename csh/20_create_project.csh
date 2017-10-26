@@ -13,6 +13,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/03_set_project.csh
 
@@ -43,12 +44,12 @@ else
    svn mkdir --quiet $PROJT_URL/.htm -m "HTML Report" --parents
    svn mkdir --quiet $PROJT_URL/.dvc/env -m "DVC environment variable"
 
+   svn import --quiet --force  $ETC_DIR/DOP_VERSION   $PROJT_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
 #   svn import --quiet --force  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
 #   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
    set tmpfile=`mktemp`
-   echo -n "" > $tmpfile
-   echo $DESIGN_PROJT > $tmpfile
+   echo -n $DESIGN_PROJT > $tmpfile
    svn import --quiet --force $tmpfile $PROJT_URL/.dvc/env/DESIGN_PROJT -m 'Project Name'
    rm -f $tmpfile
 

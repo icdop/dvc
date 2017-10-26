@@ -13,6 +13,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_design.csh

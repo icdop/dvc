@@ -31,3 +31,6 @@
 *       enhance dvc_init_server function , now support --options and restart
 * 2017/10/25 By Albert Li
 *	prepare for 2017_1025 release
+* 2017/10/26 By Albert Li
+*	add version code to dvc directory
+*	prepare for 2017_1025a patch

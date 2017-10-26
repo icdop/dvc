@@ -12,6 +12,8 @@ if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
 endif
 setenv CSH_DIR $DVC_HOME/csh
+setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
@@ -40,6 +42,8 @@ else
       svn mkdir --quiet $CONTR_URL/.dqi -m "Design Quality Indicator" --parents
       svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       svn mkdir --quiet $CONTR_URL/.dvc/env -m "DVC environment variable"
+
+      svn import --quiet --force  $ETC_DIR/DOP_VERSION   $CONTR_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
 
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile

@@ -10,9 +10,11 @@ echo "TIME: @`date +%Y%m%d_%H%M%S` BEGIN $prog $*"
 if ($?DVC_HOME == 0) then
    setenv DVC_HOME $0:h/..
 endif
-source $DVC_HOME/csh/12_get_server.csh
-source $DVC_HOME/csh/13_get_project.csh
-source $DVC_HOME/csh/14_get_design.csh
+setenv CSH_DIR $DVC_HOME/csh
+setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/12_get_server.csh
+source $CSH_DIR/13_get_project.csh
+source $CSH_DIR/14_get_design.csh
 
 if ($1 != "") then
     setenv DESIGN_PHASE $1
