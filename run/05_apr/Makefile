@@ -27,7 +27,7 @@ view:
 	firefox	index.htm &
 
 clean:
-	dvc_remove_project 05-apr
+	dvc_remove_project 05_apr
 	rm -fr .dop log _
 	rm -f :phase :block :stage :version :container
 	rm -f index.htm index.ccs run.log diff.log

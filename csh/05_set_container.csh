@@ -32,9 +32,10 @@ else if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/DESIGN_PATH)} then
    # backward compatible with 1018a , migrate to new 1025 format
    setenv CONTAINER_DIR  $PTR_VERSN/$DESIGN_CONTR
    setenv CONTAINER_PATH `cat $CONTAINER_DIR/.dvc/DESIGN_PATH`/$DESIGN_CONTR
+   mkdir -p $CONTAINER_DIR/.dvc/env
    cp $CONTAINER_DIR/.dvc/DESIGN_PATH $CONTAINER_DIR/.dvc/env/DESIGN_PATH
+   (cd $CONTAINER_DIR/.dvc/; svn add --force env)
    svn rm --force $CONTAINER_DIR/.dvc/DESIGN_PATH
-   svn add --force $CONTAINER_DIR/.dvc/env/DESIGN_PATH
 else 
    setenv CONTAINER_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
    setenv CONTAINER_DIR  $PROJT_PATH/$CONTAINER_PATH
