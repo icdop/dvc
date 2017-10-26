@@ -39,7 +39,7 @@ else
 #=========================================================
 echo "INFO: Create Project Design Version : $DESIGN_VERSN"
 svn mkdir --quiet $VERSN_URL -m "Create Design Version $DESIGN_VERSN ..." --parents
-svn mkdir --quiet $VERSN_URL/.dvc/env -m "DVC Config Directory" --parents
+svn mkdir --quiet $VERSN_URL/.dvc -m "DVC Config Directory" --parents
 svn mkdir --quiet $VERSN_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $VERSN_URL/.htm -m "HTML Report" --parents
 
@@ -58,10 +58,10 @@ echo "====================================" >> $tmpfile
 svn import --quiet --force $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
 
 echo -n "$DVC_PATH" > $tmpfile
-svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/DESIGN_PATH -m 'Design Version Path'
 
 echo -n "." > $tmpfile
-svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_CONTR -m 'Design Container Path'
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/DESIGN_CONTR -m 'Design Container Path'
 
 rm -fr $tmpfile
 #=========================================================

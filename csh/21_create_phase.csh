@@ -36,13 +36,13 @@ else
 #=========================================================
 echo "INFO: Create Project Design Phase : $DESIGN_PHASE"
 svn mkdir --quiet $PHASE_URL -m "Create Design Phase $DESIGN_PHASE ..." --parents
-svn mkdir --quiet $PHASE_URL/.dvc/env -m "Design Platform Config Directory" --parents
+svn mkdir --quiet $PHASE_URL/.dvc -m "Design Platform Config Directory" --parents
 svn mkdir --quiet $PHASE_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $PHASE_URL/.htm -m "HTML Report" --parents
 
 set tmpfile=`mktemp`
 echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet --force $tmpfile $PHASE_URL/.dvc/env/DESIGN_PATH -m 'Project Phase Name'
+svn import --quiet --force $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`

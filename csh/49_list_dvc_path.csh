@@ -21,11 +21,11 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if ($1 != "") then
    set dir $1
-   if {(test -e $dir/.dvc/env/DESIGN_PATH)} then
-      if {(test -e $dir/.dvc/env/DESIGN_CONTR)} then
-         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/env/DESIGN_PATH`/`cat $dir/.dvc/env/DESIGN_CONTR`
+   if {(test -e $dir/.dvc/DESIGN_PATH)} then
+      if {(test -e $dir/.dvc/DESIGN_CONTR)} then
+         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
       else
-         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/env/DESIGN_PATH`
+         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`
       endif
    else
       setenv DESIGN_URL $PROJT_URL/$dir
