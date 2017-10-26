@@ -81,6 +81,12 @@ else if ($?SVN_PORT == 0) then
   setenv SVN_PORT      3690
 endif
 
+if {(test -f $SVN_ROOT/.dop/env/SVN_DVC)} then
+  setenv SVN_DVC      `cat $SVN_ROOT/.dop/env/SVN_DVC`
+else 
+  setenv SVN_DVC      ":undefined"
+endif
+
 #
 # User can overwrite SVN_MODE through environment varaible
 #
@@ -106,6 +112,7 @@ if ($?info_mode) then
   echo "INFO: SVN_HOST = $SVN_HOST"
   echo "INFO: SVN_PORT = $SVN_PORT"
   echo "INFO: SVN_URL  = $SVN_URL"
+  echo "INFO: SVN_DVC  = $SVN_DVC"
 endif
 
 

@@ -14,8 +14,7 @@ dvc_init_server:
 	  stop    -  stop svn server
 	  restart -  stop svn server and restart
 	  status  -  disply server status
- 
-#
+
 # Environment Variable Access
 #
 dvc_set_path:
@@ -25,11 +24,16 @@ dvc_set_path:
 	if <value> is not specified, auto detect the path from the bin/
 	When --dop is specified, also set DOP_HOME as the root path
 
+dvc_get_system:
+	Usage: $prog [--dop_mode <dop|dvc|dqr|dcm|dfa>] 
+		--dop_version		- $DOP_VERSION
+ 		--dop_path		- $DOP_HOME
+	Description:
+	  return the DOP system variable value
+
 dvc_get_path:
 	Usage: $prog [--dop]
 	Description:
-	  return the DVC_HOME value.
-	When --dop is specified, return DOP_HOME value instead
 	
 dvc_set_server:   
 	Usage: $prog <var> <value>

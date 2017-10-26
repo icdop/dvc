@@ -13,6 +13,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
@@ -45,6 +46,15 @@ svn mkdir --quiet $VERSN_URL/.htm -m "HTML Report" --parents
 svn mkdir --quiet $VERSN_URL/.dvc/env -m "DVC environment variable"
 
 set tmpfile=`mktemp`
+
+svn import --quiet --force  $ETC_DIR/DOP_VERSION   $VERSN_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
+
+echo -n "$DVC_PATH" > $tmpfile
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'
+
+echo "." > $tmpfile
+svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_CONTR -m 'Design Container Path'
+
 echo -n "" > $tmpfile
 echo "====================================" >> $tmpfile
 echo "* Phase   : $DESIGN_PHASE" >> $tmpfile
@@ -56,12 +66,6 @@ echo "* Created : `date +%Y%m%d_%H%M%S`" >> $tmpfile
 echo "====================================" >> $tmpfile
 
 svn import --quiet --force $tmpfile $VERSN_URL/.dvc/README -m 'Initial Design Version Directory'
-
-echo -n "$DVC_PATH" > $tmpfile
-svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'
-
-echo -n "." > $tmpfile
-svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_CONTR -m 'Design Container Path'
 
 rm -fr $tmpfile
 #=========================================================

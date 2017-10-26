@@ -12,6 +12,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
+source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/14_get_design.csh
@@ -41,10 +42,12 @@ svn mkdir --quiet $BLOCK_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $BLOCK_URL/.htm -m "HTML Report" --parents
 svn mkdir --quiet $BLOCK_URL/.dvc/env -m "DVC environment variable"
 
-#svn import --quiet --force $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
+
+svn import --quiet --force  $ETC_DIR/DOP_VERSION   $BLOCK_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
+svn import --quiet --force $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
 set tmpfile=`mktemp`
-echo "$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
+echo -n "$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
 svn import --quiet --force $tmpfile $BLOCK_URL/.dvc/env/DESIGN_PATH -m 'Block Name'
 rm -f $tmpfile
 
