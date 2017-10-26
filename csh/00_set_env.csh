@@ -1,4 +1,5 @@
 #!/bin/csh -f
+#set verbose=1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
    echo "Usage: $prog [--global|--local|--reset] <variable> <value>"
@@ -21,7 +22,7 @@ else if ($1 == "--local") then
    shift argv
 else
    set local=1
-   set env_root=.
+   set env_root=.dop
 endif
 
 if ($1 == "--reset") then
