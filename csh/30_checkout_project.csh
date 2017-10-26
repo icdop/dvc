@@ -33,22 +33,21 @@ if ($1 != "") then
     setenv PROJT_PATH "_"
   endif
   shift argv
-else if ($PROJT_ROOT == "") then
+else 
   setenv PROJT_PATH $DESIGN_PROJT
-else
-  setenv PROJT_PATH $PROJT_ROOT/$DESIGN_PROJT
 endif
 
 $CSH_DIR/00_set_env.csh PROJT_PATH   $PROJT_PATH
 
-if {(test -e $PROJT_PATH/.dqi/DESIGN_PROJT)} then
-   set orig_project=`cat $PROJT_PATH/.dqi/DESIGN_PROJT`
-   if (($orig_project != "") && ($orig_project != $DESIGN_PROJT)) then
+set project=`$CSH_DIR/10_get_env.csh --root $PROJT_PATH/.dvc DESIGN_PROJT`
+if {(test -e $PROJT_PATH/.dvc/env/DESIGN_PROJT)} then
+   set project=`cat $PROJT_PATH/.dvc/env/DESIGN_PROJT`
+   if (($project != "") && ($project != $DESIGN_PROJT)) then
       if ($?force_mode) then
-         echo "WARNING: removing previous project checkout data - $orig_project"
+         echo "WARNING: removing previous project checkout data - $project"
          rm -fr $PROJT_PATH
       else
-         echo "ERROR: there is existing project checkout data - $orig_project"
+         echo "ERROR: there is existing project checkout data - $project"
          echo "       use --force option to replace it."
          exit 1
       endif

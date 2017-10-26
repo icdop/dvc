@@ -39,10 +39,11 @@ svn mkdir --quiet $PHASE_URL -m "Create Design Phase $DESIGN_PHASE ..." --parent
 svn mkdir --quiet $PHASE_URL/.dvc -m "Design Platform Config Directory" --parents
 svn mkdir --quiet $PHASE_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $PHASE_URL/.htm -m "HTML Report" --parents
+svn mkdir --quiet $PHASE_URL/.dvc/env -m "DVC environment variable"
 
 set tmpfile=`mktemp`
-echo "/$DESIGN_PHASE" > $tmpfile
-svn import --quiet --force $tmpfile $PHASE_URL/.dvc/DESIGN_PATH -m 'Project Phase Name'
+echo "$DESIGN_PHASE" > $tmpfile
+svn import --quiet --force $tmpfile $PHASE_URL/.dvc/env/DESIGN_PATH -m 'Project Phase Name'
 rm -f $tmpfile
 
 set readme=`mktemp`

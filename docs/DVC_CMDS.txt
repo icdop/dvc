@@ -136,13 +136,21 @@ dvc_create_project:
 	copy the default config files (dvc/etc/conf/*) to conf/ folder
 
 dvc_checkout_project:   
-	Usage: $prog [--depth <files|infinity>] <DESIGN_PROJT> [<PROJT_ROOT>]
+	Usage: $prog [--recursive] <DESIGN_PROJT> [<PROJT_PATH>]
 	Description:
-	  create a .project folder in current directory
-	checkout project folder to $PROJT_ROOT/
-	--depth infinity
-		checkout all data and subfolder under version folder 
+	  checkout project $DESIGN_PROJT to directory $PROJT_PATH/
+	only files under the project root is checkout by default, 
+	subfolders (phase/block/stage/version) are not checkout
+	Option:
+	--recursive
+		checkout all files and subfolder under project root
 
+dvc_checkin_project:   
+	Usage: $prog [--recursive] [<PROJT_PATH>]
+	Description:
+	  checkin projec folder $PROJT_PATH, get DESIGN_PROJT value from .dvc/DESIGN_PROJT
+	--recursive
+		checkin all files and subfolder under project root path
 #
 # Create Design Version Folder at Server side
 #

@@ -26,7 +26,11 @@ else if ($?DVC_PATH == 0) then
    setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
 endif
 
-setenv DESIGN_PATH $PROJT_PATH/$DVC_PATH
+if (($PROJT_PATH == "")||($PROJT_PATH == ".")) then
+   setenv DESIGN_PATH ./$DVC_PATH
+else
+   setenv DESIGN_PATH $PROJT_PATH/$DVC_PATH
+endif
 
 if ($?depth_mode == 0) then
    set depth_mode=files

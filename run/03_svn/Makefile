@@ -15,7 +15,7 @@ PTR_VERSN   := :version
 PTR_CONTR   := :container
 
 ##################################
-PROJT_BASE   := _
+PROJT_PATH   := _
 DESIGN_PROJT := 03-svn
 #---------------------------------
 DESIGN_PHASE := P1-trial

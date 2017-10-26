@@ -13,7 +13,7 @@ PTR_VERSN   := :version
 PTR_CONTR   := :container
 
 ####################################################################
-PROJT_BASE   := _
+PROJT_PATH   := _
 DESIGN_PROJT := 02_file
 #----------------------------------
 DESIGN_PHASE := P1-trial

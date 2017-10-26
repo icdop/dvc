@@ -20,12 +20,14 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 # this is used to preserved all option modes of parent commands 
 
 if ($1 != "") then
-   set dir $1
-   if {(test -e $dir/.dvc/DESIGN_PATH)} then
-      if {(test -e $dir/.dvc/DESIGN_CONTR)} then
-         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`/`cat $dir/.dvc/DESIGN_CONTR`
+   set dir=$1
+   set design_path=`$CSH_DIR/10_get_env --root $dir/.dvc DESIGN_PATH`
+   set container=`$CSH_DIR/10_get_env --root $dir/.dvc DESIGN_CONTR`
+   if ($design_path != "") then
+      if {($container != "") then
+         setenv DESIGN_URL $PROJT_URL/$design_path/$container
       else
-         setenv DESIGN_URL $PROJT_URL/`cat $dir/.dvc/DESIGN_PATH`
+         setenv DESIGN_URL $PROJT_URL/$container
       endif
    else
       setenv DESIGN_URL $PROJT_URL/$dir

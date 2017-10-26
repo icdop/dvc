@@ -1,50 +1,35 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/05_apr'
+make[1]: Entering directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'
 dvc_list_design --recursive
 _
-├── P1-trial
-│   ├── block1
-│   │   └── index.htm
-│   ├── block2
-│   │   └── index.htm
-│   ├── block3
-│   │   └── index.htm
-│   ├── block4
-│   │   └── index.htm
-│   ├── block5
-│   │   └── index.htm
-│   ├── chip
-│   │   ├── 400-APR
-│   │   │   ├── 2017_0912-xxx
-│   │   │   │   ├── chip.jpg
-│   │   │   │   ├── cts
-│   │   │   │   │   ├── apr.log
-│   │   │   │   │   ├── index.htm
-│   │   │   │   │   └── sta.rpt
-│   │   │   │   ├── design.sdc
-│   │   │   │   ├── design.v
-│   │   │   │   ├── index.htm
-│   │   │   │   ├── place
-│   │   │   │   │   ├── apr.log
-│   │   │   │   │   ├── index.htm
-│   │   │   │   │   ├── place.jpg
-│   │   │   │   │   └── sta.rpt
-│   │   │   │   ├── postroute
-│   │   │   │   │   ├── apr.log
-│   │   │   │   │   ├── index.htm
-│   │   │   │   │   └── sta.rpt
-│   │   │   │   ├── preplace
-│   │   │   │   │   ├── apr.log
-│   │   │   │   │   ├── index.htm
-│   │   │   │   │   └── sta.rpt
-│   │   │   │   └── route
-│   │   │   │       ├── apr.log
-│   │   │   │       ├── index.htm
-│   │   │   │       ├── route.jpg
-│   │   │   │       └── sta.rpt
-│   │   │   └── index.htm
-│   │   └── index.htm
-│   └── index.htm
-└── index.htm
+└── P1-trial
+    ├── block1
+    ├── block2
+    ├── block3
+    ├── block4
+    ├── block5
+    └── chip
+        └── 400-APR
+            └── 2017_0912-xxx
+                ├── chip.jpg
+                ├── cts
+                │   ├── apr.log
+                │   └── sta.rpt
+                ├── design.sdc
+                ├── design.v
+                ├── place
+                │   ├── apr.log
+                │   ├── place.jpg
+                │   └── sta.rpt
+                ├── postroute
+                │   ├── apr.log
+                │   └── sta.rpt
+                ├── preplace
+                │   ├── apr.log
+                │   └── sta.rpt
+                └── route
+                    ├── apr.log
+                    ├── route.jpg
+                    └── sta.rpt
 
-14 directories, 30 files
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/05_apr'
+14 directories, 15 files
+make[1]: Leaving directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'

@@ -72,7 +72,7 @@
 
   * checkuot_project :
 
-	$PROJT_ROOT/      (project checkout root, default is '_')
+	$PROJT_PATH/      (checkout root dir, default is $DESIGN_PROJT)
 		.dvc/DESIGN_PROJT
 
 

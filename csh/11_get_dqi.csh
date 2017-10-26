@@ -63,7 +63,7 @@ endif
 
 if ($1 == "--all") then
    shift argv
-   set dqi_list = `(cd $dqi_root/.dqi/$dqi_group/; ls -a . )`
+   set dqi_list = `(cd $dqi_root/.dqi/$dqi_group/; ls -a . -1 -I . -I .. )`
 else
    set dqi_list=""
    while ($1 != "")

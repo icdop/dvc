@@ -1,44 +1,32 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/05_apr'
+make[1]: Entering directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'
 dvc_list_project --recursive
 P1-trial/
 P1-trial/block1/
-P1-trial/block1/index.htm
 P1-trial/block2/
-P1-trial/block2/index.htm
 P1-trial/block3/
-P1-trial/block3/index.htm
 P1-trial/block4/
-P1-trial/block4/index.htm
 P1-trial/block5/
-P1-trial/block5/index.htm
 P1-trial/chip/
 P1-trial/chip/400-APR/
 P1-trial/chip/400-APR/2017_0912-xxx/
 P1-trial/chip/400-APR/2017_0912-xxx/chip.jpg
 P1-trial/chip/400-APR/2017_0912-xxx/cts/
 P1-trial/chip/400-APR/2017_0912-xxx/cts/apr.log
-P1-trial/chip/400-APR/2017_0912-xxx/cts/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/cts/sta.rpt
 P1-trial/chip/400-APR/2017_0912-xxx/design.sdc
 P1-trial/chip/400-APR/2017_0912-xxx/design.v
-P1-trial/chip/400-APR/2017_0912-xxx/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/place/
 P1-trial/chip/400-APR/2017_0912-xxx/place/apr.log
-P1-trial/chip/400-APR/2017_0912-xxx/place/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/place/place.jpg
 P1-trial/chip/400-APR/2017_0912-xxx/place/sta.rpt
 P1-trial/chip/400-APR/2017_0912-xxx/postroute/
 P1-trial/chip/400-APR/2017_0912-xxx/postroute/apr.log
-P1-trial/chip/400-APR/2017_0912-xxx/postroute/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/postroute/sta.rpt
 P1-trial/chip/400-APR/2017_0912-xxx/preplace/
 P1-trial/chip/400-APR/2017_0912-xxx/preplace/apr.log
-P1-trial/chip/400-APR/2017_0912-xxx/preplace/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/preplace/sta.rpt
 P1-trial/chip/400-APR/2017_0912-xxx/route/
 P1-trial/chip/400-APR/2017_0912-xxx/route/apr.log
-P1-trial/chip/400-APR/2017_0912-xxx/route/index.htm
 P1-trial/chip/400-APR/2017_0912-xxx/route/route.jpg
 P1-trial/chip/400-APR/2017_0912-xxx/route/sta.rpt
-P1-trial/chip/index.htm
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/05_apr'
+make[1]: Leaving directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'

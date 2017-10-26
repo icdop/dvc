@@ -41,13 +41,15 @@ else
    svn mkdir --quiet $PROJT_URL/.dvc -m "Design Platform Config Directory" --parents
    svn mkdir --quiet $PROJT_URL/.dqi -m "Design Quality Indicator" --parents
    svn mkdir --quiet $PROJT_URL/.htm -m "HTML Report" --parents
-   svn import --quiet --force  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
-   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
+   svn mkdir --quiet $PROJT_URL/.dvc/env -m "DVC environment variable"
+
+#   svn import --quiet --force  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
+#   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
    set tmpfile=`mktemp`
    echo -n "" > $tmpfile
    echo $DESIGN_PROJT > $tmpfile
-   svn import --quiet --force $tmpfile $PROJT_URL/.dqi/DESIGN_PROJT -m 'Project Name'
+   svn import --quiet --force $tmpfile $PROJT_URL/.dvc/env/DESIGN_PROJT -m 'Project Name'
    rm -f $tmpfile
 
    set readme=`mktemp`
