@@ -14,7 +14,7 @@ diff: tree
 	@echo "============================="
 	@wc -l diff.log
 clean:
-	rm -f :phase :block :stage :version :container
+	rm -fr :phase :block :stage :version :container
 	rm -fr .dop _ svn_root testcase
 	rm -fr log diff.log run.log
 	

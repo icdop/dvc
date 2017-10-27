@@ -24,21 +24,21 @@ if ($1 == "--mode") then
    shift argv
    setenv SVN_MODE $1
    shift argv
-   $CSH_DIR/02_set_server.csh SVN_MODE $SVN_MODE
+   $CSH_DIR/00_set_env.csh SVN_MODE $SVN_MODE
 endif
 
 if ($1 == "--host") then
    shift argv
    setenv SVN_HOST $1
    shift argv
-   $CSH_DIR/02_set_server.csh SVN_HOST $SVN_HOST
+   $CSH_DIR/00_set_env.csh SVN_HOST $SVN_HOST
 endif
 
 if ($1 == "--port") then
    shift argv
    setenv SVN_PORT $1
    shift argv
-   $CSH_DIR/02_set_server.csh SVN_PORT $SVN_PORT
+   $CSH_DIR/00_set_env.csh SVN_PORT $SVN_PORT
 endif
 
 if ($1 != "") then
@@ -49,7 +49,10 @@ else
 endif
 
 switch($command)
+case "svn":
 case "file":
+  echo "ERROR: '$prog $command' is obsolete, use '--mode $command' instead"
+  breaksw
 case "status":
   echo "-------------------------------------------------------"
   echo "INFO: SVN_ROOT = $SVN_ROOT"
@@ -93,22 +96,18 @@ case "start":
      echo "======================================================="
      exit 0
   endif
-case "svn":
-  if ($SVN_MODE == "file") then
-     $CSH_DIR/02_set_server.csh SVN_MODE "svn"
-  endif
   if ($?SVN_PID) then
      set svn_host = `cat $SVN_ROOT/.dop/svnserve.host`
      set svn_port = `cat $SVN_ROOT/.dop/svnserve.port`
      if (($SVN_HOST != $svn_host)||($SVN_PORT != $svn_port)) then
         echo "EORROR: SVN server is already runining on differnt port - $svn_host $svn_port"
-        $CSH_DIR/02_set_server.csh SVN_HOST $svn_host
-        $CSH_DIR/02_set_server.csh SVN_PORT $svn_port
+        $CSH_DIR/00_set_env.csh SVN_HOST $svn_host
+        $CSH_DIR/00_set_env.csh SVN_PORT $svn_port
      else
         ps -f -p $SVN_PID
         if ($status == 0) then
            echo "INFO: SVN server is already runining - $svn_host $svn_port "
-           $CSH_DIR/02_set_server.csh SVN_MODE "svn"
+           $CSH_DIR/00_set_env.csh SVN_MODE "svn"
         else
            echo "ERROR: Can not find SVN server with pid($SVN_PID)"
         endif
@@ -124,9 +123,9 @@ case "svn":
         if ($status == 0) then
            echo $SVN_HOST > $SVN_ROOT/.dop/svnserve.host
            echo $SVN_PORT > $SVN_ROOT/.dop/svnserve.port
-           $CSH_DIR/02_set_server.csh SVN_ROOT $SVN_ROOT
-           $CSH_DIR/02_set_server.csh SVN_HOST $SVN_HOST
-           $CSH_DIR/02_set_server.csh SVN_PORT $SVN_PORT
+           $CSH_DIR/00_set_env.csh SVN_ROOT $SVN_ROOT
+           $CSH_DIR/00_set_env.csh SVN_HOST $SVN_HOST
+           $CSH_DIR/00_set_env.csh SVN_PORT $SVN_PORT
         else
         endif
      endif

@@ -6,7 +6,7 @@ if (($1 == "-h") || ($1 == "--help")) then
 endif
 
 if ($1 == "--reset") then
-   set reset=1
+   set reset_mode=1
    shift argv
 endif
 
@@ -17,6 +17,17 @@ if ($1 == "SVN_ROOT") then
       shift argv
       $CSH_DIR/00_set_env.csh SVN_ROOT $SVN_ROOT
    endif
+   exit 0
+endif
+
+if ($1 == "SVN_MODE") then
+   shift argv
+   if ($1 != "") then
+      setenv SVN_MODE $1
+      shift argv
+      $CSH_DIR/00_set_env.csh SVN_MODE $SVN_MODE
+   endif
+   exit 0
 endif
 
 if ($?SVN_ROOT == 0) then
@@ -29,7 +40,7 @@ mkdir -p $SVN_ROOT/.dop/env
 
 if (($1 != "") && ($1 != ".") && ($1 != "..") && ($1 != "/")) then
    set envname = $1
-   if (($?reset)||($2 == "--reset")) then
+   if (($?reset_mode)||($2 == "--reset")) then
       echo "INFO: remove server env($envname)"
       rm -f $SVN_ROOT/.dop/env/$envname
    else if ($2 != "") then

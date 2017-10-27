@@ -44,9 +44,10 @@ else
    svn mkdir --quiet $PROJT_URL/.htm -m "HTML Report" --parents
    svn mkdir --quiet $PROJT_URL/.dvc/env -m "DVC environment variable"
 
+   svn import --quiet --force  $ETC_DIR/jquery   $PROJT_URL/.htm/jquery -m 'jQuery Plugin' 
+   svn import --quiet --force  $ETC_DIR/bootstrap   $PROJT_URL/.htm/bootstrap -m 'Bootstrap Plugin' 
+   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
    svn import --quiet --force  $ETC_DIR/DOP_VERSION   $PROJT_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
-#   svn import --quiet --force  $ETC_DIR/rule/DEFINE_PHASE   $PROJT_URL/.dvc/SUB_FOLDERS -m 'Phase Naming Rule' 
-#   svn import --quiet --force  $ETC_DIR/rule/FILE_PLUGINS   $PROJT_URL/.dvc/FILE_PLUGINS -m 'Design Plugin' 
 
    set tmpfile=`mktemp`
    echo -n $DESIGN_PROJT > $tmpfile
