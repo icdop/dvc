@@ -2,7 +2,7 @@
 #set verbose = 1
 set prog = $0:t
 if (($1 == "-h") || ($1 == "--help")) then
-   echo "Usage: $prog [--server|--local] [--all] <variable>"
+   echo "Usage: $prog [--local|--global|--server] [--design <dir>] [--all] <variable>"
    exit -1
 endif
 
@@ -24,6 +24,10 @@ else if ($1 == "--server") then
 else if ($1 == "--local") then
    shift argv
    set env_root=$PWD/.dop
+else if ($1 == "--design") then
+   shift argv
+   set env_root=$1/.dvc
+   shift argv
 else
    set env_root=.dop
 endif

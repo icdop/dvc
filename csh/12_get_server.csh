@@ -63,38 +63,42 @@ else if ($?SVN_ROOT == 0) then
    exit 1
 endif
 
-if {(test -e $SVN_ROOT/.dop/svnserve.pid)} then
-  setenv SVN_PID      `cat $SVN_ROOT/.dop/svnserve.pid`
-else
-  unsetenv SVN_PID
-endif
-
-if {(test -f $SVN_ROOT/.dop/env/SVN_HOST)} then
-  setenv SVN_HOST      `cat $SVN_ROOT/.dop/env/SVN_HOST`
+# Sequence :
+#   1) Local run dir saved value
+#   2) Server root dir saved value
+#   3) Environment variable value
+#   4) Default value : local host name
+if {(test -e .dop/env/SVN_HOST)} then
+   setenv SVN_HOST  `cat .dop/env/SVN_HOST`
+   if {(test -e .dop/env/SVN_PORT)} then
+      setenv SVN_PORT  `cat .dop/env/SVN_PORT`
+   else
+      setenv SVN_PORT      3690
+   endif
+else if {(test -f $SVN_ROOT/.dop/svnserve.host)} then
+   setenv SVN_HOST      `cat $SVN_ROOT/.dop/svnserve.host`
+   if {(test -f $SVN_ROOT/.dop/svnserve.port)} then
+      setenv SVN_PORT      `cat $SVN_ROOT/.dop/svnserve.port`
+   else
+      setenv SVN_PORT      3690
+   endif
 else if ($?SVN_HOST == 0) then
-  setenv SVN_HOST      `hostname`
-endif
-
-if {(test -f $SVN_ROOT/.dop/env/SVN_PORT)} then
-  setenv SVN_PORT      `cat $SVN_ROOT/.dop/env/SVN_PORT`
+   setenv SVN_HOST      `hostname`
+   setenv SVN_PORT      3690
 else if ($?SVN_PORT == 0) then
-  setenv SVN_PORT      3690
-endif
-
-if {(test -f $SVN_ROOT/.dop/env/SVN_DVC)} then
-  setenv SVN_DVC      `cat $SVN_ROOT/.dop/env/SVN_DVC`
-else 
-  setenv SVN_DVC      ":undefined"
+   setenv SVN_PORT      3690
 endif
 
 #
 # User can overwrite SVN_MODE through environment varaible
 #
 if ($?SVN_MODE == 0) then
-   if {(test -f $SVN_ROOT/.dop/env/SVN_MODE)} then
-     setenv SVN_MODE      `cat $SVN_ROOT/.dop/env/SVN_MODE`
-   else
+   if {(test -f .dop/env/SVN_MODE)} then
+     setenv SVN_MODE      `cat .dop/env/SVN_MODE`
+   else if {(test -e $SVN_ROOT)} then
      setenv SVN_MODE      file
+   else
+     setenv SVN_MODE      svn
    endif
 endif
 
@@ -112,7 +116,6 @@ if ($?info_mode) then
   echo "INFO: SVN_HOST = $SVN_HOST"
   echo "INFO: SVN_PORT = $SVN_PORT"
   echo "INFO: SVN_URL  = $SVN_URL"
-  echo "INFO: SVN_DVC  = $SVN_DVC"
 endif
 
 
