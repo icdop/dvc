@@ -63,7 +63,7 @@ else
    echo "====================================" >> $readme
    svn import --quiet --force $readme $PROJT_URL/.dvc/README -m 'Initial Design Version Directory'
    rm -fr $readme
-   
+
 endif
 
 
