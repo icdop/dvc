@@ -1,4 +1,4 @@
-# Design Version Control V2017_1025a
+# Design Version Control V2017_1101.dev
 
 ## Version Control Engine -- Subversion
 
@@ -21,9 +21,9 @@
 
 ## Design Database Directory Structure
 
-- There are 4 levels of directories under project respository
+- Under project respository, there are 4 levels of design version directories 
 
-Directory:
+[Directory]:
 
 	$DESIGN_PROJT/		(Project Repository Root)
 
@@ -33,21 +33,21 @@ Directory:
 					$DESIGN_VERSN/
 
 
-Phase:
+Phase Name (defined by project manager):
 
 	P1-trial , P2-stable, P3-final, P4-tapeout, ...
 
-Block:
+Block Name (defined by design manager):
 
 	chip, cpu, gpu, ddr, sub1, ...
 
-Stage:
+Stage Name (defined based on tool execution flow):
 
 	000-DATA,	100-CIRCUIT,	200-LOGIC,	300-DFT,
 	400-APR,	500-SIGNOFF,	600-TAPEOUT,	700-TESTING,
 	800-PACKAGE,	900-SYSTEM
 
-Version:
+Version Name (defined by designer, recommend to follow the same convention):  
 
 	<DBSRC_DATE>-<DBDST_WEEK>-<REMARK>
 	170910-ww38-ftp
@@ -56,7 +56,7 @@ Version:
 	170910-ww42-eco
 
 ***
-## Design Version Management Flow:
+## Execution Flow:
 
 ### 1. Setup svn file server and project account - CAD/IT
 
@@ -72,8 +72,6 @@ Example:
 		--root /home/owner/proj_svn \
 		--mode svn --host <localhost> -port 3690
 
-	; check server status
-	% dvc_init_server status
 
 ### 2. Create project respository - Project Manager
 
