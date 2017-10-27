@@ -44,7 +44,6 @@ svn mkdir --quiet $BLOCK_URL/.dvc/env -m "DVC environment variable"
 
 
 svn import --quiet --force  $ETC_DIR/DOP_VERSION   $BLOCK_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
-svn import --quiet --force $ETC_DIR/rule/DEFINE_STAGE    $BLOCK_URL/.dvc/SUB_FOLDERS -m 'Stage Naming Rule'
 
 set tmpfile=`mktemp`
 echo -n "$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile
