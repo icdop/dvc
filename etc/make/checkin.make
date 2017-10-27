@@ -76,10 +76,10 @@ init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
 	@echo "#---------------------------------------------------"
-	dvc_set_server SVN_ROOT $(SVN_ROOT)
-	dvc_set_server SVN_MODE $(SVN_MODE)
-	dvc_set_server SVN_HOST $(SVN_HOST)
-	dvc_set_server SVN_PORT $(SVN_PORT)
+	dvc_set_env SVN_ROOT $(SVN_ROOT)
+	dvc_set_env SVN_MODE $(SVN_MODE)
+	dvc_set_env SVN_HOST $(SVN_HOST)
+	dvc_set_env SVN_PORT $(SVN_PORT)
 
 SVN_PID	:= $(SVN_ROOT)/.dvc/svnserve.pid
 SVN_LOG	:= $(SVN_ROOT)/.dvc/svnserve.log
