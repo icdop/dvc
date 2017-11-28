@@ -1,8 +1,0 @@
-#echo "<!doctype html>"
-echo "<html>"
-echo "<meta charset=utf-8>"
-echo "<head>"
-echo "<title>$dvc_title </title>"
-echo "<link rel=stylesheet type=text/css href=.htm/index.css>"
-echo "</head>"
-echo "<body>"

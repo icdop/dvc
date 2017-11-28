@@ -24,12 +24,6 @@ log/tree.log:
 diff: log/list.log log/tree.log
 	diff -r log golden | tee diff.log
 	
-index:
-	dvc_init_report
-	
-view:
-	firefox	index.htm &
-		
 clean:
 	dvc_remove_project 04_sta
 	rm -fr .dop log _
