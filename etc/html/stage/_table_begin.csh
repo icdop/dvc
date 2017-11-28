@@ -1,6 +1,0 @@
-echo "<table id=indextable>"
-echo "<tr class=header>"
-echo "<td>Version</td>"
-echo "<td>Detail Content</td>"
-echo "<td>Quality Indicator</td>"
-echo "</tr>"

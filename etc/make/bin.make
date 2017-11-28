@@ -55,7 +55,6 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/65_checkin_container.csh		$(BIN_PATH)/dvc_checkin_container
 	ln -f -s $(CSH_PATH)/66_checkin_design.csh		$(BIN_PATH)/dvc_checkin_design
 	ln -f -s $(CSH_PATH)/69_checkin_dvc_path.csh		$(BIN_PATH)/dvc_checkin_dvc_path
-	ln -f -s $(CSH_PATH)/98_init_report.csh			$(BIN_PATH)/dvc_init_report
 	ln -f -s $(CSH_PATH)/99_init_server.csh			$(BIN_PATH)/dvc_init_server
 	ln -f -s $(CSH_PATH)/x0_remove_project.csh		$(BIN_PATH)/dvc_remove_project
 	ln -f -s $(CSH_PATH)/x1_remove_phase.csh		$(BIN_PATH)/dvc_remove_phase
