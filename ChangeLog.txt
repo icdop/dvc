@@ -34,3 +34,5 @@
 * 2017/10/26 By Albert Li
 *	add version code to dvc directory
 *	prepare for 2017_1025a patch
+* 2017/11/27 By Albert Li
+*	move DQI realted code to dqr sub system
