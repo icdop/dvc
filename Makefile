@@ -1,4 +1,4 @@
-GIT_PATH := https://github.com/VirtualChip/dvc.git
+GIT_PATH := https://github.com/icdop/dvc.git
 
 help:
 	@echo "Usage: make bin"
@@ -11,4 +11,3 @@ pull:
 push:
 	git push $(GIT_PATH)
 
-	
