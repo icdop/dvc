@@ -30,7 +30,7 @@ Example:
 
 ## Design Database Directory Structure
 
-- Under project respository, there are 4 levels of design version directories 
+- Under project repository, there are 4 levels of design version directories 
 
 [Directory]:
 
