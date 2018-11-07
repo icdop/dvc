@@ -4,19 +4,19 @@
 
 - The SVN server is initialized withthe following parameters:
 
-  * SVN_ROOT : svn repository root path, need to be set first
+	  $SVN_ROOT : svn repository root path, need to be set first
   
-  * SVN_MODE : svn | file -- server db access mode
-  * SVN_HOST : server host name -- only been used in svn server mode
-  * SVN_PORT : server port name -- only been used in svn server mode
+	  $SVN_MODE : svn | file -- server db access mode
+	  $SVN_HOST : server host name -- only been used in svn server mode
+	  $SVN_PORT : server port name -- only been used in svn server mode
   
 - When a project is createed, there will be one repository under:
 
-  * $SVN_ROOT/<project_name>/
+	  $SVN_ROOT/<project_name>/
 
 - Project config files are copied from $DVC_HOME/etc/conf/:
 
-  * $SVN_ROOT/<project_name>/conf/
+	  $SVN_ROOT/<project_name>/conf/
       
 
 ## Design Database Directory Structure
