@@ -52,7 +52,7 @@ else
    while ($1 != "")
       set env_list =($env_list $1)
       shift argv
-   endif
+   end
 endif
 
 if {(test -d $env_root/env/)} then
