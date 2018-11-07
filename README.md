@@ -1,23 +1,32 @@
 # Design Version Control V2018_1107a
 
-## Version Control Engine -- Subversion
+## How To install DVC package and setup
 
-- The SVN server is initialized withthe following parameters:
+### Download DVC package and Create unix environment setup script (Run Once):
 
-	  $SVN_ROOT : svn repository root path, need to be set first
-	
-	  $SVN_MODE : svn | file -- server db access mode
-	  $SVN_HOST : server host name -- only been used in svn server mode
-	  $SVN_PORT : server port name -- only been used in svn server mode
-  
-- When a project is createed, there will be one repository under:
+Example:
 
-	  $SVN_ROOT/<project_name>/
+	;######################################################
+	;## run the following step once                      ##
+	;## install DVC package into /tools/icdop            ##
+	;######################################################
 
-- Project config files are copied from $DVC_HOME/etc/conf/:
+	% cd /tools/icdop/
+	% git clone https://github.com/icdop/dvc.git
 
-	  $SVN_ROOT/<project_name>/conf/
-      
+	% cd $HOME
+	% /tools/icdop/dvc/setup.cshrc
+
+	=> create CSHRC.dvc under $HOME directory
+
+	;######################################################
+	;## source the CSHRC.dvc to acces the DVC utility    ##
+	;######################################################
+
+	% source $HOME/CSHRC.dvc
+
+		DVC_HOME = /tools/icdop/dvc
+
 
 ## Design Database Directory Structure
 
@@ -57,30 +66,6 @@ Version Name (defined by designer, recommend to follow the same convention):
 
 ***
 ## Execution Flow:
-
-### 0. Download DVC package and Create unix environment setup script (Run Once):
-
-Example:
-
-	;######################################################
-	;## run the following step once                      ##
-	;## install DVC package in /tools/icdop              ##
-	;######################################################
-
-	% cd /too/icdop/
-	% git clone https://github.com/icdop/dvc.git
-	% cd dvc/
-	% /tools/icdop/dvc/setup.cshrc
-
-	=> create CSHRC.dvc under /tools/icdop/dvc/ directory
-
-	;######################################################
-	;## source the CSHRC.dvc to acces the DVC utility    ##
-	;######################################################
-
-	% source /tools/icdop/dvc/CSHRC.dvc
-
-		DVC_HOME = /tools/icdop/dvc
 
 
 ### 1. Create project account and root directory

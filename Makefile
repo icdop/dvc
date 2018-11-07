@@ -6,8 +6,14 @@ help:
 include etc/make/bin.make
 
 pull:
-	git pull $(GIT_PATH)
+	git pull
+	
+merge:
+	git merge .
 
+commit:
+	git commit .
+	
 push:
-	git push $(GIT_PATH)
+	git push 
 
