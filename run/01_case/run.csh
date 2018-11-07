@@ -6,7 +6,7 @@ dvc_init_server --root svn_root --mode file
 
 ### 2. Create project respository - Project Manager
 
-dvc_create_project testcsae
+dvc_create_project testcase
 
 ### 3. Create design version folder and checkin design data - Design Manager
 #dvc_checkout_project
