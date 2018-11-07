@@ -89,7 +89,7 @@ Example:
 
 	- Project Root Directory
 	
-		PROJ_ROOT = /project/N13301A
+		PROJ_ROOT = /projects/N13301A
 		
 	- Project Central Data Directory 
 
@@ -113,12 +113,15 @@ Step-2.1:
 	;## create project specific CSHRC.dvc                ##
 	;######################################################
 
-	% cp $DVC_HOME/CSHRC.dvc  $PROJ_ROOT/flow
-	% echo 'setnev PROJ_ROOT /projects/N13301A' >> CSHRC.dvc
-	% echo 'setenv SVN_ROOT  $PROJ_ROOT/svn'    >> CSHRC.dvc
-	% echo 'setenv SVN_MODE  svn'               >> CSHRC.dvc
-	% echo 'setenv SVN_HOST  icdop_server'      >> CSHRC.dvc
-        % echo 'setenv SVN_PORT  3690'              >> CSHRC.dvc
+	% vi /projects/N13301A/flow/CSHRC.dvc
+
+	setenv DVC_HOME /tools/icdop/dvc
+	setenv PATH     $DVC_HOME/bin:$PATH
+	setnev PROJ_ROOT /projects/N13301A
+	setenv SVN_ROOT  $PROJ_ROOT/svn
+	setenv SVN_MODE  svn
+	setenv SVN_HOST  svn_server
+        setenv SVN_PORT  13301
 
 
 Step-2.2:
@@ -149,16 +152,12 @@ Step-2.2:
 
 	;######################################################
 	;## Start SVN server for other members to use        ##
-	;## % dvc_init_server \                              ##
-	;##	--root $SVN_ROOT \                           ##
-	;##	--mode $SVN_MODE \                           ##
-	;##	--host $SVN_HOST -port $SVN_PORT             ##
 	;######################################################
 
 	% dvc_init_server \
 		--root $PROJ_ROOT/svn \
 		--mode svn \
-		--host localhost -port 3690
+		--host $SVN_HOST -port $SVN_PORT
 
 
 ### 3. Create design folder for members - Technical Lead
@@ -172,10 +171,9 @@ Example:
 	% source /projects/N11301A/flow/CSHRC.dvc
 
 	;######################################################
-	;## dvc_create_project   <proj_name>                 ##
+	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
-
-	% dvc_create_project N11301A
+	% dvc_checkout_project N11301A _
 
 	;######################################################
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
@@ -195,7 +193,7 @@ Example:
 	% source /projects/N11301A/flow/CSHRC.dvc
 
 	;######################################################
-	;## dvc_checkout_project   <proj_name> [<dest_path>] ##
+	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
 	% dvc_checkout_project N11301A _
 
