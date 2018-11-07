@@ -58,8 +58,8 @@ if ($1 == "--mod") then
    endsw
 endif
 
-if {(test -f $root_path/etc/VERSION)} then
-   setenv DVC_VERSION `cat $root_path/etc/VERSION`
+if {(test -f $root_path/REVISION)} then
+   setenv DVC_VERSION `cat $root_path/REVISION`
 else
    setenv DVC_VERSION ":undefined:"
 endif
