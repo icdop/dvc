@@ -7,8 +7,8 @@
 	  $SVN_MODE : svn | file -- server db access mode
 	  $SVN_HOST : server host name -- only been used in svn server mode
 	  $SVN_PORT : server port name -- only been used in svn server mode
-  
-- When a project is createed, there will be one repository under:
+
+- When a project is created, there will be one repository under:
 
 	  $SVN_ROOT/<project_name>/
 
@@ -81,8 +81,8 @@
 		<Location /project>
 		  DAV svn
 		  SVNParentPath /var/svn/project
- 		  AuthType Basic
- 		  AuthName "Subversion Repository"
+		  AuthType Basic
+		  AuthName "Subversion Repository"
 		  AuthUserFile /etc/apache2/dav_svn.passwd
 		  <LimitExcept GET PROPFIND OPTIONS REPORT>
 		    Require valid-user

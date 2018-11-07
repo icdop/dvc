@@ -92,7 +92,7 @@ Example:
 
 ### 2. Initialize project specific svn file server (Run If Needed)  - CAD/IT
 
-Step-2.1:
+Example:
 
 	;######################################################
 	;## create project specific CSHRC.dvc                ##
@@ -109,14 +109,20 @@ Step-2.1:
 	setenv SVN_PORT  13301
 
 
-Step-2.2:
-
 	;######################################################
 	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
 
 	% source $PRJ_ROOT/flow/CSHRC.dvc
 
+	- The SVN server is initialized withthe following parameters:
+
+	  $SVN_ROOT : svn repository root path, need to be set first
+	
+	  $SVN_MODE : svn | file -- server db access mode
+	  $SVN_HOST : server host name -- only been used in svn server mode
+	  $SVN_PORT : server port name -- only been used in svn server mode
+  
 
 	;######################################################
 	;## Init SVN DB with file access mode                ##
@@ -129,14 +135,22 @@ Step-2.2:
 
 
 	;######################################################
-	;## dvc_create_project   <proj_id>                   ##
+	;## dvc_create_project   <project_id>                ##
 	;######################################################
 
-	% dvc_create_project N11301A
+	% dvc_create_project N13301A
 
+	- When a project is created, there will be one repository under:
+
+	  $SVN_ROOT/<project_id>/
+
+	- Project config files are copied from $DVC_HOME/etc/conf/:
+
+	  $SVN_ROOT/<project_id>/conf/
+      
 
 	;######################################################
-	;## Start SVN server for other members to use        ##
+	;## Start a SVN server for other members to access   ##
 	;######################################################
 
 	% dvc_init_server \
@@ -145,7 +159,7 @@ Step-2.2:
 		--host $SVN_HOST -port $SVN_PORT
 
 
-### 3. Create design folder for members - Technical Lead
+### 3. Create design folder for members to checkin data - Technical Lead
 
 Example:
 
@@ -153,12 +167,12 @@ Example:
 	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
 
-	% source /projects/N11301A/flow/CSHRC.dvc
+	% source /projects/N13301A/flow/CSHRC.dvc
 
 	;######################################################
 	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
-	% dvc_checkout_project N11301A _
+	% dvc_checkout_project N13301A _
 
 	;######################################################
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
@@ -175,19 +189,19 @@ Example:
 	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
 
-	% source /projects/N11301A/flow/CSHRC.dvc
+	% source /projects/N13301A/flow/CSHRC.dvc
 
 	;######################################################
 	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
-	% dvc_checkout_project N11301A _
+	% dvc_checkout_project N13301A _
 
 	% dvc_checkout_folder P1-trial/block1/000-DATA/170910-ww38-place
 
 	% dvc_copy_object /some_rundir_path/design.v       design.v
 	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz
 
-	% dvc_list_folder --recursive
+	% dvc_list_folder [--recursive]
 
 	% dvc_checkin_folder
 
