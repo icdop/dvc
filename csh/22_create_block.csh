@@ -43,7 +43,7 @@ svn mkdir --quiet $BLOCK_URL/.htm -m "HTML Report" --parents
 svn mkdir --quiet $BLOCK_URL/.dvc/env -m "DVC environment variable"
 
 
-svn import --quiet --force  $ETC_DIR/DOP_VERSION   $BLOCK_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
+#svn import --quiet --force  $DVC_HOME/REVISION   $BLOCK_URL/.dvc/env/DVC_VERSION -m "$DVC_VERSION"
 
 set tmpfile=`mktemp`
 echo -n "$DESIGN_PHASE/$DESIGN_BLOCK" > $tmpfile

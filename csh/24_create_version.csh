@@ -47,7 +47,7 @@ svn mkdir --quiet $VERSN_URL/.dvc/env -m "DVC environment variable"
 
 set tmpfile=`mktemp`
 
-svn import --quiet --force  $ETC_DIR/DOP_VERSION   $VERSN_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
+svn import --quiet --force  $DVC_HOME/REVISION   $VERSN_URL/.dvc/env/DVC_VERSION -m "$DVC_VERSION"
 
 echo -n "$DVC_PATH" > $tmpfile
 svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'
