@@ -1,6 +1,6 @@
 #!/bin/csh -f
 set prog=$0:t
-if ($prog == "CSHRC.dvc") then
+if ($prog == "setup.cshrc") then
    setenv DVC_HOME `realpath $0:h`
 else
    setenv DVC_HOME `pwd`
