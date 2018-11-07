@@ -14,7 +14,7 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/04_set_design.csh
+source $CSH_DIR/04_set_folder.csh
 
 setenv DVC_PATH /$phase/$block/$stage/$version
 echo "INFO: DVC_PATH = $DVC_PATH"

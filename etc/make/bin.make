@@ -8,6 +8,7 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/01_set_dqi.csh			$(BIN_PATH)/dvc_set_dqi
 	ln -f -s $(CSH_PATH)/02_set_server.csh			$(BIN_PATH)/dvc_set_server
 	ln -f -s $(CSH_PATH)/03_set_project.csh			$(BIN_PATH)/dvc_set_project
+	ln -f -s $(CSH_PATH)/04_set_folder.csh			$(BIN_PATH)/dvc_set_folder
 	ln -f -s $(CSH_PATH)/04_set_design.csh			$(BIN_PATH)/dvc_set_design
 	ln -f -s $(CSH_PATH)/05_set_container.csh		$(BIN_PATH)/dvc_set_container
 	ln -f -s $(CSH_PATH)/09_set_path.csh			$(BIN_PATH)/dvc_set_path
@@ -15,6 +16,7 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/11_get_dqi.csh			$(BIN_PATH)/dvc_get_dqi
 	ln -f -s $(CSH_PATH)/12_get_server.csh			$(BIN_PATH)/dvc_get_server
 	ln -f -s $(CSH_PATH)/13_get_project.csh			$(BIN_PATH)/dvc_get_project
+	ln -f -s $(CSH_PATH)/14_get_folder.csh			$(BIN_PATH)/dvc_get_folder
 	ln -f -s $(CSH_PATH)/14_get_design.csh			$(BIN_PATH)/dvc_get_design
 	ln -f -s $(CSH_PATH)/19_get_system.csh			$(BIN_PATH)/dvc_get_system
 	ln -f -s $(CSH_PATH)/20_create_project.csh		$(BIN_PATH)/dvc_create_project
@@ -41,7 +43,7 @@ bin: csh/* csh/
 	ln -f -s $(CSH_PATH)/44_list_version.csh		$(BIN_PATH)/dvc_list_version
 	ln -f -s $(CSH_PATH)/45_list_container.csh		$(BIN_PATH)/dvc_list_container
 	ln -f -s $(CSH_PATH)/46_list_folder.csh			$(BIN_PATH)/dvc_list_folder
-	ln -f -s $(CSH_PATH)/46_list_folder.csh			$(BIN_PATH)/dvc_list_design
+	ln -f -s $(CSH_PATH)/46_list_design.csh			$(BIN_PATH)/dvc_list_design
 	ln -f -s $(CSH_PATH)/49_list_dvc_path.csh		$(BIN_PATH)/dvc_list_dvc_path
 	ln -f -s $(CSH_PATH)/52_copy_object.csh			$(BIN_PATH)/dvc_copy_object
 	ln -f -s $(CSH_PATH)/53_link_object.csh			$(BIN_PATH)/dvc_link_object
