@@ -1,4 +1,4 @@
-# Design Version Control V2017_1101.dev
+# Design Version Control V2018_1107.dev
 
 ## Version Control Engine -- Subversion
 
@@ -57,6 +57,23 @@ Version Name (defined by designer, recommend to follow the same convention):
 
 ***
 ## Execution Flow:
+### 0. Create Unix Environment setup script:
+
+Example:
+	;
+	; run the following step once
+	; install DVC package in /tools/icdop
+	;
+	% cd /tools/icdop
+	% git clone https://github.com/icdop/dvc.git
+	% cd dvc
+	% /tools/icdop/dvc/setup.cshrc
+	=> create CSHRC.dvc under /tools/icdop/dvc/ directory
+
+	;
+	; source the CSHRC.dvc to acces the DVC utility
+	;
+	% source /tools/icdop/dvc/CSHRC.dvc
 
 ### 1. Setup svn file server and project account - CAD/IT
 
