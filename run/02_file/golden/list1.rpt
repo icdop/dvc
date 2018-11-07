@@ -1,4 +1,4 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/02_file'
+make[1]: Entering directory `/home/icdop/dvc/run/02_file'
 dvc_list_project --recursive
 P1-trial/
 P1-trial/chip/
@@ -7,10 +7,9 @@ P1-trial/chip/520-sta/2017_0620-xxx/
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/cache/
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/cache/dummy_file
-P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/design.sdf
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/design.spef
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/design.v
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/report/
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/report/dummy_file
 P1-trial/chip/520-sta/2017_0620-xxx/ttt_0p80V_25C_rctyp/run_sta.log
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/02_file'
+make[1]: Leaving directory `/home/icdop/dvc/run/02_file'

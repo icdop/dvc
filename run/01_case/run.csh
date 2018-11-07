@@ -11,17 +11,16 @@ dvc_create_project testcsae
 ### 3. Create design version folder and checkin design data - Design Manager
 #dvc_checkout_project
 
-dvc_create_design P1-trial/chip/000-DATA/2017_0910-xxx
+dvc_create_folder P1-trial/chip/000-DATA/2017_0910-xxx
 
-dvc_checkout_design
+dvc_checkout_folder
 
 cp design_x.v :version/design.v
 cp design_x.sdc :version/design.sdc
 
-dvc_checkin_design
+dvc_checkin_folder
 
 dvc_list_project --recursive
 
-dvc_list_design
-
+dvc_list_folder
 

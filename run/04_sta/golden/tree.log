@@ -1,4 +1,4 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/04_sta'
+make[1]: Entering directory `/home/icdop/dvc/run/04_sta'
 dvc_list_design --recursive
 _
 └── P1-trial
@@ -11,52 +11,52 @@ _
         └── 520-sta
             ├── 2017_0910-ww38
             │   ├── 001
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 002
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 003
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 004
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── chip.jpg
             │   ├── design.sdc
             │   └── design.v
             ├── 2017_0910-ww39
             │   ├── 001
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 002
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 003
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── 004
-            │   │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+            │   │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
             │   │   └── sta.rpt
             │   ├── chip.jpg
             │   ├── design.sdc
             │   └── design.v
             └── 2017_0910-ww40
                 ├── 001
-                │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+                │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
                 │   └── sta.rpt
                 ├── 002
-                │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+                │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
                 │   └── sta.rpt
                 ├── 003
-                │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+                │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
                 │   └── sta.rpt
                 ├── 004
-                │   ├── sta.log -> /home/albertli/GITHOME/dvc/run/04_sta/report/sta.log
+                │   ├── sta.log -> /home/icdop/dvc/run/04_sta/report/sta.log
                 │   └── sta.rpt
                 ├── chip.jpg
                 ├── design.sdc
                 └── design.v
 
 20 directories, 36 files
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/04_sta'
+make[1]: Leaving directory `/home/icdop/dvc/run/04_sta'

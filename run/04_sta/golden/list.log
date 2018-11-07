@@ -1,4 +1,4 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/04_sta'
+make[1]: Entering directory `/home/icdop/dvc/run/04_sta'
 dvc_list_project --recursive
 P1-trial/
 P1-trial/chip/
@@ -56,4 +56,4 @@ P1-trial/chip/520-sta/2017_0910-ww40/004/sta.rpt
 P1-trial/chip/520-sta/2017_0910-ww40/chip.jpg
 P1-trial/chip/520-sta/2017_0910-ww40/design.sdc
 P1-trial/chip/520-sta/2017_0910-ww40/design.v
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/04_sta'
+make[1]: Leaving directory `/home/icdop/dvc/run/04_sta'
