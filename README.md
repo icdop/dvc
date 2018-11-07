@@ -89,20 +89,20 @@ Example:
 
 	- Project Root Directory
 	
-		PROJ_ROOT = /projects/N13301A
+		PRJ_ROOT = /projects/N13301A
 		
 	- Project Central Data Directory 
 
-		$PROJ_ROOT/techlib/		: n13301uc0
-		$PROJ_ROOT/design/		: n13301ud0
-		$PROJ_ROOT/flow/		: n13301uc0
-		$PROJ_ROOT/svn/			: n13301ua0
+		$PRJ_ROOT/techlib/		: n13301uc0
+		$PRJ_ROOT/design/		: n13301ud0
+		$PRJ_ROOT/flow/		: n13301uc0
+		$PRJ_ROOT/svn/			: n13301ua0
 
 	- Project User Working Directory 
 	
-		$PROJ_ROOT/users/n13301ua0/	: n13301ua0
-		$PROJ_ROOT/users/n13301ub0/	: n13301ub0
-		$PROJ_ROOT/users/n13301ub1/	: n13301ub1
+		$PRJ_ROOT/users/n13301ua0/	: n13301ua0
+		$PRJ_ROOT/users/n13301ub0/	: n13301ub0
+		$PRJ_ROOT/users/n13301ub1/	: n13301ub1
 		....
 
 ### 2. Initialize project specific svn file server (Run If Needed)  - CAD/IT
@@ -117,11 +117,11 @@ Step-2.1:
 
 	setenv DVC_HOME /tools/icdop/dvc
 	setenv PATH     $DVC_HOME/bin:$PATH
-	setnev PROJ_ROOT /projects/N13301A
-	setenv SVN_ROOT  $PROJ_ROOT/svn
+	setnev PRJ_ROOT /projects/N13301A
+	setenv SVN_ROOT  $PRJ_ROOT/svn
 	setenv SVN_MODE  svn
 	setenv SVN_HOST  svn_server
-        setenv SVN_PORT  13301
+	setenv SVN_PORT  13301
 
 
 Step-2.2:
@@ -130,7 +130,7 @@ Step-2.2:
 	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
 
-	% source $PROJ_ROOT/flow/CSHRC.dvc
+	% source $PRJ_ROOT/flow/CSHRC.dvc
 
 
 	;######################################################
@@ -139,7 +139,7 @@ Step-2.2:
 	;######################################################
 
 	% dvc_init_server \
-		--root $PROJ_ROOT/svn \
+		--root $PRJ_ROOT/svn \
 		--mode file
 
 
@@ -155,7 +155,7 @@ Step-2.2:
 	;######################################################
 
 	% dvc_init_server \
-		--root $PROJ_ROOT/svn \
+		--root $PRJ_ROOT/svn \
 		--mode svn \
 		--host $SVN_HOST -port $SVN_PORT
 
