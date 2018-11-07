@@ -103,7 +103,7 @@ dvc_set_project:
 	Description:
 	  Set the default project name and store the value to .dop/env/
 
-dvc_set_design:   
+dvc_set_folder:   
 	Usage: $prog /<phase>/<block>/<stage>/<version> 
 	Description:
 	  Assign default version path and store the value to .dop/env/
@@ -119,7 +119,7 @@ dvc_get_project:
 	Description:
 	  fetch the DESIGN_PROJT value from .dop/env/
 
-dvc_get_design:   
+dvc_get_folder:   
 	Usage: $prog 
 	Description:
 	  fetch working design folder name from .dop/env/
@@ -158,10 +158,10 @@ dvc_checkin_project:
 #
 # Create Design Version Folder at Server side
 #
-dvc_create_design:
+dvc_create_folder:
 	Usage: $prog <phase>/<block>/<stage>/<version>
 	Description:
-	  create_design will call the following commans sequentially.
+	  create_folder will call the following commans sequentially.
 
 dvc_create_phase:   
 	Usage: $prog <DESIGN_PHASE>
@@ -175,10 +175,10 @@ dvc_create_version:
 #
 # Checkout Design Version Folder to Working Directory
 #
-dvc_checkout_design:
+dvc_checkout_folder:
 	Usage: $prog <phase>/<block>/<stage>/<version>
 	Description:
-	  checkout_design will call the following commans sequentially.
+	  checkout_folder will call the following commans sequentially.
 
 dvc_checkout_phase:   
 	Usage: $prog [--depth <mode>] <DESIGN_PHASE>
@@ -222,10 +222,10 @@ dvc_checkout_version:
 #
 # Checkin Design Working Directory to SVN Respository
 #
-dvc_checkin_design:
+dvc_checkin_folder:
 	Usage: $prog <phase>/<block>/<stage>/<version>
 	Description:
-	  checkin_design commit files under each level
+	  checkin_folder commit files under each level
 
 #
 # Container
@@ -328,7 +328,7 @@ dvc_list_container:
 	Description:
 	  list all objects under container directory
 
-dvc_list_design:   
+dvc_list_folder:   
 	Usage: $prog [--info|--recursive] <dir>
 	Description:
 	  call unix tree command to print out tree structure

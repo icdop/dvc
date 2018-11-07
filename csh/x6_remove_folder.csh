@@ -14,7 +14,7 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/04_set_design.csh
+source $CSH_DIR/04_set_folder.csh
 
 if (($phase == "") || ($phase == ".") || ($phase == ":") || ($phase == "_")) then
    set phase $DESIGN_PHASE
