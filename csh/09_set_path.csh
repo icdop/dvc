@@ -17,6 +17,6 @@ else
 endif
 echo "INFO: DVC_HOME = $DVC_HOME"
 if ($?dop_mode) then
-   setenv DOP_HOME `realpath $DVC_HOME/..`
+   setenv DOP_HOME `realpath $DVC_HOME/../dop`
    echo "INFO: DOP_HOME = $DOP_HOME"
 endif

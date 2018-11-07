@@ -43,8 +43,6 @@ else
       svn mkdir --quiet $CONTR_URL/.htm -m "HTML Report" --parents
       svn mkdir --quiet $CONTR_URL/.dvc/env -m "DVC environment variable"
 
-      svn import --quiet --force  $ETC_DIR/DOP_VERSION   $CONTR_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
-
       set tmpfile=`mktemp`
       echo -n $DVC_PATH > $tmpfile
       svn import --quiet --force $tmpfile $CONTR_URL/.dvc/env/DESIGN_PATH -m 'Design Version Path'

@@ -42,7 +42,7 @@ svn mkdir --quiet $PHASE_URL/.dqi -m "Design Quality Indicator" --parents
 svn mkdir --quiet $PHASE_URL/.htm -m "HTML Report" --parents
 svn mkdir --quiet $PHASE_URL/.dvc/env -m "DVC environment variable"
 
-svn import --quiet --force  $ETC_DIR/DOP_VERSION   $PHASE_URL/.dvc/env/DOP_VERSION -m "$DOP_VERSION"
+#svn import --quiet --force  $DVC_HOME/REVISION   $PHASE_URL/.dvc/env/DVC_VERSION -m "$DVC_VERSION"
 
 set tmpfile=`mktemp`
 echo -n "$DESIGN_PHASE" > $tmpfile
