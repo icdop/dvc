@@ -19,7 +19,7 @@ if ($?recursive_mode) then
 else if ($?info_mode) then
   tree -d $PROJT_PATH
 else
-  tree -L 4 -I $PTR_CURR -d $PROJT_PATH
+  tree -L 5 -I $PTR_CURR -d $PROJT_PATH
 endif
 
 exit 0
