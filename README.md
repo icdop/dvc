@@ -1,4 +1,4 @@
-# Design Version Control V2018_1107.dev
+# Design Version Control V2018_1107a
 
 ## Version Control Engine -- Subversion
 
@@ -61,31 +61,37 @@ Version Name (defined by designer, recommend to follow the same convention):
 
 Example:
 
-	;
-	; run the following step once
-	; install DVC package in /tools/icdop
-	;
+	;######################################################
+	;## run the following step once                      ##
+	;## install DVC package in /tools/icdop              ##
+	;######################################################
+
 	% cd /tools/icdop
 	% git clone https://github.com/icdop/dvc.git
 	% cd dvc
 	% /tools/icdop/dvc/setup.cshrc
 	=> create CSHRC.dvc under /tools/icdop/dvc/ directory
 
-	;
-	; source the CSHRC.dvc to acces the DVC utility
-	;
+	;######################################################
+	;## source the CSHRC.dvc to acces the DVC utility    ##
+	;######################################################
+
 	% source /tools/icdop/dvc/CSHRC.dvc
 
 ### 1. Setup svn file server and project account - CAD/IT
 
 Example:
 
-	; start server with file access mode
+	;######################################################
+	;## start server with file access mode               ##
+	;######################################################
 	% dvc_init_server \
 		--root /home/owner/proj_svn \
 		--mode file
 
-	; start server with svn server mode
+	;######################################################
+	;## start server with svn server mode                ##
+	;######################################################
 	% dvc_init_server \
 		--root /home/owner/proj_svn \
 		--mode svn --host <localhost> -port 3690
@@ -95,25 +101,42 @@ Example:
 
 Example:
 
-	% dvc_create_project <proj_name>
+	% dvc_create_project n11301A
 
 
-### 3. Create design folder and checkin design data - Designer
+### 3. Create design folder for members - Technical Lead
 
 Example:
 
-	% dvc_checkout_project <proj_name>
-	
-	#
-	# dvc_create_design   <phase>/<block>/<stage>/<version>
-	#
-	% dvc_create_design   P1-trial/chip/000-DATA/170910-ww38-ftp
+	;######################################################
+	;## dvc_checkout_project   <proj_name> [<dest_path>] ##
+	;######################################################
 
-	% dvc_checkout_design P1-trial/chip/000-DATA/170910-ww38-ftp
+	% dvc_checkout_project N11301A
+
+	;######################################################
+	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
+	;######################################################
+
+	% dvc_create_folder   P1-trial/block1/000-DATA/170910-ww38-place
+
+
+### 4. Checkin design data into design folder - Designer
+
+Example:
+
+	;######################################################
+	;## dvc_checkout_project   <proj_name> [<dest_path>] ##
+	;######################################################
+	% dvc_checkout_project N11301A _
+
+	% dvc_checkout_folder P1-trial/block1/000-DATA/170910-ww38-place
 
 	% dvc_copy_object /some_rundir_path/design.v       design.v
 	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz
 
-	% dvc_checkin_design 
+	% dvc_list_folder --recursive
+
+	% dvc_checkin_folder
 
 
