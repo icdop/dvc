@@ -5,7 +5,7 @@
 - The SVN server is initialized withthe following parameters:
 
 	  $SVN_ROOT : svn repository root path, need to be set first
-  
+	
 	  $SVN_MODE : svn | file -- server db access mode
 	  $SVN_HOST : server host name -- only been used in svn server mode
 	  $SVN_PORT : server port name -- only been used in svn server mode
@@ -57,7 +57,8 @@ Version Name (defined by designer, recommend to follow the same convention):
 
 ***
 ## Execution Flow:
-### 0. Create Unix Environment setup script:
+
+### 0. Download DVC package and Create unix environment setup script (Run Once):
 
 Example:
 
@@ -66,10 +67,11 @@ Example:
 	;## install DVC package in /tools/icdop              ##
 	;######################################################
 
-	% cd /tools/icdop
+	% cd /too/icdop/
 	% git clone https://github.com/icdop/dvc.git
-	% cd dvc
+	% cd dvc/
 	% /tools/icdop/dvc/setup.cshrc
+
 	=> create CSHRC.dvc under /tools/icdop/dvc/ directory
 
 	;######################################################
@@ -78,30 +80,85 @@ Example:
 
 	% source /tools/icdop/dvc/CSHRC.dvc
 
-### 1. Setup svn file server and project account - CAD/IT
+		DVC_HOME = /tools/icdop/dvc
+
+
+### 1. Create project account and root directory
 
 Example:
 
+	- Project Root Directory
+	
+		PROJ_ROOT = /project/N13301A
+		
+	- Project Central Data Directory 
+
+		$PROJ_ROOT/techlib/		: n13301uc0
+		$PROJ_ROOT/design/		: n13301ud0
+		$PROJ_ROOT/flow/		: n13301uc0
+		$PROJ_ROOT/svn/			: n13301ua0
+
+	- Project User Working Directory 
+	
+		$PROJ_ROOT/users/n13301ua0/	: n13301ua0
+		$PROJ_ROOT/users/n13301ub0/	: n13301ub0
+		$PROJ_ROOT/users/n13301ub1/	: n13301ub1
+		....
+
+### 2. Initialize project specific svn file server (Run If Needed)  - CAD/IT
+
+Step-2.1:
+
 	;######################################################
-	;## start server with file access mode               ##
+	;## create project specific CSHRC.dvc                ##
 	;######################################################
+
+	% cp $DVC_HOME/CSHRC.dvc  $PROJ_ROOT/flow
+	% echo 'setnev PROJ_ROOT /projects/N13301A' >> CSHRC.dvc
+	% echo 'setenv SVN_ROOT  $PROJ_ROOT/svn'    >> CSHRC.dvc
+	% echo 'setenv SVN_MODE  svn'               >> CSHRC.dvc
+	% echo 'setenv SVN_HOST  icdop_server'      >> CSHRC.dvc
+        % echo 'setenv SVN_PORT  3690'              >> CSHRC.dvc
+
+
+Step-2.2:
+
+	;######################################################
+	;## source the CSHRC.dvc to acces the DVC utility    ##
+	;######################################################
+
+	% source $PROJ_ROOT/flow/CSHRC.dvc
+
+
+	;######################################################
+	;## Init SVN DB with file access mode                ##
+	;## (only svnadmin can init file server db)          ##
+	;######################################################
+
 	% dvc_init_server \
-		--root /home/owner/proj_svn \
+		--root $PROJ_ROOT/svn \
 		--mode file
 
+
 	;######################################################
-	;## start server with svn server mode                ##
+	;## dvc_create_project   <proj_id>                   ##
 	;######################################################
+
+	% dvc_create_project N11301A
+
+
+	;######################################################
+	;## Start SVN server for other members to use        ##
+	;## % dvc_init_server \                              ##
+	;##	--root $SVN_ROOT \                           ##
+	;##	--mode $SVN_MODE \                           ##
+	;##	--host $SVN_HOST -port $SVN_PORT             ##
+	;######################################################
+
 	% dvc_init_server \
-		--root /home/owner/proj_svn \
-		--mode svn --host <localhost> -port 3690
-
-
-### 2. Create project respository - Project Manager
-
-Example:
-
-	% dvc_create_project n11301A
+		--root $PROJ_ROOT/svn \
+		--mode svn \
+		--host localhost -port 3690
 
 
 ### 3. Create design folder for members - Technical Lead
@@ -109,10 +166,16 @@ Example:
 Example:
 
 	;######################################################
-	;## dvc_checkout_project   <proj_name> [<dest_path>] ##
+	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
 
-	% dvc_checkout_project N11301A
+	% source /projects/N11301A/flow/CSHRC.dvc
+
+	;######################################################
+	;## dvc_create_project   <proj_name>                 ##
+	;######################################################
+
+	% dvc_create_project N11301A
 
 	;######################################################
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
@@ -124,6 +187,12 @@ Example:
 ### 4. Checkin design data into design folder - Designer
 
 Example:
+
+	;######################################################
+	;## source the CSHRC.dvc to acces the DVC utility    ##
+	;######################################################
+
+	% source /projects/N11301A/flow/CSHRC.dvc
 
 	;######################################################
 	;## dvc_checkout_project   <proj_name> [<dest_path>] ##
