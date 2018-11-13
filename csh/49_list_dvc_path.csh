@@ -21,8 +21,8 @@ setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
 if ($1 != "") then
    set dir=$1
-   set design_path=`$CSH_DIR/10_get_env --root $dir/.dvc DESIGN_PATH`
-   set container=`$CSH_DIR/10_get_env --root $dir/.dvc DESIGN_CONTR`
+   set design_path=`$CSH_DIR/10_get_env.csh --root $dir/.dvc DESIGN_PATH`
+   set container=`$CSH_DIR/10_get_env.csh --root $dir/.dvc DESIGN_CONTR`
    if ($design_path != "") then
       if {($container != "") then
          setenv DESIGN_URL $PROJT_URL/$design_path/$container
