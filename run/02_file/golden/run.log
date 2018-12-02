@@ -1,0 +1,264 @@
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 0. Start SVN server
+#---------------------------------------------------
+dvc_init_server --root svn_root --mode file --host adream --port 3690 start
+=======================================================
+TIME: @20181202_184606 BEGIN dvc_init_server --root svn_root --mode file --host adream --port 3690 start
+SETP: SVN_MODE = file
+SETP: SVN_HOST = adream
+SETP: SVN_PORT = 3690
+SETP: SVN_ROOT = svn_root
+TIME: @20181202_184606 END   dvc_init_server
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 1. Initiatize Project Repository
+#---------------------------------------------------
+dvc_create_project	02_file
+=======================================================
+TIME: @20181202_184606 BEGIN dvc_create_project 02_file
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_PROJT = 02_file
+INFO: Create Project Design Respository : 02_file
+TIME: @20181202_184611 END   dvc_create_project
+=======================================================
+#---------------------------------------------------
+# 3 Checkout project to '_' dir
+#---------------------------------------------------
+dvc_checkout_project	02_file _
+=======================================================
+TIME: @20181202_184611 BEGIN dvc_checkout_project 02_file _
+SETP: DESIGN_PROJT = 02_file
+INFO: Checkout Project Design Respository : 02_file
+SETP: PROJT_PATH = _
+Checked out revision 8.
+TIME: @20181202_184611 END   dvc_checkout_project
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 2. Create version directory in SVN server
+#---------------------------------------------------
+dvc_create_design	chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184611 BEGIN dvc_create_design chip/P1-trial/520-sta/2017_0620-xxx
+INFO: DVC_VERSON = 2018_1201a
+INFO: DVC_PATH = chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184611 BEGIN 21_create_block.csh chip
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_BLOCK = chip
+INFO: Create Project Design Block : chip
+TIME: @20181202_184615 END   21_create_block.csh
+=======================================================
+=======================================================
+TIME: @20181202_184615 BEGIN 22_create_phase.csh P1-trial
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_PHASE = P1-trial
+INFO: Create Project Design Phase : P1-trial
+TIME: @20181202_184619 END   22_create_phase.csh
+=======================================================
+=======================================================
+TIME: @20181202_184619 BEGIN 23_create_stage.csh 520-sta
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_STAGE = 520-sta
+INFO: Create Project Design Stage : 520-sta
+TIME: @20181202_184624 END   23_create_stage.csh
+=======================================================
+=======================================================
+TIME: @20181202_184624 BEGIN 24_create_version.csh 2017_0620-xxx
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_VERSN = 2017_0620-xxx
+INFO: Create Project Design Version : 2017_0620-xxx
+TIME: @20181202_184630 END   24_create_version.csh
+=======================================================
+TIME: @20181202_184630 END   dvc_create_design
+=======================================================
+#---------------------------------------------------
+# 3 Checkout design
+#---------------------------------------------------
+dvc_checkout_design	chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184630 BEGIN dvc_checkout_design chip/P1-trial/520-sta/2017_0620-xxx
+INFO: DVC_PATH = /chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184630 BEGIN 30_checkout_project.csh 02_file _
+SETP: DESIGN_PROJT = 02_file
+INFO: Checkout Project Design Respository : 02_file
+SETP: PROJT_PATH = _
+TIME: @20181202_184630 END   30_checkout_project.csh
+=======================================================
+=======================================================
+TIME: @20181202_184630 BEGIN 31_checkout_block.csh chip
+SETP: DESIGN_BLOCK = chip
+INFO: Checkout Project Design Block : chip
+Checked out revision 39.
+property 'svn:ignore' set on '_'
+TIME: @20181202_184630 END   31_checkout_block.csh
+=======================================================
+=======================================================
+TIME: @20181202_184630 BEGIN 32_checkout_phase.csh P1-trial
+SETP: DESIGN_PHASE = P1-trial
+INFO: Checkout Design Phase : P1-trial
+Checked out revision 39.
+property 'svn:ignore' set on '_/chip'
+TIME: @20181202_184631 END   32_checkout_phase.csh
+=======================================================
+=======================================================
+TIME: @20181202_184631 BEGIN 33_checkout_stage.csh 520-sta
+SETP: DESIGN_STAGE = 520-sta
+INFO: Checkout Project Design Stage : 520-sta
+Checked out revision 39.
+property 'svn:ignore' set on '_/chip/P1-trial'
+TIME: @20181202_184631 END   33_checkout_stage.csh
+=======================================================
+=======================================================
+TIME: @20181202_184631 BEGIN 34_checkout_version.csh 2017_0620-xxx
+SETP: DESIGN_VERSN = 2017_0620-xxx
+INFO: Checkout Project Design Version : 2017_0620-xxx
+Checked out revision 39.
+property 'svn:ignore' set on '_/chip/P1-trial/520-sta'
+INFO: Container Path - ':version/.'
+TIME: @20181202_184632 END   34_checkout_version.csh
+=======================================================
+=======================================================
+TIME: @20181202_184632 BEGIN 35_checkout_container.csh .
+INFO: Container Path - ':version/.'
+TIME: @20181202_184632 END   35_checkout_container.csh
+=======================================================
+TIME: @20181202_184632 END   dvc_checkout_design
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 4-1 Create container
+#---------------------------------------------------
+dvc_create_container	ttt_0p80V_25C_rctyp
+=======================================================
+TIME: @20181202_184632 BEGIN dvc_create_container ttt_0p80V_25C_rctyp
+INFO: DVC_VERSON = 2018_1201a
+SETP: DESIGN_CONTR = ttt_0p80V_25C_rctyp
+TIME: @20181202_184636 END   dvc_create_container
+=======================================================
+#---------------------------------------------------
+# 4-2 Checkout container
+#---------------------------------------------------
+dvc_checkout_container	ttt_0p80V_25C_rctyp
+=======================================================
+TIME: @20181202_184636 BEGIN dvc_checkout_container ttt_0p80V_25C_rctyp
+INFO: Container Path - ':version/ttt_0p80V_25C_rctyp'
+TIME: @20181202_184636 END   dvc_checkout_container
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 5. Checkin object into container
+#---------------------------------------------------
+make add_object
+make[3]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 5-1 Add existing object to container repo
+#---------------------------------------------------
+WARNING: object 'design.sdf' is not found, create a dummy file.
+dvc_add_object	design.sdf
+make[3]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make copy_object
+make[3]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+WARNING: file 'run_sta.log' does not exist, create a dummy file.
+#---------------------------------------------------
+# 5-2 Copy objects to container
+#---------------------------------------------------
+Copying file 'run_sta.log' into container ...
+A         run_sta.log
+make[3]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make copy_folder
+make[3]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+WARNING: dir 'report/' does not exist, create a dummy folder.
+WARNING: dir 'cache/' does not exist, create a dummy folder.
+#---------------------------------------------------
+# 5-2 Copy folders to container
+#---------------------------------------------------
+Copying directory 'report/' into container ...
+A         report
+A         report/dummy_file
+Copying directory 'cache/' into container ...
+A         cache
+A         cache/dummy_file
+make[3]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make link_object
+make[3]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+WARNING: link 'design.spef' does not exist, create a dummy file.
+#---------------------------------------------------
+# 5-3 Crearte symbolic link in container
+#---------------------------------------------------
+Linking object 'design.spef' in container ...
+A         design.spef
+make[3]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+#---------------------------------------------------
+# 6-4 Checkin design folders
+#---------------------------------------------------
+dvc_checkin_design	chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184637 BEGIN dvc_checkin_design chip/P1-trial/520-sta/2017_0620-xxx
+=======================================================
+TIME: @20181202_184637 BEGIN 61_checkin_block.csh chip
+INFO: Checkin Project Design Block : chip
+TIME: @20181202_184638 END   61_checkin_block.csh
+=======================================================
+=======================================================
+TIME: @20181202_184638 BEGIN 62_checkin_phase.csh P1-trial
+INFO: Checkin Project Design Phase : P1-trial
+TIME: @20181202_184639 END   62_checkin_phase.csh
+=======================================================
+=======================================================
+TIME: @20181202_184639 BEGIN 63_checkin_stage.csh 520-sta
+INFO: Checkin Project Design Stage : 520-sta
+TIME: @20181202_184641 END   63_checkin_stage.csh
+=======================================================
+=======================================================
+TIME: @20181202_184641 BEGIN 64_checkin_version.csh 2017_0620-xxx
+INFO: Checkin Project Design Version : 2017_0620-xxx
+TIME: @20181202_184641 END   64_checkin_version.csh
+=======================================================
+=======================================================
+TIME: @20181202_184641 BEGIN 65_checkin_container.csh .
+SETP: DESIGN_CONTR = .
+INFO: Container Path - ':version/.'
+TIME: @20181202_184642 END   65_checkin_container.csh
+=======================================================
+TIME: @20181202_184642 END   dvc_checkin_design
+=======================================================
+#---------------------------------------------------
+# 6-5 Checkin all files inside container
+#---------------------------------------------------
+dvc_checkin_container	ttt_0p80V_25C_rctyp
+=======================================================
+TIME: @20181202_184642 BEGIN dvc_checkin_container ttt_0p80V_25C_rctyp
+SETP: DESIGN_CONTR = ttt_0p80V_25C_rctyp
+INFO: Container Path - ':version/ttt_0p80V_25C_rctyp'
+A         design.sdf
+Adding         cache
+Adding         cache/dummy_file
+Adding         design.sdf
+Adding         design.spef
+Adding         report
+Adding         report/dummy_file
+Adding         run_sta.log
+Transmitting file data .....done
+Committing transaction...
+Committed revision 50.
+TIME: @20181202_184642 END   dvc_checkin_container
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
+dvc_init_server stop
+=======================================================
+TIME: @20181202_184642 BEGIN dvc_init_server stop
+WARNING: No server PID file is found.
+TIME: @20181202_184642 END   dvc_init_server
+=======================================================
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'
