@@ -14,7 +14,7 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 
 if ($1 != "") then
     setenv DESIGN_PHASE $1
@@ -24,13 +24,13 @@ if ($1 != "") then
 endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$DESIGN_PHASE
+setenv PHASE_URL $PROJT_URL/$DESIGN_BLOCK/$DESIGN_PHASE
 svn info $PHASE_URL >& /dev/null
 if ($status == 0) then
-    echo "INFO: Remove Project Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
-    svn remove $PHASE_URL -m "remove Phase : /$DESIGN_PROJT/$DESIGN_PHASE"
+    echo "INFO: Remove Project Design Phase - /$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE"
+    svn remove $PHASE_URL -m "remove Phase : /$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE"
 else
-    echo "ERROR: Can not find Design Phase - /$DESIGN_PROJT/$DESIGN_PHASE"
+    echo "ERROR: Can not find Design Phase - /$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE"
 endif
 
 echo "TIME: @`date +%Y%m%d_%H%M%S` END   $prog"

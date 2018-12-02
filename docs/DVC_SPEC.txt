@@ -51,8 +51,8 @@
   * DESIGN Variables:
 
 	  DESIGN_PROJT = testcase
-	  DESIGN_PHASE = P1-trial
 	  DESIGN_BLOCK = chip
+	  DESIGN_PHASE = P1-trial
 	  DESIGN_STAGE = 000-INIT_DATA
 	  DESIGN_VERSN = 2017_0610-XXXX
 	  DESIGN_CONTR = netlist
@@ -81,28 +81,28 @@
   * create_design :
 	
 	$DESIGN_PROJT/
-		$DESIGN_PHASE/.dvc
-			$DESIGN_BLOCK/.dvc
+		$DESIGN_DESIGN/.dvc
+			$DESIGN_PHASE/.dvc
 				$DESIGN_STAGE/.dvc
 					$DESIGN_VERSN/.dvc
 
   * checkout_design
 
 	$PROJT_ROOT/	(project checkout root)
-		_ -> $current_phase
-		$DESIGN_PHASE/
-			_ -> $current_block
-       			$DESIGN_BLOCK/
-				_ -> $current_stage
+		: -> $current_block
+		$DESIGN_BLOCK/
+			: -> $current_phase
+       			$DESIGN_PHASE/
+				: -> $current_stage
 				$DESIGN_STAGE/
-					_ -> $current_version
+					: -> $current_version
 					$DESIGN_VERSN/
 						.dvc/
 						.dqi/
 						.htm/
 
-	:phase -> _/$phase
-	:block -> _/$phase/$block
+	:block -> _/$block
+	:phase -> _/$block/$phase
 	:stage -> _/$phase/$block/$stage
 	:version -> _/$phase/$block/$stage/$version
 
@@ -173,7 +173,7 @@
 ## 4. Sub folder naming rule
 
   ** ------------------------------------------
-  ** $project/.dvc/SUB_FOLDERS
+  ** $block/.dvc/SUB_FOLDERS
   ** ------------------------------------------
 
   Example: (etc/rule/DEFINE_PAHSE)
@@ -187,7 +187,7 @@
 
 
   ** ------------------------------------------
-  ** $block/.dvc/SUB_FOLDERS 
+  ** $phase/.dvc/SUB_FOLDERS 
   ** ------------------------------------------
 
   Example: (etc/rule/DEFINE_STAGE)

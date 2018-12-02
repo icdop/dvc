@@ -16,7 +16,7 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_folder.csh
 
-setenv DVC_PATH /$phase/$block/$stage/$version
+setenv DVC_PATH /$block/$phase/$stage/$version
 echo "INFO: DVC_PATH = $DVC_PATH"
 
 if ($?SVN_ROOT == 0) then
@@ -45,23 +45,11 @@ endif
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
-if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
-setenv PHASE_URL $PROJT_URL/$phase
-svn info $PHASE_URL >& /dev/null
-if ($status == 0) then
-   $CSH_DIR/31_checkout_phase.csh $phase
-   setenv DESIGN_PHASE $phase
-else
-   echo "ERROR: Cannot find Project Design Phase : $phase"
-   exit 1
-endif
-endif
-
 if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
-setenv BLOCK_URL $PROJT_URL/$DESIGN_PHASE/$block
+setenv BLOCK_URL $PROJT_URL/$block
 svn info $BLOCK_URL >& /dev/null
 if ($status == 0) then
-   $CSH_DIR/32_checkout_block.csh $block
+   $CSH_DIR/31_checkout_block.csh $block
    setenv DESIGN_BLOCK $block
 else
    echo "ERROR: Cannot find Project Design Block : $block"
@@ -69,8 +57,20 @@ else
 endif
 endif
 
+if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
+setenv PHASE_URL $PROJT_URL/$DESIGN_BLOCK/$phase
+svn info $PHASE_URL >& /dev/null
+if ($status == 0) then
+   $CSH_DIR/32_checkout_phase.csh $phase
+   setenv DESIGN_PHASE $phase
+else
+   echo "ERROR: Cannot find Project Design Phase : $phase"
+   exit 1
+endif
+endif
+
 if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then
-setenv STAGE_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$stage
+setenv STAGE_URL $PROJT_URL/$DESIGN_BLOCK/$DESIGN_PHASE/$stage
 svn info $STAGE_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/33_checkout_stage.csh $stage
@@ -82,7 +82,7 @@ endif
 endif
 
 if (($version != "") && ($version != "_") && ($version != ":") && ($version != ".")) then
-setenv VERSN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$version
+setenv VERSN_URL $PROJT_URL/$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$version
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then
    $CSH_DIR/34_checkout_version.csh $version

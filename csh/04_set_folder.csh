@@ -32,33 +32,33 @@ if ($?dvc_path != 0) then
       set stage = $dvc_path:t
       if ($dvc_path != $stage) then
          set dvc_path = $dvc_path:h
-         set block    = $dvc_path:t
-         if ($dvc_path != $block) then
+         set phase    = $dvc_path:t
+         if ($dvc_path != $phase) then
             set dvc_path = $dvc_path:h
-            set phase    = $dvc_path:t
+            set block    = $dvc_path:t
          else
-            set phase = ":"
+            set block = ":"
          endif
       else
-         set phase = ":"
          set block = ":"
+         set phase = ":"
       endif
    else
-      set phase = ":"
       set block = ":"
+      set phase = ":"
       set stage = ":"
    endif
 else
-   set phase   = $DESIGN_PHASE
    set block   = $DESIGN_BLOCK
+   set phase   = $DESIGN_PHASE
    set stage   = $DESIGN_STAGE
    set version = $DESIGN_VERSN
 endif
 
 if ($?verbose_mode) then
 echo "==============================="
-echo "DESIGN_PHASE = $phase"
 echo "DESIGN_BLOCK = $block"
+echo "DESIGN_PHASE = $phase"
 echo "DESIGN_STAGE = $stage"
 echo "DESIGN_VERSN = $version"
 echo "==============================="

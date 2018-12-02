@@ -16,7 +16,7 @@ setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 
 if ($1 != "") then
    if (($1 != "_") && ($1 != ".")) then
@@ -26,9 +26,9 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+setenv DVC_PATH $DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN
 
-setenv VERSN_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+setenv VERSN_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN
 svn info $VERSN_URL >& /dev/null
 if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Version : $DESIGN_VERSN"
@@ -57,8 +57,8 @@ svn import --quiet --force $tmpfile $VERSN_URL/.dvc/env/DESIGN_CONTR -m 'Design 
 
 echo -n "" > $tmpfile
 echo "====================================" >> $tmpfile
-echo "* Phase   : $DESIGN_PHASE" >> $tmpfile
 echo "* Block   : $DESIGN_BLOCK" >> $tmpfile
+echo "* Phase   : $DESIGN_PHASE" >> $tmpfile
 echo "* Stage   : $DESIGN_STAGE" >> $tmpfile
 echo "* Version : $DESIGN_VERSN" >> $tmpfile
 echo "* Author  : $USER" >> $tmpfile

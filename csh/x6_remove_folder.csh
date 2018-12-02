@@ -16,12 +16,12 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_folder.csh
 
-if (($phase == "") || ($phase == ".") || ($phase == ":") || ($phase == "_")) then
-   set phase $DESIGN_PHASE
-endif
-
 if (($block == "") || ($block == ".") || ($block == ":") || ($block == "_")) then
    set block $DESIGN_BLOCK
+endif
+
+if (($phase == "") || ($phase == ".") || ($phase == ":") || ($phase == "_")) then
+   set phase $DESIGN_PHASE
 endif
 
 if (($stage == "") || ($stage == ".") || ($stage == ":") || ($stage == "_")) then
@@ -32,13 +32,10 @@ if (($version == "") || ($version == ".") || ($version == ":") || ($version == "
    set version $DESIGN_VERSN
 endif
 
-setenv DVC_PATH $phase/$block/$stage/$version
+setenv DVC_PATH $block/$phase/$stage/$version
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
-setenv PHASE_URL $PROJT_URL/$phase
-setenv BLOCK_URL $PHASE_URL/$block
-setenv STAGE_URL $BLOCK_URL/$stage
-setenv VERSN_URL $STAGE_URL/$version
+setenv VERSN_URL $PROJT_URL/$block/$phase/$stage/$version
 
 svn info $VERSN_URL >& /dev/null
 if ($status == 0) then

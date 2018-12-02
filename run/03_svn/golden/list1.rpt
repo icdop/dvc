@@ -1,16 +1,16 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/03_svn'
+make[2]: Entering directory '/home/toolsadm/GITHOME/dvc/run/03_svn'
 dvc_list_project --recursive
-P1-trial/
-P1-trial/chip/
-P1-trial/chip/420-place/
-P1-trial/chip/420-place/2017_0615-xxx/
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/cache/
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/cache/dummy_file
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.def
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.spef
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.v
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/dummy_file
-P1-trial/chip/420-place/2017_0615-xxx/place_opt/run_apr.log
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/03_svn'
+chip/
+chip/P1-trial/
+chip/P1-trial/420-place/
+chip/P1-trial/420-place/2017_0615-xxx/
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/cache/
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/cache/dummy_file
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/design.def
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/design.spef
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/design.v
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/report/
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/report/dummy_file
+chip/P1-trial/420-place/2017_0615-xxx/place_opt/run_apr.log
+make[2]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/03_svn'

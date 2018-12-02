@@ -16,7 +16,7 @@ setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 source $CSH_DIR/15_get_container.csh
 
 if ($1 != "") then
@@ -24,7 +24,7 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+setenv DVC_PATH $DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN
 setenv CONTAINER_PATH $DVC_PATH/$DESIGN_CONTR
 setenv CONTR_URL $SVN_URL/$DESIGN_PROJT/$CONTAINER_PATH
 

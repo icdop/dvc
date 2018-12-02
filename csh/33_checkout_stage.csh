@@ -14,7 +14,7 @@ endif
 setenv CSH_DIR $DVC_HOME/csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 
 if ($1 != "") then
    if (($1 != "_") && ($1 != ".")) then
@@ -24,7 +24,7 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if ($status != 0) then
    echo "ERROR: Cannot find Project Design Stage : $DESIGN_STAGE"
@@ -32,7 +32,7 @@ if ($status != 0) then
 endif
 
 echo "INFO: Checkout Project Design Stage : $DESIGN_STAGE"
-setenv DVC_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv DVC_PATH $DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE
 setenv DESIGN_PTR $PTR_STAGE
 
 source $CSH_DIR/39_checkout_dvc_path.csh

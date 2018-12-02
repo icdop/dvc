@@ -1,4 +1,4 @@
-# Design Version Control V2018_1107a
+# Design Version Control V2018_1202a
 
 ## How To install DVC package and setup
 
@@ -36,19 +36,19 @@ Example:
 
 	$DESIGN_PROJT/		(Project Repository Root)
 
-		$DESIGN_PHASE/
-			$DESIGN_BLOCK/
+		$DESIGN_BLOCK/
+			$DESIGN_PHASE/
 				$DESIGN_STAGE/
 					$DESIGN_VERSN/
 
 
-Phase Name (defined by project manager):
-
-	P1-trial , P2-stable, P3-final, P4-tapeout, ...
-
 Block Name (defined by design manager):
 
 	chip, cpu, gpu, ddr, sub1, ...
+
+Phase Name (defined by project manager):
+
+	P1-trial , P2-stable, P3-final, P4-tapeout, ...
 
 Stage Name (defined based on tool execution flow):
 
@@ -178,7 +178,7 @@ Example:
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
 	;######################################################
 
-	% dvc_create_folder   P1-trial/block1/000-DATA/170910-ww38-place
+	% dvc_create_folder   block1/P1-trial/000-DATA/170910-ww38-place
 
 
 ### 4. Checkin design data into design folder - Designer
@@ -196,7 +196,7 @@ Example:
 	;######################################################
 	% dvc_checkout_project N13301A _
 
-	% dvc_checkout_folder P1-trial/block1/000-DATA/170910-ww38-place
+	% dvc_checkout_folder block1/P1-trial/000-DATA/170910-ww38-place
 
 	% dvc_copy_object /some_rundir_path/design.v       design.v
 	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz

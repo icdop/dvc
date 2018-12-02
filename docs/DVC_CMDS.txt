@@ -104,7 +104,7 @@ dvc_set_project:
 	  Set the default project name and store the value to .dop/env/
 
 dvc_set_folder:   
-	Usage: $prog /<phase>/<block>/<stage>/<version> 
+	Usage: $prog <block>/<phase>/<stage>/<version> 
 	Description:
 	  Assign default version path and store the value to .dop/env/
 
@@ -144,7 +144,7 @@ dvc_checkout_project:
 	Description:
 	  checkout project $DESIGN_PROJT to directory $PROJT_PATH/
 	only files under the project root is checkout by default, 
-	subfolders (phase/block/stage/version) are not checkout
+	subfolders (<block>/<phase>/<stage>/<version>) are not checkout
 	Option:
 	--recursive
 		checkout all files and subfolder under project root
@@ -159,7 +159,7 @@ dvc_checkin_project:
 # Create Design Version Folder at Server side
 #
 dvc_create_folder:
-	Usage: $prog <phase>/<block>/<stage>/<version>
+	Usage: $prog <block>/<phase>/<stage>/<version>
 	Description:
 	  create_folder will call the following commans sequentially.
 
@@ -176,22 +176,22 @@ dvc_create_version:
 # Checkout Design Version Folder to Working Directory
 #
 dvc_checkout_folder:
-	Usage: $prog <phase>/<block>/<stage>/<version>
+	Usage: $prog <block>/<phase>/<stage>/<version>
 	Description:
 	  checkout_folder will call the following commans sequentially.
-
-dvc_checkout_phase:   
-	Usage: $prog [--depth <mode>] <DESIGN_PHASE>
-	Description:
-	  checkout phase folder to .project/
-	dy default, only .dvc/ is checkout
-	--depth infinity
-		checkout all data and subfolder under version folder 
 
 dvc_checkout_block:   
 	Usage: $prog [--depth <mode>] <DESIGN_BLOCK>
 	Description:
 	  checkout block folder to .project/
+	dy default, only .dvc/ is checkout
+	--depth infinity
+		checkout all data and subfolder under version folder 
+
+dvc_checkout_phase:   
+	Usage: $prog [--depth <mode>] <DESIGN_PHASE>
+	Description:
+	  checkout phase folder to .project/
 	dy default, only .dvc/ is checkout
 	--depth infinity
 		checkout all data and subfolder under version folder 
@@ -211,10 +211,10 @@ dvc_checkout_version:
 	checkout version folder to local working directory .project/
 	dy default, only .dvc/ is checkout
 	create the following link
-		:phase -> _/phase
-		:block -> _/phase/chip
-		:stage -> _/phase/chip/stage
-		:version -> _/phase/chip/stage/version
+		:block -> _/chip
+		:phase -> _/block/phase
+		:stage -> _/block/phase/stage
+		:version -> _/block/phase/stage/version
 	create "_:" link in all four levels, pointing it to current version
 	--depth infinity
 		checkout all data and subfolder under version folder 
@@ -223,7 +223,7 @@ dvc_checkout_version:
 # Checkin Design Working Directory to SVN Respository
 #
 dvc_checkin_folder:
-	Usage: $prog <phase>/<block>/<stage>/<version>
+	Usage: $prog <block>/<block>/<stage>/<version>
 	Description:
 	  checkin_folder commit files under each level
 
@@ -239,7 +239,7 @@ dvc_checkout_container:
 	Usage: $prog <DESIGN_CONTR>
 	Description:
 	  1) checkout container folder to local working directory
-	     _/<phase>/<block>/<stage>/<version>/$container
+	     _/<block>/<phase>/<stage>/<version>/$container
 	  2) create a :container link to :version/$container
 	:container ->	:version/$container
 
@@ -334,7 +334,7 @@ dvc_list_folder:
 	  call unix tree command to print out tree structure
 
 dvc_list_dvc_path:   
-	Usage: $prog <phase/block/stage/version/container>
+	Usage: $prog <phase>/<block>/<stage>/<version>/<container>
 	Description:
 	  list all sub-folders under design path directory
 	default is to list objects in current container
@@ -344,10 +344,10 @@ dvc_list_dvc_path:
 #
 dvc_remove_project:   
 	Usage: $prog <DESIGN_PROJT>
-dvc_remove_phase:   
-	Usage: $prog <DESIGN_PHASE>
 dvc_remove_block:   
 	Usage: $prog <DESIGN_BLOCK>
+dvc_remove_phase:   
+	Usage: $prog <DESIGN_PHASE>
 dvc_remove_stage:   
 	Usage: $prog <DESIGN_STAGE>
 dvc_remove_version:   

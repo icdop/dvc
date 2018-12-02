@@ -18,27 +18,27 @@ source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
 source $CSH_DIR/04_set_folder.csh
 
-setenv DVC_PATH $phase/$block/$stage/$version
+setenv DVC_PATH $block/$phase/$stage/$version
 echo "INFO: DVC_PATH = $DVC_PATH"
 
 setenv PROJT_URL $SVN_URL/$DESIGN_PROJT
 
-if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
-   if ($?force_mode) then
-      $CSH_DIR/21_create_phase.csh --force $phase
-   else
-      $CSH_DIR/21_create_phase.csh $phase
-   endif
-   setenv DESIGN_PHASE $phase
-endif
-
 if (($block != "") && ($block != "_") && ($block != ":") && ($block != ".")) then
    if ($?force_mode) then
-      $CSH_DIR/22_create_block.csh --force $block
+      $CSH_DIR/21_create_block.csh --force $block
    else
-      $CSH_DIR/22_create_block.csh $block
+      $CSH_DIR/21_create_block.csh $block
    endif
    setenv DESIGN_BLOCK $block
+endif
+
+if (($phase != "") && ($phase != "_") && ($phase != ":") && ($phase != ".")) then
+   if ($?force_mode) then
+      $CSH_DIR/22_create_phase.csh --force $phase
+   else
+      $CSH_DIR/22_create_phase.csh $phase
+   endif
+   setenv DESIGN_PHASE $phase
 endif
 
 if (($stage != "") && ($stage != "_") && ($stage != ":") && ($stage != ".")) then

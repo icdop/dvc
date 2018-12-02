@@ -26,8 +26,8 @@ endif
 if (($1 != "") && ($1 != ":") && ($1 != ".")) then
    setenv DVC_PATH $1
 else if ($?DVC_PATH == 0) then
-   source $CSH_DIR/14_get_design.csh
-   setenv DVC_PATH   $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+   source $CSH_DIR/14_get_folder.csh
+   setenv DVC_PATH   $DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN
    setenv DESIGN_PTR $PTR_VERSN
 endif
 

@@ -33,8 +33,8 @@ if ($1 != "") then
       setenv DESIGN_URL $PROJT_URL/$dir
    endif
 else if ($?DESIGN_URL == 0) then
-   source $CSH_DIR/14_get_design.csh
-   setenv DESIGN_URL $PROJT_URL/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN
+   source $CSH_DIR/14_get_folder.csh
+   setenv DESIGN_URL $PROJT_URL/$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN
 endif
 
 svn info $DESIGN_URL >& /dev/null

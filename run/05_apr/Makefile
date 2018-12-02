@@ -6,16 +6,13 @@ help:
 run: 
 	mkdir -p log
 	script/run.csh 2| tee run.log
+
 list:
-	dvc_list_project --recursive
+	dvc_list_project --recursive | tee log/list.log
 
-log/list.log:
-	make list > log/list.log	
 tree:	
-	dvc_list_design --recursive
+	dvc_list_design --recursive | tee log/tree.log
 
-log/tree.log:
-	make tree > log/tree.log
 
 diff: log/list.log log/tree.log
 	diff -r log golden | tee diff.log

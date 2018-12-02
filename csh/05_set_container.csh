@@ -11,7 +11,7 @@ if ($?DVC_HOME == 0) then
 endif
 setenv CSH_DIR $DVC_HOME/csh 
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 source $CSH_DIR/15_get_container.csh
 
 if ($1 != "") then
@@ -37,7 +37,7 @@ else if {(test -e $PTR_VERSN/$DESIGN_CONTR/.dvc/DESIGN_PATH)} then
    (cd $CONTAINER_DIR/.dvc/; svn add --force env)
    svn rm --force $CONTAINER_DIR/.dvc/DESIGN_PATH
 else 
-   setenv CONTAINER_PATH $DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
+   setenv CONTAINER_PATH $DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE/$DESIGN_VERSN/$DESIGN_CONTR
    setenv CONTAINER_DIR  $PROJT_PATH/$CONTAINER_PATH
 endif
 

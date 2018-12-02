@@ -20,6 +20,11 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 
+if ($?SVN_ROOT) then
+   mkdir -p $SVN_ROOT/.dop/env
+endif
+
+
 if ($1 == "--mode") then
    shift argv
    setenv SVN_MODE $1

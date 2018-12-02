@@ -12,7 +12,7 @@ endif
 setenv CSH_DIR $DVC_HOME/csh 
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/18_get_report.csh
-source $CSH_DIR/04_set_design.csh
+source $CSH_DIR/04_set_folder.csh
 
 endif
 

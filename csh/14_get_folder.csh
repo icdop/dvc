@@ -46,8 +46,8 @@ else if ($?DESIGN_VERSN == 0) then
 endif
 
 if ($?info_mode) then
-  echo "INFO: DESIGN_PHASE = $DESIGN_PHASE"
   echo "INFO: DESIGN_BLOCK = $DESIGN_BLOCK"
+  echo "INFO: DESIGN_PHASE = $DESIGN_PHASE"
   echo "INFO: DESIGN_STAGE = $DESIGN_STAGE"
   echo "INFO: DESIGN_VERSN = $DESIGN_VERSN"
 endif

@@ -1,13 +1,13 @@
 _
-├── : -> P1-trial
-└── P1-trial
-    ├── : -> chip
-    └── chip
-        ├── 000-DATA
-        │   ├── 2017_0910-xxx
-        │   │   ├── design.sdc
-        │   │   └── design.v
-        │   └── : -> 2017_0910-xxx
-        └── : -> 000-DATA
+├── : -> chip
+└── chip
+    ├── : -> P1-trial
+    └── P1-trial
+        ├── : -> 000-DATA
+        └── 000-DATA
+            ├── : -> 2017_0910-xxx
+            └── 2017_0910-xxx
+                ├── design.sdc
+                └── design.v
 
 8 directories, 2 files

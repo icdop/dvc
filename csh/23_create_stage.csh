@@ -15,7 +15,7 @@ setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/19_get_system.csh
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 
 if ($1 != "") then
    if (($1 != "_") && ($1 != ".")) then
@@ -25,7 +25,7 @@ if ($1 != "") then
    shift argv
 endif
 
-setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE
+setenv STAGE_URL $SVN_URL/$DESIGN_PROJT/$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE
 svn info $STAGE_URL >& /dev/null
 if (($status == 0) && ($?force_mode == 0)) then
    echo "INFO: Exist Project Design Stage : $DESIGN_STAGE"
@@ -46,15 +46,15 @@ svn mkdir --quiet $STAGE_URL/.dvc/env -m "DVC environment variable"
 svn import --quiet --force $ETC_DIR/rule/DESIGN_FILES  $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
 
 set tmpfile=`mktemp`
-echo -n "$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile
+echo -n "$DESIGN_BLOCK/$DESIGN_PHASE/$DESIGN_STAGE" > $tmpfile
 svn import --quiet --force $tmpfile $STAGE_URL/.dvc/env/DESIGN_PATH -m 'Stage Name'
 rm -f $tmpfile
 
 set readme=`mktemp`
 echo -n "" > $readme
 echo "====================================" >> $readme
-echo "* Phase   : $DESIGN_PHASE" >> $readme
 echo "* Block   : $DESIGN_BLOCK" >> $readme
+echo "* Phase   : $DESIGN_PHASE" >> $readme
 echo "* Stage   : $DESIGN_STAGE" >> $readme
 echo "* Author  : $USER" >> $readme
 echo "* Created : `date +%Y%m%d_%H%M%S`" >> $readme

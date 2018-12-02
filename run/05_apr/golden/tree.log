@@ -1,13 +1,16 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'
-dvc_list_design --recursive
 _
-└── P1-trial
-    ├── block1
-    ├── block2
-    ├── block3
-    ├── block4
-    ├── block5
-    └── chip
+├── block1
+│   └── P1-trial
+├── block2
+│   └── P1-trial
+├── block3
+│   └── P1-trial
+├── block4
+│   └── P1-trial
+├── block5
+│   └── P1-trial
+└── chip
+    └── P1-trial
         └── 400-APR
             └── 2017_0912-xxx
                 ├── chip.jpg
@@ -31,5 +34,4 @@ _
                     ├── route.jpg
                     └── sta.rpt
 
-14 directories, 15 files
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc-1025/run/05_apr'
+19 directories, 15 files

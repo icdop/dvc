@@ -2,7 +2,7 @@
 
 ### 1. Setup svn file server and project account - CAD/IT
 
-dvc_init_server --root $HOME/svn_root --mode file
+dvc_init_server --root svn_root --mode file
 
 ### 2. Create project respository - Project Manager
 
@@ -12,7 +12,7 @@ dvc_checkout_project --force 04_sta _
 
 ### 3. Create design version folder and checkin design data - Design Manager
 
-dvc_create_design    P1-trial/chip/400-APR/2017_0910-xxx
+dvc_create_design    chip/P1-trial/400-APR/2017_0910-xxx
 dvc_checkout_design  
   cp data/design.v   :version/design.v
   cp data/design.sdc :version/design.sdc

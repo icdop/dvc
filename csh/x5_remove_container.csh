@@ -15,7 +15,7 @@ setenv CSH_DIR $DVC_HOME/csh
 setenv ETC_DIR $DVC_HOME/etc
 source $CSH_DIR/12_get_server.csh
 source $CSH_DIR/13_get_project.csh
-source $CSH_DIR/14_get_design.csh
+source $CSH_DIR/14_get_folder.csh
 source $CSH_DIR/05_set_container.csh
 
 if {((test -d $CONTAINER_DIR)&&(test -d $PROJT_PATH/$CONTAINER_PATH))} then

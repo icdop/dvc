@@ -4,7 +4,7 @@
 * 2017/06/09 By Albert Li
 *       revere back to 4 level directory, remove parition level
 * 2017/06/13 By Albert Li
-*       use svn to implement a sampel code
+*       use svn to implement a sample code
 * 2017/06/14 By Albert Li
 *       add regressiion test
 * 2017/06/28 By Albert Li
@@ -36,3 +36,15 @@
 *	prepare for 2017_1025a patch
 * 2017/11/27 By Albert Li
 *	move DQI realted code to dqr sub system
+*
+* 2018/11/07 By Albert Li (1107a)
+*	refine the code and use create_folder to replace create_design
+*
+* 2018/12/02 By Albert Li (1201a, Major SPEC change v2.0)
+*	change four levels of design folder hierarchy order, 
+*       swap the order between <BLOCK> and <PHASE>
+*	Before:
+*		<PHASE>/<BLOCK>/<STAGE>/<VERSION>
+*	Current:
+*		<BLOCK>/<PHASE>/<STAGE>/<VERSION>
+*

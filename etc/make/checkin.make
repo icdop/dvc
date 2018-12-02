@@ -50,6 +50,7 @@ run:
 	make object	| tee -a log/run.log
 	make checkin	| tee -a log/run.log
 	make list 	| tee log/list1.rpt
+	make stop	| tee -a log/run.log
 	make tree 	| tee log/tree1.rpt
 
 test:
@@ -64,7 +65,8 @@ test:
 	make update	| tee -a log/test.log
 	make object	| tee -a log/test.log
 	make commit	| tee -a log/test.log
-	make list	| tee log/list2.rpt
+	make list	| tee -a log/test.log
+	make stop	| tee -a log/test.log
 	make tree	| tee log/tree2.rpt
 
 diff:
@@ -72,6 +74,8 @@ diff:
 	grep -i err log/*
 	
 init: init_server
+stop: stop_server
+
 init_setup:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Set Enviroment Variable"
@@ -88,7 +92,7 @@ init_server:
 	@echo "#---------------------------------------------------"
 	@echo "# 0. Start SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_init_server --root $(SVN_ROOT) --mode $(SVN_MODE) --host $(SVN_HOST) --port $(SVN_PORT) restart
+	dvc_init_server --root $(SVN_ROOT) --mode $(SVN_MODE) --host $(SVN_HOST) --port $(SVN_PORT) start
 
 
 stop_server:
@@ -107,15 +111,15 @@ create_design:
 	@echo "#---------------------------------------------------"
 	@echo "# 2. Create version directory in SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_create_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
+	dvc_create_design	$(DESIGN_BLOCK)/$(DESIGN_PHASE)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
 
 version: create_version checkout_version
 create_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 2. Create version directory in SVN server"
 	@echo "#---------------------------------------------------"
-	dvc_create_phase	$(DESIGN_PHASE)
 	dvc_create_block	$(DESIGN_BLOCK)
+	dvc_create_phase	$(DESIGN_PHASE)
 	dvc_create_stage	$(DESIGN_STAGE)
 	dvc_create_version	$(DESIGN_VERSN)
 
@@ -131,14 +135,14 @@ checkout_design:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout design"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
+	dvc_checkout_design	$(DESIGN_BLOCK)/$(DESIGN_PHASE)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
 
 checkout_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 3 Checkout version"
 	@echo "#---------------------------------------------------"
-	dvc_checkout_phase	$(DESIGN_PHASE)
 	dvc_checkout_block	$(DESIGN_BLOCK)
+	dvc_checkout_phase	$(DESIGN_PHASE)
 	dvc_checkout_stage	$(DESIGN_STAGE)
 	dvc_checkout_version	$(DESIGN_VERSN)
 
@@ -271,14 +275,14 @@ checkin_design:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-4 Checkin design folders"
 	@echo "#---------------------------------------------------"
-	dvc_checkin_design	$(DESIGN_PHASE)/$(DESIGN_BLOCK)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
+	dvc_checkin_design	$(DESIGN_BLOCK)/$(DESIGN_PHASE)/$(DESIGN_STAGE)/$(DESIGN_VERSN)
 
 checkin_version:
 	@echo "#---------------------------------------------------"
 	@echo "# 6-4 Checkin all files of design version"
 	@echo "#---------------------------------------------------"
-	dvc_checkin_phase	$(DESIGN_PHASE)
 	dvc_checkin_block	$(DESIGN_BLOCK)
+	dvc_checkin_phase	$(DESIGN_PHASE)
 	dvc_checkin_stage	$(DESIGN_STAGE)
 	dvc_checkin_version	$(DESIGN_VERSN)
 
@@ -350,8 +354,8 @@ remove_design:
 	make remove_container
 	make remove_version
 	make remove_stage
-	make remove_block
 	make remove_phase
+	make remove_block
 	
 remove_container:
 	@echo "#---------------------------------------------------"
@@ -371,17 +375,17 @@ remove_stage:
 	@echo "#---------------------------------------------------"
 	dvc_remove_stage	$(DESIGN_STAGE)
 
-remove_block: 
-	@echo "#---------------------------------------------------"
-	@echo "# 7-2. Clean up design block"
-	@echo "#---------------------------------------------------"
-	dvc_remove_block	$(DESIGN_BLOCK)
-
 remove_phase: 
 	@echo "#---------------------------------------------------"
 	@echo "# 7-2. Clean up design phase"
 	@echo "#---------------------------------------------------"
 	dvc_remove_phase	$(DESIGN_PHASE)
+
+remove_block: 
+	@echo "#---------------------------------------------------"
+	@echo "# 7-2. Clean up design block"
+	@echo "#---------------------------------------------------"
+	dvc_remove_block	$(DESIGN_BLOCK)
 
 remove_project:
 	@echo "#---------------------------------------------------"

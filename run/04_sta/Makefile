@@ -11,15 +11,10 @@ checkout:
 	script/checkout.csh
 
 list:
-	dvc_list_project --recursive
+	dvc_list_project --recursive | tee log/list.log
 
-log/list.log:
-	make list > log/list.log	
 tree:	
-	dvc_list_design --recursive
-
-log/tree.log:
-	make tree > log/tree.log
+	dvc_list_design --recursive | tee log/tree.log
 
 diff: log/list.log log/tree.log
 	diff -r log golden | tee diff.log

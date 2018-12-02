@@ -63,6 +63,12 @@ else if ($?SVN_ROOT == 0) then
    exit 1
 endif
 
+if {(test -e $SVN_ROOT/.dop/env/SVN_PID)} then
+   setenv SVN_PID  `cat $SVN_ROOT/.dop/env/SVN_PID`
+else if {(test -f $SVN_ROOT/.dop/svnserve.pid)} then
+   setenv SVN_PID      `cat $SVN_ROOT/.dop/svnserve.pid`
+endif
+
 # Sequence :
 #   1) Local run dir saved value
 #   2) Server root dir saved value

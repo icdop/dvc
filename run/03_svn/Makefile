@@ -8,8 +8,8 @@ SVN_PORT     := 3693
 ####################################################################
 # The follwing parameter are checkout pointer configuration.
 # Do not change it unless you need to
-PTR_PHASE   := :phase
 PTR_BLOCK   := :block
+PTR_PHASE   := :phase
 PTR_STAGE   := :stage
 PTR_VERSN   := :version
 PTR_CONTR   := :container
