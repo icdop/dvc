@@ -12,17 +12,28 @@ if ("$prog" == "setup.cshrc") then
    echo 'setenv SVN_HOST localhost' >> CSHRC.dvc
    echo 'setenv SVN_PORT 3690' >> CSHRC.dvc
    echo "" >> CSHRC.dvc
-else if ($?DVC_HOME != 0) then
+   source CSHRC.dvc
+   exit
+endif
+echo $1
+if ($?DVC_HOME != 0) then
    echo "DVC_HOME = $DVC_HOME"
-   echo "SVN_MODE = $SVN_MODE"
-   echo "SVN_HOST = $SVN_HOST"
-   echo "SVN_PORT = $SVN_PORT"
-else if ("$prog" == "-csh") then
+else if ("$prog" == "csh") then
    setenv DVC_HOME "/tools/icdop/dvc"
    echo "DVC_HOME = $DVC_HOME"
    set path = ($DVC_HOME/bin $path)
+else
+   setenv DVC_HOME "/tools/icdop/dvc"
+   echo "DVC_HOME = $DVC_HOME"
+   set path = ($DVC_HOME/bin $path)
+endif
+
+if ($?SVN_MODE != 0) then
+   echo "SVN_MODE = $SVN_MODE"
+   echo "SVN_HOST = $SVN_HOST"
+   echo "SVN_PORT = $SVN_PORT"
+else
    setenv SVN_MODE svn
    setenv SVN_HOST localhost
    setenv SVN_PORT 3690
 endif
-
