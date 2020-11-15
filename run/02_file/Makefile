@@ -24,7 +24,7 @@ DESIGN_VERSN := 2017_0620-xxx
 DESIGN_CONTR := ttt_0p80V_25C_rctyp
 
 # The following object will be checkin to container
-OBJECT_FILES := run_sta.log
+OBJECT_FILES := design.v run_sta.log
 OBJECT_DIRS  := report/  cache/
 OBJECT_LINKS := design.spef
 

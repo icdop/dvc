@@ -36,8 +36,8 @@ help:
 	@echo ""
 	@echo "Usage:  make tree      (dvc_list_design)"
 	@echo "Usage:  make list      (dvc_list_project --recursive)"
-	@echo "Usage:  make remove    (remove specific objects)"
-	@echo "Usage:  make clean    (clean all data on server)"
+	@echo "Usage:  make remove    (remove specific target)"
+	@echo "Usage:  make clean     (clean working directory)"
 	@echo ""
 
 
@@ -328,23 +328,25 @@ clean:
 	@echo " Use 'make remove_all' to clean up database on server"
 	@echo
 	@echo "************** WARNING *************************"
-	make remove_all
+	make remove_server
+	make remove_data
+	make remove_tests
+	rm -fr $(SVN_ROOT)
+	rm -fr .dop
 
 remove:
 	@echo "Usage:"
-	@echo "        make remove_tests      ; remove test report files"
 	@echo "        make remove_data       ; remove checkout project data"
 	@echo "        make remove_design     ; remove current design"
-	@echo "        make remove_files      ; remove unnecessary files"
+	@echo "        make remove_objects    ; remove object files"
+	@echo "        make remove_tests      ; remove test report files"
 	@echo ""
 
 remove_all:
-	make remove_tests
 	make remove_design
 	make remove_project
-	make remove_server
 	make remove_data
-	make remove_files
+	make remove_tests
 
 remove_design:
 	make remove_container
@@ -394,7 +396,6 @@ remove_server:
 	@echo "# 7-3. Remove SVN repository (For TEST ONLY)"
 	@echo "#---------------------------------------------------"
 	dvc_init_server	stop
-	rm -fr $(SVN_ROOT)
 
 remove_data:
 	@echo "#---------------------------------------------------"
@@ -403,12 +404,11 @@ remove_data:
 	rm -fr $(PROJT_PATH) 
 	rm -fr $(PTR_PHASE) $(PTR_BLOCK) $(PTR_STAGE) $(PTR_VERSN) $(PTR_CONTR)
 
-remove_files:
+remove_objects:
 	@echo "#---------------------------------------------------"
-	@echo "# 7-5. Clean up dummy files in working directory"
+	@echo "# 7-5. Clean up object files in working directory"
 	@echo "#---------------------------------------------------"
 	rm -fr $(OBJECT_FILES) $(OBJECT_DIRS) $(OBJECT_LINKS)
-	rm -fr .dop
 
 remove_tests:
 	rm -fr log/ tree.rpt list.rpt diff.log

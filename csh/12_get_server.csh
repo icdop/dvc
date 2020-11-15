@@ -59,8 +59,9 @@ endif
 if {(test -e .dop/env/SVN_ROOT)} then
    setenv SVN_ROOT  `cat .dop/env/SVN_ROOT`
 else if ($?SVN_ROOT == 0) then
-   echo "ERROR: env variable (SVN_ROOT) is not set yet."
-   exit 1
+   echo "WARNING: env variable (SVN_ROOT) is not set yet."
+   setenv SVN_ROOT ":svn_root"
+#   exit 1
 endif
 
 # Sequence :
@@ -75,8 +76,14 @@ if {(test -e .dop/env/SVN_HOST)} then
    else
       setenv SVN_PORT      3690
    endif
-else if {(test -f $SVN_ROOT/.dop/svnserve.host)} then
-   setenv SVN_HOST      `cat $SVN_ROOT/.dop/svnserve.host`
+   if {(test -e .dop/env/SVN_PID)} then
+      setenv SVN_PID  `cat .dop/env/SVN_PID`
+   endif
+else if {(test -f $SVN_ROOT/.dop/svnserve.pid)} then
+   setenv SVN_PID       `cat $SVN_ROOT/.dop/svnserve.pid`
+   if {(test -f $SVN_ROOT/.dop/svnserve.host)} then
+      setenv SVN_HOST      `cat $SVN_ROOT/.dop/svnserve.host`
+   endif
    if {(test -f $SVN_ROOT/.dop/svnserve.port)} then
       setenv SVN_PORT      `cat $SVN_ROOT/.dop/svnserve.port`
    else

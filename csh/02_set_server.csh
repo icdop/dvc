@@ -5,6 +5,12 @@ if (($1 == "-h") || ($1 == "--help")) then
    exit -1
 endif
 
+if ($?DVC_HOME == 0) then
+   setenv DVC_HOME $0:h/
+endif
+setenv CSH_DIR $DVC_HOME/csh 
+source $CSH_DIR/12_get_server.csh
+
 if ($1 == "--reset") then
    set reset_mode=1
    shift argv

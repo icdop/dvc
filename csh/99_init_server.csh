@@ -74,6 +74,7 @@ case "stop":
   if ($?SVN_PID) then
      set svn_host = `cat $SVN_ROOT/.dop/svnserve.host`
      set svn_port = `cat $SVN_ROOT/.dop/svnserve.port`
+     set svn_pid  = `cat $SVN_ROOT/.dop/svnserve.pid`
      echo "INFO: Stopping SVN server - svn://$svn_host"":$svn_port/"
      ps -f -p $SVN_PID
      if (($status == 0)||($?force_mode)) then
@@ -96,6 +97,7 @@ case "start":
      echo "======================================================="
      exit 0
   endif
+  mkdir -p $SVN_ROOT/.dop/
   if ($?SVN_PID) then
      set svn_host = `cat $SVN_ROOT/.dop/svnserve.host`
      set svn_port = `cat $SVN_ROOT/.dop/svnserve.port`
@@ -126,6 +128,7 @@ case "start":
            $CSH_DIR/00_set_env.csh SVN_ROOT $SVN_ROOT
            $CSH_DIR/00_set_env.csh SVN_HOST $SVN_HOST
            $CSH_DIR/00_set_env.csh SVN_PORT $SVN_PORT
+           $CSH_DIR/00_set_env.csh SVN_PID  $SVN_PID
         else
         endif
      endif

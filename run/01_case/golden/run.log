@@ -3,30 +3,30 @@ SETP: SVN_MODE = file
 SETP: SVN_ROOT = svn_root
 =======================================================
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
-SETP: DESIGN_PROJT = testcsae
-INFO: Create Project Design Respository : testcsae
+INFO: DVC_VERSON = 2020_1115a
+SETP: DESIGN_PROJT = testcase
+INFO: Create Project Design Respository : testcase
 =======================================================
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
+INFO: DVC_VERSON = 2020_1115a
 INFO: DVC_PATH = P1-trial/chip/000-DATA/2017_0910-xxx
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
+INFO: DVC_VERSON = 2020_1115a
 SETP: DESIGN_PHASE = P1-trial
 INFO: Create Project Design Phase : P1-trial
 =======================================================
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
+INFO: DVC_VERSON = 2020_1115a
 SETP: DESIGN_BLOCK = chip
 INFO: Create Project Design Block : chip
 =======================================================
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
+INFO: DVC_VERSON = 2020_1115a
 SETP: DESIGN_STAGE = 000-DATA
 INFO: Create Project Design Stage : 000-DATA
 =======================================================
 =======================================================
-INFO: DOP_VERSON = 2017_1025a
+INFO: DVC_VERSON = 2020_1115a
 SETP: DESIGN_VERSN = 2017_0910-xxx
 INFO: Create Project Design Version : 2017_0910-xxx
 =======================================================
@@ -34,33 +34,33 @@ INFO: Create Project Design Version : 2017_0910-xxx
 =======================================================
 INFO: DVC_PATH = /P1-trial/chip/000-DATA/2017_0910-xxx
 =======================================================
-SETP: DESIGN_PROJT = testcsae
-INFO: Checkout Project Design Respository : testcsae
+SETP: DESIGN_PROJT = testcase
+INFO: Checkout Project Design Respository : testcase
 SETP: PROJT_PATH = _
-Checked out revision 41.
+Checked out revision 39.
 =======================================================
 =======================================================
 SETP: DESIGN_PHASE = P1-trial
 INFO: Checkout Project Design Phase : P1-trial
-Checked out revision 41.
+Checked out revision 39.
 property 'svn:ignore' set on '_'
 =======================================================
 =======================================================
 SETP: DESIGN_BLOCK = chip
 INFO: Checkout Project Design Block : P1-trial/chip
-Checked out revision 41.
+Checked out revision 39.
 property 'svn:ignore' set on '_/P1-trial'
 =======================================================
 =======================================================
 SETP: DESIGN_STAGE = 000-DATA
 INFO: Checkout Project Design Stage : 000-DATA
-Checked out revision 41.
+Checked out revision 39.
 property 'svn:ignore' set on '_/P1-trial/chip'
 =======================================================
 =======================================================
 SETP: DESIGN_VERSN = 2017_0910-xxx
 INFO: Checkout Project Design Version : 2017_0910-xxx
-Checked out revision 41.
+Checked out revision 39.
 property 'svn:ignore' set on '_/P1-trial/chip/000-DATA'
 INFO: Container Path - ':version/.'
 =======================================================

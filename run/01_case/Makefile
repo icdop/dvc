@@ -2,6 +2,7 @@ run: clean
 	mkdir -p log
 	./run.csh | tee run.log
 	grep -v "TIME:" run.log > log/run.log
+	tree _ | tee log/tree.log
 
 list:
 	dvc_list_design
@@ -9,7 +10,7 @@ list:
 tree: golden
 	tree _ | tee log/tree.log
 		
-diff: tree
+diff: 
 	@diff -r log golden | tee diff.log
 	@echo "============================="
 	@wc -l diff.log
