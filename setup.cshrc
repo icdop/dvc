@@ -1,21 +1,23 @@
-#!/bin/csh -f
+#!/bin/csh -f 
 set prog=$0:t
 if ("$prog" == "setup.cshrc") then
    setenv DVC_HOME `realpath $0:h`
    echo "DVC_HOME = $DVC_HOME"
    echo "Create CSHRC.dvc ..."
-   echo "# `date` " > CSHRC.dvc
-   echo "setenv DVC_HOME $DVC_HOME" >> CSHRC.dvc
-   echo 'setenv PATH $DVC_HOME/bin/:$PATH' >> CSHRC.dvc
+   echo '#\!/bin/csh -f v' > CSHRC.dvc
+   echo 'setenv DVC_HOME "$DVC_HOME"' >> CSHRC.dvc
+   echo 'setenv PATH "$DVC_HOME/bin/:$PATH"' >> CSHRC.dvc
    echo 'setenv SVN_ROOT svnroot' >> CSHRC.dvc
    echo 'setenv SVN_MODE svn' >> CSHRC.dvc
    echo 'setenv SVN_HOST localhost' >> CSHRC.dvc
    echo 'setenv SVN_PORT 3690' >> CSHRC.dvc
-   echo "" >> CSHRC.dvc
+   echo "# `date` " >> CSHRC.dvc
+   echo '' >> CSHRC.dvc
+   chmod +x CSHRC.dvc
    source CSHRC.dvc
    exit
 endif
-echo $1
+#echo $1
 if ($?DVC_HOME != 0) then
    echo "DVC_HOME = $DVC_HOME"
 else if ("$prog" == "csh") then

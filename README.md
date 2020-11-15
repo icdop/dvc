@@ -1,4 +1,4 @@
-# Design Version Control V2018_1107b
+# Design Version Control V2020_1115a
 
 ## How To install DVC package and setup
 
@@ -52,17 +52,16 @@ Block Name (defined by design manager):
 
 Stage Name (defined based on tool execution flow):
 
-	000-DATA,	100-CIRCUIT,	200-LOGIC,	300-DFT,
-	400-APR,	500-SIGNOFF,	600-TAPEOUT,	700-TESTING,
-	800-PACKAGE,	900-SYSTEM
+	000-DATA,	100-CIRCUIT,	200-FUNCTION,	300-DFT,	400-APR,
+	500-TIMING,	600-POWER,	700-TAPEOUT,	800-TESTING,	900-PACKAGE,	
 
 Version Name (defined by designer, recommend to follow the same convention):  
 
-	<DBSRC_DATE>-<DBDST_WEEK>-<REMARK>
-	170910-ww38-ftp
-	170910-ww39-scan
-	170910-ww40-apr
-	170910-ww42-eco
+	<DBSRC_DATE>-<REMARK>
+	170910-ftp
+	170910-scan
+	170910-apr
+	170910-eco
 
 ***
 ## Execution Flow:
@@ -102,11 +101,11 @@ Example:
 
 	setenv DVC_HOME /tools/icdop/dvc
 	setenv PATH     $DVC_HOME/bin:$PATH
-	setnev PRJ_ROOT /projects/N13301A
 	setenv SVN_ROOT  $PRJ_ROOT/svn
 	setenv SVN_MODE  svn
 	setenv SVN_HOST  svn_server
 	setenv SVN_PORT  13301
+	setnev PRJ_ROOT /projects/N13301A
 
 
 	;######################################################
@@ -178,7 +177,7 @@ Example:
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
 	;######################################################
 
-	% dvc_create_folder   P1-trial/block1/000-DATA/170910-ww38-place
+	% dvc_create_folder   P1-trial/block1/000-DATA/170910-place
 
 
 ### 4. Checkin design data into design folder - Designer
@@ -196,7 +195,7 @@ Example:
 	;######################################################
 	% dvc_checkout_project N13301A _
 
-	% dvc_checkout_folder P1-trial/block1/000-DATA/170910-ww38-place
+	% dvc_checkout_folder P1-trial/block1/000-DATA/170910-place
 
 	% dvc_copy_object /some_rundir_path/design.v       design.v
 	% dvc_link_object /some_rundir_path/design.spef.gz design.spef.gz

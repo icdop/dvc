@@ -43,7 +43,7 @@ svn mkdir --quiet $STAGE_URL/.htm -m "HTML Report" --parents
 svn mkdir --quiet $STAGE_URL/.dvc/env -m "DVC environment variable"
 
 #svn import --quiet --force  $DVC_HOME/REVISION   $STAGE_URL/.dvc/env/DVC_VERSION -m "$DVC_VERSION"
-svn import --quiet --force $ETC_DIR/rule/DESIGN_FILES  $STAGE_URL/.dvc/DESIGN_FILES -m 'Design Object Table'
+svn import --quiet --force $ETC_DIR/rule/DEFINE_FILE  $STAGE_URL/.dvc/DEFINE_FILE -m 'Design File Format'
 
 set tmpfile=`mktemp`
 echo -n "$DESIGN_PHASE/$DESIGN_BLOCK/$DESIGN_STAGE" > $tmpfile

@@ -90,16 +90,21 @@ else if ($?SVN_PORT == 0) then
 endif
 
 #
+# [2020/11/15] Honor .dop/env/SVN_MODE as 1st priority
 # User can overwrite SVN_MODE through environment varaible
 #
-if ($?SVN_MODE == 0) then
+if ($?SVN_MODE_FORCE == 0) then
    if {(test -f .dop/env/SVN_MODE)} then
-     setenv SVN_MODE      `cat .dop/env/SVN_MODE`
+      setenv SVN_MODE      `cat .dop/env/SVN_MODE`
+   else if ($?SVN_MODE == "file") then
+   else if ($?SVN_MODE == "svn") then
    else if {(test -e $SVN_ROOT)} then
-     setenv SVN_MODE      file
+      setenv SVN_MODE      file
    else
-     setenv SVN_MODE      svn
+      setenv SVN_MODE      svn
    endif
+else
+   setenv SVN_MODE $SVN_MODE_FORCE
 endif
 
 if ($?SVN_URL == 0) then
@@ -111,11 +116,14 @@ if ($?SVN_URL == 0) then
 endif
 
 if ($?info_mode) then
-  echo "INFO: SVN_ROOT = $SVN_ROOT"
-  echo "INFO: SVN_MODE = $SVN_MODE"
-  echo "INFO: SVN_HOST = $SVN_HOST"
-  echo "INFO: SVN_PORT = $SVN_PORT"
-  echo "INFO: SVN_URL  = $SVN_URL"
+   echo "INFO: SVN_MODE = $SVN_MODE"
+   if ($SVN_MODE == "svn") then
+      echo "INFO: SVN_HOST = $SVN_HOST"
+      echo "INFO: SVN_PORT = $SVN_PORT"
+   else
+      echo "INFO: SVN_ROOT = $SVN_ROOT"
+   endif
+   echo "INFO: SVN_URL  = $SVN_URL"
 endif
 
 

@@ -1,6 +1,7 @@
 ;NAME		DEFAULT	    FORMAT  	TITLE
 =====   	==========  ======= 	==========================
-V_FILE		design.v    VERILOG 	"Verilog Netlist File"
+VLG_FILE	design.v    VERILOG 	"Verilog Netlist File"
+VHD_FILE	design.vhd  VHDL	"VHDL Netlist File"
 SDC_FILE	design.sdc  SDC	   	"Timing Constraint File"
 DEF_FILE	design.def  DEF	   	"Physical Design File"
 SPEF_FILE	design.spef SPEF   	"RC Extraction File"
