@@ -1,4 +1,4 @@
-make[1]: Entering directory '/home/albertli/GITHOME/dvc/run/03_svn'
+make[1]: Entering directory '/home/toolsadm/GITHOME/dvc/run/03_svn'
 dvc_list_project --recursive
 P1-trial/
 P1-trial/chip/
@@ -13,4 +13,4 @@ P1-trial/chip/420-place/2017_0615-xxx/place_opt/design.v
 P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/
 P1-trial/chip/420-place/2017_0615-xxx/place_opt/report/dummy_file
 P1-trial/chip/420-place/2017_0615-xxx/place_opt/run_apr.log
-make[1]: Leaving directory '/home/albertli/GITHOME/dvc/run/03_svn'
+make[1]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/03_svn'

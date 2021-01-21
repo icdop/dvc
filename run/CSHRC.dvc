@@ -1,0 +1,8 @@
+#!/bin/csh -f v
+setenv DVC_HOME `realpath ../../dvc`
+setenv PATH "$DVC_HOME/bin/:$PATH"
+setenv SVN_ROOT svnroot
+setenv SVN_MODE svn
+setenv SVN_HOST localhost
+setenv SVN_PORT 3690
+

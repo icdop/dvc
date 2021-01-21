@@ -1,12 +1,6 @@
 1. include the dvc bin path
 
-   ; if you are using csh/tcsh
-
-   % source setup.cshrc
-
-   ; if you are using sh/bash
-
-   % . setup.shrc
+   source CSHRC.dvc
 
 2. There are testcases in the directory
 

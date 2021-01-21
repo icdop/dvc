@@ -1,4 +1,4 @@
-make[1]: Entering directory `/home/icdop/dvc/run/02_file'
+make[1]: Entering directory '/home/toolsadm/GITHOME/dvc/run/02_file'
 dvc_list_design --recursive
 _
 └── P1-trial
@@ -9,11 +9,11 @@ _
                     ├── cache
                     │   └── dummy_file
                     ├── design.sdf
-                    ├── design.spef -> /home/icdop/dvc/run/02_file/design.spef
+                    ├── design.spef -> /home/toolsadm/GITHOME/dvc/run/02_file/design.spef
                     ├── design.v
                     ├── report
                     │   └── dummy_file
                     └── run_sta.log
 
 7 directories, 6 files
-make[1]: Leaving directory `/home/icdop/dvc/run/02_file'
+make[1]: Leaving directory '/home/toolsadm/GITHOME/dvc/run/02_file'

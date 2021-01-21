@@ -27,7 +27,7 @@ help:
 	@echo "=============================================================="
 	@echo "Usage:  make run       run the following steps"
 	@echo ""
-	@echo "        make init      (reset_resository)"
+	@echo "        make init      (reset_repository)"
 	@echo "        make project   (create_project; checkout_project)"
 	@echo "        make design    (create_design; checkout_design)"
 	@echo "        make container (create_container; checkout_container)"
@@ -346,6 +346,7 @@ remove_all:
 	make remove_design
 	make remove_project
 	make remove_data
+	make remove_objects
 	make remove_tests
 
 remove_design:
