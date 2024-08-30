@@ -99,12 +99,13 @@ endif
 #
 # [2020/11/15] Honor .dop/env/SVN_MODE as 1st priority
 # User can overwrite SVN_MODE through environment varaible
+# [2024/08/30] Fix Bug $?SVN_MODE ==> $SVN_MODE
 #
 if ($?SVN_MODE_FORCE == 0) then
    if {(test -f .dop/env/SVN_MODE)} then
       setenv SVN_MODE      `cat .dop/env/SVN_MODE`
-   else if ($?SVN_MODE == "file") then
-   else if ($?SVN_MODE == "svn") then
+   else if ($SVN_MODE == "file") then
+   else if ($SVN_MODE == "svn") then
    else if {(test -e $SVN_ROOT)} then
       setenv SVN_MODE      file
    else
