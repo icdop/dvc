@@ -92,53 +92,51 @@ Example:
 ### 2. Initialize project specific svn file server (Run If Needed)  - CAD/IT
 
 Example:
-
 	;######################################################
 	;## create project specific CSHRC.dvc                ##
 	;######################################################
-
 	% vi /projects/N13301A/flow/CSHRC.dvc
 
 	setenv DVC_HOME /tools/icdop/dvc
 	setenv PATH     $DVC_HOME/bin:$PATH
-	setenv SVN_ROOT  $PRJ_ROOT/svn
-	setenv SVN_MODE  svn
-	setenv SVN_HOST  svn_server
-	setenv SVN_PORT  13301
 	setnev PRJ_ROOT /projects/N13301A
 
+	;# The SVN server is initialized with the following parameters:
+	;#  $SVN_ROOT : svn repository root path, need to be set first
+ 	setenv SVN_ROOT  $PRJ_ROOT/svn
+  
+	;#  $SVN_MODE : svn | file -- server db access mode
+	setenv SVN_MODE  svn
+ 
+	;#  $SVN_HOST : server host name -- only been used in svn server mode
+	;#  $SVN_PORT : server port name -- only been used in svn server mode
+	setenv SVN_HOST  svn_server
+	setenv SVN_PORT  13301
 
 	;######################################################
 	;## source the CSHRC.dvc to acces the DVC utility    ##
 	;######################################################
-
 	% source $PRJ_ROOT/flow/CSHRC.dvc
-
-	- The SVN server is initialized withthe following parameters:
-
-	  $SVN_ROOT : svn repository root path, need to be set first
-	
-	  $SVN_MODE : svn | file -- server db access mode
-	  $SVN_HOST : server host name -- only been used in svn server mode
-	  $SVN_PORT : server port name -- only been used in svn server mode
-  
 
 	;######################################################
 	;## Init SVN DB with file access mode                ##
 	;## (only svnadmin can init file server db)          ##
 	;######################################################
-
 	% dvc_init_server \
 		--root $PRJ_ROOT/svn \
 		--mode file
-
-
+	;######################################################
+	;## Start a SVN server for other members to access   ##
+	;######################################################
+	% dvc_init_server \
+		--root $PRJ_ROOT/svn \
+		--mode svn \
+		--host $SVN_HOST -port $SVN_PORT
+  
 	;######################################################
 	;## dvc_create_project   <project_id>                ##
 	;######################################################
-
 	% dvc_create_project N13301A
-
 	- When a project is created, there will be one repository under:
 
 	  $SVN_ROOT/<project_id>/
@@ -146,28 +144,10 @@ Example:
 	- Project config files are copied from $DVC_HOME/etc/conf/:
 
 	  $SVN_ROOT/<project_id>/conf/
-      
-
-	;######################################################
-	;## Start a SVN server for other members to access   ##
-	;######################################################
-
-	% dvc_init_server \
-		--root $PRJ_ROOT/svn \
-		--mode svn \
-		--host $SVN_HOST -port $SVN_PORT
-
-
+ 
 ### 3. Create design folder for members to checkin data - Technical Lead
 
-Example:
-
-	;######################################################
-	;## source the CSHRC.dvc to acces the DVC utility    ##
-	;######################################################
-
-	% source /projects/N13301A/flow/CSHRC.dvc
-
+Example:     
 	;######################################################
 	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
@@ -176,20 +156,11 @@ Example:
 	;######################################################
 	;## dvc_create_folder   <phase>/<block>/<stage>/<version>
 	;######################################################
-
 	% dvc_create_folder   P1-trial/block1/000-DATA/170910-place
-
 
 ### 4. Checkin design data into design folder - Designer
 
 Example:
-
-	;######################################################
-	;## source the CSHRC.dvc to acces the DVC utility    ##
-	;######################################################
-
-	% source /projects/N13301A/flow/CSHRC.dvc
-
 	;######################################################
 	;## dvc_checkout_project   <proj_name> [<local_path>]##
 	;######################################################
@@ -203,5 +174,6 @@ Example:
 	% dvc_list_folder [--recursive]
 
 	% dvc_checkin_folder
+ 
 
 
